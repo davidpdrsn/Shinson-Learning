@@ -24,4 +24,5 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'spring-commands-rspec'
   gem "spring-commands-cucumber"
+  gem 'simplecov'
 end
