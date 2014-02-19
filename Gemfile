@@ -30,6 +30,6 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'spring-commands-rspec'
-  gem "spring-commands-cucumber"
+  gem 'spring-commands-cucumber'
   gem 'simplecov'
 end
