@@ -6,4 +6,15 @@ feature 'viewing the homepage' do
 
     expect(page).to have_content "Sign in"
   end
+
+  scenario 'a user signs in' do
+    visit root_path
+
+    fill_in "Email", with: 'bob@example.com'
+    fill_in "Password", with: 'passwordlol'
+    fill_in "Password confirmation", with: 'passwordlol'
+    click_button "Sign up"
+
+    expect(page).to have_content "Welcome"
+  end
 end
