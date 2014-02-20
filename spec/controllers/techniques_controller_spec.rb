@@ -61,7 +61,7 @@ describe TechniquesController, "POST #create" do
     it "creates a new technique" do
       user = create(:user)
       sign_in user
-      attributes = attributes_for(:technique)
+      attributes = build(:technique).attributes
 
       expect do
         post :create, technique: attributes
@@ -74,7 +74,7 @@ describe TechniquesController, "POST #create" do
     it "doesn't create a new technique if the data is invalid" do
       user = create(:user)
       sign_in user
-      attributes = attributes_for(:technique, name: "")
+      attributes = build(:technique, name: "").attributes
 
       expect do
         post :create, technique: attributes
