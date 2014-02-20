@@ -1,0 +1,7 @@
+<% if @techniques.present? %>
+  <% @techniques.each do |technique| %>
+    <%= technique.name %>
+  <% end %>
+<% else %>
+  You have no techniques yet
+<% end %>
