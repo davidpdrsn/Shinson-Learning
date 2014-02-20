@@ -34,7 +34,6 @@ class TechniquesController < ApplicationController
       flash.notice = "Technique updated"
       redirect_to @technique
     else
-      p "two"
       flash.alert = "Technique not updated"
       render :edit
     end
