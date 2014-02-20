@@ -33,22 +33,22 @@ def create_categories
   Category.destroy_all
 
   [
-    "sugi sul",
-    "jokgi sul",
+    "dan jeon hohupbob",
+    "gigu sul",
     "hyong",
+    "jahse",
+    "jokgi sul",
+    "kyokpa",
+    "miscellaneous",
+    "nakbop",
+    "pressure point",
     "su",
+    "sugi sul",
+    "theory",
+    "vocabulary",
     "yaksok daeryon",
     "yayo daeryon",
-    "gigu sul",
-    "yuldong undong",
-    "dan jeon hohupbob",
-    "nakbop",
-    "vocabulary",
-    "pressure point",
-    "jahse",
-    "kyokpa",
-    "theory",
-    "miscellaneous"
+    "yuldong undong"
   ].map(&:titleize).each do |name|
     if Category.create(name: name)
       puts "Created category #{name}"
