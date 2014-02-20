@@ -1,6 +1,42 @@
 require 'spec_helper'
 
 describe "layouts/application" do
+  context "when the user is logged in" do
+    before do
+      controller.stub(:user_signed_in?).and_return(true)
+    end
+
+    it "shows the logout link" do
+      with_rendered_page do |page|
+        expect(page).to have_content "Log out"
+      end
+    end
+
+    it "doesn't show the sign up link" do
+      with_rendered_page do |page|
+        expect(page).not_to have_content "Sign up"
+      end
+    end
+
+    it "doesn't show the sign in link" do
+      with_rendered_page do |page|
+        expect(page).not_to have_content "Sign in"
+      end
+    end
+
+    it "shows a link to create a new technique" do
+      with_rendered_page do |page|
+        expect(page).to have_link "New technique"
+      end
+    end
+
+    it "shows a link to see your techniques" do
+      with_rendered_page do |page|
+        expect(page).to have_content "My techniques"
+      end
+    end
+  end
+
   context "when the user is not logged in" do
     before do
       controller.stub(:user_signed_in?).and_return(false)
@@ -29,34 +65,10 @@ describe "layouts/application" do
         expect(page).not_to have_link "New technique"
       end
     end
-  end
 
-  context "when the user is logged in" do
-    before do
-      controller.stub(:user_signed_in?).and_return(true)
-    end
-
-    it "shows the logout link" do
+    it "shows doesn't show a link to see your techniques" do
       with_rendered_page do |page|
-        expect(page).to have_content "Log out"
-      end
-    end
-
-    it "doesn't show the sign up link" do
-      with_rendered_page do |page|
-        expect(page).not_to have_content "Sign up"
-      end
-    end
-
-    it "doesn't show the sign in link" do
-      with_rendered_page do |page|
-        expect(page).not_to have_content "Sign in"
-      end
-    end
-
-    it "shows a link to create a new technique" do
-      with_rendered_page do |page|
-        expect(page).to have_link "New technique"
+        expect(page).not_to have_content "My techniques"
       end
     end
   end
