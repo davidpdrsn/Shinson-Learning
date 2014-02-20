@@ -1,6 +1,7 @@
 def sign_up(email = 'bob@example.com', password = 'passwordlol')
   visit root_path
 
+  click_link "Sign up"
   fill_in "Email", with: email
   fill_in "user_password", with: password
   fill_in "user_password_confirmation", with: password
