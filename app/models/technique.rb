@@ -1,3 +1,6 @@
 class Technique < ActiveRecord::Base
-  validates :name, presence: true
+  belongs_to :belt
+
+  validates :name, presence: true,
+                   uniqueness: true
 end
