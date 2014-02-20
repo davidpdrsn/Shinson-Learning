@@ -14,6 +14,7 @@ gem 'normalize-rails'
 gem 'neat'
 gem 'smarter_csv'
 gem 'simple_form'
+gem 'pry'
 
 group :production do
   gem 'pg'
