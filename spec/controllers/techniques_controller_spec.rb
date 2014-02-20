@@ -24,6 +24,16 @@ describe TechniquesController, "GET #index" do
   end
 end
 
+describe TechniquesController, "GET #show" do
+  it "assigns @technique" do
+    technique = create(:technique)
+
+    get :show, id: technique.id
+
+    expect(assigns(:technique)).to eq technique
+  end
+end
+
 describe TechniquesController, "GET #new" do
   context "as a signed in user" do
     it "assigns @techniques as a new technique for the user" do

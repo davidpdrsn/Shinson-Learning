@@ -22,6 +22,10 @@ class TechniquesController < ApplicationController
     end
   end
 
+  def show
+    @technique = Technique.find(params[:id])
+  end
+
   def edit
   end
 
