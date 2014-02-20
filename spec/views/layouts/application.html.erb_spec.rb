@@ -23,6 +23,12 @@ describe "layouts/application" do
         expect(page).not_to have_content "Log out"
       end
     end
+
+    it "shows a link to create a new technique" do
+      with_rendered_page do |page|
+        expect(page).not_to have_link "New technique"
+      end
+    end
   end
 
   context "when the user is logged in" do
@@ -45,6 +51,12 @@ describe "layouts/application" do
     it "doesn't show the sign in link" do
       with_rendered_page do |page|
         expect(page).not_to have_content "Sign in"
+      end
+    end
+
+    it "shows a link to create a new technique" do
+      with_rendered_page do |page|
+        expect(page).to have_link "New technique"
       end
     end
   end
