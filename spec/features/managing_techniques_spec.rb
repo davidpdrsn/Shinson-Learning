@@ -21,6 +21,7 @@ feature 'creating techniques' do
   scenario 'a user creates an invalid technique' do
     sign_up
     click_link "New technique"
+    fill_in "Name", with: ""
     fill_in "Description", with: "Front kick"
     select "White (mu kup)", from: "Belt"
     select "Jokgi sul", from: "Category"
