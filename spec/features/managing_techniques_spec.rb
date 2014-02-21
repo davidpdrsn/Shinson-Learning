@@ -22,7 +22,7 @@ feature 'viewing techniques' do
     sign_up
   end
 
-  scenario 'a user view his list of techniques' do
+  scenario 'a user view his list of techniques with the default grouping' do
     create_technique("Ap chagi", "description", "White (mu kup)", "Jokgi sul")
     click_link "My techniques"
 
