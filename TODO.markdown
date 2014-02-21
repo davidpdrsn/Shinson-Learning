@@ -1,11 +1,13 @@
 TODOS
 =====
 
-- notes for techniques
-- note crud
+- statistics page
+- searching
 
 DOING
 =====
+
+- note crud
 
 DONE
 ====
@@ -13,3 +15,4 @@ DONE
 - setup categories
 - setup belts
 - remaining technique crud (edit and destroy)
+- notes for techniques
