@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220105111) do
+ActiveRecord::Schema.define(version: 20140221142212) do
 
   create_table "belts", force: true do |t|
     t.string "color"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20140220105111) do
 
   create_table "categories", force: true do |t|
     t.string "name"
+  end
+
+  create_table "notes", force: true do |t|
+    t.text     "text"
+    t.integer  "user_id"
+    t.integer  "technique_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "techniques", force: true do |t|

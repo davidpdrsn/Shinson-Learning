@@ -28,12 +28,29 @@ describe TechniquesController, "GET #index" do
 end
 
 describe TechniquesController, "GET #show" do
+  let(:technique) { create(:technique) }
+
+  before do
+    get :show, id: technique.id
+  end
+
   it "assigns @technique" do
+    expect(assigns(:technique)).to eq technique
+  end
+
+  it "assigns @new_note" do
+    expect(assigns(:new_note)).to be_new_record
+    expect(assigns(:new_note).technique).to eq technique
+  end
+
+  it "assigns @notes" do
     technique = create(:technique)
+    note1 = create(:note, technique: technique)
+    note2 = create(:note)
 
     get :show, id: technique.id
 
-    expect(assigns(:technique)).to eq technique
+    expect(assigns(:notes)).to eq [note1]
   end
 end
 

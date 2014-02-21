@@ -33,6 +33,8 @@ class TechniquesController < ApplicationController
 
   def show
     @technique = Technique.find(params[:id])
+    @new_note = @technique.notes.new
+    @notes = @technique.notes.where("ID NOT NULL")
   end
 
   def edit

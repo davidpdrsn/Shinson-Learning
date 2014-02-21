@@ -11,3 +11,16 @@
     <%= link_to "Delete", @technique, method: :delete, data: { confirm: "Sure?" } %>
   </div>
 <% end %>
+
+<%= simple_form_for [@technique, @new_note] do |f| %>
+  <%= f.input :text, label: "Note text" %>
+  <%= f.button :submit %>
+<% end %>
+
+<% if @notes.present? %>
+  <% @notes.each do |note| %>
+    <%= note.text %>
+  <% end %>
+<% else %>
+  There are no notes for this technique
+<% end %>

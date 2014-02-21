@@ -1,11 +1,17 @@
 require 'spec_helper'
 
 describe "techniques/show" do
-  it "shows links to edit and destroy the technique if the user owns it" do
-    user = build_stubbed(:user)
-    technique = build_stubbed(:technique, user: user)
+  let(:user) { build_stubbed(:user) }
+
+  before do
     controller.stub(:current_user).and_return(user)
+  end
+
+  it "shows links to edit and destroy the technique if the user owns it" do
+    technique = build_stubbed(:technique, user: user)
+    assign(:new_note, technique.notes.new)
     assign(:technique, technique)
+    assign(:notes, [])
 
     with_rendered_page do |page|
       expect(page).to have_content "Edit"
@@ -14,14 +20,37 @@ describe "techniques/show" do
   end
 
   it "doesn't shows links to edit and destroy the technique if the user doesn't own it" do
-    user = build_stubbed(:user)
     technique = build_stubbed(:technique)
-    controller.stub(:current_user).and_return(user)
+    assign(:new_note, technique.notes.new)
     assign(:technique, technique)
+    assign(:notes, [])
 
     with_rendered_page do |page|
       expect(page).not_to have_content "Edit"
       expect(page).not_to have_content "Delete"
+    end
+  end
+
+  it "shows a list of notes" do
+    technique = build_stubbed(:technique)
+    assign(:new_note, technique.notes.new)
+    assign(:technique, technique)
+    note = build_stubbed(:note, technique: technique)
+    assign(:notes, [note])
+
+    with_rendered_page do |page|
+      expect(page).to have_content note.text
+    end
+  end
+
+  it "shows when there are no notes" do
+    technique = build_stubbed(:technique)
+    assign(:new_note, technique.notes.new)
+    assign(:technique, technique)
+    assign(:notes, [])
+
+    with_rendered_page do |page|
+      expect(page).to have_content "There are no notes for this technique"
     end
   end
 end
