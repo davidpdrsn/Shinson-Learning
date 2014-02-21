@@ -4,8 +4,7 @@ class Grouper
   end
 
   def group_by(*methods)
-    first_method = methods.first
-    rest_of_methods = methods[(1..methods.length)]
+    first_method, *rest_of_methods = methods
 
     if rest_of_methods.empty?
       do_grouping(first_method)
