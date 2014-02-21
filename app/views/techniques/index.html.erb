@@ -1,6 +1,18 @@
 <% if @techniques.present? %>
-  <% @techniques.each do |technique| %>
-    <%= technique.name %>
+  <% @techniques.each do |category_name, belts| %>
+    <div class="<%= category_name %>">
+      <h1><%= category_name.gsub("-", " ").titleize %></h1>
+
+      <% belts.each do |belt, techniques| %>
+        <div class="<%= belt.split(/\s/).first.downcase.sub("/", "-") %>">
+          <h2><%= belt %></h2>
+
+          <% techniques.each do |technique| %>
+            <%= technique.name %><br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 <% else %>
   You have no techniques yet
