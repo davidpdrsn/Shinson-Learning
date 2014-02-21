@@ -27,7 +27,7 @@ group :test, :development do
   gem 'spring'
   gem 'database_cleaner'
   gem 'capybara'
-  gem 'poltergeist'
+  gem "capybara-webkit"
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'spring-commands-rspec'
