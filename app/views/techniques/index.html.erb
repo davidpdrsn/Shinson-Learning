@@ -1,11 +1,11 @@
 <% if @techniques.present? %>
-  <% @techniques.each do |category_name, belts| %>
-    <div class="<%= category_name %>">
-      <h1><%= category_name.gsub("-", " ").titleize %></h1>
+  <% @techniques.each do |first_group_name, second_group| %>
+    <div>
+      <h1><%= first_group_name %></h1>
 
-      <% belts.each do |belt, techniques| %>
-        <div class="<%= belt.split(/\s/).first.downcase.sub("/", "-") %>">
-          <h2><%= belt %></h2>
+      <% second_group.each do |second_group_name, techniques| %>
+        <div>
+          <h2><%= second_group_name %></h2>
 
           <% techniques.each do |technique| %>
             <%= link_to technique.name, technique %><br>
