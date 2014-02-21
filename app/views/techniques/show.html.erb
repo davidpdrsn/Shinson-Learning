@@ -5,7 +5,9 @@
 
 <%= simple_format @technique.description %>
 
-<div>
-  <%= link_to "Edit", edit_technique_path(@technique) %>
-  <%= link_to "Delete", @technique, method: :delete %>
-</div>
+<% if @technique.user == current_user %>
+  <div>
+    <%= link_to "Edit", edit_technique_path(@technique) %>
+    <%= link_to "Delete", @technique, method: :delete %>
+  </div>
+<% end %>
