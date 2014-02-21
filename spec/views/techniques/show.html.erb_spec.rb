@@ -53,4 +53,26 @@ describe "techniques/show" do
       expect(page).to have_content "There are no notes for this technique"
     end
   end
+
+  it "shows the form for creating a note" do
+    technique = build_stubbed(:technique, user: user)
+    assign(:new_note, technique.notes.new)
+    assign(:technique, technique)
+
+    with_rendered_page do |page|
+      expect(page).to have_button "Create Note"
+    end
+  end
+
+  it "doesn't show the form for creating a new note when the user doesn't own it" do
+    another_user = build_stubbed(:user)
+    controller.stub(:current_user).and_return(another_user)
+    technique = build_stubbed(:technique, user: user)
+    assign(:new_note, technique.notes.new)
+    assign(:technique, technique)
+
+    with_rendered_page do |page|
+      expect(page).not_to have_button "Create Note"
+    end
+  end
 end

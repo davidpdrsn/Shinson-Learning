@@ -12,11 +12,13 @@
   </div>
 <% end %>
 
-<hr>
+<% if @technique.user == current_user %>
+  <hr>
 
-<%= simple_form_for [@technique, @new_note] do |f| %>
-  <%= f.input :text, label: "Note text" %>
-  <%= f.button :submit %>
+  <%= simple_form_for [@technique, @new_note] do |f| %>
+    <%= f.input :text, label: "Note text" %>
+    <%= f.button :submit %>
+  <% end %>
 <% end %>
 
 <hr>
