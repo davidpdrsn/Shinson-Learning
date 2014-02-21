@@ -17,7 +17,7 @@ feature 'creating techniques' do
 end
 
 feature 'viewing techniques' do
-  scenario 'a user view his list of todos' do
+  scenario 'a user view his list of techniques' do
     sign_up
     create_technique("Ap chagi", "description", "White (mu kup)", "Jokgi sul")
     create_technique("Dollyo chagi", "description", "Red/Brown (4. kup)", "Jokgi sul")
