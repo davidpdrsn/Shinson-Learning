@@ -1,5 +1,5 @@
 class TechniquesController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :create, :edit, :update, :destroy, :new]
+  before_action :authenticate_user!, except: [:show]
   before_action :get_technique, only: [:destroy, :update, :edit]
 
   def index
