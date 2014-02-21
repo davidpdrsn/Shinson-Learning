@@ -23,6 +23,7 @@
                   <% if technique.note_count > 0 %>
                     (<%= pluralize(technique.note_count, "note") %>)
                   <% end %>
+                  <%= link_to "Peek", "#", class: "peek__link", data: { technique_id: technique.id } %>
                 </li>
               <% end %>
             </ul>

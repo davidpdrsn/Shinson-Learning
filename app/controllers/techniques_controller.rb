@@ -35,6 +35,14 @@ class TechniquesController < ApplicationController
     @technique = Technique.find(params[:id])
     @new_note = @technique.notes.new
     @notes = @technique.notes.where("ID NOT NULL")
+
+    respond_to do |format|
+      format.html {}
+      # TODO: should this be tested?
+      format.json do
+        render json: { technique: @technique, notes: @notes }
+      end
+    end
   end
 
   def edit
