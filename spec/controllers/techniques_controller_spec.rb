@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe TechniquesController, "GET #index" do
   context "as a signed in user" do
-    it "assigns @techniques to the users techniques" do
+    it "assigns @techniques as grouped" do
       user = create(:user)
       sign_in user
-      kicks = create(:category, name: "Jokgi sul")
+      kicks = create(:category, name: "Jokgi Sul")
       belt = create(:belt, color: "White", degree: "Mu kup")
       technique1 = create(:technique, user: user, category: kicks, belt: belt)
       technique2 = create(:technique, category: kicks, belt: belt)
@@ -14,7 +14,7 @@ describe TechniquesController, "GET #index" do
       get :index
 
       techniques = assigns(:techniques)
-      expect(techniques["jokgi-sul"]["White (mu kup)"]).to eq [technique1, technique3]
+      expect(techniques["Jokgi Sul"]["White (mu kup)"]).to eq [technique1, technique3]
     end
   end
 

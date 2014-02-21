@@ -5,7 +5,7 @@ class TechniquesController < ApplicationController
   before_action :get_technique, only: [:destroy, :update, :edit]
 
   def index
-    @techniques = Grouper.new(current_user.techniques).group_by(:category_html_class,
+    @techniques = Grouper.new(current_user.techniques).group_by(:category_name,
                                                                 :belt_pretty_print)
   end
 
