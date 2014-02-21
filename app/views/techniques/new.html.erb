@@ -1,7 +1,7 @@
 <%= simple_form_for @technique do |f| %>
   <%= f.input :name %>
   <%= f.input :description %>
-  <%= f.association :belt, label_method: :pretty_format, prompt: "Choose a belt" %>
+  <%= f.association :belt, label_method: :pretty_print, prompt: "Choose a belt" %>
   <%= f.association :category, prompt: "Choose a category" %>
   <%= f.button :submit %>
 <% end %>

@@ -7,7 +7,7 @@ def create_technique(name="Ap chagi",
     create(:category, name: category)
   end
 
-  unless Belt.all.map.any? { |b| b.pretty_format == belt }
+  unless Belt.all.map.any? { |b| b.pretty_print == belt }
     match = belt.match(/(?<color>.*?) \((?<degree>.*?)\)/)
     Belt.create(color: match[:color], degree: match[:degree])
   end

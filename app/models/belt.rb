@@ -5,7 +5,7 @@ class Belt < ActiveRecord::Base
   validates :degree, presence: true,
                      uniqueness: true
 
-  def pretty_format
+  def pretty_print
     "#{color.titleize} (#{degree.downcase})"
   end
 end
