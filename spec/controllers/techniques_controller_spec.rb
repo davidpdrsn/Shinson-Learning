@@ -85,10 +85,9 @@ describe TechniquesController, "POST #create" do
 
       expect do
         post :create, technique: attributes
-      end.to change { Technique.count }
+      end.to change { user.techniques.count }
 
       expect(subject).to set_the_flash[:notice]
-      expect(Technique.first.user).to eq user
     end
 
     it "doesn't create a new technique if the data is invalid" do
@@ -98,7 +97,7 @@ describe TechniquesController, "POST #create" do
 
       expect do
         post :create, technique: attributes
-      end.not_to change { Technique.count }
+      end.not_to change { user.techniques.count }
 
       expect(subject).to set_the_flash[:alert]
     end
@@ -196,7 +195,7 @@ describe TechniquesController, "DELETE #destroy" do
 
       expect do
         delete :destroy, id: technique.id
-      end.to change { Technique.count }.by -1
+      end.to change { technique.user.techniques.count }.by -1
 
       expect(subject).to set_the_flash[:notice]
     end
@@ -208,7 +207,7 @@ describe TechniquesController, "DELETE #destroy" do
 
       expect do
         delete :destroy, id: another_technique.id
-      end.not_to change { Technique.count }
+      end.not_to change { technique.user.techniques.count }
 
       expect(subject).to set_the_flash[:alert]
     end
