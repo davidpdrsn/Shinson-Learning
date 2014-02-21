@@ -72,3 +72,16 @@ feature 'updating techniques' do
     expect(page).to have_content "Technique not updated"
   end
 end
+
+feature "deleting techniques" do
+  scenario "a user deletes a technique" do
+    sign_up
+    create_technique("Ap chagi")
+    click_link "My techniques"
+    click_link "Ap chagi"
+    click_link "Delete"
+    click_link "My techniques"
+
+    expect(page).not_to have_content "Ap chagi"
+  end
+end
