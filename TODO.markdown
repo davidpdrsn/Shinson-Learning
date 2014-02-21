@@ -7,7 +7,7 @@ TODOS
 DOING
 =====
 
-- note crud
+- note editing
 
 DONE
 ====
