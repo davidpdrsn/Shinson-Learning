@@ -3,9 +3,10 @@ require 'spec_helper'
 feature 'creating techniques' do
   scenario 'a user creates a technique' do
     sign_up
-    create_technique
+    create_technique("Ap chagi")
 
     expect(page).to have_content "Technique saved"
+    expect(page).to have_content "Ap chagi"
   end
 
   scenario 'a user creates an invalid technique' do
