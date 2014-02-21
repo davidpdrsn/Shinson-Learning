@@ -12,15 +12,25 @@
   </div>
 <% end %>
 
+<hr>
+
 <%= simple_form_for [@technique, @new_note] do |f| %>
   <%= f.input :text, label: "Note text" %>
   <%= f.button :submit %>
 <% end %>
 
+<hr>
+
 <% if @notes.present? %>
-  <% @notes.each do |note| %>
-    <%= note.text %>
-  <% end %>
+  <ul>
+    <% @notes.each do |note| %>
+      <li>
+        <%= note.text %><br>
+        Created <%= note.created_at.to_formatted_s(:short) %>
+        (<%= time_ago_in_words note.created_at %> ago)
+      </li>
+    <% end %>
+  </ul>
 <% else %>
   There are no notes for this technique
 <% end %>
