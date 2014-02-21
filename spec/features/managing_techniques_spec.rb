@@ -24,32 +24,9 @@ feature 'viewing techniques' do
 
   scenario 'a user view his list of techniques' do
     create_technique("Ap chagi", "description", "White (mu kup)", "Jokgi sul")
-    create_technique("Dollyo chagi", "description", "Red/Brown (4. kup)", "Jokgi sul")
-    create_technique("Sujang chigi", "description", "Yellow (9. kup)", "Sugi sul")
-    create_technique("Monkey hyong", "description", "Black (1. dan)", "Hyong")
     click_link "My techniques"
 
-    within ".jokgi-sul" do
-      within ".white" do
-        expect(page).to have_content "Ap chagi"
-      end
-
-      within ".red-brown" do
-        expect(page).to have_content "Dollyo chagi"
-      end
-    end
-
-    within ".sugi-sul" do
-      within ".yellow" do
-        expect(page).to have_content "Sujang chigi"
-      end
-    end
-
-    within ".hyong" do
-      within ".black" do
-        expect(page).to have_content "Monkey hyong"
-      end
-    end
+    expect(page).to have_content "Ap chagi"
   end
 
   scenario 'a user views a single technique' do

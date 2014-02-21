@@ -5,13 +5,12 @@ describe "techniques/index" do
     it "shows a list of the techniques" do
       technique = build_stubbed(:technique)
       techniques = {
-        "jokgi-sul" => { "White (mu kup)" => [technique] }
+        "Jokgi Sul" => { "White (mu kup)" => [technique] }
       }
       assign(:techniques, techniques)
 
-      with_rendered_page do |page|
-        expect(page).to have_content technique.name
-      end
+      render
+      expect(rendered).to match /Jokgi Sul.*White \(mu kup\).*#{technique.name}/m
     end
   end
 
