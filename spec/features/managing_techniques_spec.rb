@@ -29,6 +29,14 @@ feature 'viewing techniques' do
     expect(page).to have_content "Ap chagi"
   end
 
+  scenario "a user views his list of techniques using another grouping", js: true do
+    create_technique("Ap chagi", "description", "White (mu kup)", "Jokgi sul")
+    click_link "My techniques"
+    select 'Belt then category', from: 'groupings'
+
+    expect(page.body).to match /White \(mu kup\).*Jokgi Sul.*Ap chagi/mi
+  end
+
   scenario 'a user views a single technique' do
     create_technique("Ap chagi")
     visit root_path

@@ -5,8 +5,14 @@ class TechniquesController < ApplicationController
   before_action :get_technique, only: [:destroy, :update, :edit]
 
   def index
-    @techniques = Grouper.new(current_user.techniques).group_by(:category_name,
-                                                                :belt_pretty_print)
+    grouper = Grouper.new(current_user.techniques)
+
+    default_grouping = [:category_name, :belt_pretty_print]
+    groupings = Hash.new(default_grouping)
+    groupings['category-belt'] = [:category_name, :belt_pretty_print]
+    groupings['belt-category'] = [:belt_pretty_print, :category_name]
+
+    @techniques = grouper.group_by(*groupings[params[:group_by]])
   end
 
   def new
