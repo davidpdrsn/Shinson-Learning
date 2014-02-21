@@ -33,4 +33,15 @@ describe Technique do
       expect(technique.belt).to have_received :pretty_print
     end
   end
+
+  describe "#category_name" do
+    it "delegates to category" do
+      technique = create(:technique)
+      technique.category.stub(:name)
+
+      technique.category_name
+
+      expect(technique.category).to have_received :name
+    end
+  end
 end

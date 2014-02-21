@@ -17,4 +17,8 @@ class Technique < ActiveRecord::Base
   def belt_pretty_print
     belt.pretty_print
   end
+
+  def category_name
+    category.name
+  end
 end
