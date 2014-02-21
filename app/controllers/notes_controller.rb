@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
-  before_action :get_technique, only: [:create]
+  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :get_technique, only: [:create, :destroy]
 
   def create
     @note = @technique.notes.new(note_params)
@@ -13,6 +13,13 @@ class NotesController < ApplicationController
       flash.alert = "Note not saved"
       redirect_to @technique
     end
+  end
+
+  def destroy
+    @note = @technique.notes.find(params[:id])
+    @note.destroy
+    flash.notice = "Note deleted"
+    redirect_to @technique
   end
 
   private

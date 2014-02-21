@@ -56,3 +56,46 @@ describe NotesController, "POST #create" do
     end
   end
 end
+
+describe NotesController, "DELETE #destory" do
+  context "as a signed in user" do
+    it "deletes the note" do
+      user = create(:user)
+      another_user = create(:user)
+      technique = create(:technique, user: another_user)
+      note = create(:note, technique: technique, user: another_user)
+      sign_in user
+
+      expect do
+        delete :destroy, id: note.id, technique_id: technique.id
+      end.not_to change { Note.count }
+
+      expect(subject).to set_the_flash[:alert]
+    end
+
+    it "doesn't delete the note if the user doesn't own it" do
+      user = create(:user)
+      technique = create(:technique, user: user)
+      note = create(:note, technique: technique, user: user)
+      sign_in user
+
+      expect do
+        delete :destroy, id: note.id, technique_id: technique.id
+      end.to change { Note.count }.by -1
+
+      expect(subject).to set_the_flash[:notice]
+      expect(subject).to redirect_to technique
+    end
+  end
+
+  context "as a guest" do
+    it "requires authentication" do
+      technique = create(:technique)
+      note = create(:note, technique: technique)
+
+      delete :destroy, id: note.id, technique_id: technique.id
+
+      expect(subject).to redirect_to new_user_session_path
+    end
+  end
+end
