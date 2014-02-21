@@ -9,4 +9,12 @@ class Technique < ActiveRecord::Base
   validates :category_id, presence: true
   validates :user_id, presence: true
   validates :description, presence: true
+
+  def category_html_class
+    category.html_class
+  end
+
+  def belt_pretty_print
+    belt.pretty_print
+  end
 end
