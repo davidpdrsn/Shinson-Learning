@@ -1,18 +1,14 @@
-require 'grouper'
-
 class TechniquesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create, :edit, :update, :destroy, :new]
   before_action :get_technique, only: [:destroy, :update, :edit]
 
   def index
-    grouper = Grouper.new(current_user.techniques)
-
     default_grouping = [:category_name, :belt_pretty_print]
     groupings = Hash.new(default_grouping)
     groupings['category-belt'] = [:category_name, :belt_pretty_print]
     groupings['belt-category'] = [:belt_pretty_print, :category_name]
 
-    @techniques = grouper.group_by(*groupings[params[:group_by]])
+    @techniques = Technique.for_user_grouped_by(current_user, *groupings[params[:group_by]])
   end
 
   def new

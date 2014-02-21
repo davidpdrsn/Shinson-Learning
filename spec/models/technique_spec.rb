@@ -54,4 +54,19 @@ describe Technique do
       expect(technique.note_count).to eq 1
     end
   end
+
+  describe "#for_user_grouped_by" do
+    it "finds the techniques for the user and groups them" do
+      techniques = [double(:technique), double(:technique)]
+      user = double(:user, techniques: techniques)
+      fake_grouper = double(:grouper)
+      Grouper.stub(:new).and_return(fake_grouper)
+      fake_grouper.stub(:group_by)
+
+      Technique.for_user_grouped_by(user, :category_name)
+
+      expect(Grouper).to have_received(:new).with(techniques)
+      expect(fake_grouper).to have_received(:group_by).with(:category_name)
+    end
+  end
 end

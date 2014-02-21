@@ -1,3 +1,5 @@
+require 'grouper'
+
 class Technique < ActiveRecord::Base
   belongs_to :belt
   belongs_to :category
@@ -10,6 +12,10 @@ class Technique < ActiveRecord::Base
   validates :category_id, presence: true
   validates :user_id, presence: true
   validates :description, presence: true
+
+  def self.for_user_grouped_by(user, *groupings)
+    Grouper.new(user.techniques).group_by(*groupings)
+  end
 
   def category_html_class
     category.html_class
