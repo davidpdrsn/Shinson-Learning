@@ -72,4 +72,48 @@ describe "layouts/application" do
       end
     end
   end
+
+  describe "showing the flashes" do
+    before do
+      controller.stub(:user_signed_in?).and_return(true)
+    end
+
+    context "when there is a flash notice" do
+      before do
+        controller.stub(:notice).and_return("foo")
+        controller.stub(:alert).and_return("")
+      end
+
+      it "shows the flash notice" do
+        with_rendered_page do |page|
+          expect(page).to have_css ".flash.flash--notice", text: "foo"
+        end
+      end
+
+      it "doesn't showt the flash alert element" do
+        with_rendered_page do |page|
+          expect(page).not_to have_css ".flash.flash--alert"
+        end
+      end
+    end
+
+    context "when there is a flash alert" do
+      before do
+        controller.stub(:alert).and_return("foo")
+        controller.stub(:notice).and_return("")
+      end
+
+      it "shows the flash alert" do
+        with_rendered_page do |page|
+          expect(page).to have_css ".flash.flash--alert", text: "foo"
+        end
+      end
+
+      it "doesn't showt the flash notice element" do
+        with_rendered_page do |page|
+          expect(page).not_to have_css ".flash.flash--notice"
+        end
+      end
+    end
+  end
 end

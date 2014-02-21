@@ -9,8 +9,12 @@
 </head>
 <body>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% if notice.present? or alert.present? %>
+  <div class="flash flash--<%= if notice.present? then "notice" else "alert" end %>">
+    <%= notice %>
+    <%= alert %>
+  </div>
+<% end %>
 
 <% if user_signed_in? %>
   <%= link_to "Log out", destroy_user_session_path, method: :delete %>
