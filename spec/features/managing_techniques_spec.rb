@@ -46,3 +46,17 @@ feature 'viewing techniques' do
     expect(page).to have_content "Ap chagi"
   end
 end
+
+feature 'updating techniques' do
+  scenario "a user updates a technique" do
+    sign_up
+    create_technique("Ap chagi")
+    click_link "My techniques"
+    click_link "Ap chagi"
+    click_link "Edit"
+    fill_in "Name", with: "Dollyo chagi"
+    click_button "Update"
+
+    expect(page).to have_content "Dollyo chagi"
+  end
+end

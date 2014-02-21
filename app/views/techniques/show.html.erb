@@ -4,3 +4,7 @@
 <p>Belt: <%= @technique.belt.pretty_print %></p>
 
 <%= simple_format @technique.description %>
+
+<div>
+  <%= link_to "Edit", edit_technique_path(@technique) %>
+</div>
