@@ -8,6 +8,6 @@
 <% if @technique.user == current_user %>
   <div>
     <%= link_to "Edit", edit_technique_path(@technique) %>
-    <%= link_to "Delete", @technique, method: :delete %>
+    <%= link_to "Delete", @technique, method: :delete, data: { confirm: "Sure?" } %>
   </div>
 <% end %>
