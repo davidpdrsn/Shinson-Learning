@@ -4,7 +4,10 @@ describe "techniques/index" do
   context "there are are techniques" do
     it "shows a list of the techniques" do
       technique = build_stubbed(:technique)
-      assign(:techniques, [technique])
+      techniques = {
+        "jokgi-sul" => { "White (mu kup)" => [technique] }
+      }
+      assign(:techniques, techniques)
 
       with_rendered_page do |page|
         expect(page).to have_content technique.name

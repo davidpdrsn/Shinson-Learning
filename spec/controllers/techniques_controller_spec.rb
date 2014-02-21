@@ -5,13 +5,16 @@ describe TechniquesController, "GET #index" do
     it "assigns @techniques to the users techniques" do
       user = create(:user)
       sign_in user
-      technique1 = create(:technique, user: user)
-      technique2 = create(:technique)
-      technique3 = create(:technique, user: user)
+      kicks = create(:category, name: "Jokgi sul")
+      belt = create(:belt, color: "White", degree: "Mu kup")
+      technique1 = create(:technique, user: user, category: kicks, belt: belt)
+      technique2 = create(:technique, category: kicks, belt: belt)
+      technique3 = create(:technique, user: user, category: kicks, belt: belt)
 
       get :index
 
-      expect(assigns(:techniques)).to eq [technique1, technique3]
+      techniques = assigns(:techniques)
+      expect(techniques["jokgi-sul"]["White (mu kup)"]).to eq [technique1, technique3]
     end
   end
 

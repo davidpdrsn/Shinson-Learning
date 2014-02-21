@@ -1,9 +1,12 @@
+require 'grouper'
+
 class TechniquesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create, :edit, :update, :destroy, :new]
   before_action :get_technique, only: [:destroy, :update, :edit]
 
   def index
-    @techniques = current_user.techniques
+    @techniques = Grouper.new(current_user.techniques).group_by(:category_html_class,
+                                                                :belt_pretty_print)
   end
 
   def new
