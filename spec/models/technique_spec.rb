@@ -45,4 +45,13 @@ describe Technique do
       expect(technique.category).to have_received :name
     end
   end
+
+  describe "#note_count" do
+    it "returns the number of notes a technique has" do
+      technique = create(:technique)
+      note = create(:note, technique: technique)
+
+      expect(technique.note_count).to eq 1
+    end
+  end
 end

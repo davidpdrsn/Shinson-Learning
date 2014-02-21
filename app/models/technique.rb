@@ -22,4 +22,8 @@ class Technique < ActiveRecord::Base
   def category_name
     category.name
   end
+
+  def note_count
+    notes.count
+  end
 end
