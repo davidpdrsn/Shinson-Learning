@@ -34,6 +34,7 @@
         </p>
         <% if @technique.user == current_user %>
           <p>
+            <%= link_to "Edit note", edit_technique_note_path(@technique, note) %>
             <%= link_to "Delete note", technique_note_path(@technique, note), method: :delete, data: { confirm: "Sure?" } %>
           </p>
         <% end %>

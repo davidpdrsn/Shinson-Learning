@@ -101,4 +101,30 @@ describe "techniques/show" do
       expect(page).not_to have_content "Delete note"
     end
   end
+
+  it "shows a link a to edit the note" do
+    technique = build_stubbed(:technique, user: user)
+    assign(:new_note, technique.notes.new)
+    assign(:technique, technique)
+    note = build_stubbed(:note, technique: technique)
+    assign(:notes, [note])
+
+    with_rendered_page do |page|
+      expect(page).to have_content "Edit note"
+    end
+  end
+
+  it "doesn't show a link to edit the note if the user doesn't own the note" do
+    technique = build_stubbed(:technique, user: user)
+    another_user = build_stubbed(:user)
+    controller.stub(:current_user).and_return(another_user)
+    assign(:new_note, technique.notes.new)
+    assign(:technique, technique)
+    note = build_stubbed(:note, technique: technique)
+    assign(:notes, [note])
+
+    with_rendered_page do |page|
+      expect(page).not_to have_content "Edit note"
+    end
+  end
 end

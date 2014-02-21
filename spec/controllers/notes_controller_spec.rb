@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+# TODO: refactor this!
+
 describe NotesController, "POST #create" do
   context "user is signed in" do
     it "creates the note" do
@@ -54,6 +56,89 @@ describe NotesController, "POST #create" do
 
       expect(subject).to redirect_to new_user_session_path
     end
+  end
+end
+
+describe NotesController, "GET #edit" do
+  context "user is signed in" do
+    it "assigns @note" do
+      user = create(:user)
+      sign_in user
+      technique = create(:technique, user: user)
+      note = create(:note, technique: technique, user: user)
+
+      get :edit, id: note.id, technique_id: technique.id
+
+      expect(assigns(:note)).to eq note
+    end
+
+    it "doesn't let a user edit another users note" do
+      user = create(:user)
+      sign_in user
+      another_user = create(:user)
+      technique = create(:technique, user: another_user)
+      note = create(:note, technique: technique, user: another_user)
+
+      get :edit, id: note.id, technique_id: technique.id
+
+      expect(subject).to set_the_flash[:alert]
+    end
+  end
+
+  it "requires authentication" do
+    technique = create(:technique)
+    note = create(:note, technique: technique)
+
+    get :edit, id: note.id, technique_id: technique.id
+
+    expect(subject).to redirect_to new_user_session_path
+  end
+end
+
+describe NotesController, "PATCH #update" do
+  context "user is signed in" do
+    it "updates the note" do
+      user = create(:user)
+      sign_in user
+      technique = create(:technique, user: user)
+      note = create(:note, technique: technique, user: user)
+
+      patch :update, id: note.id, technique_id: technique.id, note: { text: "New text" }
+
+      expect(subject).to set_the_flash[:notice]
+    end
+
+    it "doesn't update the note if the data is invalid" do
+      user = create(:user)
+      sign_in user
+      technique = create(:technique, user: user)
+      note = create(:note, technique: technique, user: user)
+
+      patch :update, id: note.id, technique_id: technique.id, note: { text: "" }
+
+      expect(subject).to set_the_flash[:alert]
+    end
+
+    it "doesn't update the note if the user doesn't own it" do
+      user = create(:user)
+      sign_in user
+      another_user = create(:user)
+      technique = create(:technique, user: another_user)
+      note = create(:note, technique: technique, user: another_user)
+
+      patch :update, id: note.id, technique_id: technique.id, note: { text: "" }
+
+      expect(subject).to set_the_flash[:alert]
+    end
+  end
+
+  it "requires authentication" do
+    technique = create(:technique)
+    note = create(:note, technique: technique)
+
+    patch :update, id: note.id, technique_id: technique.id
+
+    expect(subject).to redirect_to new_user_session_path
   end
 end
 
