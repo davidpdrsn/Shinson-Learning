@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'viewing the homepage' do
+feature 'authentication' do
   scenario 'a guest arrives at the home page' do
     visit root_path
 

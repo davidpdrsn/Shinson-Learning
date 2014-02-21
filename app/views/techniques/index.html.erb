@@ -8,7 +8,7 @@
           <h2><%= belt %></h2>
 
           <% techniques.each do |technique| %>
-            <%= technique.name %><br>
+            <%= link_to technique.name, technique %><br>
           <% end %>
         </div>
       <% end %>

@@ -1,0 +1,6 @@
+<h1><%= @technique.name %></h1>
+
+<p>Category: <%= @technique.category.name %></p>
+<p>Belt: <%= @technique.belt.pretty_print %></p>
+
+<%= simple_format @technique.description %>

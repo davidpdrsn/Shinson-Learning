@@ -51,4 +51,13 @@ feature 'viewing techniques' do
       end
     end
   end
+
+  scenario 'a user views a single technique' do
+    create_technique("Ap chagi")
+    visit root_path
+    click_link "My techniques"
+    click_link "Ap chagi"
+
+    expect(page).to have_content "Ap chagi"
+  end
 end
