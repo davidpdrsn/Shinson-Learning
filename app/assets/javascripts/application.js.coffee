@@ -8,3 +8,8 @@ $ ->
     grouping = $(this).val()
     newUrl = window.location.origin + window.location.pathname + "?group_by=" + grouping
     window.location.href = newUrl
+
+  $('.techniques ul').hide()
+  $('.toggle-techniques').on 'click', (e) ->
+    e.preventDefault()
+    $(this).parent().next('ul').slideToggle('fast')

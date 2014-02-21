@@ -6,22 +6,26 @@
   </select>
 </div>
 
-<% if @techniques.present? %>
-  <% @techniques.each do |first_group_name, second_group| %>
-    <div>
-      <h1><%= first_group_name %></h1>
+<div class="techniques">
+  <% if @techniques.present? %>
+    <% @techniques.each do |first_group_name, second_group| %>
+      <div>
+        <h1><%= first_group_name %></h1>
 
-      <% second_group.each do |second_group_name, techniques| %>
-        <div>
-          <h2><%= second_group_name %></h2>
+        <% second_group.each do |second_group_name, techniques| %>
+          <div>
+            <h2><a href="#" class="toggle-techniques"><%= second_group_name %></a></h2>
 
-          <% techniques.each do |technique| %>
-            <%= link_to technique.name, technique %><br>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+            <ul>
+              <% techniques.each do |technique| %>
+                <li><%= link_to technique.name, technique %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    You have no techniques yet
   <% end %>
-<% else %>
-  You have no techniques yet
-<% end %>
+</div>
