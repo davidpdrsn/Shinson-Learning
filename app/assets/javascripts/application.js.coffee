@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require fastclick
 //= require_tree .
 
 $ ->

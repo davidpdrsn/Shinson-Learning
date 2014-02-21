@@ -1,0 +1,20 @@
+{
+  "name": "shinson_learning",
+  "version": "0.0.0",
+  "homepage": "https://github.com/davidpdrsn/Shinson-Learning",
+  "authors": [
+    "David Pedersen <david.pdrsn@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fastclick": "~0.6.11",
+    "normalize-css": "~3.0.0"
+  }
+}
