@@ -12,11 +12,9 @@ describe NotesController, "POST #create" do
 
       expect do
         post :create, note: attributes, technique_id: technique.id
-      end.to change { Note.count }.by 1
+      end.to change { user.notes.count + technique.notes.count }.by 2
 
       expect(subject).to set_the_flash[:notice]
-      expect(Note.last.technique).to eq technique
-      expect(Note.last.user).to eq user
     end
 
     it "doesn't create the note if it is invalid" do
@@ -27,7 +25,7 @@ describe NotesController, "POST #create" do
 
       expect do
         post :create, note: attributes, technique_id: technique.id
-      end.not_to change { Note.count }
+      end.not_to change { user.notes.count + technique.notes.count }
 
       expect(subject).to set_the_flash[:alert]
     end
@@ -41,7 +39,7 @@ describe NotesController, "POST #create" do
 
       expect do
         post :create, note: attributes, technique_id: technique.id
-      end.not_to change { Note.count }
+      end.not_to change { user.notes.count + technique.notes.count }
 
       expect(subject).to set_the_flash[:alert]
     end
@@ -152,7 +150,7 @@ describe NotesController, "DELETE #destory" do
 
       expect do
         delete :destroy, id: note.id, technique_id: technique.id
-      end.to change { Note.count }.by -1
+      end.to change { user.notes.count + technique.notes.count }.by -2
 
       expect(subject).to set_the_flash[:notice]
       expect(subject).to redirect_to technique
@@ -167,7 +165,7 @@ describe NotesController, "DELETE #destory" do
 
       expect do
         delete :destroy, id: note.id, technique_id: technique.id
-      end.not_to change { Note.count }
+      end.not_to change { user.notes.count + technique.notes.count }
 
       expect(subject).to set_the_flash[:alert]
     end
