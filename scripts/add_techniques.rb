@@ -8,7 +8,7 @@ misc = Category.where(name: "Miscellaneous").first
 yaksok = Category.where(name: "Yaksok Daeryon").first
 hyong = Category.where(name: "Hyong").first
 
-me.techniques.destroy_all
+# me.techniques.destroy_all
 
 techniques = Hash.new
 
