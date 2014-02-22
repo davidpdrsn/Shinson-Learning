@@ -7,20 +7,25 @@ domain.setGrouping = ->
 
 domain.toggleTechniques = (event) ->
   event.preventDefault()
-  $(this).parent().next('ul').slideToggle('fast')
+  $(this)
+    .toggleClass("icon-arrow-right-after")
+    .toggleClass("icon-arrow-down-after")
+    .parent()
+    .next('ul')
+    .toggle()
 
 domain.peekAtTechnique = (event) ->
   event.preventDefault()
 
   if $(this).hasClass("peek__link--peeking")
-    $(this).text("Peek").removeClass("peek__link--peeking")
+    $(this).removeClass("peek__link--peeking").removeClass("icon-eye-blocked")
     domain.removeTechniqueDescription(this)
   else
     $.ajax
       url: "/techniques/#{$(this).data('technique-id')}"
       dataType: "json"
     .done (data) =>
-      $(this).text("Unpeek").addClass("peek__link--peeking")
+      $(this).addClass("peek__link--peeking").addClass("icon-eye-blocked")
       domain.injectTechniqueDescription(data.technique.description, this)
 
 domain.injectTechniqueDescription = (description, linkNode) ->
@@ -34,6 +39,20 @@ domain.removeTechniqueDescription = (linkNode) ->
     .parent("li")
     .find(".peek__description")
     .remove()
+
+domain.closeFlash = (event) ->
+  event.preventDefault()
+  $(this).parents(".flash").remove()
+
+domain.toggleNewNoteForm = (event) ->
+  event.preventDefault()
+  $newNote = $(".new_note")
+  $button = $(event.target)
+  $('.new_note').toggle()
+  if $newNote.is(":visible")
+    $button.text("-")
+  else
+    $button.text("+")
 
 # private
 

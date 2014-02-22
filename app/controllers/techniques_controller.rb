@@ -3,6 +3,8 @@ class TechniquesController < ApplicationController
   before_action :get_technique, only: [:destroy, :update, :edit]
 
   def index
+    @page_title = "My techniques"
+
     default_grouping = [:category_name, :belt_pretty_print]
     groupings = Hash.new(default_grouping)
     groupings['category-belt'] = [:category_name, :belt_pretty_print]
@@ -12,6 +14,7 @@ class TechniquesController < ApplicationController
   end
 
   def new
+    @page_title = "New technique"
     @technique = current_user.techniques.new
   end
 

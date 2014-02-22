@@ -1,0 +1,34 @@
+@import "bits";
+
+$flash_padding: .75rem;
+
+.flash {
+  font-size: .8rem;
+  padding: $flash_padding;
+  border-radius: $radius;
+  margin-bottom: $space;
+  position: relative;
+}
+
+.flash--notice {
+  background: #d8ebf8;
+  border: 1px solid #97c1da;
+  color: #264c72;
+}
+
+.flash--alert {
+  background: #e54d42;
+  border: 1px solid darken(#e54d42, 15%);
+  color: white;
+}
+
+.flash__close {
+  -webkit-appearance: none;
+  padding: 0;
+  background: none;
+  color: black;
+  margin: 0;
+  border: none;
+  position: absolute;
+  right: $flash_padding;
+}

@@ -1,0 +1,75 @@
+@import "bits";
+
+select[name="groupings"] {
+  float: right;
+}
+
+.techniques {
+  h1 {
+    font-size: 1.5rem;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  .icon-arrow-right-after:after,
+  .icon-arrow-down-after:after {
+    position: relative;
+    top: 3px;
+    float: left;
+  }
+
+  ul {
+    display: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      background: $light_gray;
+      margin: .5rem 0;
+      padding: .25rem;
+      border-radius: $radius;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  .toggle-techniques {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .peek__link {
+    text-decoration: none;
+    color: inherit;
+    float: right;
+    position: relative;
+    top: 2px;
+    right: 3px;
+    color: $darker_gray;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  .peek__description {
+    margin-bottom: 0;
+  }
+
+  .note-count {
+    @include secondary_text;
+    display: inline-block;
+    float: right;
+    margin-right: $space/2;
+  }
+}

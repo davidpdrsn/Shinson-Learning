@@ -14,6 +14,7 @@ gem 'neat'
 gem 'smarter_csv'
 gem 'simple_form'
 gem 'pry'
+gem 'autoprefixer-rails'
 
 group :production do
   gem 'pg'

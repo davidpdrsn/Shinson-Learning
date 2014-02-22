@@ -1,0 +1,38 @@
+@import "bits";
+
+.main-header {
+  background: $light_gray;
+  border-bottom: 1px solid $black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+
+  a, a:visited {
+    color: $black;
+    text-decoration: none;
+  }
+}
+.main-header__logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.33rem;
+
+  img {
+    @include size(143px/2);
+    margin-right: 1rem;
+  }
+}
+.main-header__nav {
+  a {
+    font-size: .9rem;
+    padding: .25rem .5rem;
+    border-radius: $radius;
+    margin: .25rem;
+    transition: .1s;
+
+    &:hover {
+      background: $dark_gray;
+    }
+  }
+}

@@ -1,31 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ShinsonLearning</title>
+  <% if @page_title.present? %>
+    <title><%= @page_title %> | Shinson Learning</title>
+  <% else %>
+    <title>Shinson Learning</title>
+  <% end %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet'>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<% if notice.present? or alert.present? %>
-  <div class="flash flash--<%= if notice.present? then "notice" else "alert" end %>">
-    <%= notice %>
-    <%= alert %>
-  </div>
-<% end %>
+<header class="main-header">
+  <a class="main-header__logo" href="<%= root_path %>">
+    <%= image_tag "ssh-logo.png" %>
 
-<% if user_signed_in? %>
-  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-  <%= link_to "New technique", new_technique_path %>
-  <%= link_to "My techniques", techniques_path %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path %>
-  <%= link_to "Sign in", new_user_session_path %>
-<% end %>
+    Shinson Learning
+  </a>
 
-<%= yield %>
+  <nav class="main-header__nav">
+    <% if user_signed_in? %>
+      <%= link_to "My techniques", techniques_path %>
+      <%= link_to "New technique", new_technique_path %>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+      <a class="icon-search" href="#"></a>
+    <% else %>
+      <%= link_to "Sign in", new_user_session_path %>
+      <%= link_to "Sign up", new_user_registration_path %>
+    <% end %>
+  </nav>
+</header>
+
+<div class="main">
+  <% if notice.present? or alert.present? %>
+    <div class="flash flash--<%= if notice.present? then "notice" else "alert" end %>">
+      <%= notice %>
+      <%= alert %>
+      <button class="flash__close">Close</button>
+    </div>
+  <% end %>
+
+  <%= yield %>
+
+  <footer class="main-footer">
+    Shinson Learning (c) 2014, built by <a href="mailto:david.pdrsn@gmail.com">David Pedersen</a>
+  </footer>
+</div>
 
 </body>
 </html>

@@ -7,7 +7,7 @@ feature 'peaking at techniques' do
     visit root_path
     click_link "My techniques"
     click_link "White (mu kup)"
-    click_link "Peek"
+    click_link "toggle-peeking"
 
     expect(page).to have_content "Front kick"
   end
@@ -18,8 +18,8 @@ feature 'peaking at techniques' do
     visit root_path
     click_link "My techniques"
     click_link "White (mu kup)"
-    click_link "Peek"
-    click_link "Unpeek"
+    click_link "toggle-peeking"
+    click_link "toggle-peeking"
 
     expect(page).not_to have_content "Front kick"
   end

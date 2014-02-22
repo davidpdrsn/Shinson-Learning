@@ -1,0 +1,46 @@
+@import "bourbon";
+@import "neat";
+
+$light_gray: #e1e1e1;
+$dark_gray: #b3b3b3;
+$darker_gray: darken($dark_gray, 10%);
+$black: black;
+$white: white;
+$blue: rgb(36, 67, 147);
+$red: darken(red, 0%);
+
+$radius: 3px;
+
+$space: 1rem;
+
+
+@mixin size($x) {
+  width: $x;
+  height: $x;
+}
+
+@mixin medium {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+@mixin small {
+  @media (max-width: 400px) {
+    @content;
+  }
+}
+
+@mixin all_headings {
+  @for $i from 1 through 6 {
+    h#{$i} {
+      @content;
+    }
+  }
+}
+
+@mixin secondary_text {
+  font-style: italic;
+  font-size: .8rem;
+  color: $darker_gray;
+}

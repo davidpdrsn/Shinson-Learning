@@ -28,6 +28,8 @@ GEM
     addressable (2.3.5)
     arel (4.0.2)
     atomic (1.1.14)
+    autoprefixer-rails (1.1.20140218)
+      execjs
     bcrypt-ruby (3.1.2)
     bourbon (3.1.8)
       sass (>= 3.2.0)
@@ -185,6 +187,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   bourbon
   capybara
   capybara-webkit
