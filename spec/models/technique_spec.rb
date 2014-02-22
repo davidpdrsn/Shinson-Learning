@@ -55,10 +55,11 @@ describe Technique do
     end
   end
 
-  describe "#for_user_grouped_by" do
+  describe "#for_user_grouped_by", focus: true do
     it "finds the techniques for the user and groups them" do
-      techniques = [double(:technique), double(:technique)]
-      user = double(:user, techniques: techniques)
+      techniques = [build_stubbed(:technique), build_stubbed(:technique)]
+      user = build_stubbed(:user)
+      user.stub(:techniques).and_return(techniques)
       fake_grouper = double(:grouper)
       Grouper.stub(:new).and_return(fake_grouper)
       fake_grouper.stub(:group_by)

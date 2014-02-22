@@ -14,7 +14,7 @@ class Technique < ActiveRecord::Base
   validates :description, presence: true
 
   def self.for_user_grouped_by(user, *groupings)
-    Grouper.new(user.techniques).group_by(*groupings)
+    Grouper.new(user.techniques.sort_by(&:name)).group_by(*groupings)
   end
 
   def category_html_class
