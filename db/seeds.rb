@@ -52,4 +52,4 @@ def create_categories
 end
 
 create_belts
-rreate_categories
+create_categories
