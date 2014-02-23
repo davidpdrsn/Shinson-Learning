@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+class ClassAnalyzer
+  def analyze!
+    puts stats_about_classes
+  end
+
+  private
+
+  def stats_about_classes
+    files_containing_classes.map do |file|
+      stat_for_file(file)
+    end.sort_by do |stat|
+      first_int_in_line(stat)
+    end
+  end
+
+  def first_int_in_line(line)
+    line.scan(/\d+/).first.to_i
+  end
+
+  def stat_for_file(file)
+    "#{number_of_lines_in_file(file).to_s.ljust(2)} - #{file}"
+  end
+
+  def number_of_lines_in_file(file)
+    File.read(file).lines.length
+  end
+
+  def files_containing_classes
+    ruby_files.select { |file| file_contains_class(file) }
+  end
+
+  def file_contains_class(file)
+    File.read(file).lines.any? { |line| line.match(class_regex) }
+  end
+
+  def ruby_files
+    Dir["app/**/*.rb", "lib/**/*.rb"]
+  end
+
+  def class_regex
+    /^\s*(class|module) (?<name>.*?)(\s|$)/
+  end
+end
+
+ClassAnalyzer.new.analyze!
