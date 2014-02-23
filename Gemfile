@@ -16,14 +16,13 @@ gem 'simple_form'
 gem 'pry'
 gem 'autoprefixer-rails'
 gem 'figaro'
+gem 'pg'
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 
 group :test, :development do
-  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'spring'
   gem 'database_cleaner'
