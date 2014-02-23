@@ -13,9 +13,20 @@ Development
 
 3. Get the code.
 
-      $ git clone https://github.com/davidpdrsn/Shinson-Learning.git
+```
+$ git clone https://github.com/davidpdrsn/Shinson-Learning.git
+```
 
 4. Setup your environment
 
-      $ bin/setup
+```
+$ bin/setup
+```
 
+5. Run the server to check that everything works
+
+```
+$ bin/rails server
+```
+
+Then visit [http://localhost:3000](http://localhost:3000)
