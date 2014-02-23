@@ -37,6 +37,15 @@ feature 'viewing techniques' do
     expect(page.body).to match /White \(mu kup\).*Jokgi Sul.*Ap chagi/mi
   end
 
+  scenario "A user sees that the list is sorted" do
+    create_technique("Gibon sul 10")
+    create_technique("Gibon sul 2")
+    create_technique("Gibon sul 1")
+    click_link "My techniques"
+
+    expect(page.body).to match /Gibon sul 1.*Gibon sul 2.*Gibon sul 10/mi
+  end
+
   scenario 'a user views a single technique' do
     create_technique("Ap chagi")
     visit root_path

@@ -14,7 +14,7 @@ class Technique < ActiveRecord::Base
   validates :description, presence: true
 
   def self.for_user_grouped_by(user, *groupings)
-    Grouper.new(user.techniques.sort_by(&:name)).group_by(*groupings)
+    Grouper.new(user.techniques.sort).group_by(*groupings)
   end
 
   def category_html_class
@@ -31,5 +31,21 @@ class Technique < ActiveRecord::Base
 
   def note_count
     notes.count
+  end
+
+  def <=>(another)
+    name_to_a(self) <=> name_to_a(another)
+  end
+
+  private
+
+  def name_to_a(technique)
+    match = technique.name.match(/(?<string>.*?)(?<digit>\d+)$/)
+
+    if match
+      [match[:string], match[:digit].to_i]
+    else
+      [technique.name]
+    end
   end
 end

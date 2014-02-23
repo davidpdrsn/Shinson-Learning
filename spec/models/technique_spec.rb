@@ -55,7 +55,7 @@ describe Technique do
     end
   end
 
-  describe "#for_user_grouped_by", focus: true do
+  describe "#for_user_grouped_by" do
     it "finds the techniques for the user and groups them" do
       techniques = [build_stubbed(:technique), build_stubbed(:technique)]
       user = build_stubbed(:user)
@@ -69,5 +69,13 @@ describe Technique do
       expect(Grouper).to have_received(:new).with(techniques)
       expect(fake_grouper).to have_received(:group_by).with(:category_name)
     end
+  end
+
+  it "can be sorted" do
+    a = create(:technique, name: "gibon sul 1")
+    c = create(:technique, name: "gibon sul 10")
+    b = create(:technique, name: "gibon sul 2")
+
+    expect([c,b,a].sort).to eq [a,b,c]
   end
 end
