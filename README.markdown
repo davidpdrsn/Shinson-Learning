@@ -31,4 +31,4 @@ Development
     $ bin/rails server
     ```
 
-Then visit [http://localhost:3000](http://localhost:3000)
+    Then visit [http://localhost:3000](http://localhost:3000)
