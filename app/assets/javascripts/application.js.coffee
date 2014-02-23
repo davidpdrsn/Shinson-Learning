@@ -12,7 +12,14 @@ $ ->
 
   $(document).on 'click', '.toggle-techniques', (event) ->
     event.preventDefault()
-    domain.toggleTechniques $(this), $(this).parent().next('ul')
+    domain.toggleTechniques $(this), $(this).parent().siblings('ul')
+
+  $(document).on 'click', '.peek__link--all', (event) ->
+    event.preventDefault()
+    $list = $(this).next('ul')
+    domain.peekAtAllTechniques $list,
+                               $(this).parent().find('.toggle-techniques'),
+                               $(this).parent().find('.peek__link')
 
   $(document).on 'click', '.peek__link', (event) ->
     event.preventDefault()

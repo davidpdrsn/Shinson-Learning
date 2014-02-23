@@ -2,11 +2,18 @@
 
 select[name="groupings"] {
   float: right;
+
+  @include small {
+    float: none;
+    width: 100%;
+    margin-bottom: $space;
+  }
 }
 
 .techniques {
   h1 {
     font-size: 1.5rem;
+    clear: both;
 
     &:first-of-type {
       margin-top: 0;
@@ -15,6 +22,8 @@ select[name="groupings"] {
 
   h2 {
     font-size: 1.25rem;
+    float: left;
+    clear: both;
   }
 
   .icon-arrow-right-after:after,
@@ -29,6 +38,7 @@ select[name="groupings"] {
     margin: 0;
     padding: 0;
     list-style: none;
+    clear: both;
 
     li {
       background: $light_gray;
@@ -48,18 +58,34 @@ select[name="groupings"] {
     text-decoration: none;
   }
 
+  .peek__link--all,
   .peek__link {
-    text-decoration: none;
-    color: inherit;
     float: right;
-    position: relative;
-    top: 2px;
-    right: 3px;
     color: $darker_gray;
+    text-decoration: none;
+
+    @include small {
+      font-size: 1.25rem;
+      top: -1px !important;
+      margin-right: 2px;
+      right: 0 !important;
+    }
 
     &:hover {
       color: black;
     }
+  }
+
+  .peek__link--all {
+    position: relative;
+    top: 6px !important;
+    right: 3px !important;
+  }
+
+  .peek__link {
+    position: relative;
+    top: 2px;
+    right: 3px;
   }
 
   .peek__description {
@@ -70,6 +96,8 @@ select[name="groupings"] {
     @include secondary_text;
     display: inline-block;
     float: right;
+    position: relative;
+    top: 1px;
     margin-right: $space/2;
   }
 }

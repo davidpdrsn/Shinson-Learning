@@ -5,8 +5,20 @@ domain.setGrouping = (grouping) ->
   redirectTo newUrl
 
 domain.toggleTechniques = ($button, $list) ->
-  $button.toggleClass("icon-arrow-right-after").toggleClass("icon-arrow-down-after")
+  if $button.hasClass("icon-arrow-right-after") ||
+     $button.hasClass("icon-arrow-down-after")
+    $button.toggleClass("icon-arrow-right-after").toggleClass("icon-arrow-down-after")
   $list.toggle()
+
+domain.peekAtAllTechniques = ($list, $toggleLink, $peekLinks) ->
+  $toggleLink.click() unless $list.is(":visible")
+
+  allOpen = $peekLinks.toArray().reduce ((acc, link) ->
+    acc && $(link).hasClass('peek__link--peeking')
+  ), true
+
+  $peekLinks.each ->
+    $(this).click() unless !allOpen and $(this).hasClass("peek__link--peeking")
 
 domain.peekAtTechnique = ($link, $listItem) ->
   if $link.hasClass("peek__link--peeking")
