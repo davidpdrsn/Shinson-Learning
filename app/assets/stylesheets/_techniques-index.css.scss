@@ -64,12 +64,12 @@ select[name="groupings"] {
     color: $darker_gray;
     text-decoration: none;
 
-    @include small {
-      font-size: 1.25rem;
-      top: -1px !important;
-      margin-right: 2px;
-      right: 0 !important;
-    }
+    // @include small {
+    //   font-size: 1.25rem;
+    //   top: -1px !important;
+    //   margin-right: 2px;
+    //   right: 0 !important;
+    // }
 
     &:hover {
       color: black;

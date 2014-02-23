@@ -18,6 +18,13 @@
   text-transform: none;
   line-height: 1;
 
+  // @include small {
+  //   &:empty {
+  //     display: inline-block !important;
+  //     padding: 1px !important;
+  //   }
+  // }
+
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
