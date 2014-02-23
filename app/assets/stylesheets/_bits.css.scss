@@ -19,6 +19,12 @@ $space: 1rem;
   height: $x;
 }
 
+@mixin big {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
 @mixin medium {
   @media (max-width: 600px) {
     @content;

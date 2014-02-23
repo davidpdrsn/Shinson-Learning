@@ -54,6 +54,10 @@ domain.toggleNewNoteForm = (event) ->
   else
     $button.text("+")
 
+domain.toggleNav = (event) ->
+  event.preventDefault()
+  $('.main-header__nav').slideToggle('fast')
+
 # private
 
 redirectTo = (url) -> window.location.href = url

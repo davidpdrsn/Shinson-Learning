@@ -32,8 +32,8 @@ input[type=submit] {
     @include linear-gradient(to top, lighten($light_gray, 5%), lighten($dark_gray, 5%));
   }
 
-  &.button--small {
-    font-size: .7rem;
-    padding: .2rem .33rem;
-  }
+}
+.button--small {
+  font-size: .7rem;
+  padding: .2rem .33rem;
 }

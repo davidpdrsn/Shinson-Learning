@@ -21,12 +21,14 @@
     Shinson Learning
   </a>
 
+  <button class="main-header__toggle-nav button--small">Menu</button>
+
   <nav class="main-header__nav">
     <% if user_signed_in? %>
       <%= link_to "My techniques", techniques_path %>
       <%= link_to "New technique", new_technique_path %>
       <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-      <a class="icon-search" href="#"></a>
+      <%# <a class="icon-search" href="#"></a> %>
     <% else %>
       <%= link_to "Sign in", new_user_session_path %>
       <%= link_to "Sign up", new_user_registration_path %>
