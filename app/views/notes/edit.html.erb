@@ -1,4 +1,1 @@
-<%= simple_form_for [@technique, @note] do |f| %>
-  <%= f.input :text, label: "Note text" %>
-  <%= f.button :submit %>
-<% end %>
+<%= render partial: "shared/notes_form" %>

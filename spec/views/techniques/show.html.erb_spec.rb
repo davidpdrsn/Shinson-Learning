@@ -9,7 +9,7 @@ describe "techniques/show" do
 
   it "shows links to edit and destroy the technique if the user owns it" do
     technique = build_stubbed(:technique, user: user)
-    assign(:new_note, technique.notes.new)
+    assign(:note, technique.notes.new)
     assign(:technique, technique)
     assign(:notes, [])
 
@@ -21,7 +21,7 @@ describe "techniques/show" do
 
   it "doesn't shows links to edit and destroy the technique if the user doesn't own it" do
     technique = build_stubbed(:technique)
-    assign(:new_note, technique.notes.new)
+    assign(:note, technique.notes.new)
     assign(:technique, technique)
     assign(:notes, [])
 
@@ -33,7 +33,7 @@ describe "techniques/show" do
 
   it "shows a list of notes" do
     technique = build_stubbed(:technique)
-    assign(:new_note, technique.notes.new)
+    assign(:note, technique.notes.new)
     assign(:technique, technique)
     note = build_stubbed(:note, technique: technique)
     assign(:notes, [note])
@@ -45,7 +45,7 @@ describe "techniques/show" do
 
   it "shows when there are no notes" do
     technique = build_stubbed(:technique)
-    assign(:new_note, technique.notes.new)
+    assign(:note, technique.notes.new)
     assign(:technique, technique)
     assign(:notes, [])
 
@@ -56,7 +56,7 @@ describe "techniques/show" do
 
   it "shows the form for creating a note" do
     technique = build_stubbed(:technique, user: user)
-    assign(:new_note, technique.notes.new)
+    assign(:note, technique.notes.new)
     assign(:technique, technique)
 
     with_rendered_page do |page|
@@ -68,7 +68,7 @@ describe "techniques/show" do
     another_user = build_stubbed(:user)
     controller.stub(:current_user).and_return(another_user)
     technique = build_stubbed(:technique, user: user)
-    assign(:new_note, technique.notes.new)
+    assign(:note, technique.notes.new)
     assign(:technique, technique)
 
     with_rendered_page do |page|
@@ -78,7 +78,7 @@ describe "techniques/show" do
 
   it "shows link to delete notes" do
     technique = build_stubbed(:technique, user: user)
-    assign(:new_note, technique.notes.new)
+    assign(:note, technique.notes.new)
     assign(:technique, technique)
     note = build_stubbed(:note, technique: technique)
     assign(:notes, [note])
@@ -92,7 +92,7 @@ describe "techniques/show" do
     technique = build_stubbed(:technique, user: user)
     another_user = build_stubbed(:user)
     controller.stub(:current_user).and_return(another_user)
-    assign(:new_note, technique.notes.new)
+    assign(:note, technique.notes.new)
     assign(:technique, technique)
     note = build_stubbed(:note, technique: technique)
     assign(:notes, [note])
@@ -104,7 +104,7 @@ describe "techniques/show" do
 
   it "shows a link a to edit the note" do
     technique = build_stubbed(:technique, user: user)
-    assign(:new_note, technique.notes.new)
+    assign(:note, technique.notes.new)
     assign(:technique, technique)
     note = build_stubbed(:note, technique: technique)
     assign(:notes, [note])
@@ -118,7 +118,7 @@ describe "techniques/show" do
     technique = build_stubbed(:technique, user: user)
     another_user = build_stubbed(:user)
     controller.stub(:current_user).and_return(another_user)
-    assign(:new_note, technique.notes.new)
+    assign(:note, technique.notes.new)
     assign(:technique, technique)
     note = build_stubbed(:note, technique: technique)
     assign(:notes, [note])

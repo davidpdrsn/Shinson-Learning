@@ -32,7 +32,7 @@ class TechniquesController < ApplicationController
 
   def show
     @technique = Technique.find(params[:id])
-    @new_note = @technique.notes.new
+    @note = @technique.notes.new
     @notes = @technique.notes.reject(&:new_record?)
 
     respond_to do |format|

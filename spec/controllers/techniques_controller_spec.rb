@@ -38,9 +38,9 @@ describe TechniquesController, "GET #show" do
     expect(assigns(:technique)).to eq technique
   end
 
-  it "assigns @new_note" do
-    expect(assigns(:new_note)).to be_new_record
-    expect(assigns(:new_note).technique).to eq technique
+  it "assigns @note" do
+    expect(assigns(:note)).to be_new_record
+    expect(assigns(:note).technique).to eq technique
   end
 
   it "assigns @notes" do
