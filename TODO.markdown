@@ -7,8 +7,6 @@ TODOS
 DOING
 =====
 
-- note editing
-
 DONE
 ====
 
@@ -16,3 +14,4 @@ DONE
 - setup belts
 - remaining technique crud (edit and destroy)
 - notes for techniques
+- note editing
