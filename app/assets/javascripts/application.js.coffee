@@ -7,13 +7,25 @@
 $ ->
   FastClick.attach document.body
 
-  $(document).on "change", 'select[name="groupings"]', domain.setGrouping
+  $(document).on "change", 'select[name="groupings"]', ->
+    domain.setGrouping $(this).val()
 
-  [
-    { element: '.toggle-techniques', callback: domain.toggleTechniques },
-    { element: '.peek__link', callback: domain.peekAtTechnique },
-    { element: '.flash__close', callback: domain.closeFlash },
-    { element: '.notes__new-button', callback: domain.toggleNewNoteForm }
-    { element: '.main-header__toggle-nav', callback: domain.toggleNav }
-  ].forEach (x) ->
-    $(document).on 'click', x.element, x.callback
+  $(document).on 'click', '.toggle-techniques', (event) ->
+    event.preventDefault()
+    domain.toggleTechniques $(this), $(this).parent().next('ul')
+
+  $(document).on 'click', '.peek__link', (event) ->
+    event.preventDefault()
+    domain.peekAtTechnique $(this), $(this).parent('li')
+
+  $(document).on 'click', '.flash__close', (event) ->
+    event.preventDefault()
+    domain.closeFlash $(this).parents('.flash')
+
+  $(document).on 'click', '.main-header__toggle-nav', (event) ->
+    event.preventDefault()
+    domain.toggleNav $('.main-header__nav')
+
+  $(document).on 'click', '.notes__new-button', (event) ->
+    event.preventDefault()
+    domain.toggleNewNoteForm $('.notes__new-button'), $('.new_note')
