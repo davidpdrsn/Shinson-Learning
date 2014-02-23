@@ -15,6 +15,7 @@ gem 'smarter_csv'
 gem 'simple_form'
 gem 'pry'
 gem 'autoprefixer-rails'
+gem 'figaro'
 
 group :production do
   gem 'pg'
