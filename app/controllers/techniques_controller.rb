@@ -4,12 +4,6 @@ class TechniquesController < ApplicationController
 
   def index
     @page_title = "My techniques"
-
-    default_grouping = [:category_name, :belt_pretty_print]
-    groupings = Hash.new(default_grouping)
-    groupings['category-belt'] = [:category_name, :belt_pretty_print]
-    groupings['belt-category'] = [:belt_pretty_print, :category_name]
-
     @techniques = Technique.for_user_grouped_by(current_user, *groupings[params[:group_by]])
   end
 
@@ -58,6 +52,17 @@ class TechniquesController < ApplicationController
   end
 
   private
+
+  def default_grouping
+    [:category_name, :belt_pretty_print]
+  end
+
+  def groupings
+    Hash.new(default_grouping).tap do |hash|
+      hash['category-belt'] = [:category_name, :belt_pretty_print]
+      hash['belt-category'] = [:belt_pretty_print, :category_name]
+    end
+  end
 
   def technique_param_key
     :id
