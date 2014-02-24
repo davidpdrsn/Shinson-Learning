@@ -39,11 +39,8 @@ class NotesController < ApplicationController
     @note = @technique.notes.find(params[:id])
   end
 
-  def get_technique
-    @technique = current_user.techniques.find(params[:technique_id])
-  rescue ActiveRecord::RecordNotFound
-    flash.alert = "Technique not found"
-    redirect_to root_path
+  def technique_param_key
+    :technique_id
   end
 
   def note_params

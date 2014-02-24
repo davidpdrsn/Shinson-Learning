@@ -57,11 +57,8 @@ class TechniquesController < ApplicationController
 
   private
 
-  def get_technique
-    @technique = current_user.techniques.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    flash.alert = "Technique not found"
-    redirect_to root_path
+  def technique_param_key
+    :id
   end
 
   def techinque_params
