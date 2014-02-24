@@ -34,14 +34,6 @@ class TechniquesController < ApplicationController
     @technique = Technique.find(params[:id])
     @note = @technique.notes.new
     @notes = @technique.notes.reject(&:new_record?)
-
-    respond_to do |format|
-      format.html {}
-      # TODO: should this be tested?
-      format.json do
-        render json: { technique: @technique, notes: @notes }
-      end
-    end
   end
 
   def edit
