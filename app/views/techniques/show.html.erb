@@ -13,7 +13,8 @@
 
 <p>
   Category: <%= @technique.category.name %><br>
-  Belt: <%= @technique.belt.pretty_print %>
+  Belt: <%= @technique.belt.pretty_print %><br>
+  Created: <%= @technique.created_at.to_formatted_s(:short) %> (<%= time_ago_in_words @technique.created_at %> ago)
 </p>
 
 <div class="notes">
