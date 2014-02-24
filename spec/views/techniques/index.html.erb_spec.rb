@@ -1,55 +1,48 @@
 require 'spec_helper'
 
 describe "techniques/index" do
-  it "shows a list of the techniques" do
-    technique = build_stubbed(:technique)
-    techniques = {
-      "Jokgi Sul" => { "White (mu kup)" => [technique] }
-    }
-    assign(:techniques, techniques)
+  context "when there are techniques" do
+    let(:technique) { build_stubbed(:technique) }
+    let(:techniques) do
+      { "Jokgi Sul" => { "White (mu kup)" => [technique] } }
+    end
+    before { assign(:techniques, techniques) }
 
-    render
-    expect(rendered).to match /Jokgi Sul.*White \(mu kup\).*#{technique.name}/m
-  end
+    it "shows a list of the techniques" do
+      render
+      expect(rendered).to match /Jokgi Sul.*White \(mu kup\).*#{technique.name}/m
+    end
 
-  it "shows when there are no techniques" do
-    assign(:techniques, [])
+    it "shows groupings select" do
+      with_rendered_page do |page|
+        expect(page).to have_css "select"
+      end
+    end
 
-    with_rendered_page do |page|
-      expect(page).to have_content "You have no techniques yet"
+    context "when there are also notes" do
+      it "shows the note count when a technique has notes" do
+        technique.stub(:note_count).and_return(2)
+
+        with_rendered_page do |page|
+          expect(page).to have_content "(2 notes)"
+        end
+      end
     end
   end
 
-  it "shows the note count when a technique has notes" do
-    technique = build_stubbed(:technique)
-    technique.stub(:note_count).and_return(2)
-    techniques = {
-      "Jokgi Sul" => { "White (mu kup)" => [technique] }
-    }
-    assign(:techniques, techniques)
+  context "when there are no techniques" do
+    before { assign(:techniques, []) }
 
-    with_rendered_page do |page|
-      expect(page).to have_content "(2 notes)"
+    it "shows when there are no techniques" do
+      with_rendered_page do |page|
+        expect(page).to have_content "You have no techniques yet"
+      end
     end
-  end
 
-  it "shows groupings select" do
-    technique = build_stubbed(:technique)
-    techniques = {
-      "Jokgi Sul" => { "White (mu kup)" => [technique] }
-    }
-    assign(:techniques, techniques)
-
-    with_rendered_page do |page|
-      expect(page).to have_css "select"
-    end
-  end
-
-  it "doesn't show groupings select when there are no techniques" do
-    assign(:techniques, [])
-
-    with_rendered_page do |page|
-      expect(page).not_to have_css "select"
+    it "doesn't show groupings select when there are no techniques" do
+      with_rendered_page do |page|
+        expect(page).not_to have_css "select"
+      end
     end
   end
 end
