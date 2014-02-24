@@ -15,6 +15,7 @@ describe NotesController, "POST #create" do
       end.to change { user.notes.count + technique.notes.count }.by 2
 
       expect(subject).to set_the_flash[:notice]
+      expect(subject).to redirect_to technique
     end
 
     it "doesn't create the note if it is invalid" do
@@ -28,6 +29,7 @@ describe NotesController, "POST #create" do
       end.not_to change { user.notes.count + technique.notes.count }
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to redirect_to technique
     end
 
     it "doesn't create the note if the user doesn't own the technique" do
@@ -42,6 +44,7 @@ describe NotesController, "POST #create" do
       end.not_to change { user.notes.count + technique.notes.count }
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to redirect_to root_path
     end
   end
 
@@ -52,6 +55,7 @@ describe NotesController, "POST #create" do
 
       post :create, note: attributes, technique_id: technique.id
 
+      expect(subject).to redirect_to new_user_session_path
       expect(subject).to redirect_to new_user_session_path
     end
   end
@@ -68,6 +72,7 @@ describe NotesController, "GET #edit" do
       get :edit, id: note.id, technique_id: technique.id
 
       expect(assigns(:note)).to eq note
+      expect(subject).to render_template :edit
     end
 
     it "doesn't let a user edit another users note" do
@@ -80,6 +85,7 @@ describe NotesController, "GET #edit" do
       get :edit, id: note.id, technique_id: technique.id
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to redirect_to root_path
     end
   end
 
@@ -89,6 +95,7 @@ describe NotesController, "GET #edit" do
 
     get :edit, id: note.id, technique_id: technique.id
 
+    expect(subject).to set_the_flash[:alert]
     expect(subject).to redirect_to new_user_session_path
   end
 end
@@ -104,6 +111,7 @@ describe NotesController, "PATCH #update" do
       patch :update, id: note.id, technique_id: technique.id, note: { text: "New text" }
 
       expect(subject).to set_the_flash[:notice]
+      expect(subject).to redirect_to technique
     end
 
     it "doesn't update the note if the data is invalid" do
@@ -115,6 +123,7 @@ describe NotesController, "PATCH #update" do
       patch :update, id: note.id, technique_id: technique.id, note: { text: "" }
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to redirect_to technique
     end
 
     it "doesn't update the note if the user doesn't own it" do
@@ -127,6 +136,7 @@ describe NotesController, "PATCH #update" do
       patch :update, id: note.id, technique_id: technique.id, note: { text: "" }
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to redirect_to root_path
     end
   end
 
@@ -137,6 +147,7 @@ describe NotesController, "PATCH #update" do
     patch :update, id: note.id, technique_id: technique.id
 
     expect(subject).to redirect_to new_user_session_path
+    expect(subject).to set_the_flash[:alert]
   end
 end
 
@@ -168,6 +179,7 @@ describe NotesController, "DELETE #destory" do
       end.not_to change { user.notes.count + technique.notes.count }
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to redirect_to root_path
     end
   end
 
@@ -179,6 +191,7 @@ describe NotesController, "DELETE #destory" do
       delete :destroy, id: note.id, technique_id: technique.id
 
       expect(subject).to redirect_to new_user_session_path
+      expect(subject).to set_the_flash[:alert]
     end
   end
 end
