@@ -32,11 +32,13 @@ class TechniquesController < ApplicationController
 
   def show
     @technique = Technique.find(params[:id])
+    @page_title = @technique.name
     @note = @technique.notes.new
     @notes = @technique.notes.reject(&:new_record?)
   end
 
   def edit
+    @page_title = "Edit #{@technique.name}"
   end
 
   def update

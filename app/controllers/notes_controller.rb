@@ -17,6 +17,7 @@ class NotesController < ApplicationController
   end
 
   def edit
+    @page_title = "Edit note for #{@technique.name}"
   end
 
   def update
