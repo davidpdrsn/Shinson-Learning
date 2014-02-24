@@ -15,6 +15,7 @@ describe TechniquesController, "GET #index" do
 
       techniques = assigns(:techniques)
       expect(techniques["Jokgi Sul"]["White (mu kup)"]).to eq [technique1, technique3]
+      expect(subject).to render_template :index
     end
   end
 
@@ -23,6 +24,7 @@ describe TechniquesController, "GET #index" do
       get :index
 
       expect(subject).to redirect_to new_user_session_path
+      expect(subject).to set_the_flash[:alert]
     end
   end
 end
@@ -52,6 +54,8 @@ describe TechniquesController, "GET #show" do
 
     expect(assigns(:notes)).to eq [note1]
   end
+
+  it { should render_template :show }
 end
 
 describe TechniquesController, "GET #new" do
@@ -64,6 +68,7 @@ describe TechniquesController, "GET #new" do
 
       expect(assigns(:technique)).to be_new_record
       expect(assigns(:technique).user).to eq user
+      expect(subject).to render_template :new
     end
   end
 
@@ -72,6 +77,7 @@ describe TechniquesController, "GET #new" do
       get :new
 
       expect(subject).to redirect_to new_user_session_path
+      expect(subject).to set_the_flash[:alert]
     end
   end
 end
@@ -88,6 +94,7 @@ describe TechniquesController, "POST #create" do
       end.to change { user.techniques.count }
 
       expect(subject).to set_the_flash[:notice]
+      expect(subject).to redirect_to Technique.last
     end
 
     it "doesn't create a new technique if the data is invalid" do
@@ -100,6 +107,7 @@ describe TechniquesController, "POST #create" do
       end.not_to change { user.techniques.count }
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to render_template :new
     end
   end
 
@@ -108,6 +116,7 @@ describe TechniquesController, "POST #create" do
       post :create, technique: {}
 
       expect(subject).to redirect_to new_user_session_path
+      expect(subject).to set_the_flash[:alert]
     end
   end
 end
@@ -121,6 +130,7 @@ describe TechniquesController, "GET #edit" do
       get :edit, id: technique.id
 
       expect(assigns(:technique)).to eq technique
+      expect(subject).to render_template :edit
     end
 
     it "doesn't let a user edit other users techniques" do
@@ -131,6 +141,7 @@ describe TechniquesController, "GET #edit" do
       get :edit, id: another_technique.id
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to redirect_to root_path
     end
   end
 
@@ -141,6 +152,7 @@ describe TechniquesController, "GET #edit" do
       get :edit, id: technique.id
 
       expect(subject).to redirect_to new_user_session_path
+      expect(subject).to set_the_flash[:alert]
     end
   end
 end
@@ -154,6 +166,7 @@ describe TechniquesController, "PATCH #update" do
       patch :update, id: technique.id, technique: { name: "foo" }
 
       expect(subject).to set_the_flash[:notice]
+      expect(subject).to redirect_to technique
     end
 
     it "doesn't update the technique if the data is invalid" do
@@ -163,6 +176,7 @@ describe TechniquesController, "PATCH #update" do
       patch :update, id: technique.id, technique: { name: "" }
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to render_template :edit
     end
 
     it "doesn't allow users to update other users techniques" do
@@ -173,6 +187,7 @@ describe TechniquesController, "PATCH #update" do
       patch :update, id: another_technique.id, technique: { name: "foo" }
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to redirect_to root_path
     end
   end
 
@@ -183,6 +198,7 @@ describe TechniquesController, "PATCH #update" do
       patch :update, id: technique.id, technique: { name: "foo" }
 
       expect(subject).to redirect_to new_user_session_path
+      expect(subject).to set_the_flash[:alert]
     end
   end
 end
@@ -198,6 +214,7 @@ describe TechniquesController, "DELETE #destroy" do
       end.to change { technique.user.techniques.count }.by -1
 
       expect(subject).to set_the_flash[:notice]
+      expect(subject).to redirect_to root_path
     end
 
     it "doesn't let a user destroy another users techniques" do
@@ -210,6 +227,7 @@ describe TechniquesController, "DELETE #destroy" do
       end.not_to change { technique.user.techniques.count }
 
       expect(subject).to set_the_flash[:alert]
+      expect(subject).to redirect_to root_path
     end
   end
 
@@ -220,6 +238,7 @@ describe TechniquesController, "DELETE #destroy" do
       delete :destroy, id: technique.id
 
       expect(subject).to redirect_to new_user_session_path
+      expect(subject).to set_the_flash[:alert]
     end
   end
 end
