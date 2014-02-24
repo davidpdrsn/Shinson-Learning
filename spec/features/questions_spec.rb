@@ -31,7 +31,7 @@ feature 'questions' do
     check "Question?"
     click_button "Create Note"
     click_link "Questions"
-    click_link "Go to technique"
+    click_link "Ap Chagi"
 
     expect(page).to have_content "technique description"
   end
