@@ -100,4 +100,8 @@ select[name="groupings"] {
     top: 1px;
     margin-right: $space/2;
   }
+
+  .technique__description p {
+    margin-bottom: 0;
+  }
 }

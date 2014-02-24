@@ -38,3 +38,9 @@ input[type=submit] {
   font-size: .7rem;
   padding: .2rem .33rem;
 }
+
+.screen-reader-text {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}

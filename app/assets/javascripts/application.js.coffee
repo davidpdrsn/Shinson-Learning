@@ -23,7 +23,7 @@ $ ->
 
   $(document).on 'click', '.peek__link', (event) ->
     event.preventDefault()
-    domain.peekAtTechnique $(this), $(this).parent('li')
+    domain.peekAtTechnique $(this), $(this).parents('li').find('.technique__description')
 
   $(document).on 'click', '.flash__close', (event) ->
     event.preventDefault()

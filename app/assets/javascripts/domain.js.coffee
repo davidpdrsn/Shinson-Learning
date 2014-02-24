@@ -20,24 +20,9 @@ domain.peekAtAllTechniques = ($list, $toggleLink, $peekLinks) ->
   $peekLinks.each ->
     $(this).click() unless !allOpen and $(this).hasClass("peek__link--peeking")
 
-domain.peekAtTechnique = ($link, $listItem) ->
-  if $link.hasClass("peek__link--peeking")
-    $link.removeClass("peek__link--peeking").removeClass("icon-eye-blocked")
-    domain.removeTechniqueDescription($listItem)
-  else
-    $.ajax
-      url: "/techniques/#{$link.data('technique-id')}"
-      dataType: "json"
-    .done (data) =>
-      $link.addClass("peek__link--peeking").addClass("icon-eye-blocked")
-      domain.injectTechniqueDescription(data.technique.description, $listItem)
-
-domain.injectTechniqueDescription = (description, $listItem) ->
-  node = $('<p class="peek__description">').html(description)
-  $listItem.append(node)
-
-domain.removeTechniqueDescription = ($listItem) ->
-  $listItem.find(".peek__description").remove()
+domain.peekAtTechnique = ($link, $description) ->
+  $description.toggle()
+  $link.toggleClass("peek__link--peeking").toggleClass("icon-eye-blocked")
 
 domain.closeFlash = ($flash) ->
   $flash.remove()

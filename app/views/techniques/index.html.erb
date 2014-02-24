@@ -13,13 +13,27 @@
         <% second_group.each do |second_group_name, techniques| %>
           <div>
             <h2><a href="#" class="toggle-techniques icon-arrow-right-after"><%= second_group_name %></a></h2>
-            <a class="peek__link--all icon-eye" href="#"></a>
+            <a class="peek__link--all icon-eye" href="#">
+              <span class="screen-reader-text">
+                Peek all
+              </span>
+            </a>
 
             <ul>
               <% techniques.each do |technique| %>
                 <li>
                   <%= link_to technique.name, technique %>
-                  <a class="peek__link icon-eye" id="toggle-peeking" data-technique-id="<%= technique.id %>" href="#"></a>
+
+                  <a class="peek__link icon-eye" data-technique-id="<%= technique.id %>" href="#">
+                    <span class="screen-reader-text">
+                      Peek
+                    </span>
+                  </a>
+
+                  <div class="technique__description">
+                    <%= simple_format technique.description %>
+                  </div>
+
                   <% if technique.note_count > 0 %>
                     <span class="note-count">
                       (<%= pluralize(technique.note_count, "note") %>)
