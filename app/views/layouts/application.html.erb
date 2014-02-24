@@ -28,6 +28,7 @@
     <% if user_signed_in? %>
       <%= link_to "My techniques", techniques_path %>
       <%= link_to "New technique", new_technique_path %>
+      <%= link_to "Questions", questions_path %>
       <%= link_to "Log out", destroy_user_session_path, method: :delete %>
       <%# <a class="icon-search" href="#"></a> %>
     <% else %>

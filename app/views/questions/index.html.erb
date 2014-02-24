@@ -1,0 +1,17 @@
+<div class="questions">
+  <% if @questions.present? %>
+    <ul>
+      <% @questions.each do |question| %>
+        <li>
+          <%= question.text %>
+
+          <p>
+            <%= link_to "Go to technique", question.technique %>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    You have no notes marked as questions
+  <% end %>
+</div>
