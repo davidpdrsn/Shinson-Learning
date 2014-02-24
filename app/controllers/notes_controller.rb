@@ -9,11 +9,11 @@ class NotesController < ApplicationController
 
     if @note.save
       flash.notice = "Note saved"
-      redirect_to @technique
     else
       flash.alert = "Note not saved"
-      redirect_to @technique
     end
+
+    redirect_to @technique
   end
 
   def edit
