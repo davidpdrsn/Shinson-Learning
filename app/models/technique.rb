@@ -37,6 +37,10 @@ class Technique < ActiveRecord::Base
     name_to_a(self) <=> name_to_a(another)
   end
 
+  def to_param
+    [id, name.downcase].join("-")
+  end
+
   private
 
   def name_to_a(technique)

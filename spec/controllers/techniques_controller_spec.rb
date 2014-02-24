@@ -166,7 +166,7 @@ describe TechniquesController, "PATCH #update" do
       patch :update, id: technique.id, technique: { name: "foo" }
 
       expect(subject).to set_the_flash[:notice]
-      expect(subject).to redirect_to technique
+      expect(subject).to redirect_to Technique.find(technique.id)
     end
 
     it "doesn't update the technique if the data is invalid" do
