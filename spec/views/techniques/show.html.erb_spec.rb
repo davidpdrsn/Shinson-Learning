@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+# TODO: refactor the hell out of this!
+
 describe "techniques/show" do
   let(:user) { build_stubbed(:user) }
 
@@ -125,6 +127,30 @@ describe "techniques/show" do
 
     with_rendered_page do |page|
       expect(page).not_to have_content "Edit note"
+    end
+  end
+
+  it "shows if the note is a question" do
+    technique = build_stubbed(:technique, user: user)
+    assign(:note, technique.notes.new)
+    assign(:technique, technique)
+    note = build_stubbed(:question, technique: technique)
+    assign(:notes, [note])
+
+    with_rendered_page do |page|
+      expect(page).to have_content "This note is a question"
+    end
+  end
+
+  it "shows if the note is not a question" do
+    technique = build_stubbed(:technique, user: user)
+    assign(:note, technique.notes.new)
+    assign(:technique, technique)
+    note = build_stubbed(:note, technique: technique)
+    assign(:notes, [note])
+
+    with_rendered_page do |page|
+      expect(page).not_to have_content "This note is a question"
     end
   end
 end

@@ -59,8 +59,13 @@
   margin-bottom: $space;
 }
 
-.notes__list__timestamps {
+.notes__list__meta {
   @include secondary_text;
+  margin-bottom: $space;
+
+  p {
+    margin: 0;
+  }
 }
 
 .notes__list__controls {}

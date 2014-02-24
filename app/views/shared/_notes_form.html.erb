@@ -1,4 +1,5 @@
 <%= simple_form_for [@technique, @note] do |f| %>
   <%= f.input :text, label: "Note text" %>
+  <%= f.input :question, label: "Question?" %>
   <%= f.button :submit %>
 <% end %>

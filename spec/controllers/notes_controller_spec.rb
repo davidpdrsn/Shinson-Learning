@@ -8,7 +8,7 @@ describe NotesController, "POST #create" do
       user = create(:user)
       technique = create(:technique, user: user)
       sign_in user
-      attributes = attributes_for(:note)
+      attributes = attributes_for(:question)
 
       expect do
         post :create, note: attributes, technique_id: technique.id
@@ -16,6 +16,7 @@ describe NotesController, "POST #create" do
 
       expect(subject).to set_the_flash[:notice]
       expect(subject).to redirect_to technique
+      expect(Note.last).to be_question
     end
 
     it "doesn't create the note if it is invalid" do
