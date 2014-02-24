@@ -32,4 +32,24 @@ describe "techniques/index" do
       expect(page).to have_content "(2 notes)"
     end
   end
+
+  it "shows groupings select" do
+    technique = build_stubbed(:technique)
+    techniques = {
+      "Jokgi Sul" => { "White (mu kup)" => [technique] }
+    }
+    assign(:techniques, techniques)
+
+    with_rendered_page do |page|
+      expect(page).to have_css "select"
+    end
+  end
+
+  it "doesn't show groupings select when there are no techniques" do
+    assign(:techniques, [])
+
+    with_rendered_page do |page|
+      expect(page).not_to have_css "select"
+    end
+  end
 end
