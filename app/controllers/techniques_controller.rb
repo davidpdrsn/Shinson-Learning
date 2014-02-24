@@ -3,7 +3,7 @@ class TechniquesController < ApplicationController
   before_action :get_technique, only: [:destroy, :update, :edit]
 
   def index
-    @page_title = "My techniques"
+    @page_title = "Techniques"
     @techniques = Technique.for_user_grouped_by(current_user, *groupings[params[:group_by]])
   end
 

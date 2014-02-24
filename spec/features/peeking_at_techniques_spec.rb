@@ -5,7 +5,7 @@ feature 'peaking at techniques' do
     sign_up
     create_technique("Ap chagi", "Front kick", "White (mu kup)")
     visit root_path
-    click_link "My techniques"
+    click_link "Techniques"
     click_link "White (mu kup)"
     click_link "Peek"
 
@@ -16,7 +16,7 @@ feature 'peaking at techniques' do
     sign_up
     create_technique("Ap chagi", "Front kick", "White (mu kup)")
     visit root_path
-    click_link "My techniques"
+    click_link "Techniques"
     click_link "White (mu kup)"
     click_link "Peek"
 
@@ -30,7 +30,7 @@ feature "peeking at all techniques" do
     create_technique("Ap chagi", "Front kick", "White (mu kup)")
     create_technique("Yop chagi", "Side kick", "White (mu kup)")
     visit root_path
-    click_link "My techniques"
+    click_link "Techniques"
     click_link "Peek all"
 
     within ".techniques li:first-of-type" do

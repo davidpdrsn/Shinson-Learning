@@ -32,7 +32,7 @@ describe "layouts/application" do
 
     it "shows a link to see your techniques" do
       with_rendered_page do |page|
-        expect(page).to have_content "My techniques"
+        expect(page).to have_content "Techniques"
       end
     end
   end
@@ -68,7 +68,7 @@ describe "layouts/application" do
 
     it "shows doesn't show a link to see your techniques" do
       with_rendered_page do |page|
-        expect(page).not_to have_content "My techniques"
+        expect(page).not_to have_content "Techniques"
       end
     end
   end
