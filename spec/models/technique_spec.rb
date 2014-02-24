@@ -7,7 +7,6 @@ describe Technique do
   it { should have_many :notes }
 
   it { should validate_presence_of :name }
-  it { should validate_uniqueness_of :name }
   it { should validate_presence_of :belt_id }
   it { should validate_presence_of :category_id }
   it { should validate_presence_of :user_id }
