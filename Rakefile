@@ -8,7 +8,7 @@ ShinsonLearning::Application.load_tasks
 namespace :heroku do
   desc "Deploy app to heroku"
   task :deploy do
-    `git push herou master && heroku run rake db:migrate`
+    `git push heroku master && heroku run rake db:migrate`
   end
 
   desc "Restart heroku app"
