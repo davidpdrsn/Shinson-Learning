@@ -15,4 +15,26 @@ describe User do
       expect(user.questions).to eq [question]
     end
   end
+
+  describe "#screen_name" do
+    it "returns email when provided with only email" do
+      user = build(:user, first_name: nil, last_name: nil)
+      expect(user.screen_name).to eq user.email
+    end
+
+    it "returns the first name when provided with first name" do
+      user = build(:user, first_name: "bob", last_name: nil)
+      expect(user.screen_name).to eq "Bob"
+    end
+
+    it "returns the last name when provided with last name" do
+      user = build(:user, first_name: nil, last_name: "johnson")
+      expect(user.screen_name).to eq "Johnson"
+    end
+
+    it "returns the full when provided with first and last name" do
+      user = build(:user, first_name: "bob", last_name: "johnson")
+      expect(user.screen_name).to eq "Bob Johnson"
+    end
+  end
 end
