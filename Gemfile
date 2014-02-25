@@ -17,6 +17,7 @@ gem 'pry'
 gem 'autoprefixer-rails'
 gem 'figaro'
 gem 'pg'
+gem 'rack-mini-profiler'
 
 group :production do
   gem 'rails_12factor'
