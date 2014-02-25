@@ -12,7 +12,7 @@ create(:user, email: "david.pdrsn@gmail.com",
   puts "Made user: #{user.id}"
 end
 
-1_000.times do |n|
+10_000.times do |n|
   user = User.all.sample
   technique = Technique.new(
     name: "technique ##{n}",
