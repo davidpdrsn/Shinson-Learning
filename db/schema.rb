@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140224105940) do
+ActiveRecord::Schema.define(version: 20140225141442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(version: 20140224105940) do
     t.boolean  "question",     default: false
   end
 
+  add_index "notes", ["technique_id"], name: "index_notes_on_technique_id", using: :btree
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
+
   create_table "techniques", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -42,7 +45,12 @@ ActiveRecord::Schema.define(version: 20140224105940) do
     t.datetime "updated_at"
     t.integer  "category_id"
     t.integer  "user_id"
+    t.integer  "notes_count", default: 0, null: false
   end
+
+  add_index "techniques", ["belt_id"], name: "index_techniques_on_belt_id", using: :btree
+  add_index "techniques", ["category_id"], name: "index_techniques_on_category_id", using: :btree
+  add_index "techniques", ["user_id"], name: "index_techniques_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

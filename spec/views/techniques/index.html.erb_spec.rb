@@ -21,7 +21,7 @@ describe "techniques/index" do
 
     context "when there are also notes" do
       it "shows the note count when a technique has notes" do
-        technique.stub(:note_count).and_return(2)
+        technique.stub(:notes_count) { 2 }
 
         with_rendered_page do |page|
           expect(page).to have_content "(2 notes)"

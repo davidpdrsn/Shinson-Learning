@@ -36,9 +36,9 @@
                     <%= simple_format technique.description %>
                   </div>
 
-                  <% if technique.note_count > 0 %>
+                  <% if technique.notes_count > 0 %>
                     <span class="note-count">
-                      (<%= pluralize(technique.note_count, "note") %>)
+                      (<%= pluralize(technique.notes_count, "note") %>)
                     </span>
                   <% end %>
                 </li>

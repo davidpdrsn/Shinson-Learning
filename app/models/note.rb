@@ -1,6 +1,6 @@
 class Note < ActiveRecord::Base
   belongs_to :user
-  belongs_to :technique
+  belongs_to :technique, counter_cache: true
 
   validates :text, presence: true
   validates :user_id, presence: true
