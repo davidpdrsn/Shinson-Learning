@@ -1,0 +1,40 @@
+.spinner {
+  $size: 1.5rem;
+  @include size($size);
+  @include linear-gradient(red 50%, blue 50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -$size/2;
+  margin-top: -$size/2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 4px rgba(black, .4);
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    margin-top: -25%;
+    border-radius: 50%;
+  }
+
+  &:before {
+    left: 0;
+    background: red;
+  }
+
+  &:after {
+    right: 0;
+    background: blue;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
