@@ -32,15 +32,15 @@
                     </span>
                   </a>
 
-                  <div class="technique__description">
-                    <%= simple_format technique.description %>
-                  </div>
-
                   <% if technique.notes_count > 0 %>
                     <span class="note-count">
                       (<%= pluralize(technique.notes_count, "note") %>)
                     </span>
                   <% end %>
+
+                  <div class="technique__description">
+                    <%= simple_format technique.description %>
+                  </div>
                 </li>
               <% end %>
             </ul>
