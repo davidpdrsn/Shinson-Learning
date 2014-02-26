@@ -8,7 +8,7 @@ describe Grouper do
 
   let(:another_bob) { double(:another_bob,
                              first_name: "Bob",
-                             middle_name: "One",
+                             middle_name: "Two",
                              last_name: "Markson") }
 
   let(:alice) { double(:alice,
@@ -28,7 +28,7 @@ describe Grouper do
     groups = Grouper.new(things).group_by(:first_name, :middle_name, :last_name)
 
     expect(groups["Bob"]["One"]["Johnson"]).to eq [bob]
-    expect(groups["Bob"]["One"]["Markson"]).to eq [another_bob]
+    expect(groups["Bob"]["Two"]["Markson"]).to eq [another_bob]
     expect(groups["Alice"]["Three"]["Cooper"]).to eq [alice]
   end
 end
