@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe QuestionsController, "GET #index" do
   context "as a signed in user" do
-    it "assigns @questions" do
+    it "assigns @questions to be the users questions" do
       user = create(:user)
       sign_in user
       question = create(:question, user: user)
