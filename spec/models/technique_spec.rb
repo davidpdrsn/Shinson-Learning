@@ -45,18 +45,10 @@ describe Technique do
     end
   end
 
-  describe "#note_count" do
-    it "returns the number of notes a technique has" do
-      technique = create(:technique)
-      note = create(:note, technique: technique)
-
-      expect(technique.note_count).to eq 1
-    end
-  end
-
   describe "#for_user_grouped_by" do
     it "finds the techniques for the user and groups them" do
       techniques = [build_stubbed(:technique), build_stubbed(:technique)]
+      techniques.stub(:includes).and_return(techniques)
       user = build_stubbed(:user)
       user.stub(:techniques).and_return(techniques)
       fake_grouper = double(:grouper)
