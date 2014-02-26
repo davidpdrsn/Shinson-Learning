@@ -34,6 +34,15 @@ domain.toggleNewNoteForm = ($button, $form) ->
   else
     $button.text("+")
 
+domain.injectSpinner = ->
+  domain.timer = setTimeout(
+    (-> $('<div class="spinner"></div>').appendTo('html').hide().fadeIn('fast')),
+    100)
+
+domain.removeSpinner = ->
+  clearTimeout(domain.timer)
+  $('.spinner').fadeOut('fast', -> $(@).remove())
+
 domain.toggleNav = ($nav) ->
   $nav.slideToggle('fast')
 
