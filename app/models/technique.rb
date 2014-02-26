@@ -29,10 +29,6 @@ class Technique < ActiveRecord::Base
     category.name
   end
 
-  def note_count
-    notes.count
-  end
-
   def <=>(another)
     name_to_a(self) <=> name_to_a(another)
   end
