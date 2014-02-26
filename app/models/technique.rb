@@ -34,7 +34,7 @@ class Technique < ActiveRecord::Base
   end
 
   def to_param
-    [id, name.downcase].join("-")
+    [id, name.parameterize].join("-")
   end
 
   private
