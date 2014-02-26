@@ -13,7 +13,7 @@ class Technique < ActiveRecord::Base
   validates :description, presence: true
 
   def self.for_user_grouped_by(user, *groupings)
-    techniques = user.techniques.sort
+    techniques = user.techniques.includes(:category, :belt).sort
     Grouper.new(techniques).group_by(*groupings)
   end
 
