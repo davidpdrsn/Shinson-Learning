@@ -7,12 +7,12 @@ create(:user, email: "david.pdrsn@gmail.com",
        password: "passwordlol",
        password_confirmation: "passwordlol")
 
-100.times do
+10.times do
   user = create(:user)
   puts "Made user: #{user.id}"
 end
 
-1_000.times do |n|
+10_000.times do |n|
   user = User.all.sample
   technique = Technique.new(
     name: "technique ##{n}",
