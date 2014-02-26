@@ -7,7 +7,7 @@ create(:user, email: "david.pdrsn@gmail.com",
        password: "passwordlol",
        password_confirmation: "passwordlol")
 
-100.times do
+10.times do
   user = create(:user)
   puts "Made user: #{user.id}"
 end
