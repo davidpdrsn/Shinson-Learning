@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:email, :password, :password_confirmation, :first_name, :last_name)
     end
+
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit(:password, :password_confirmation, :current_password,
+               :email, :first_name, :last_name)
+    end
   end
 
   def get_technique

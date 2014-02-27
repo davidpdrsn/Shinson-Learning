@@ -13,6 +13,10 @@
     Created: <%= timestamp @technique %>
   </p>
 
+  <p>
+    Added by <%= link_to @technique.user.screen_name, @technique.user %>
+  </p>
+
   <div class="notes">
     <h2>Notes</h2>
 

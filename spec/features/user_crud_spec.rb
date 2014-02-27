@@ -14,11 +14,12 @@ feature 'user crud' do
   scenario 'a user updates his information' do
     click_link "Profile"
     click_link "Edit information"
-    fill_in "First name", with: "David"
+    fill_in "First name", with: "Foo"
     fill_in "Last name", with: "Pedersen"
+    fill_in "Current password", with: user.password
     click_button "Update"
 
-    expect(page).to have_content "David Pedersen"
+    expect(page).to have_content "Foo Pedersen"
   end
 
   scenario 'a user deletes his account' do
@@ -26,6 +27,5 @@ feature 'user crud' do
     click_link "Delete account"
 
     expect(page).to have_content "Sign in"
-    expect(page).to have_content "Account deleted"
   end
 end
