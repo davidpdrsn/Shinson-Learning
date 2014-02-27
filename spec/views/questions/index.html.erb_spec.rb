@@ -3,6 +3,10 @@ require 'spec_helper'
 describe "questions/index" do
   let(:question) { build_stubbed(:question) }
 
+  before do
+    controller.stub(:current_user).and_return(build_stubbed(:user))
+  end
+
   context "when there are questions" do
     it "shows a list of questions" do
       assign(:questions, [question])
