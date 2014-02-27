@@ -26,5 +26,3 @@ config/secrets.yml
 
 # Ignore application configuration
 /config/application.yml
-
-/scripts/add_techniques.rb
