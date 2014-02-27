@@ -18,6 +18,7 @@ gem 'autoprefixer-rails'
 gem 'figaro'
 gem 'pg'
 gem 'newrelic_rpm'
+gem 'memcachier'
 gem 'dalli'
 
 group :production do
