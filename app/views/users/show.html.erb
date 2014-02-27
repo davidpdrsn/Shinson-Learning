@@ -1,0 +1,23 @@
+<h1>
+  <%= @user.s %> profile
+</h1>
+
+<dl>
+  <dt>Name</dt>
+  <dd><%= "#{@user.first_name} #{@user.last_name}" || 'n\a' %><br></dd>
+
+  <dt>Email</dt>
+  <dd><a href="mailto:<%= @user.email %>"><%= @user.email %></a></dd>
+</dl>
+
+<h2>Quick stats</h2>
+<dl>
+  <dt>Number of techniques</dt>
+  <dd><%= @user.techniques.count %></dd>
+
+  <dt>Number of notes</dt>
+  <dd><%= @user.notes.count %></dd>
+
+  <dt>Joined</dt>
+  <dd><%= timestamp @user %></dd>
+</dl>

@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe "layouts/application" do
+  let(:user) { build_stubbed :user }
+  before do
+    controller.stub(:current_user).and_return(user)
+  end
+
   context "when the user is logged in" do
     before do
       controller.stub(:user_signed_in?).and_return(true)
@@ -33,6 +38,12 @@ describe "layouts/application" do
     it "shows a link to see your techniques" do
       with_rendered_page do |page|
         expect(page).to have_content "Techniques"
+      end
+    end
+
+    it "shows a link a to the users profile" do
+      with_rendered_page do |page|
+        expect(page).to have_content "Profile"
       end
     end
   end
@@ -69,6 +80,12 @@ describe "layouts/application" do
     it "shows doesn't show a link to see your techniques" do
       with_rendered_page do |page|
         expect(page).not_to have_content "Techniques"
+      end
+    end
+
+    it "should not have a link to the users profile" do
+      with_rendered_page do |page|
+        expect(page).not_to have_content "Profile"
       end
     end
   end

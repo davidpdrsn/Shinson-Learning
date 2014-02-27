@@ -4,7 +4,8 @@ describe "questions/index" do
   let(:question) { build_stubbed(:question) }
 
   before do
-    controller.stub(:current_user).and_return(build_stubbed(:user))
+    view.stub(:current_user).and_return(build_stubbed(:user))
+    view.stub(:timestamp)
   end
 
   context "when there are questions" do
