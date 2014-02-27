@@ -16,4 +16,12 @@ class User < ActiveRecord::Base
 
     [first_name, last_name].reject(&:blank?).map(&:to_s).map(&:titleize).join(" ")
   end
+
+  def s
+    if screen_name.match /s$/
+      "#{screen_name}'"
+    else
+      "#{screen_name}'s"
+    end
+  end
 end
