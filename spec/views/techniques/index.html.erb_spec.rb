@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "techniques/index" do
+  before do
+    controller.stub(:current_user).and_return(build_stubbed(:user))
+  end
+
   context "when there are techniques" do
     let(:technique) { build_stubbed(:technique) }
     let(:techniques) do

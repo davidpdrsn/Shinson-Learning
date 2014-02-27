@@ -3,7 +3,7 @@ require 'grouper'
 class Technique < ActiveRecord::Base
   belongs_to :belt
   belongs_to :category
-  belongs_to :user
+  belongs_to :user, touch: true
   has_many :notes
 
   validates :name, presence: true
