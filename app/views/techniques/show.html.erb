@@ -1,6 +1,6 @@
 <% cache [current_user, @technique] do %>
-  <header class="technique__header">
-    <h1 class="technique__heading"><%= @technique.name %></h1>
+  <header class="technique__header controls">
+    <h1 class="technique__heading controls__heading"><%= @technique.name %></h1>
 
     <%= render 'controls' if @technique.user == current_user %>
   </header>
