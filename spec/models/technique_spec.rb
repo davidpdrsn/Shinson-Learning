@@ -4,7 +4,7 @@ describe Technique do
   it { should belong_to :belt }
   it { should belong_to :category }
   it { should belong_to :user }
-  it { should have_many :notes }
+  it { should have_many(:notes).dependent(:destroy) }
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :belt_id }

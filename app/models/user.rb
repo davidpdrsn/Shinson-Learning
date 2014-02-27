@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :techniques
-  has_many :notes
+  has_many :techniques, dependent: :destroy
+  has_many :notes, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
