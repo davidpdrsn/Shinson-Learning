@@ -1,5 +1,3 @@
-@import "bits";
-
 .main-header {
   display: flex;
   flex-direction: column;
@@ -25,7 +23,7 @@
 
 .main-header__nav {
   background: darken($light_gray, 5%);
-  border-bottom: 1px solid darken($light_gray, 10%);
+  $border: 1px solid darken($light_gray, 12%);
   @include big {
     display: flex !important;
   }
@@ -46,6 +44,12 @@
 
     &:active {
       background: $darker_gray;
+    }
+
+    @include big {
+      &:not(:last-of-type) {
+        border-right: $border;
+      }
     }
   }
 
