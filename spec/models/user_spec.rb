@@ -37,4 +37,18 @@ describe User do
       expect(user.screen_name).to eq "Bob Johnson"
     end
   end
+
+  describe "#s" do
+    it "adds 's to the users screen name" do
+      user = build :user, first_name: "Bob", last_name: "Johnson"
+
+      expect(user.s).to eq "Bob Johnson's"
+    end
+
+    it "adds ' when the users name ends in s" do
+      user = build :user, first_name: "Bob", last_name: "Johnsons"
+
+      expect(user.s).to eq "Bob Johnsons'"
+    end
+  end
 end
