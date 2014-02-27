@@ -6,7 +6,7 @@ body {
 
 .main {
   padding: 1rem;
-  max-width: 50rem;
+  max-width: $page_width;
   margin: 0 auto;
 
   @include all_headings {

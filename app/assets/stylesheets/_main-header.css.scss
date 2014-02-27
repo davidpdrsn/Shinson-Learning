@@ -1,16 +1,9 @@
 @import "bits";
 
 .main-header {
-  background: $light_gray;
-  border-bottom: 1px solid $darker_gray;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-
-  @include medium {
-    flex-direction: column;
-  }
+  flex-direction: column;
+  background: $light_gray;
 
   a, a:visited {
     color: $black;
@@ -20,6 +13,8 @@
 .main-header__logo {
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 1rem;
   font-size: 1.33rem;
 
   img {
@@ -29,54 +24,56 @@
 }
 
 .main-header__nav {
+  background: darken($light_gray, 5%);
+  border-bottom: 1px solid darken($light_gray, 10%);
+  @include big {
+    display: flex !important;
+  }
+  justify-content: space-around;
+  align-items: center;
+
   a {
+    padding: $space/2;
     font-size: .9rem;
-    padding: .25rem .5rem;
-    border-radius: $radius;
-    margin: .25rem;
+    display: block;
+    flex: 1;
+    text-align: center;
     transition: .1s;
 
     &:hover {
-      background: $dark_gray;
+      background: darken($light_gray, 10%);
+    }
+
+    &:active {
+      background: $darker_gray;
     }
   }
 
-  @include big {
-    display: block !important;
-  }
-
   @include medium {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: $space/2;
+    background: $light_gray;
+    padding: $space/2;
+    padding-top: 0;
     display: none;
 
     a {
-      flex: 1;
-      width: 100%;
-      display: block;
+      padding: $space/2 0;
+      margin: 0 $space/2;
+      &:not(:last-child) {
+        border-bottom: 1px solid $dark_gray;
+      }
       text-align: left;
-      margin: 0;
-      padding: .5rem 0;
-
-      &:not(:last-of-type) {
-        border-bottom: 1px solid darken($light_gray, 10%);
-        border-radius: 0;
-      }
-
-      &:last-of-type {
-        padding-bottom: 0;
-      }
 
       &:hover {
-        background: none;
+        background: inherit;
       }
     }
   }
 }
 
 .main-header__toggle-nav {
+  width: 3rem;
+  margin: 0 auto $space;
+
   @include big {
     display: none;
   }
