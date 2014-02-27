@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def questions
-    notes.where(question: true)
+    notes.where(question: true).includes(:technique)
   end
 end
