@@ -12,9 +12,11 @@
   select,
   #{$all-text-inputs} {
     @include span-columns(8);
+    float: none;
 
     @include small {
       @include span-columns(12);
+      float: none;
     }
   }
 
@@ -68,6 +70,14 @@
 
   input[type=submit] {
     float: right;
+    position: relative;
+    right: 2px;
+  }
+
+  .hint {
+    @include secondary_text;
+    float: right;
+    margin-top: .2rem;
   }
 }
 
