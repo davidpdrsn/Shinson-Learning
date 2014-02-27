@@ -14,6 +14,6 @@ class User < ActiveRecord::Base
   def screen_name
     return email unless first_name or last_name
 
-    [first_name, last_name].map(&:to_s).map(&:titleize).reject(&:blank?).join(" ")
+    [first_name, last_name].reject(&:blank?).map(&:to_s).map(&:titleize).join(" ")
   end
 end
