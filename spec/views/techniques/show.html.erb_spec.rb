@@ -5,6 +5,7 @@ describe "techniques/show" do
 
   before do
     controller.stub(:current_user).and_return(user)
+    view.stub(:timestamp)
   end
 
   context "when the user owns the technique" do
