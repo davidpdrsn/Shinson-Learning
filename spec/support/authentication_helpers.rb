@@ -1,10 +1,12 @@
-def sign_up(email = 'bob@example.com', password = 'passwordlol')
+def sign_up user = build(:user)
   visit root_path
 
   click_link "Sign up"
-  fill_in "Email", with: email
-  fill_in "user_password", with: password
-  fill_in "user_password_confirmation", with: password
+  fill_in "Email", with: user.email
+  fill_in "user_password", with: user.password
+  fill_in "user_password_confirmation", with: user.password
+  fill_in "First name", with: user.first_name
+  fill_in "Last name", with: user.last_name
   click_button "Sign up"
 end
 
@@ -13,11 +15,11 @@ def logout
   click_link "Log out"
 end
 
-def sign_in(email = 'bob@example.com', password = 'passwordlol')
+def sign_in user = build(:user)
   visit root_path
 
   click_link "Sign in"
-  fill_in "Email", with: email
-  fill_in "Password", with: password
+  fill_in "Email", with: user.email
+  fill_in "Password", with: user.password
   click_button "Sign in"
 end

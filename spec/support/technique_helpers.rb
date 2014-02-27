@@ -1,22 +1,9 @@
-def create_technique(name="Ap chagi",
-                     description="foo",
-                     belt="White (mu kup)",
-                     category="Jokgi sul")
-
-  unless Category.find_by(name: category)
-    create(:category, name: category)
-  end
-
-  unless Belt.all.map.any? { |b| b.pretty_print == belt }
-    match = belt.match(/(?<color>.*?) \((?<degree>.*?)\)/)
-    Belt.create(color: match[:color], degree: match[:degree])
-  end
-
+def create_technique technique = build(:technique)
   visit root_path
   click_link "New technique"
-  fill_in "Name", with: name
-  fill_in "Description", with: description
-  select belt, from: "Belt"
-  select category, from: "Category"
+  fill_in "Name", with: technique.name
+  fill_in "Description", with: technique.description
+  select technique.belt.pretty_print, from: "Belt"
+  select technique.category.name, from: "Category"
   click_button "Create Technique"
 end

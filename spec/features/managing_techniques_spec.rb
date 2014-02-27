@@ -1,96 +1,100 @@
 require 'spec_helper'
 
-feature 'creating techniques' do
-  scenario 'a user creates a technique' do
-    sign_up
-    create_technique("Ap chagi")
+feature "managing techniques" do
+  let(:technique) { build :technique }
 
-    expect(page).to have_content "Technique saved"
-    expect(page).to have_content "Ap chagi"
+  feature 'creating techniques' do
+    scenario 'a user creates a technique' do
+      sign_up
+      create_technique technique
+
+      expect(page).to have_content "Technique saved"
+      expect(page).to have_content technique.name
+    end
+
+    scenario 'a user creates an invalid technique' do
+      technique = build :technique, name: ""
+      sign_up
+      create_technique technique
+
+      expect(page).to have_content "Technique not valid"
+    end
   end
 
-  scenario 'a user creates an invalid technique' do
-    sign_up
-    create_technique("")
+  feature 'viewing techniques' do
+    before do
+      sign_up
+    end
 
-    expect(page).to have_content "Technique not valid"
-  end
-end
+    scenario "a user views his list of techniques using another grouping", js: true do
+      technique = build :technique,
+        name: "Ap chagi",
+        description: "description",
+        belt: create(:belt, color: "white", degree: "mu kup"),
+        category: create(:category, name: "Jokgi sul")
 
-feature 'viewing techniques' do
-  before do
-    sign_up
-  end
+      create_technique technique
+      click_link "Techniques"
+      select 'Belt then category', from: 'groupings'
 
-  scenario 'a user view his list of techniques with the default grouping' do
-    create_technique("Ap chagi", "description", "White (mu kup)", "Jokgi sul")
-    click_link "Techniques"
+      expect(page.body).to match /White \(mu kup\).*Jokgi Sul.*Ap chagi/mi
+    end
 
-    expect(page).to have_content "Ap chagi"
-  end
+    scenario "A user sees that the list is sorted" do
+      create_technique build :technique, name: "Gibon sul 10"
+      create_technique build :technique, name: "Gibon sul 2"
+      create_technique build :technique, name: "Gibon sul 1"
+      click_link "Techniques"
 
-  scenario "a user views his list of techniques using another grouping", js: true do
-    create_technique("Ap chagi", "description", "White (mu kup)", "Jokgi sul")
-    click_link "Techniques"
-    select 'Belt then category', from: 'groupings'
+      expect(page.body).to match /Gibon sul 1.*Gibon sul 2.*Gibon sul 10/mi
+    end
 
-    expect(page.body).to match /White \(mu kup\).*Jokgi Sul.*Ap chagi/mi
-  end
+    scenario 'a user views a single technique' do
+      create_technique technique
+      visit root_path
+      click_link "Techniques"
+      click_link technique.name
 
-  scenario "A user sees that the list is sorted" do
-    create_technique("Gibon sul 10")
-    create_technique("Gibon sul 2")
-    create_technique("Gibon sul 1")
-    click_link "Techniques"
-
-    expect(page.body).to match /Gibon sul 1.*Gibon sul 2.*Gibon sul 10/mi
-  end
-
-  scenario 'a user views a single technique' do
-    create_technique("Ap chagi")
-    visit root_path
-    click_link "Techniques"
-    click_link "Ap chagi"
-
-    expect(page).to have_content "Ap chagi"
-  end
-end
-
-feature 'updating techniques' do
-  scenario "a user updates a technique" do
-    sign_up
-    create_technique("Ap chagi")
-    click_link "Techniques"
-    click_link "Ap chagi"
-    click_link "Edit"
-    fill_in "Name", with: "Dollyo chagi"
-    click_button "Update"
-
-    expect(page).to have_content "Dollyo chagi"
+      expect(page).to have_content technique.name
+    end
   end
 
-  scenario "a user updates a technique" do
-    sign_up
-    create_technique("Ap chagi")
-    click_link "Techniques"
-    click_link "Ap chagi"
-    click_link "Edit"
-    fill_in "Name", with: ""
-    click_button "Update"
+  feature 'updating techniques' do
+    scenario "a user updates a technique" do
+      sign_up
+      create_technique technique
+      click_link "Techniques"
+      click_link technique.name
+      click_link "Edit"
+      fill_in "Name", with: "Dollyo chagi"
+      click_button "Update"
 
-    expect(page).to have_content "Technique not updated"
+      expect(page).to have_content "Dollyo chagi"
+    end
+
+    scenario "a user updates a technique" do
+      sign_up
+      create_technique technique
+      click_link "Techniques"
+      click_link technique.name
+      click_link "Edit"
+      fill_in "Name", with: ""
+      click_button "Update"
+
+      expect(page).to have_content "Technique not updated"
+    end
   end
-end
 
-feature "deleting techniques" do
-  scenario "a user deletes a technique" do
-    sign_up
-    create_technique("Ap chagi")
-    click_link "Techniques"
-    click_link "Ap chagi"
-    click_link "Delete"
-    click_link "Techniques"
+  feature "deleting techniques" do
+    scenario "a user deletes a technique" do
+      sign_up
+      create_technique technique
+      click_link "Techniques"
+      click_link technique.name
+      click_link "Delete"
+      click_link "Techniques"
 
-    expect(page).not_to have_content "Ap chagi"
+      expect(page).not_to have_content "Ap chagi"
+    end
   end
 end
