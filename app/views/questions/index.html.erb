@@ -1,12 +1,12 @@
 <% cache [current_user, "questions"] do %>
-  <div class="questions">
+  <div class="notes__list">
     <% if @questions.present? %>
       <ul>
         <% @questions.each do |question| %>
           <li>
             <%= simple_format question.text %>
 
-            <div class="question__meta">
+            <div class="notes__list__meta">
               <p>Question for <%= link_to question.technique.name, question.technique %></p>
               <%= render partial: "shared/note_meta", locals: { note: question } %>
             </div>
