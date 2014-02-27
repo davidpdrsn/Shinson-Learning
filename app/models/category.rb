@@ -3,8 +3,4 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true,
                    uniqueness: true
-
-  def html_class
-    name.downcase.gsub(" ", "-")
-  end
 end
