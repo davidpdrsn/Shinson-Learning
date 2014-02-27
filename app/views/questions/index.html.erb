@@ -8,13 +8,8 @@
 
             <div class="question__meta">
               <p>Question for <%= link_to question.technique.name, question.technique %></p>
-
-              <p>
-                Created <%= question.created_at.to_formatted_s(:short) %>
-                (<%= time_ago_in_words question.created_at %> ago)
-              </p>
+              <%= render partial: "shared/note_meta", locals: { note: question } %>
             </div>
-
           </li>
         <% end %>
       </ul>

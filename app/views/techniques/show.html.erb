@@ -2,12 +2,7 @@
   <header class="technique__header">
     <h1 class="technique__heading"><%= @technique.name %></h1>
 
-    <% if @technique.user == current_user %>
-      <div class="technique__controls">
-        <%= link_to "Edit", edit_technique_path(@technique), class: "button button--small" %>
-        <%= link_to "Delete", @technique, method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
-      </div>
-    <% end %>
+    <%= render 'controls' if @technique.user == current_user %>
   </header>
 
   <%= simple_format @technique.description %>
@@ -23,7 +18,6 @@
 
     <% if @technique.user == current_user %>
       <button class="notes__new-button">+</button>
-
       <%= render partial: "shared/notes_form" %>
     <% end %>
 
@@ -35,15 +29,10 @@
               <%= simple_format note.text %>
 
               <div class="notes__list__meta">
-                <p>
-                  Created <%= note.created_at.to_formatted_s(:short) %>
-                  (<%= time_ago_in_words note.created_at %> ago)
-                </p>
+                <%= render partial: "shared/note_meta", locals: { note: note } %>
 
                 <% if note.question? %>
-                  <p>
-                    This note is a question
-                  </p>
+                  <p>This note is a question</p>
                 <% end %>
               </div>
 
