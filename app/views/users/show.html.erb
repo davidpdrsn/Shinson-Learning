@@ -1,6 +1,15 @@
-<h1>
-  <%= @user.s %> profile
-</h1>
+<div class="controls">
+  <h1 class="controls__heading">
+    <%= @user.s %> profile
+  </h1>
+
+  <% if current_user == @user %>
+    <div class="controls__container">
+      <%= link_to "Edit information", edit_user_path(@user), class: "button button--small" %>
+      <%= link_to "Delete account", @user, method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
+    </div>
+  <% end %>
+</div>
 
 <dl>
   <dt>Name</dt>

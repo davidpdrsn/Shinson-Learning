@@ -1,21 +1,8 @@
 @import "bits";
 
 .technique__header {
-  @include clearfix;
-
   h1 {
-    float: left;
     margin-bottom: 0;
-  }
-}
-
-.technique__controls {
-  float: right;
-  margin-top: $space/2;
-  margin-left: $space*2;
-
-  @include small {
-    margin-top: $space;
   }
 }
 

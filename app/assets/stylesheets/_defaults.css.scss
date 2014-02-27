@@ -48,3 +48,20 @@ input[type=submit] {
 dt:after {
   content: ":";
 }
+
+.controls {
+  @include clearfix;
+}
+.controls__heading {
+  float: left;
+}
+.controls__container {
+  float: right;
+  margin-top: $space/2;
+  margin-left: $space*2;
+
+  @include small {
+    margin-top: $space;
+  }
+}
+
