@@ -25,7 +25,7 @@
               <ul>
                 <% techniques.each do |technique| %>
                   <li>
-                    <%= link_to technique.name, technique %>
+                    <%= link_to technique.name, technique, class: "technique__link" %>
 
                     <a class="peek__link icon-eye" data-technique-id="<%= technique.id %>" href="#">
                       <span class="screen-reader-text">
