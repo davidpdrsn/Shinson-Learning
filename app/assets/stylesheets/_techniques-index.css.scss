@@ -61,6 +61,7 @@ select[name="groupings"] {
   .peek__link--all,
   .peek__link {
     float: right;
+    padding: 4px;
     color: $darker_gray;
     text-decoration: none;
 
@@ -71,14 +72,14 @@ select[name="groupings"] {
 
   .peek__link--all {
     position: relative;
-    top: 6px !important;
+    top: 2px !important;
     right: 3px !important;
   }
 
   .peek__link {
     position: relative;
-    top: 2px;
-    right: 3px;
+    top: -2px;
+    right: 0;
   }
 
   .peek__description {
@@ -90,6 +91,8 @@ select[name="groupings"] {
     display: inline-block;
     float: right;
     position: relative;
+    right: -5px;
+    pointer-events: none;
     top: 1px;
     margin-right: $space/2;
   }
