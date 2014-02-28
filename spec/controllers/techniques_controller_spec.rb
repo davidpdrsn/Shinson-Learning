@@ -1,25 +1,29 @@
 require 'spec_helper'
 
-describe TechniquesController, "GET #index" do
-  context "as a signed in user" do
-    it "assigns @techniques as grouped" do
-      user = create(:user)
-      sign_in user
-      kicks = create(:category, name: "Jokgi Sul")
-      belt = create(:belt, color: "White", degree: "Mu kup")
-      technique1 = create(:technique, user: user, category: kicks, belt: belt)
-      technique2 = create(:technique, category: kicks, belt: belt)
-      technique3 = create(:technique, user: user, category: kicks, belt: belt)
+describe TechniquesController do
+  let(:user) { create(:user) }
+  let(:technique) { create :technique, user: user }
+  let(:another_technique) { create :technique }
+  let(:attr) { build(:technique, user: user).attributes }
+  let(:invalid_attr) { build(:technique, name: "", user: user).attributes }
 
-      get :index
+  describe "#index" do
+    context "when signed in" do
+      before do
+        Technique.stub(:for_user_grouped_by)
+        sign_in user
+        get :index
+      end
 
-      techniques = assigns(:techniques)
-      expect(techniques["Jokgi Sul"]["White (mu kup)"]).to eq [technique1, technique3]
-      expect(subject).to render_template :index
+      it "assigns @techniques" do
+        expect(Technique).to have_received :for_user_grouped_by
+      end
+
+      it "assigns @page_title" do
+        expect(assigns(:page_title)).to eq "Techniques"
+      end
     end
-  end
 
-  context "as a guest" do
     it "requires authentication" do
       get :index
 
@@ -27,41 +31,33 @@ describe TechniquesController, "GET #index" do
       expect(subject).to set_the_flash[:alert]
     end
   end
-end
 
-describe TechniquesController, "GET #show" do
-  let(:technique) { create(:technique) }
+  describe "#show" do
+    before { get :show, id: technique.id }
 
-  before do
-    get :show, id: technique.id
+    it "assigns @technique" do
+      expect(assigns(:technique)).to eq technique
+    end
+
+    it "assigns @note" do
+      expect(assigns(:note)).to be_new_record
+      expect(assigns(:note).technique).to eq technique
+    end
+
+    it "assigns @notes" do
+      note = create :note, technique: technique
+      another_note = create :note
+
+      get :show, id: technique.id
+
+      expect(assigns(:notes)).to eq [note]
+    end
+
+    it { should render_template :show }
   end
 
-  it "assigns @technique" do
-    expect(assigns(:technique)).to eq technique
-  end
-
-  it "assigns @note" do
-    expect(assigns(:note)).to be_new_record
-    expect(assigns(:note).technique).to eq technique
-  end
-
-  it "assigns @notes" do
-    technique = create(:technique)
-    note1 = create(:note, technique: technique)
-    note2 = create(:note)
-
-    get :show, id: technique.id
-
-    expect(assigns(:notes)).to eq [note1]
-  end
-
-  it { should render_template :show }
-end
-
-describe TechniquesController, "GET #new" do
-  context "as a signed in user" do
-    it "assigns @techniques as a new technique for the user" do
-      user = create(:user)
+  describe "#new" do
+    it "assigns @techniqus" do
       sign_in user
 
       get :new
@@ -70,48 +66,39 @@ describe TechniquesController, "GET #new" do
       expect(assigns(:technique).user).to eq user
       expect(subject).to render_template :new
     end
-  end
 
-  context "as a guest" do
     it "requires authentication" do
-      get :new
+      get :index
 
       expect(subject).to redirect_to new_user_session_path
       expect(subject).to set_the_flash[:alert]
     end
   end
-end
 
-describe TechniquesController, "POST #create" do
-  context "as a signed in user" do
-    it "creates a new technique" do
-      user = create(:user)
-      sign_in user
-      attributes = build(:technique).attributes
+  describe "#create" do
+    context "as a signed in user" do
+      before { sign_in user }
 
-      expect do
-        post :create, technique: attributes
-      end.to change { user.techniques.count }
+      it "creates a new technique" do
 
-      expect(subject).to set_the_flash[:notice]
-      expect(subject).to redirect_to Technique.last
+        expect do
+          post :create, technique: attr
+        end.to change { user.techniques.count }
+
+        expect(subject).to set_the_flash[:notice]
+        expect(subject).to redirect_to Technique.last
+      end
+
+      it "doesn't create a new technique if the data is invalid" do
+        expect do
+          post :create, technique: invalid_attr
+        end.not_to change { user.techniques.count }
+
+        expect(subject).to set_the_flash[:alert]
+        expect(subject).to render_template :new
+      end
     end
 
-    it "doesn't create a new technique if the data is invalid" do
-      user = create(:user)
-      sign_in user
-      attributes = build(:technique, name: "").attributes
-
-      expect do
-        post :create, technique: attributes
-      end.not_to change { user.techniques.count }
-
-      expect(subject).to set_the_flash[:alert]
-      expect(subject).to render_template :new
-    end
-  end
-
-  context "as a guest" do
     it "requires authentication" do
       post :create, technique: {}
 
@@ -119,122 +106,92 @@ describe TechniquesController, "POST #create" do
       expect(subject).to set_the_flash[:alert]
     end
   end
-end
 
-describe TechniquesController, "GET #edit" do
-  context "as a signed in user" do
-    it "assigns @technique" do
-      technique = create(:technique)
-      sign_in technique.user
+  describe "#edit" do
+    context "as a signed in user" do
+      before { sign_in user }
 
-      get :edit, id: technique.id
+      it "assigns @technique" do
+        get :edit, id: technique.id
 
-      expect(assigns(:technique)).to eq technique
-      expect(subject).to render_template :edit
+        expect(assigns(:technique)).to eq technique
+        expect(subject).to render_template :edit
+      end
+
+      it "doesn't let a user edit other users techniques" do
+        get :edit, id: another_technique.id
+
+        expect(subject).to set_the_flash[:alert]
+        expect(subject).to redirect_to root_path
+      end
     end
 
-    it "doesn't let a user edit other users techniques" do
-      technique = create(:technique)
-      another_technique = create(:technique)
-      sign_in technique.user
-
-      get :edit, id: another_technique.id
-
-      expect(subject).to set_the_flash[:alert]
-      expect(subject).to redirect_to root_path
-    end
-  end
-
-  context "as a guest" do
     it "requires authentication" do
-      technique = create(:technique)
-
       get :edit, id: technique.id
 
       expect(subject).to redirect_to new_user_session_path
       expect(subject).to set_the_flash[:alert]
     end
   end
-end
 
-describe TechniquesController, "PATCH #update" do
-  context "as a signed in user" do
-    it "updates the technique" do
-      technique = create(:technique)
-      sign_in technique.user
+  describe "#update" do
+    context "as a signed in user" do
+      before { sign_in user }
 
-      patch :update, id: technique.id, technique: { name: "foo" }
+      it "updates the technique" do
+        patch :update, id: technique.id, technique: attr
 
-      expect(subject).to set_the_flash[:notice]
-      expect(subject).to redirect_to Technique.find(technique.id)
+        expect(subject).to set_the_flash[:notice]
+        expect(subject).to redirect_to Technique.find(technique.id)
+      end
+
+      it "doesn't update the technique if the data is invalid" do
+        patch :update, id: technique.id, technique: invalid_attr
+
+        expect(subject).to set_the_flash[:alert]
+        expect(subject).to render_template :edit
+      end
+
+      it "doesn't allow users to update other users techniques" do
+        patch :update, id: another_technique.id, technique: attr
+
+        expect(subject).to set_the_flash[:alert]
+        expect(subject).to redirect_to root_path
+      end
     end
 
-    it "doesn't update the technique if the data is invalid" do
-      technique = create(:technique)
-      sign_in technique.user
-
-      patch :update, id: technique.id, technique: { name: "" }
-
-      expect(subject).to set_the_flash[:alert]
-      expect(subject).to render_template :edit
-    end
-
-    it "doesn't allow users to update other users techniques" do
-      technique = create(:technique)
-      sign_in technique.user
-      another_technique = create(:technique)
-
-      patch :update, id: another_technique.id, technique: { name: "foo" }
-
-      expect(subject).to set_the_flash[:alert]
-      expect(subject).to redirect_to root_path
-    end
-  end
-
-  context "as a guest" do
     it "requires authentication" do
-      technique = create(:technique)
-
-      patch :update, id: technique.id, technique: { name: "foo" }
+      patch :update, id: technique.id, technique: attr
 
       expect(subject).to redirect_to new_user_session_path
       expect(subject).to set_the_flash[:alert]
     end
   end
-end
 
-describe TechniquesController, "DELETE #destroy" do
-  context "as a signed in user" do
-    it "destroys the technique" do
-      technique = create(:technique)
-      sign_in technique.user
+  describe "#delete" do
+    context "as a signed in user" do
+      before { sign_in user }
 
-      expect do
-        delete :destroy, id: technique.id
-      end.to change { technique.user.techniques.count }.by -1
+      it "destroys the technique" do
+        expect do
+          delete :destroy, id: technique.id
+        end.to change { technique.user.techniques.count }.by -1
 
-      expect(subject).to set_the_flash[:notice]
-      expect(subject).to redirect_to root_path
+        expect(subject).to set_the_flash[:notice]
+        expect(subject).to redirect_to root_path
+      end
+
+      it "doesn't let a user destroy another users techniques" do
+        expect do
+          delete :destroy, id: another_technique.id
+        end.not_to change { technique.user.techniques.count }
+
+        expect(subject).to set_the_flash[:alert]
+        expect(subject).to redirect_to root_path
+      end
     end
 
-    it "doesn't let a user destroy another users techniques" do
-      technique = create(:technique)
-      sign_in technique.user
-      another_technique = create(:technique)
-
-      expect do
-        delete :destroy, id: another_technique.id
-      end.not_to change { technique.user.techniques.count }
-
-      expect(subject).to set_the_flash[:alert]
-      expect(subject).to redirect_to root_path
-    end
-  end
-
-  context "as a guest" do
     it "requires authentication" do
-      technique = create(:technique)
-
       delete :destroy, id: technique.id
 
       expect(subject).to redirect_to new_user_session_path
