@@ -86,6 +86,11 @@ select[name="groupings"] {
     margin-bottom: 0;
   }
 
+  .technique__link {
+    display: inline-block;
+    max-width: 190px;
+  }
+
   .note-count {
     @include secondary_text;
     display: inline-block;
