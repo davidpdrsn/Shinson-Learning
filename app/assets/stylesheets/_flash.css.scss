@@ -32,4 +32,8 @@ $flash_padding: .75rem;
   border: none;
   position: absolute;
   right: $flash_padding;
+
+  &:focus {
+    background: none !important;
+  }
 }
