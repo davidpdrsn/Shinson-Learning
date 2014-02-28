@@ -10,7 +10,7 @@ class NotesController < ApplicationController
     if @note.save
       flash.notice = "Note saved"
     else
-      flash.alert = "Note not saved"
+      flash.alert = "Note not valid"
     end
 
     redirect_to @technique
