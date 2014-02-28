@@ -6,7 +6,7 @@
   </select>
 <% end %>
 
-<% cache [current_user, "techniques"] do %>
+<% cache [current_user, (params[:group_by] || @default_grouping), "techniques"] do %>
   <div class="techniques">
     <% if @techniques.present? %>
       <% @techniques.each do |first_group_name, second_group| %>
