@@ -1,37 +1,32 @@
+require 'crud_controller'
+
 class NotesController < ApplicationController
+  include CrudController
+
   before_action :authenticate_user!, only: [:create, :destroy, :edit, :update]
   before_action :get_technique, only: [:create, :destroy, :edit, :update]
   before_action :get_note, only: [:edit, :update, :destroy]
 
-  def create
-    @note = @technique.notes.new(note_params)
-    @note.user = current_user
+  on_create do |action|
+    action.always { redirect_to @technique }
 
-    if @note.save
-      flash.notice = "Note saved"
-    else
-      flash.alert = "Note not saved"
-    end
-
-    redirect_to @technique
-  end
-
-  def edit
-    @page_title = "Edit note for #{@technique.name}"
-  end
-
-  def update
-    if @note.update_attributes(note_params)
-      redirect_to @technique, notice: "Note updated"
-    else
-      redirect_to @technique, alert: "Note not updated"
+    action.entity :note, main: true do
+      @technique.notes.new(note_params).tap { |note| note.user = current_user }
     end
   end
 
-  def destroy
-    @note.destroy
-    flash.notice = "Note deleted"
-    redirect_to @technique
+  on_edit do |action|
+    action.entity(:page_title) { "Edit note for #{@technique.name}" }
+  end
+
+  on_update do |action|
+    action.always { redirect_to @technique }
+    action.entity(:note, main: true) { @note }
+  end
+
+  on_destroy do |action|
+    action.always { redirect_to @technique }
+    action.entity(:note, main: true) { @note }
   end
 
   private

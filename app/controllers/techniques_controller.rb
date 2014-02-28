@@ -1,27 +1,28 @@
+require 'crud_controller'
+
 class TechniquesController < ApplicationController
+  include CrudController
+
   before_action :authenticate_user!, except: [:show]
   before_action :get_technique, only: [:destroy, :update, :edit]
 
-  def index
-    @page_title = "Techniques"
-    @techniques = Technique.for_user_grouped_by(current_user, *groupings[params[:group_by]])
-  end
-
-  def new
-    @page_title = "New technique"
-    @technique = current_user.techniques.new
-  end
-
-  def create
-    @technique = current_user.techniques.new(techinque_params)
-
-    if @technique.save
-      flash.notice = "Technique saved"
-      redirect_to @technique
-    else
-      flash.alert = "Technique not valid"
-      render :new
+  on_index do |action|
+    action.entity(:techniques, main: true) do
+      Technique.for_user_grouped_by(current_user, *groupings[params[:group_by]])
     end
+  end
+
+  on_new do |action|
+    action.entity(:technique, main: true) { current_user.techniques.new }
+  end
+
+  on_create do |action|
+    action.entity(:technique, main: true) do
+      current_user.techniques.new techinque_params
+    end
+
+    action.success { redirect_to @technique }
+    action.fail { render :new }
   end
 
   def show

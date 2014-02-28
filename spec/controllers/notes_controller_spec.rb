@@ -76,6 +76,17 @@ describe NotesController, "GET #edit" do
       expect(subject).to render_template :edit
     end
 
+    it "assigns @page_title" do
+      user = create(:user)
+      sign_in user
+      technique = create(:technique, user: user)
+      note = create(:note, technique: technique, user: user)
+
+      get :edit, id: note.id, technique_id: technique.id
+
+      expect(assigns(:page_title)).to eq "Edit note for #{technique.name}"
+    end
+
     it "doesn't let a user edit another users note" do
       user = create(:user)
       sign_in user

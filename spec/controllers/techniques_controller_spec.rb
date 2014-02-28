@@ -16,6 +16,7 @@ describe TechniquesController, "GET #index" do
       techniques = assigns(:techniques)
       expect(techniques["Jokgi Sul"]["White (mu kup)"]).to eq [technique1, technique3]
       expect(subject).to render_template :index
+      expect(assigns(:page_title)).to eq "Techniques"
     end
   end
 
@@ -68,6 +69,7 @@ describe TechniquesController, "GET #new" do
 
       expect(assigns(:technique)).to be_new_record
       expect(assigns(:technique).user).to eq user
+      expect(assigns(:page_title)).to eq "New Technique"
       expect(subject).to render_template :new
     end
   end
