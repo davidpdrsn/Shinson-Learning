@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'benchmark'
 
 describe TechniquesController, type: :controller do
   it "is quite fast" do
@@ -7,15 +6,13 @@ describe TechniquesController, type: :controller do
     sign_in user
     categories = (1..10).map { create :category }
     belts = (1..10).map { create :belt }
-    100.times do
-      create :technique,
-             user: user,
-             category: categories.sample,
-             belt: belts.sample
-    end
+    technique = create :technique,
+                       user: user,
+                       category: categories.sample,
+                       belt: belts.sample
 
     benchmark do
-      get :index
+      get :show, id: technique.id
     end
   end
 end
