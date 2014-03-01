@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+if [ -e perf/stats.csv ]; then
+  rm perf/stats.csv
+fi
+
+first_rev=`ruby scripts/earliest_commit_with_file.rb $1`
+
+current_branch=`git branch | sed -n '/\* /s///p'`
+
+run-command-on-git-revisions $first_rev~1 $current_branch "sh scripts/perf_stats_on_this_rev.sh $1 >> perf/stats.csv"
+
+echo ""
+
+ruby scripts/render_stats.rb
