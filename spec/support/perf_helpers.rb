@@ -1,3 +1,5 @@
+require 'benchmark'
+
 def benchmark &block
   block.call
   iterations = 100
