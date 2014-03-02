@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative 'perf_helpers'
 
 describe TechniquesController, type: :controller do
   it "is quite fast" do
