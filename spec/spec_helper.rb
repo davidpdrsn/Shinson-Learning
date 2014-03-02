@@ -1,5 +1,9 @@
 require 'simplecov'
-SimpleCov.start if ENV["COVERAGE"]
+if ENV["COVERAGE"]
+  SimpleCov.start do
+    add_filter "/perf/"
+  end
+end
 
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
