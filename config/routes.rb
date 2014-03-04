@@ -7,7 +7,13 @@ ShinsonLearning::Application.routes.draw do
   end
   resources :questions, only: [:index]
 
-  resources :studies, only: [:new, :create, :show, :index]
+  resources :studies, only: [:new, :create, :show, :index] do
+    member do
+      get :study
+    end
+
+    resources :scores, only: [:create]
+  end
 
   root to: "home#index"
 end
