@@ -4,6 +4,7 @@ describe Study do
   it { should belong_to :user }
   it { should belong_to :belt }
   it { should belong_to :category }
+  it { should have_many(:scores).dependent(:destroy) }
 
   describe "#techniques" do
     it "returns the number of techniques for the study" do
@@ -22,6 +23,34 @@ describe Study do
       study = create :study
 
       expect(study.pretty_print).to eq "#{study.belt.pretty_print} #{study.category.name}"
+    end
+  end
+
+  describe "#to_json" do
+    it "converts the study to json" do
+      study = create :study
+
+      json = JSON.parse study.to_json
+      expect(json["study"]["id"]).to eq study.id
+      expect(json["techniques"].length).to eq study.techniques.length
+    end
+  end
+
+  describe "#average_score" do
+    it "returns the average score for the study" do
+      study = create :study
+      4.times { create :technique, belt: study.belt, category: study.category, user: study.user }
+      create :score, study: study, user: study.user, correct_answers: 0
+      create :score, study: study, user: study.user, correct_answers: 4
+
+      expect(study.average_score).to eq 50
+    end
+
+    it "returns 0 when there are no scores" do
+      study = create :study
+      4.times { create :technique, belt: study.belt, category: study.category, user: study.user }
+
+      expect(study.average_score).to eq 0
     end
   end
 end

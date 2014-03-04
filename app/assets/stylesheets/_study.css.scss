@@ -1,0 +1,103 @@
+@import "bits";
+
+.study__card {
+  position: relative;
+  height: 20rem;
+  perspective: 1000;
+
+  @include small {
+    height: 10rem;
+  }
+}
+
+.study__card__front,
+.study__card__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $light_gray;
+  font-size: 2.5rem;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backface-visibility: hidden;
+  background: darken(white, 3%);
+  transition: .25s ease-in-out;
+
+  @include small {
+    font-size: 1.5rem;
+  }
+}
+
+.study__card__front {}
+.study__card__back {
+  transform: rotateX(180deg);
+}
+
+.study__card.study__card--flipped {
+  .study__card__front {
+    transform: rotateX(180deg);
+  }
+
+  .study__card__back {
+    transform: rotateX(360deg);
+  }
+}
+
+.study__card__label {
+  @include secondary_text;
+  font-style: normal;
+  position: absolute;
+  top: $space/2;
+  left: $space/2;
+}
+
+.study__controls {
+  margin: $space 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > * {
+    @include small {
+      width: 100%;
+    }
+  }
+
+  > button {
+    margin-bottom: $space;
+  }
+}
+.study__controls__submit {
+  display: none;
+}
+.study__controls__right,
+.study__controls__wrong {
+  @include small {
+    width: 100%;
+    margin-bottom: $space;
+  }
+}
+.study__controls__right {
+  $color: lighten(green, 5%);
+  @include linear_gradient(lighten($color, 10%), darken($color, 3%));
+  color: white;
+  border-color: darken($color, 3%);
+
+  &:active {
+    @include linear_gradient(bottom, lighten($color, 10%), darken($color, 3%));
+  }
+}
+.study__controls__wrong {
+  $color: lighten(red, 5%);
+  @include linear_gradient(lighten($color, 10%), darken($color, 10%));
+  color: white;
+  border-color: darken($color, 10%);
+
+  &:active {
+    @include linear_gradient(bottom, lighten($color, 10%), darken($color, 10%));
+  }
+}

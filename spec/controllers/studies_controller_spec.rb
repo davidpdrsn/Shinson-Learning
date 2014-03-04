@@ -87,4 +87,37 @@ describe StudiesController do
       expect(subject).to redirect_to new_user_session_path
     end
   end
+
+  describe "study" do
+    let(:study) { create :study }
+    let(:user) { study.user }
+
+    context "as a signed in user" do
+      before { sign_in user }
+
+      context "with an html request" do
+        it "assigns @study" do
+          get :study, id: study.id
+
+          expect(assigns(:study)).to eq study
+        end
+      end
+
+      context "with a json request" do
+        it "responds with the study and its techniques" do
+          get :study, id: study.id, format: :json
+
+          json = JSON.parse response.body
+          expect(json["study"]["id"]).to eq study.id
+          expect(json["techniques"].length).to eq study.techniques.length
+        end
+      end
+    end
+
+    it "requires authentication" do
+      get :study, id: 1
+
+      expect(subject).to redirect_to new_user_session_path
+    end
+  end
 end
