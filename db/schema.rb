@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225141442) do
+ActiveRecord::Schema.define(version: 20140304154337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,47 @@ ActiveRecord::Schema.define(version: 20140225141442) do
 
   add_index "notes", ["technique_id"], name: "index_notes_on_technique_id", using: :btree
   add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
+
+  create_table "questions", force: true do |t|
+    t.integer  "technique_id"
+    t.integer  "study_round_id"
+    t.boolean  "answered_correctly", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "questions", ["study_round_id"], name: "index_questions_on_study_round_id", using: :btree
+  add_index "questions", ["technique_id"], name: "index_questions_on_technique_id", using: :btree
+
+  create_table "studies", force: true do |t|
+    t.integer "belt_id"
+    t.integer "category_id"
+    t.integer "user_id"
+  end
+
+  add_index "studies", ["belt_id"], name: "index_studies_on_belt_id", using: :btree
+  add_index "studies", ["category_id"], name: "index_studies_on_category_id", using: :btree
+  add_index "studies", ["user_id"], name: "index_studies_on_user_id", using: :btree
+
+  create_table "study_rounds", force: true do |t|
+    t.integer  "study_set_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "study_rounds", ["study_set_id"], name: "index_study_rounds_on_study_set_id", using: :btree
+
+  create_table "study_sets", force: true do |t|
+    t.integer  "category_id"
+    t.integer  "belt_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "study_sets", ["belt_id"], name: "index_study_sets_on_belt_id", using: :btree
+  add_index "study_sets", ["category_id"], name: "index_study_sets_on_category_id", using: :btree
+  add_index "study_sets", ["user_id"], name: "index_study_sets_on_user_id", using: :btree
 
   create_table "techniques", force: true do |t|
     t.string   "name"

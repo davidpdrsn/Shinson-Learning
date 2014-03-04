@@ -1,0 +1,14 @@
+<header class="technique__header controls">
+  <h1 class="technique__heading controls__heading"><%= @study.pretty_print %></h1>
+
+  <div class="controls__container">
+    <%= link_to "Study this", "", class: "button" %>
+  </div>
+</header>
+
+<dl>
+  <dt>Number of techniques</dt>
+  <dd>
+    <%= pluralize @study.techniques.count, "technique" %>
+  </dd>
+</dl>

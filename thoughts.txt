@@ -1,0 +1,15 @@
+user creates a study set that has a category and a belt
+he then sees a page with statistics about that set
+he can then hit a button to start practicing that set
+he then goes through the techniques in that set one by one in a flash card style, each time checking if the got the question right or not
+he then sees a page that shows his scores for that run through he just did
+he can then go back to the overview for that set and see his statistics updated
+
+creating a study set
+/studies/new
+
+viewing a study set
+/studies/:id
+
+studying a set
+/studies/:id/study
