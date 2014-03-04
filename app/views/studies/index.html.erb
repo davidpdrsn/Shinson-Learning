@@ -1,0 +1,11 @@
+<% if @studies.present? %>
+  <ul>
+    <% @studies.each do |study| %>
+      <li>
+        <%= link_to study.pretty_print, study %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no studies</p>
+<% end %>

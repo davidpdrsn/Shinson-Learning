@@ -28,6 +28,8 @@
     <% if user_signed_in? %>
       <%= link_to "Techniques", techniques_path %>
       <%= link_to "New technique", new_technique_path %>
+      <%= link_to "Studies", studies_path %>
+      <%= link_to "New study", new_study_path %>
       <%= link_to "Questions", questions_path %>
       <%= link_to "Profile", current_user %>
       <%= link_to "Log out", destroy_user_session_path, method: :delete %>
