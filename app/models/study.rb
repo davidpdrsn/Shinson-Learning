@@ -36,10 +36,4 @@ class Study < ActiveRecord::Base
   def newest_score
     scores.order("created_at").last
   end
-
-  private
-
-  def sum_of_scores
-    scores.map(&:to_percent).inject 0, :+
-  end
 end
