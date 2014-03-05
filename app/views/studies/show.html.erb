@@ -34,5 +34,9 @@
 
 <div class="stats-container">
   <h2>Statistics</h2>
-  <%= content_tag :div, "", id: "scores_chart", data: { scores: @study.scores, max_score: @study.techniques.count } %>
+  <% if @study.scores.present? %>
+    <%= content_tag :div, "", id: "scores_chart", data: { scores: @study.scores, max_score: @study.techniques.count } %>
+  <% else %>
+    <p>You haven't studied this yet.</p>
+  <% end %>
 </div>
