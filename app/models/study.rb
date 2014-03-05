@@ -25,7 +25,6 @@ class Study < ActiveRecord::Base
     0
   end
 
-  # TODO: test this
   def newest_score
     scores.order("created_at").last
   end
