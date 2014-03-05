@@ -45,6 +45,6 @@ feature "study" do
       click_button "Didn't guess correctly"
     end
 
-    expect(page).to have_content "50%"
+    expect(page).to have_content "50.0%"
   end
 end
