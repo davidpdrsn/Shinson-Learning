@@ -53,4 +53,20 @@ describe Study do
       expect(study.average_score).to eq 0
     end
   end
+
+  describe "#newest_score" do
+    it "finds the newest score" do
+      study = build :study
+      new_score = create :score, study: study, created_at: 1.day.ago
+      old_score = create :score, study: study, created_at: 2.weeks.ago
+
+      expect(study.newest_score).to eq new_score
+    end
+
+    it "returns nil when there it has no scores" do
+      study = build :study
+
+      expect(study.newest_score).to be_nil
+    end
+  end
 end
