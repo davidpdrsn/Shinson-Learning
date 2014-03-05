@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+ag "(if|else|elsif|unless|then|\|\||&&) " app --nocolor -l | egrep -v "(devise|assets)"
