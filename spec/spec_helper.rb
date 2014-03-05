@@ -4,10 +4,9 @@ if ENV["COVERAGE"]
     add_group 'Models', '/app/models/'
     add_group 'Controllers', '/app/controllers/'
     add_group 'Views', '/app/views/'
+    add_group 'Libraries', '/lib/'
 
-    add_filter "/perf/"
-
-    project_name 'Rails Tutorial Sample App'
+    project_name 'Shinson Learning'
   end
 end
 
