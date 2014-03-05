@@ -2,6 +2,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require fastclick
+//= require raphael/raphael
+//= require morris.js/morris.js
 //= require domain
 //= require_tree .
 
