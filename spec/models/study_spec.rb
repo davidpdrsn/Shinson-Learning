@@ -37,20 +37,10 @@ describe Study do
   end
 
   describe "#average_score" do
-    it "returns the average score for the study" do
+    it "delegates to MathHelper" do
       study = create :study
-      4.times { create :technique, belt: study.belt, category: study.category, user: study.user }
-      create :score, study: study, user: study.user, correct_answers: 0
-      create :score, study: study, user: study.user, correct_answers: 4
-
-      expect(study.average_score).to eq 50
-    end
-
-    it "returns 0 when there are no scores" do
-      study = create :study
-      4.times { create :technique, belt: study.belt, category: study.category, user: study.user }
-
-      expect(study.average_score).to eq 0
+      MathHelper.should_receive(:average)
+      study.average_score
     end
   end
 
