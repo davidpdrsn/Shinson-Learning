@@ -17,3 +17,12 @@
 @import "techniques-index";
 @import "techniques-show";
 @import "study";
+
+.stats-container {
+  margin-bottom: $space*4;
+  margin-top: $space*2;
+}
+
+#scores_chart > svg {
+  width: 100% !important;
+}

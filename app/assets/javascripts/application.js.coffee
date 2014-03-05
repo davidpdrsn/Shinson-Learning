@@ -4,6 +4,7 @@
 //= require fastclick
 //= require raphael/raphael
 //= require morris.js/morris.js
+//= require moment/moment.js
 //= require domain
 //= require_tree .
 
