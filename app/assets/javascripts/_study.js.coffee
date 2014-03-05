@@ -80,3 +80,21 @@ $(window).on "load page:load", ->
       domain.removeSpinner()
       study = new Study(json.study, json.techniques)
       study.play()
+
+  Morris.Line
+    element: 'scores_chart'
+    data: $("#scores_chart").data("scores")
+    xkey: 'created_at'
+    ykeys: ['correct_answers']
+    labels: ['Correct answers']
+    xLabels: 'day'
+    smooth: false
+    hideHover: false
+    ymin: 0
+    ymax: $("#scores_chart").data("max-score")
+    dateFormat: (x) -> moment(x).format("MMM Do YYYY")
+    xLabelFormat: (x) -> moment(x).format("DD-MM-YYYY")
+    yLabelFormat: (y) -> if Math.round(y) == y
+                           y
+                         else
+                           ""

@@ -16,6 +16,7 @@
   "dependencies": {
     "fastclick": "~0.6.11",
     "normalize-css": "~3.0.0",
-    "morris.js": "~0.4.3"
+    "morris.js": "~0.4.3",
+    "moment": "~2.5.1"
   }
 }
