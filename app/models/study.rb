@@ -22,7 +22,11 @@ class Study < ActiveRecord::Base
   end
 
   def average_score
-    MathHelper.average scores.map(&:to_percent)
+    MathHelper.average(scores.map(&:to_percent)).round(2)
+  end
+
+  def cached_average_score
+    Rails.cache.fetch([self, "score"]) { average_score }
   end
 
   def newest_score

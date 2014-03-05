@@ -19,7 +19,7 @@
 
   <dt>Average score</dt>
   <dd>
-    <%= @study.average_score %>%
+    <%= @study.cached_average_score %>%
   </dd>
 
   <dt>Last study</dt>
@@ -34,6 +34,5 @@
 
 <div class="stats-container">
   <h2>Statistics</h2>
-
   <%= content_tag :div, "", id: "scores_chart", data: { scores: @study.scores, max_score: @study.techniques.count } %>
 </div>
