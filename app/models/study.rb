@@ -29,6 +29,10 @@ class Study < ActiveRecord::Base
     Rails.cache.fetch([self, "score"]) { average_score }
   end
 
+  def cached_scores_count
+    Rails.cache.fetch([self, "score_count"]) { scores.count }
+  end
+
   def newest_score
     scores.order("created_at").last
   end

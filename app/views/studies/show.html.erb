@@ -14,7 +14,7 @@
 
   <dt>Number of times studies</dt>
   <dd>
-    <%= pluralize @study.scores.count, "time" %>
+    <%= pluralize @study.cached_scores_count, "time" %>
   </dd>
 
   <dt>Average score</dt>
