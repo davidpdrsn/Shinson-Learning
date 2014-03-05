@@ -1,3 +1,5 @@
+require 'math_helper'
+
 class Study < ActiveRecord::Base
   belongs_to :user
   belongs_to :belt
@@ -20,9 +22,7 @@ class Study < ActiveRecord::Base
   end
 
   def average_score
-    (sum_of_scores / scores.count).round
-  rescue ZeroDivisionError
-    0
+    MathHelper.average scores.map(&:to_percent)
   end
 
   def newest_score

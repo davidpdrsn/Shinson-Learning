@@ -10,7 +10,7 @@ describe Score do
       score.stub(:correct_answers) { 1 }
       score.stub(:study) { double(techniques: double(count: 4)) }
 
-      CalculatesPercentages.should_receive(:of).with(1, 4)
+      MathHelper.should_receive(:percentage_difference).with(1, 4)
 
       score.to_percent
     end
