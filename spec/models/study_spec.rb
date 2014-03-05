@@ -39,7 +39,7 @@ describe Study do
   describe "#average_score" do
     it "delegates to MathHelper" do
       study = create :study
-      MathHelper.should_receive(:average)
+      MathHelper.should_receive(:average).and_return(10)
       study.average_score
     end
   end
