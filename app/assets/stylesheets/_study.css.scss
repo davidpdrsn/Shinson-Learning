@@ -1,0 +1,171 @@
+@import "bits";
+
+.studies__list {
+  @include border_list;
+
+  a {
+    color: inherit;
+  }
+
+  .studies__list__meta {
+    @include secondary_text;
+    margin-top: $space/2;
+  }
+}
+
+.study__card {
+  position: relative;
+  height: 20rem;
+  perspective: 1000;
+
+  @include small {
+    height: 10rem;
+  }
+}
+
+.study__card__front,
+.study__card__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $light_gray;
+  border-radius: $radius;
+  font-size: 2.5rem;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backface-visibility: hidden;
+  background: darken(white, 3%);
+  transition: .25s ease-in-out;
+
+  @include small {
+    font-size: 1.5rem;
+  }
+}
+
+.study__card__front {}
+.study__card__back {
+  transform: rotateX(180deg);
+}
+
+.study__card.study__card--flipped {
+  .study__card__front {
+    transform: rotateX(180deg);
+  }
+
+  .study__card__back {
+    transform: rotateX(360deg);
+  }
+}
+
+.study__card__label {
+  @include secondary_text;
+  font-style: normal;
+  position: absolute;
+  top: $space/2;
+  left: $space/2;
+}
+
+.study__controls {
+  margin: $space 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.study__controls__submit {
+  margin-bottom: $space;
+  display: none;
+
+  &.show {
+    display: flex;
+  }
+}
+.study__controls__right,
+.study__controls__wrong {
+  @include small {
+    flex: 1;
+  }
+}
+.study__controls__right {
+  margin-right: $space;
+  $color: lighten(green, 5%);
+  @include linear_gradient(lighten($color, 10%), darken($color, 3%));
+  color: white;
+  border-color: darken($color, 3%);
+
+  &:active {
+    @include linear_gradient(bottom, lighten($color, 10%), darken($color, 3%));
+  }
+}
+.study__controls__wrong {
+  $color: lighten(red, 5%);
+  @include linear_gradient(lighten($color, 10%), darken($color, 10%));
+  color: white;
+  border-color: darken($color, 10%);
+
+  &:active {
+    @include linear_gradient(bottom, lighten($color, 10%), darken($color, 10%));
+  }
+}
+
+.stats-container {
+  margin-bottom: $space*4;
+  margin-top: $space*2;
+}
+
+#scores_chart > svg {
+  width: 100% !important;
+}
+
+.study-progress {
+  height: 4px;
+  background: $light_gray;
+  margin-bottom: $space;
+  display: flex;
+  position: relative;
+  align-items: stretch;
+  border-radius: $radius;
+
+  .study-progress__tile {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: $radius;
+    transition: .5s ease-in-out;
+    background: $dark_gray;
+  }
+
+  .study-progress__dot {
+    flex: 1;
+    position: relative;
+    z-index: 9999;
+
+    &:after {
+      transition: .1s ease-in-out;
+      border: 1px solid white;
+      content: "";
+      display: block;
+      position: absolute;
+      border-radius: 50%;
+      $size: 8px;
+      @include size($size);
+      background: $light_gray;
+      right: 0;
+      top: 50%;
+      margin-top: -$size/2 - 1px;
+    }
+
+    &.right:after {
+      background: green;
+    }
+
+    &.wrong:after {
+      background: red;
+    }
+  }
+}

@@ -54,6 +54,10 @@ dt:after {
 }
 .controls__heading {
   float: left;
+
+  @include small {
+    margin-bottom: 0;
+  }
 }
 .controls__container {
   float: right;

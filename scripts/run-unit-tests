@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+find spec -name "*.rb" | egrep -v "(features|factories|spec_helper|support)" | xargs bin/rspec
