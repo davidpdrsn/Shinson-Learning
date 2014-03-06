@@ -14,7 +14,7 @@ namespace :db do
       puts "Made user: #{user.id}"
     end
 
-    10_000.times do |n|
+    1_000.times do |n|
       user = User.all.sample
       technique = Technique.new(
         name: "technique ##{n}",
