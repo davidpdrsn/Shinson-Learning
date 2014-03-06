@@ -101,3 +101,12 @@
     @include linear_gradient(bottom, lighten($color, 10%), darken($color, 10%));
   }
 }
+
+.stats-container {
+  margin-bottom: $space*4;
+  margin-top: $space*2;
+}
+
+#scores_chart > svg {
+  width: 100% !important;
+}
