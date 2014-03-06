@@ -88,7 +88,9 @@ select[name="groupings"] {
 
   .technique__link {
     display: inline-block;
-    max-width: 190px;
+    @include small {
+      max-width: 190px;
+    }
   }
 
   .note-count {
