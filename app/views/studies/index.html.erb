@@ -1,11 +1,32 @@
-<% if @studies.present? %>
-  <ul>
-    <% @studies.each do |study| %>
-      <li>
-        <%= link_to study.pretty_print, study %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>You have no studies</p>
-<% end %>
+<div class="controls">
+  <h1 class="controls__heading">
+    Studies
+  </h1>
+
+  <div class="controls__container">
+    <%= link_to "+", new_study_path, class: "button" %>
+  </div>
+</div>
+
+<div class="studies__list">
+  <% if @studies.present? %>
+    <ul>
+      <% @studies.each do |study| %>
+        <li>
+          <%= link_to study.pretty_print, study %>
+
+          <div class="studies__list__meta">
+            <% if study.scores.present? %>
+              Average score <%= study.cached_average_score %>%<br>
+              Studied <%= time_ago_in_words study.newest_score.created_at %> ago
+            <% else %>
+              Never studied
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You have no studies</p>
+  <% end %>
+</div>

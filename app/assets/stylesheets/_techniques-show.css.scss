@@ -16,31 +16,11 @@
 }
 
 .notes__list {
+  @include border_list;
   clear: both;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
 
   a {
     color: inherit;
-  }
-
-  li {
-    &:not(:last-of-type) {
-      border-bottom: 1px solid $light_gray;
-      padding-bottom: $space*1.5;
-    }
-
-    &:last-of-type {
-      border-bottom: none;
-    }
-
-    &:first-of-type p {
-      margin-top: 0;
-    }
   }
 }
 
@@ -56,14 +36,15 @@
 
 .notes__list__meta {
   @include secondary_text;
-  margin-bottom: $space;
 
   p {
     margin: 0;
   }
 }
 
-.notes__list__controls {}
+.notes__list__controls {
+  margin-top: $space/2;
+}
 
 .technique__description {
   display: none;
