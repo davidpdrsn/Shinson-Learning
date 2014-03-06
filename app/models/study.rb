@@ -43,7 +43,7 @@ class Study < ActiveRecord::Base
 
   def has_techniques
     unless techniques.present?
-      errors[:base] << "No techniques for category and belt"
+      errors[:base] << "No techniques for #{pretty_print}"
     end
   end
 end
