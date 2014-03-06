@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: techniques
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#  belt_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  category_id :integer
+#  user_id     :integer
+#  notes_count :integer          default(0), not null
+#
+
 require 'spec_helper'
 
 describe Technique do
