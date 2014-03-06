@@ -1,7 +1,7 @@
 require 'math_helper'
 
 class Study < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, touch: true
   belongs_to :belt
   belongs_to :category
   has_many :scores, dependent: :destroy
