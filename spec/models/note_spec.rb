@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: notes
+#
+#  id           :integer          not null, primary key
+#  text         :text
+#  user_id      :integer
+#  technique_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  question     :boolean          default(FALSE)
+#
+
 require 'spec_helper'
 
 describe Note do

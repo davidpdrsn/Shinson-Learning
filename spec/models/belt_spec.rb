@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: belts
+#
+#  id     :integer          not null, primary key
+#  color  :string(255)
+#  degree :string(255)
+#
+
 require 'spec_helper'
 
 describe Belt do
