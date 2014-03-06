@@ -19,7 +19,7 @@ class Study < ActiveRecord::Base
   def to_json
     {
       study: self,
-      techniques: techniques
+      techniques: techniques.shuffle
     }.to_json
   end
 
