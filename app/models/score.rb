@@ -1,7 +1,7 @@
 require 'math_helper'
 
 class Score < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, touch: true
   belongs_to :study, touch: true
 
   def to_percent
