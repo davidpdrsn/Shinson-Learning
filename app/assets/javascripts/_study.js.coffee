@@ -23,12 +23,12 @@ class Question
     </div>
 
     <div class='study__controls'>
-      <button class='study__controls__flip' type='button'>Flip</button>
-
       <div class='study__controls__submit'>
         <button class='study__controls__right' type='button'>Guessed correctly</button>
         <button class='study__controls__wrong'type='button'>Didn't guess correctly</button>
       </div>
+
+      <button class='study__controls__flip' type='button'>Flip</button>
     </div>
     "
 
@@ -38,10 +38,24 @@ class Study
     @questions = techniques.map (t) -> new Question(t)
     @current_question = @questions[0]
     @score = 0
+    @progress = 0
 
   play: ->
+    this._initProgress()
     @current_question.injectToDom()
     this._bindButtons()
+
+  _initProgress: () ->
+    $(".study-progress").append("<span class='study-progress__tile'></span>")
+    this._setProgressWidth()
+
+  _progressPercentage: ->
+     @progress/@questions.length * 100
+
+  _setProgressWidth: ->
+    console.log "setting width"
+    el = $(".study-progress__tile")
+    el.css width: "#{this._progressPercentage()}%"
 
   _bindButtons: ->
     $(document).on 'click', '.study__controls__flip', => this._flip()
@@ -50,23 +64,28 @@ class Study
 
   _next: ->
     @current_question = @questions[@questions.indexOf(@current_question)+1]
+    @progress++
+    this._setProgressWidth()
     if @current_question
       @current_question.injectToDom()
     else
-      $.ajax({
-        url: "/studies/#{@id}/scores",
-        type: "POST",
-        data: {
-          study_id: @id,
-          score: {
-            correct_answers: @score
+      durationOfProgressAnimation = 500
+      setTimeout((=>
+        $.ajax({
+          url: "/studies/#{@id}/scores",
+          type: "POST",
+          data: {
+            study_id: @id,
+            score: {
+              correct_answers: @score
+            }
           }
-        }
-      }).done =>
-        Turbolinks.visit "/studies/#{@id}"
+        }).done =>
+          Turbolinks.visit "/studies/#{@id}"
+      ), durationOfProgressAnimation)
 
   _flip: ->
-    $(".study__controls__submit").show()
+    $(".study__controls__submit").addClass "show"
     $(".study__card").toggleClass "study__card--flipped"
 
 $(window).on "load page:load", ->
@@ -81,20 +100,21 @@ $(window).on "load page:load", ->
       study = new Study(json.study, json.techniques)
       study.play()
 
-  Morris.Line
-    element: 'scores_chart'
-    data: $("#scores_chart").data("scores")
-    xkey: 'created_at'
-    ykeys: ['correct_answers']
-    labels: ['Correct answers']
-    xLabels: 'day'
-    smooth: false
-    hideHover: false
-    ymin: 0
-    ymax: $("#scores_chart").data("max-score")
-    dateFormat: (x) -> moment(x).format("MMM Do YYYY")
-    xLabelFormat: (x) -> moment(x).format("DD-MM-YYYY")
-    yLabelFormat: (y) -> if Math.round(y) == y
-                           y
-                         else
-                           ""
+  if $('#scores_chart').length > 0
+    Morris.Line
+      element: 'scores_chart'
+      data: $("#scores_chart").data("scores")
+      xkey: 'created_at'
+      ykeys: ['correct_answers']
+      labels: ['Correct answers']
+      xLabels: 'day'
+      smooth: false
+      hideHover: false
+      ymin: 0
+      ymax: $("#scores_chart").data("max-score")
+      dateFormat: (x) -> moment(x).format("MMM Do YYYY")
+      xLabelFormat: (x) -> moment(x).format("DD-MM-YYYY")
+      yLabelFormat: (y) -> if Math.round(y) == y
+                             y
+                           else
+                             ""
