@@ -6,6 +6,12 @@ describe Study do
   it { should belong_to :category }
   it { should have_many(:scores).dependent(:destroy) }
 
+  it "is not valid if it has not techniques" do
+    study = build :study
+
+    expect(study).not_to be_valid
+  end
+
   describe "#techniques" do
     it "returns the number of techniques for the study" do
       category = create :category
@@ -20,7 +26,7 @@ describe Study do
 
   describe "#pretty_print" do
     it "pretty prints the study" do
-      study = create :study
+      study = build :study
 
       expect(study.pretty_print).to eq "#{study.belt.pretty_print} #{study.category.name}"
     end
@@ -28,7 +34,7 @@ describe Study do
 
   describe "#to_json" do
     it "converts the study to json" do
-      study = create :study
+      study = build :study
 
       json = JSON.parse study.to_json
       expect(json["study"]["id"]).to eq study.id
@@ -38,7 +44,7 @@ describe Study do
 
   describe "#average_score" do
     it "delegates to MathHelper" do
-      study = create :study
+      study = build :study
       MathHelper.should_receive(:average).and_return(10)
       study.average_score
     end
@@ -47,6 +53,7 @@ describe Study do
   describe "#newest_score" do
     it "finds the newest score" do
       study = build :study
+      create :technique, belt: study.belt, category: study.category, user: study.user
       new_score = create :score, study: study, created_at: 1.day.ago
       old_score = create :score, study: study, created_at: 2.weeks.ago
 
