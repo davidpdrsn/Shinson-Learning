@@ -147,6 +147,7 @@
 
     &:after {
       transition: .1s ease-in-out;
+      border: 1px solid white;
       content: "";
       display: block;
       position: absolute;
@@ -156,7 +157,7 @@
       background: $light_gray;
       right: 0;
       top: 50%;
-      margin-top: -$size/2;
+      margin-top: -$size/2 - 1px;
     }
 
     &.right:after {
