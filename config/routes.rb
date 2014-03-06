@@ -12,7 +12,7 @@ ShinsonLearning::Application.routes.draw do
       get :study
     end
 
-    resources :scores, only: [:create]
+    resources :scores, only: [:create, :index]
   end
 
   root to: "home#index"

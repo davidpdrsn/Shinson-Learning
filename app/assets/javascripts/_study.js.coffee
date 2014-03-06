@@ -120,20 +120,25 @@ $(window).on "load page:load", ->
       study.play()
 
   if $('#scores_chart').length > 0
-    Morris.Line
-      element: 'scores_chart'
-      data: $("#scores_chart").data("scores")
-      xkey: 'created_at'
-      ykeys: ['correct_answers']
-      labels: ['Correct answers']
-      xLabels: 'day'
-      smooth: false
-      hideHover: false
-      ymin: 0
-      ymax: $("#scores_chart").data("max-score")
-      dateFormat: (x) -> moment(x).format("MMM Do YYYY")
-      xLabelFormat: (x) -> moment(x).format("DD-MM-YYYY")
-      yLabelFormat: (y) -> if Math.round(y) == y
-                             y
-                           else
-                             ""
+    $.ajax({
+      url: "#{window.location.pathname}/scores"
+      type: "GET"
+      dataType: "json"
+    }).done (json) =>
+      Morris.Line
+        element: 'scores_chart'
+        data: json.scores
+        xkey: 'created_at'
+        ykeys: ['correct_answers']
+        labels: ['Correct answers']
+        xLabels: 'day'
+        smooth: false
+        hideHover: false
+        ymin: 0
+        ymax: json.techniques_count
+        dateFormat: (x) -> moment(x).format("MMM Do YYYY")
+        xLabelFormat: (x) -> moment(x).format("DD-MM-YYYY")
+        yLabelFormat: (y) -> if Math.round(y) == y
+                               y
+                             else
+                               ""
