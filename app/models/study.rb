@@ -6,6 +6,8 @@ class Study < ActiveRecord::Base
   belongs_to :category
   has_many :scores, dependent: :destroy
 
+  validate :has_techniques
+
   def techniques
     Technique.where user: user, belt: belt, category: category
   end
@@ -35,5 +37,13 @@ class Study < ActiveRecord::Base
 
   def newest_score
     scores.order("created_at").last
+  end
+
+  private
+
+  def has_techniques
+    unless techniques.present?
+      errors[:base] << "No techniques for category and belt"
+    end
   end
 end
