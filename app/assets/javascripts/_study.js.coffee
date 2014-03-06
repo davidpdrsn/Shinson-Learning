@@ -46,21 +46,36 @@ class Study
     this._bindButtons()
 
   _initProgress: () ->
+    # TODO: rename __tile to __dot
     $(".study-progress").append("<span class='study-progress__tile'></span>")
+    @questions.forEach ->
+      $(".study-progress").append("<span class='study-progress__dot'></span>")
     this._setProgressWidth()
 
   _progressPercentage: ->
      @progress/@questions.length * 100
 
   _setProgressWidth: ->
-    console.log "setting width"
     el = $(".study-progress__tile")
     el.css width: "#{this._progressPercentage()}%"
 
   _bindButtons: ->
     $(document).on 'click', '.study__controls__flip', => this._flip()
-    $(document).on 'click', '.study__controls__right', => @score++; this._next()
-    $(document).on 'click', '.study__controls__wrong', => this._next()
+    $(document).on 'click', '.study__controls__right', =>
+      this._processRight()
+    $(document).on 'click', '.study__controls__wrong', =>
+      this._processWrong()
+
+  _processRight: ->
+    @score++
+    this._wait ->
+      $(".study-progress__dot").not(".right").not(".wrong").first().addClass("right")
+    this._next()
+
+  _processWrong: ->
+    this._wait ->
+      $(".study-progress__dot").not(".right").not(".wrong").first().addClass("wrong")
+    this._next()
 
   _next: ->
     @current_question = @questions[@questions.indexOf(@current_question)+1]
@@ -70,7 +85,7 @@ class Study
       @current_question.injectToDom()
     else
       durationOfProgressAnimation = 500
-      setTimeout((=>
+      this._wait =>
         $.ajax({
           url: "/studies/#{@id}/scores",
           type: "POST",
@@ -80,9 +95,13 @@ class Study
               correct_answers: @score
             }
           }
-        }).done =>
-          Turbolinks.visit "/studies/#{@id}"
-      ), durationOfProgressAnimation)
+        }).done => Turbolinks.visit "/studies/#{@id}"
+
+  _wait: (f) ->
+    durationOfProgressAnimation = 500
+    setTimeout((=>
+      f()
+    ), durationOfProgressAnimation)
 
   _flip: ->
     $(".study__controls__submit").addClass "show"
