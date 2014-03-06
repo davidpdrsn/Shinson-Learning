@@ -18,7 +18,7 @@ describe Study do
       belt = create :belt
       user = create :user
       4.times { create :technique, belt: belt, category: category, user: user }
-      study = create :study, category: category, belt: belt, user: user
+      study = build :study, category: category, belt: belt, user: user
 
       expect(study.techniques).to have(4).techniques
     end

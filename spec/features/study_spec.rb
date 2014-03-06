@@ -26,12 +26,11 @@ feature "study" do
     click_link study.pretty_print
 
     expect(page).to have_content study.pretty_print
-    expect(page).to have_content "#{study.techniques.count} techniques"
+    expect(page).to have_content "#{study.techniques.count} technique"
   end
 
   scenario "user studies a study", js: true do
-    study = create :study
-    4.times { create :technique, category: study.category, belt: study.belt, user: study.user }
+    study = create :study, techniques_count: 4
 
     sign_in study.user
     click_link "Studies"
