@@ -1,6 +1,7 @@
 def create_technique technique = build(:technique)
   visit root_path
-  click_link "New technique"
+  click_link "Techniques"
+  click_link "+"
   fill_in "Name", with: technique.name
   fill_in "Description", with: technique.description
   select technique.belt.pretty_print, from: "Belt"

@@ -29,12 +29,6 @@ describe "layouts/application" do
       end
     end
 
-    it "shows a link to create a new technique" do
-      with_rendered_page do |page|
-        expect(page).to have_link "New technique"
-      end
-    end
-
     it "shows a link to see your techniques" do
       with_rendered_page do |page|
         expect(page).to have_content "Techniques"

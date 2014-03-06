@@ -1,3 +1,13 @@
+<div class="controls">
+  <h1 class="controls__heading">
+    Techniques
+  </h1>
+
+  <div class="controls__container">
+    <%= link_to "+", new_technique_path, class: "button" %>
+  </div>
+</div>
+
 <% if @techniques.present? %>
   <select name="groupings">
     <option>Choose grouping</option>

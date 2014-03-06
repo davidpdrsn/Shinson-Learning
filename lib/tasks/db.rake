@@ -3,29 +3,34 @@ namespace :db do
   task :add_test_data do
     include FactoryGirl::Syntax::Methods
 
-    [User, Technique].map &:destroy_all
+    [User, Technique, Study, Note, Score].map &:destroy_all
 
-    create(:user, email: "david.pdrsn@gmail.com",
-           password: "passwordlol",
-           password_confirmation: "passwordlol")
+    me = create(:user, email: "david.pdrsn@gmail.com",
+               password: "passwordlol",
+               password_confirmation: "passwordlol")
 
-    10.times do
-      user = create(:user)
-      puts "Made user: #{user.id}"
-    end
-
-    1_000.times do |n|
-      user = User.all.sample
+    100.times do |n|
       technique = Technique.new(
         name: "technique ##{n}",
         description: "descript for technique ##{n}",
         belt: Belt.all.sample,
         category: Category.all.sample,
-        user: user
+        user: me
       )
       if technique.save
-        p "Created technique ##{n} for user ##{user.id}"
+        p "Created technique ##{n} for user ##{me.id}"
       end
+    end
+
+    technique = me.techniques.first
+    category = technique.category
+    belt = technique.belt
+
+    study = me.studies.create! category: category, belt: belt
+
+    100.times do |n|
+      study.scores.create! correct_answers: (1..study.techniques.count).to_a.sample,
+                           created_at: n.days.ago
     end
   end
 end

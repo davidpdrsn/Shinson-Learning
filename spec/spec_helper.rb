@@ -1,7 +1,12 @@
 require 'simplecov'
 if ENV["COVERAGE"]
   SimpleCov.start do
-    add_filter "/perf/"
+    add_group 'Models', '/app/models/'
+    add_group 'Controllers', '/app/controllers/'
+    add_group 'Views', '/app/views/'
+    add_group 'Libraries', '/lib/'
+
+    project_name 'Shinson Learning'
   end
 end
 
