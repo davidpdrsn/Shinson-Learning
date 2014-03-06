@@ -22,6 +22,7 @@ gem 'pg'
 gem 'newrelic_rpm'
 gem 'memcachier'
 gem 'dalli'
+gem 'annotate', '>=2.6.0'
 
 group :production do
   gem 'rails_12factor'
