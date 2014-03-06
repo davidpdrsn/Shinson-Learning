@@ -121,41 +121,50 @@
 }
 
 .study-progress {
-  height: $space;
-  background: darken(white, 2%);
+  height: 4px;
+  background: $light_gray;
   margin-bottom: $space;
   display: flex;
+  position: relative;
   align-items: stretch;
-  border: 1px solid $light_gray;
   border-radius: $radius;
-  box-shadow: inset -1px -1px 1px rgba(black, .05);
-  overflow: hidden;
 
   .study-progress__tile {
-    transition: .5s ease-in-out;
-    background-image:
-      -webkit-linear-gradient(-45deg, 
-                              transparent 33%, rgba(0, 0, 0, .1) 33%, 
-                              rgba(0,0, 0, .1) 66%, transparent 66%),
-      -webkit-linear-gradient(top, 
-                              rgba($red, .25), 
-                              rgba(0, 0, 0, .25)),
-      -webkit-linear-gradient(left, #09c, #f44);
-    background-image:
-      linear-gradient(-45deg, 
-                      transparent 33%, rgba(0, 0, 0, .1) 33%, 
-                      rgba(0,0, 0, .1) 66%, transparent 66%),
-      linear-gradient(to bottom, 
-                      rgba($red, .25), 
-                      rgba(0, 0, 0, .25)),
-      linear-gradient(to right, #09c, #f44);
-
-    background-size: 35px 20px, 100% 100%, 100% 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
     border-radius: $radius;
-    @include animation(animate-stripes 10s linear infinite);
+    transition: .5s ease-in-out;
+    background: $dark_gray;
   }
-}
 
-@include keyframes(animate-stripes) {
-  100% { background-position: -100px 0px; }
+  .study-progress__dot {
+    flex: 1;
+    position: relative;
+    z-index: 9999;
+
+    &:after {
+      transition: .1s ease-in-out;
+      content: "";
+      display: block;
+      position: absolute;
+      border-radius: 50%;
+      $size: 8px;
+      @include size($size);
+      background: $light_gray;
+      right: 0;
+      top: 50%;
+      margin-top: -$size/2;
+    }
+
+    &.right:after {
+      background: green;
+    }
+
+    &.wrong:after {
+      background: red;
+    }
+  }
 }
