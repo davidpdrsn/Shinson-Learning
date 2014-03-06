@@ -81,11 +81,10 @@ class Study
     @current_question = @questions[@questions.indexOf(@current_question)+1]
     @progress++
     this._setProgressWidth()
-    if @current_question
-      @current_question.injectToDom()
-    else
-      durationOfProgressAnimation = 500
-      this._wait =>
+    this._wait =>
+      if @current_question
+        @current_question.injectToDom()
+      else
         $.ajax({
           url: "/studies/#{@id}/scores",
           type: "POST",

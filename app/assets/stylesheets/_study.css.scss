@@ -146,6 +146,7 @@
     z-index: 9999;
 
     &:after {
+      opacity: 1;
       transition: .1s ease-in-out;
       border: 1px solid white;
       content: "";
@@ -155,7 +156,7 @@
       $size: 8px;
       @include size($size);
       background: $light_gray;
-      right: 0;
+      right: -$size/2;
       top: 50%;
       margin-top: -$size/2 - 1px;
     }
