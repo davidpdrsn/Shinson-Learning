@@ -1,5 +1,5 @@
 <%= simple_form_for @technique do |f| %>
-  <%= f.input :name %>
+  <%= f.input :name, autofocus: true %>
   <%= f.input :description %>
   <%= f.association :belt, label_method: :pretty_print, prompt: "Choose a belt" %>
   <%= f.association :category, prompt: "Choose a category" %>

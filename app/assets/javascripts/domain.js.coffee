@@ -30,6 +30,7 @@ domain.closeFlash = ($flash) ->
 domain.toggleNewNoteForm = ($button, $form) ->
   $form.toggle()
   if $form.is(":visible")
+    $form.find("textarea").first().focus()
     $button.text("-")
   else
     $button.text("+")
