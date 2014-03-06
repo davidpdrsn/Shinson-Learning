@@ -1,5 +1,19 @@
 @import "bits";
 
+.studies__list {
+  @include border_list;
+
+  a {
+    color: inherit;
+    // text-decoration: none;
+  }
+
+  .studies__list__meta {
+    @include secondary_text;
+    margin-top: $space/2;
+  }
+}
+
 .study__card {
   position: relative;
   height: 20rem;

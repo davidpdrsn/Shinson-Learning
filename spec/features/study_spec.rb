@@ -9,7 +9,8 @@ feature "study" do
 
     sign_in bob
 
-    click_link "New study"
+    click_link "Studies"
+    click_link "+"
     select white.pretty_print, from: "Belt"
     select kicks.name, from: "Category"
     click_button "Create Study"
