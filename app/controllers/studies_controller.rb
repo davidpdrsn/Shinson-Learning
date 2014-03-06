@@ -17,9 +17,11 @@ class StudiesController < ApplicationController
     @study = current_user.studies.new study_params
 
     if @study.save
-      redirect_to @study, notice: "Study created"
+      flash.notice = "Study created"
+      redirect_to @study
     else
-      render :new, alert: "Something went wrong"
+      flash.alert = "Study not created"
+      render action: :new
     end
   end
 

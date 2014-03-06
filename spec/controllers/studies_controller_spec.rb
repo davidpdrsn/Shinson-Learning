@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe StudiesController do
+  before do
+    Study.any_instance.stub(:valid?) { true }
+  end
+
   describe "index" do
     it "assigns studies" do
       study = create :study
