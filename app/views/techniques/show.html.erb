@@ -14,7 +14,9 @@
   </p>
 
   <p>
-    Added by <%= link_to @technique.user.screen_name, @technique.user %>
+    <% present @technique.user do |user_presenter| %>
+      Added by <%= user_presenter.link_to_user %>
+    <% end %>
   </p>
 
   <div class="notes">

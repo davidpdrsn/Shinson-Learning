@@ -78,4 +78,16 @@ describe UserPresenter do
       expect(user_presenter.name_with_s).to eq "Bob Johnsons'"
     end
   end
+
+  describe "#link_to_user" do
+    it "returns a link to that user" do
+      user = double :user, first_name: "Bob", last_name: "Johnson"
+      view = double(:view).as_null_object
+      user_presenter = UserPresenter.new user, view
+
+      user_presenter.link_to_user
+
+      expect(view).to have_received(:link_to).with(user_presenter.screen_name, user_presenter.user)
+    end
+  end
 end

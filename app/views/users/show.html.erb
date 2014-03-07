@@ -1,32 +1,34 @@
-<div class="controls">
-  <h1 class="controls__heading">
-    <%= @user.s %> profile
-  </h1>
+<% present @user do |user_presenter| %>
+  <div class="controls">
+    <h1 class="controls__heading">
+      <%= user_presenter.name_with_s %> profile
+    </h1>
 
-  <% if current_user == @user %>
-    <div class="controls__container">
-      <%= link_to "Edit information", edit_user_registration_path, class: "button button--small" %>
-      <%= link_to "Delete account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class: "button button--small" %>
-    </div>
-  <% end %>
-</div>
+    <% if current_user == @user %>
+      <div class="controls__container">
+        <%= link_to "Edit information", edit_user_registration_path, class: "button button--small" %>
+        <%= link_to "Delete account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class: "button button--small" %>
+      </div>
+    <% end %>
+  </div>
 
-<dl>
-  <dt>Name</dt>
-  <dd><%= "#{@user.first_name} #{@user.last_name}" || 'n\a' %><br></dd>
+  <dl>
+    <dt>Name</dt>
+    <dd><%= user_presenter.name %><br></dd>
 
-  <dt>Email</dt>
-  <dd><a href="mailto:<%= @user.email %>"><%= @user.email %></a></dd>
-</dl>
+    <dt>Email</dt>
+    <dd><a href="mailto:<%= @user.email %>"><%= @user.email %></a></dd>
+  </dl>
 
-<h2>Quick stats</h2>
-<dl>
-  <dt>Number of techniques</dt>
-  <dd><%= @user.techniques.count %></dd>
+  <h2>Quick stats</h2>
+  <dl>
+    <dt>Number of techniques</dt>
+    <dd><%= @user.techniques.count %></dd>
 
-  <dt>Number of notes</dt>
-  <dd><%= @user.notes.count %></dd>
+    <dt>Number of notes</dt>
+    <dd><%= @user.notes.count %></dd>
 
-  <dt>Joined</dt>
-  <dd><%= timestamp @user %></dd>
-</dl>
+    <dt>Joined</dt>
+    <dd><%= timestamp @user %></dd>
+  </dl>
+<% end %>
