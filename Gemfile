@@ -39,4 +39,6 @@ group :test, :development do
   gem 'spring-commands-rspec'
   gem 'spring-commands-cucumber'
   gem 'simplecov'
+  gem 'quiet_assets'
+  gem 'thin'
 end
