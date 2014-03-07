@@ -10,6 +10,7 @@
 
     <p>
       Category: <%= technique_presenter.category_name %><br>
+      <%# TODO: extract this method into somewhere else %>
       Belt: <%= @technique.belt.pretty_print %><br>
       Created: <%= technique_presenter.timestamp %>
     </p>
