@@ -1,5 +1,7 @@
 <%= simple_form_for @study do |f| %>
+  <%= f.error_notification %>
   <%= f.association :belt, label_method: :pretty_print, prompt: "Choose a belt" %>
   <%= f.association :category, prompt: "Choose a category" %>
+  <%= f.error :base %>
   <%= f.button :submit %>
 <% end %>
