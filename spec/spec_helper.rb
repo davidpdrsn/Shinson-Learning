@@ -50,4 +50,6 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
 end
