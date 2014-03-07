@@ -15,4 +15,19 @@ describe TechniquePresenter do
       expect(technique_presenter.category_name).to eq "punches"
     end
   end
+
+  describe "#belt_pretty_print" do
+    it "returns the pretty print for the belt", caching: true do
+      white = double pretty_print: "white"
+      yellow = double pretty_print: "yellow"
+      technique = double
+      technique_presenter = TechniquePresenter.new technique, view
+
+      technique.stub belt: white
+      expect(technique_presenter.belt_pretty_print).to eq "white"
+
+      technique.stub belt: yellow
+      expect(technique_presenter.belt_pretty_print).to eq "yellow"
+    end
+  end
 end
