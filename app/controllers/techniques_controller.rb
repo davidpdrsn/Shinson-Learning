@@ -20,7 +20,6 @@ class TechniquesController < ApplicationController
       flash.notice = "Technique saved"
       redirect_to @technique
     else
-      flash.alert = "Technique not valid"
       render :new
     end
   end
@@ -41,7 +40,6 @@ class TechniquesController < ApplicationController
       flash.notice = "Technique updated"
       redirect_to @technique
     else
-      flash.alert = "Technique not updated"
       render :edit
     end
   end
