@@ -17,7 +17,7 @@ feature "managing techniques" do
       sign_up
       create_technique technique
 
-      expect(page).to have_content "Technique not valid"
+      expect(page).to have_content "Please review the problems"
     end
   end
 
@@ -81,7 +81,7 @@ feature "managing techniques" do
       fill_in "Name", with: ""
       click_button "Update"
 
-      expect(page).to have_content "Technique not updated"
+      expect(page).to have_content "Please review the problems"
     end
   end
 

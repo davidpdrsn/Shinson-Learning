@@ -28,10 +28,12 @@
   float: right;
 }
 
-.new_note {
-  display: none;
-  clear: both;
-  margin-bottom: $space;
+.notes {
+  .new_note {
+    display: none;
+    clear: both;
+    margin-bottom: $space;
+  }
 }
 
 .notes__list__meta {
