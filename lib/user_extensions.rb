@@ -7,12 +7,6 @@ module UserExtensions
     AddsS.on screen_name
   end
 
-  def screen_name
-    return email unless first_name or last_name
-
-    [first_name, last_name].reject(&:blank?).map(&:to_s).map(&:titleize).join(" ")
-  end
-
   module Queries
     def questions
       notes.where(question: true).includes(:technique)

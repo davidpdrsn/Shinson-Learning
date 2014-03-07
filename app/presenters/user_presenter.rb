@@ -8,4 +8,10 @@ class UserPresenter < Presenter
       "None given"
     end
   end
+
+  def screen_name
+    return user.email unless user.first_name || user.last_name
+
+    [user.first_name, user.last_name].reject(&:blank?).map(&:to_s).map(&:titleize).join(" ")
+  end
 end
