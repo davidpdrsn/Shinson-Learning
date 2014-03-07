@@ -3,7 +3,7 @@ ShinsonLearning::Application.routes.draw do
 
   resources :users, only: [:show]
   resources :techniques do
-    resources :notes, only: [:create, :edit, :update, :destroy]
+    resources :notes, only: [:create, :edit, :update, :destroy, :index]
   end
   resources :questions, only: [:index]
 

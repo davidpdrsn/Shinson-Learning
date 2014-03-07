@@ -9,6 +9,21 @@ describe NotesController do
   let(:another_user) { create :user }
   let(:another_technique) { create :technique, user: another_user }
 
+  describe "#index" do
+    it "redirects to the technique" do
+      sign_in user
+      get :index, technique_id: technique.id
+
+      expect(subject).to redirect_to technique
+    end
+
+    it "requires authentication" do
+      get :index, technique_id: technique.id
+
+      expect(subject).to redirect_to new_user_session_path
+    end
+  end
+
   describe "#create" do
     context "when signed in" do
       before { sign_in user }
