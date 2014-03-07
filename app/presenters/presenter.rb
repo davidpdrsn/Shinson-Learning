@@ -7,8 +7,12 @@ class Presenter
   private
 
   def self.presents name
-    define_method(name) do
+    define_method name do
       @object
     end
+  end
+
+  def method_missing *args, &block
+    @template.send *args, &block
   end
 end

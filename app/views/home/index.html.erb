@@ -1,3 +1,5 @@
-<h1>Welcome <%= current_user.screen_name %></h1>
+<% present current_user do |user_presenter| %>
+  <h1>Welcome <%= user_presenter.screen_name %></h1>
 
-<p>Some text will appear here at some point...</p>
+  <p>Some text will appear here at some point...</p>
+<% end %>

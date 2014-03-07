@@ -22,4 +22,8 @@ class UserPresenter < Presenter
       "#{name}'s"
     end
   end
+
+  def link_to_user
+    link_to screen_name, user
+  end
 end

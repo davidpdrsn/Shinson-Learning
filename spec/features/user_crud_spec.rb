@@ -5,12 +5,6 @@ feature 'user crud' do
 
   before { sign_up user }
 
-  scenario 'a user views his profile' do
-    click_link "Profile"
-
-    expect(page).to have_content user.screen_name
-  end
-
   scenario 'a user updates his information' do
     click_link "Profile"
     click_link "Edit information"
