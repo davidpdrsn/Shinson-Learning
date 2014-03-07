@@ -21,34 +21,6 @@ describe UserExtensions do
       expect(AddsS).to have_received(:on).with(screen_name)
     end
   end
-
-  describe "#screen_name" do
-    before do
-      [:email, :first_name, :last_name].each do |m|
-        user.stub m
-      end
-    end
-
-    it "returns email when provided with only email" do
-      expect(user.screen_name).to eq user.email
-    end
-
-    it "returns the first name when provided with first name" do
-      user.stub(:first_name) { "bob" }
-      expect(user.screen_name).to eq "Bob"
-    end
-
-    it "returns the last name when provided with last name" do
-      user.stub(:last_name) { "johnson" }
-      expect(user.screen_name).to eq "Johnson"
-    end
-
-    it "returns the full when provided with first and last name" do
-      user.stub(:last_name) { "johnson" }
-      user.stub(:first_name) { "bob" }
-      expect(user.screen_name).to eq "Bob Johnson"
-    end
-  end
 end
 
 describe UserExtensions::Queries do
