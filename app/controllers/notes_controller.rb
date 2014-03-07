@@ -9,11 +9,10 @@ class NotesController < ApplicationController
 
     if @note.save
       flash.notice = "Note saved"
+      redirect_to @technique
     else
-      flash.alert = "Note not valid"
+      render :edit
     end
-
-    redirect_to @technique
   end
 
   def edit
@@ -24,7 +23,7 @@ class NotesController < ApplicationController
     if @note.update_attributes(note_params)
       redirect_to @technique, notice: "Note updated"
     else
-      redirect_to @technique, alert: "Note not updated"
+      render :edit
     end
   end
 

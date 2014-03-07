@@ -1,5 +1,7 @@
 <%= simple_form_for [@technique, @note] do |f| %>
+  <%= f.error_notification %>
   <%= f.input :text, label: "Note text", autofocus: true %>
   <%= f.input :question, label: "Question?" %>
+  <%= f.error :base %>
   <%= f.button :submit %>
 <% end %>

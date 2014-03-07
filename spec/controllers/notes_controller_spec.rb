@@ -28,8 +28,7 @@ describe NotesController do
           post :create, note: invalid_attr, technique_id: technique.id
         end.not_to change { user.notes.count + technique.notes.count }
 
-        expect(subject).to set_the_flash[:alert]
-        expect(subject).to redirect_to technique
+        expect(subject).to render_template :edit
       end
 
       it "doesn't create the note if the techniques belongs to another user" do
@@ -90,8 +89,7 @@ describe NotesController do
       it "doesn't update the note if the data is invalid" do
         patch :update, id: note.id, technique_id: technique.id, note: { text: "" }
 
-        expect(subject).to set_the_flash[:alert]
-        expect(subject).to redirect_to technique
+        expect(subject).to render_template :edit
       end
 
       it "doesn't update the note if the user doesn't own it" do
