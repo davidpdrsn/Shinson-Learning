@@ -1,0 +1,12 @@
+<ul>
+  <% techniques.each do |technique| %>
+    <% present technique do |technique_presenter| %>
+      <li>
+        <%= technique_presenter.link %>
+        <%= render partial: "peek_link", locals: { technique: technique } %>
+        <%= technique_presenter.human_note_count if technique.notes_count > 0 %>
+        <%= content_tag :div, simple_format(technique.description), class: "technique__description" %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
