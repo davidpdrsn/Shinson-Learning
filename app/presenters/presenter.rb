@@ -20,8 +20,4 @@ class Presenter
   def h
     @template
   end
-
-  def method_missing method_name, *args, &block
-    @object.send method_name, *args, &block
-  end
 end

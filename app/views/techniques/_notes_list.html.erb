@@ -16,9 +16,7 @@
             <div class="notes__list__meta">
               <%= render partial: "shared/note_meta", locals: { note: note } %>
 
-              <% if note.question? %>
-                <p>This note is a question</p>
-              <% end %>
+              <%= content_tag :p, "This note is a question" if note.question? %>
             </div>
 
             <% if @technique.user == current_user %>
