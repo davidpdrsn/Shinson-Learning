@@ -1,61 +1,61 @@
 <% cache [current_user, @technique] do %>
-  <header class="technique__header controls">
-    <h1 class="technique__heading controls__heading"><%= @technique.name %></h1>
+  <% present @technique do |technique_presenter| %>
+    <header class="technique__header controls">
+      <h1 class="technique__heading controls__heading"><%= @technique.name %></h1>
 
-    <%= render 'controls' if @technique.user == current_user %>
-  </header>
+      <%= render partial: 'controls' if @technique.user == current_user %>
+    </header>
 
-  <%= simple_format @technique.description %>
+    <%= simple_format @technique.description %>
 
-  <p>
-    <% present @technique do |technique_presenter| %>
-      Category: <%= @technique.category.name %><br>
+    <p>
+      Category: <%= technique_presenter.category_name %><br>
       Belt: <%= @technique.belt.pretty_print %><br>
       Created: <%= technique_presenter.timestamp %>
-    <% end %>
-  </p>
+    </p>
 
-  <p>
-    <% present @technique.user do |user_presenter| %>
-      Added by <%= user_presenter.link_to_user %>
-    <% end %>
-  </p>
-
-  <div class="notes">
-    <h2>Notes</h2>
-
-    <% if @technique.user == current_user %>
-      <button class="notes__new-button">+</button>
-      <%= render partial: "shared/notes_form" %>
-    <% end %>
-
-    <div class="notes__list">
-      <% if @notes.present? %>
-        <ul>
-          <% @notes.each do |note| %>
-            <li>
-              <%= simple_format note.text %>
-
-              <div class="notes__list__meta">
-                <%= render partial: "shared/note_meta", locals: { note: note } %>
-
-                <% if note.question? %>
-                  <p>This note is a question</p>
-                <% end %>
-              </div>
-
-              <% if @technique.user == current_user %>
-                <div class="notes__list__controls">
-                  <%= link_to "Edit note", edit_technique_note_path(@technique, note), class: "button button--small" %>
-                  <%= link_to "Delete note", technique_note_path(@technique, note), method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
-                </div>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      <% else %>
-        There are no notes for this technique
+    <p>
+      <% present @technique.user do |user_presenter| %>
+        Added by <%= user_presenter.link_to_user %>
       <% end %>
+    </p>
+
+    <div class="notes">
+      <h2>Notes</h2>
+
+      <% if @technique.user == current_user %>
+        <button class="notes__new-button">+</button>
+        <%= render partial: "shared/notes_form" %>
+      <% end %>
+
+      <div class="notes__list">
+        <% if @notes.present? %>
+          <ul>
+            <% @notes.each do |note| %>
+              <li>
+                <%= simple_format note.text %>
+
+                <div class="notes__list__meta">
+                  <%= render partial: "shared/note_meta", locals: { note: note } %>
+
+                  <% if note.question? %>
+                    <p>This note is a question</p>
+                  <% end %>
+                </div>
+
+                <% if @technique.user == current_user %>
+                  <div class="notes__list__controls">
+                    <%= link_to "Edit note", edit_technique_note_path(@technique, note), class: "button button--small" %>
+                    <%= link_to "Delete note", technique_note_path(@technique, note), method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          There are no notes for this technique
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
