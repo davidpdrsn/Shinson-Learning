@@ -1,0 +1,6 @@
+<select name="groupings">
+  <option>Choose grouping</option>
+  <option value="category-belt" <%= if params[:group_by] == 'category-belt' then "selected" end %>>Category then belt</option>
+  <option value="belt-category" <%= if params[:group_by] == 'belt-category' then "selected" end %>>Belt then category</option>
+</select>
+
