@@ -62,4 +62,20 @@ describe UserPresenter do
       expect(user_presenter.screen_name).to eq [first_name, last_name].join(" ")
     end
   end
+
+  describe "#s" do
+    it "adds 's" do
+      user = double :user, first_name: "Bob", last_name: "Johnson"
+      user_presenter = UserPresenter.new user, view
+
+      expect(user_presenter.name_with_s).to eq "Bob Johnson's"
+    end
+
+    it "doesnt add the ' when it shouldn't" do
+      user = double :user, first_name: "Bob", last_name: "Johnsons"
+      user_presenter = UserPresenter.new user, view
+
+      expect(user_presenter.name_with_s).to eq "Bob Johnsons'"
+    end
+  end
 end
