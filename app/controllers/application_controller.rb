@@ -5,12 +5,6 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def timestamp(record, method = :created_at)
-    date = record.send(method)
-    "#{date.to_formatted_s(:short)} (#{view_context.time_ago_in_words date} ago)"
-  end
-  helper_method :timestamp
-
   protected
 
   def configure_permitted_parameters

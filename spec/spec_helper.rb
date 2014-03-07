@@ -52,4 +52,13 @@ RSpec.configure do |config|
   end
 
   config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
+
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+
+  config.around(:each, :caching) do |example|
+    caching = ActionController::Base.perform_caching
+    ActionController::Base.perform_caching = example.metadata[:caching]
+    example.run
+    ActionController::Base.perform_caching = caching
+  end
 end

@@ -1,0 +1,2 @@
+class ScorePresenter < Presenter
+end
