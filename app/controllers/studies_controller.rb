@@ -20,7 +20,6 @@ class StudiesController < ApplicationController
       flash.notice = "Study created"
       redirect_to @study
     else
-      flash.alert = "Study not created"
       render action: :new
     end
   end
