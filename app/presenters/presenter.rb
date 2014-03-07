@@ -12,7 +12,7 @@ class Presenter
     end
   end
 
-  def method_missing *args, &block
-    @template.send *args, &block
+  def h
+    @template
   end
 end

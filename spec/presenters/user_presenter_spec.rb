@@ -90,4 +90,16 @@ describe UserPresenter do
       expect(view).to have_received(:link_to).with(user_presenter.screen_name, user_presenter.user)
     end
   end
+
+  describe "#mailto_link" do
+    it "returns a mailto link" do
+      user = double :user, email: "bob@example.com"
+      view = double(:view).as_null_object
+      user_presenter = UserPresenter.new user, view
+
+      user_presenter.mailto_link
+
+      expect(view).to have_received(:mail_to).with(user_presenter.email, user_presenter.email)
+    end
+  end
 end
