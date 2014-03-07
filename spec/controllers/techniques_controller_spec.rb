@@ -94,7 +94,6 @@ describe TechniquesController do
           post :create, technique: invalid_attr
         end.not_to change { user.techniques.count }
 
-        expect(subject).to set_the_flash[:alert]
         expect(subject).to render_template :new
       end
     end
@@ -148,7 +147,6 @@ describe TechniquesController do
       it "doesn't update the technique if the data is invalid" do
         patch :update, id: technique.id, technique: invalid_attr
 
-        expect(subject).to set_the_flash[:alert]
         expect(subject).to render_template :edit
       end
 
