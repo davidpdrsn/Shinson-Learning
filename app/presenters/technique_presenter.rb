@@ -1,0 +1,2 @@
+class TechniquePresenter < Presenter
+end

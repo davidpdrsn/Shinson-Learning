@@ -31,4 +31,20 @@ class UserPresenter < Presenter
   def mailto_link
     h.mail_to email, email
   end
+
+  def techniques_count
+    Rails.cache.fetch([user, :techniques_count]) { user.techniques.count }
+  end
+
+  def notes_count
+    Rails.cache.fetch([user, :notes_count]) { user.notes.count }
+  end
+
+  def edit_link
+    h.link_to "Edit information", h.edit_user_registration_path, class: "button button--small"
+  end
+
+  def destroy_link
+    h.link_to "Delete account", h.registration_path(user), data: { confirm: "Are you sure?" }, method: :delete, class: "button button--small"
+  end
 end

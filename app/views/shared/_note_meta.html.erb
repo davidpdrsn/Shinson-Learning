@@ -1,3 +1,5 @@
 <p>
-  Created <%= timestamp note %>
+  <% present note do |note_presenter| %>
+    Created <%= note_presenter.timestamp %>
+  <% end %>
 </p>

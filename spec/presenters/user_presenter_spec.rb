@@ -102,4 +102,63 @@ describe UserPresenter do
       expect(view).to have_received(:mail_to).with(user_presenter.email, user_presenter.email)
     end
   end
+
+  describe "#techniques_count" do
+    it "returns the number of techniques the user has", caching: true do
+      user = create :user
+      view = double :view
+      user_presenter = UserPresenter.new user, view
+
+      2.times { create :technique, user: user }
+      expect(user_presenter.techniques_count).to eq 2
+
+      2.times { create :technique, user: user }
+      expect(user_presenter.techniques_count).to eq 4
+    end
+  end
+
+  describe "#notes_count" do
+    it "returns the number of notes the user has", caching: true do
+      user = create :user
+      user_presenter = UserPresenter.new user, double
+
+      2.times { create :note, user: user }
+      expect(user_presenter.notes_count).to eq 2
+
+      2.times { create :note, user: user }
+      expect(user_presenter.notes_count).to eq 4
+    end
+  end
+
+  describe "#edit link" do
+    it "returns a edit link for the user" do
+      user = create :user
+      user_presenter = UserPresenter.new user, view
+      view.stub :link_to
+
+      user_presenter.edit_link
+
+      expect(view).to have_received(:link_to).with "Edit information",
+                                                   edit_user_registration_path,
+                                                   { class: "button button--small" }
+    end
+  end
+
+  describe "#destroy_link" do
+    it "returns a destroy link for the user" do
+      user = create :user
+      user_presenter = UserPresenter.new user, view
+      view.stub :link_to
+
+      user_presenter.destroy_link
+
+      expect(view).to have_received(:link_to).with "Delete account",
+                                                   view.registration_path(user),
+                                                   {
+                                                     data: { confirm: "Are you sure?" },
+                                                     method: :delete,
+                                                     class: "button button--small"
+                                                   }
+    end
+  end
 end

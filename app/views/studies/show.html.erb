@@ -25,7 +25,9 @@
   <dt>Last study</dt>
   <dd>
     <% if @study.scores.present? %>
-      <%= timestamp @study.newest_score %>
+      <% present @study.newest_score do |score_presenter| %>
+        <%= score_presenter.timestamp %>
+      <% end %>
     <% else %>
       Never studied this
     <% end %>

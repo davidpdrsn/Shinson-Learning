@@ -1,0 +1,2 @@
+class NotePresenter < Presenter
+end

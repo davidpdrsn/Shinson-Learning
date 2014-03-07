@@ -8,9 +8,11 @@
   <%= simple_format @technique.description %>
 
   <p>
-    Category: <%= @technique.category.name %><br>
-    Belt: <%= @technique.belt.pretty_print %><br>
-    Created: <%= timestamp @technique %>
+    <% present @technique do |technique_presenter| %>
+      Category: <%= @technique.category.name %><br>
+      Belt: <%= @technique.belt.pretty_print %><br>
+      Created: <%= technique_presenter.timestamp %>
+    <% end %>
   </p>
 
   <p>

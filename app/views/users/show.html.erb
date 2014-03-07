@@ -6,8 +6,8 @@
 
     <% if current_user == @user %>
       <div class="controls__container">
-        <%= link_to "Edit information", edit_user_registration_path, class: "button button--small" %>
-        <%= link_to "Delete account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class: "button button--small" %>
+        <%= user_presenter.edit_link %>
+        <%= user_presenter.destroy_link %>
       </div>
     <% end %>
   </div>
@@ -23,12 +23,12 @@
   <h2>Quick stats</h2>
   <dl>
     <dt>Number of techniques</dt>
-    <dd><%= @user.techniques.count %></dd>
+    <dd><%= user_presenter.techniques_count %></dd>
 
     <dt>Number of notes</dt>
-    <dd><%= @user.notes.count %></dd>
+    <dd><%= user_presenter.notes_count %></dd>
 
     <dt>Joined</dt>
-    <dd><%= timestamp @user %></dd>
+    <dd><%= user_presenter.timestamp %></dd>
   </dl>
 <% end %>

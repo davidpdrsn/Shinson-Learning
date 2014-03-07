@@ -4,6 +4,11 @@ class Presenter
     @template = template
   end
 
+  def timestamp method = :created_at
+    date = @object.send method
+    "#{date.to_formatted_s(:short)} (#{h.time_ago_in_words date} ago)"
+  end
+
   private
 
   def self.presents name
