@@ -1,22 +1,21 @@
 <% cache [current_user, @technique] do %>
   <% present @technique do |technique_presenter| %>
     <header class="technique__header controls">
-      <h1 class="technique__heading controls__heading"><%= @technique.name %></h1>
+      <h1 class="technique__heading controls__heading"><%= technique_presenter.name %></h1>
 
-      <%= render partial: 'controls' if @technique.user == current_user %>
+      <%= render partial: 'controls' if technique_presenter.user == current_user %>
     </header>
 
-    <%= simple_format @technique.description %>
+    <%= simple_format technique_presenter.description %>
 
     <p>
       Category: <%= technique_presenter.category_name %><br>
-      <%# TODO: extract this method into somewhere else %>
-      Belt: <%= @technique.belt.pretty_print %><br>
-      Created: <%= technique_presenter.timestamp %>
+      Belt: <%= technique_presenter.belt_pretty_print %><br>
+      Created: <%= technique_presenter.timestamp :updated_at %>
     </p>
 
     <p>
-      <% present @technique.user do |user_presenter| %>
+      <% present technique_presenter.user do |user_presenter| %>
         Added by <%= user_presenter.link_to_user %>
       <% end %>
     </p>
