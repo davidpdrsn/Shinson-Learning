@@ -8,6 +8,8 @@ class Study < ActiveRecord::Base
 
   validate :has_techniques
 
+  # TODO: add validation for belt and category id
+
   def techniques
     Technique.where user: user, belt: belt, category: category
   end
