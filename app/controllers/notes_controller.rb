@@ -1,7 +1,11 @@
 class NotesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy, :edit, :update]
-  before_action :get_technique, only: [:create, :destroy, :edit, :update]
+  before_action :authenticate_user!, only: [:create, :destroy, :edit, :update, :index]
+  before_action :get_technique, only: [:create, :destroy, :edit, :update, :index]
   before_action :get_note, only: [:edit, :update, :destroy]
+
+  def index
+    redirect_to @technique
+  end
 
   def create
     @note = @technique.notes.new(note_params)
