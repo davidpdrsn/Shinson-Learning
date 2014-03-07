@@ -5,24 +5,6 @@ class DummyUser
   include UserExtensions::Queries
 end
 
-class AddsS; end
-
-describe UserExtensions do
-  let(:user) { DummyUser.new }
-
-  describe "#s" do
-    it "delegates to AddsS" do
-      screen_name = "David"
-      AddsS.stub(:on)
-
-      user.stub(:screen_name) { screen_name }
-      user.s
-
-      expect(AddsS).to have_received(:on).with(screen_name)
-    end
-  end
-end
-
 describe UserExtensions::Queries do
   let(:user) { DummyUser.new }
   let(:fake_relation) { double.as_null_object }

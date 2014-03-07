@@ -14,4 +14,12 @@ class UserPresenter < Presenter
 
     [user.first_name, user.last_name].reject(&:blank?).map(&:to_s).map(&:titleize).join(" ")
   end
+
+  def name_with_s
+    if name.match /s$/
+      "#{name}'"
+    else
+      "#{name}'s"
+    end
+  end
 end
