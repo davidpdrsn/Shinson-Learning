@@ -1,5 +1,6 @@
 class UserPresenter < Presenter
   presents :user
+  delegate :email, to: :user
 
   def name
     if user.first_name && user.last_name
@@ -24,6 +25,10 @@ class UserPresenter < Presenter
   end
 
   def link_to_user
-    link_to screen_name, user
+    h.link_to screen_name, user
+  end
+
+  def mailto_link
+    h.mail_to email, email
   end
 end
