@@ -27,4 +27,3 @@ config/secrets.yml
 # Ignore application configuration
 /config/application.yml
 /perf/stats.csv
-/vendor/assets/components
