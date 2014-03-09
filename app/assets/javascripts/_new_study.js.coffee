@@ -6,14 +6,14 @@ class Technique
   choiceMarkup: ->
     "
     <li>
-      <a href='#' data-id='#{@id}' data-name='#{@name}'>#{@id} | #{@name}</a>
+      <a href='#' data-id='#{@id}' data-name='#{@name}'>#{@name}</a>
     </li>
     "
 
   pickMarkup: ->
     "
     <li>
-      <a href='#' data-id='#{@id}' data-name='#{@name}'>#{@id} | #{@name}</a>
+      <a href='#' data-id='#{@id}' data-name='#{@name}'>#{@name}</a>
     </li>
     "
 
@@ -35,16 +35,21 @@ class TechniqueList
     if this._picksListEmpty() then this._handlePicksListEmpty()
 
   _$picks: -> $('.new-study__picks')
-
   _$picksList: -> this._$picks().find('ul')
+  _$results: -> $(".new-study__results")
 
   _picksListEmpty: ->
     this._$picksList().find('li').length == 0
 
   _removePick: ($linkNode) ->
+    this._$results()
+      .find("[data-id=#{$linkNode.data 'id'}]")
+      .removeClass('new-study__picked-link')
+
     $linkNode.parents('li').remove()
 
   _addPick: ($linkNode) ->
+    $linkNode.addClass 'new-study__picked-link'
     if this._$picksList().length == 0
       this._$picks().append "<ul></ul>"
       this._$picks().find('p').hide()
@@ -67,8 +72,9 @@ $(window).on "load page:load", ->
     url: "/techniques"
     keyboard: true
     minLength: 1
+    selectionClass: 'new-study__selection'
     markup: (techniques) ->
-      techniqueList.markupFor(techniques)
+      "<h2>Matching techniques</h2> #{techniqueList.markupFor(techniques)}"
     enterPressedHandler: (selection, event) ->
       techniqueList.pickTechnique selection, event
     containerClass: 'new-study__results'
@@ -79,9 +85,14 @@ $(window).on "load page:load", ->
   $(document).on 'click', '.new-study__picks a', (event) ->
     techniqueList.unpickTechnique this, event
 
+  $(document).on 'sayt:results:injected', ->
+    $('.new-study__picks a').each ->
+      id = $(this).data 'id'
+      $('.new-study__results').find("[data-id=#{id}]").addClass "new-study__picked-link"
+
   $(document).on 'submit', ".new-study form", (event) ->
     $('.new-study__picks').find('ul li a').toArray().forEach (link) =>
       $(this).append "<input type='hidden'
-                             multiple='multiple'
+                             multiple
                              name='study[technique_ids][]'
                              value='#{$(link).data 'id'}'>"
