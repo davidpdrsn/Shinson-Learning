@@ -5,21 +5,9 @@ class TechniquesController < ApplicationController
   before_action :get_technique, only: [:destroy, :update, :edit]
 
   def index
-    respond_to do |format|
-      format.html do
-        @page_title = "Techniques"
-        @default_grouping = default_grouping
-        @techniques = Technique.for_user_grouped_by(current_user, *groupings[params[:group_by]])
-      end
-
-      format.json do
-        techniques = current_user.techniques.select do |t|
-          t.name.match params[:query]
-        end
-
-        render json: techniques
-      end
-    end
+    @page_title = "Techniques"
+    @default_grouping = default_grouping
+    @techniques = Technique.for_user_grouped_by(current_user, *groupings[params[:group_by]])
   end
 
   def new
