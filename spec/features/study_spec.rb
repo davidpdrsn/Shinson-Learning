@@ -16,10 +16,10 @@ feature "study" do
     click_link "Studies"
     click_link "+"
     fill_in "Name of study", with: "Misc study"
-    fill_in "Search query", with: "chagi"
+    fill_in "new-study__query", with: "chagi"
     click_link "ap chagi"
     click_link "dollyo chagi"
-    fill_in "Search query", with: "sul"
+    fill_in "new-study__query", with: "sul"
     click_link "gibon sul 1"
     click_button "Create Study"
 
