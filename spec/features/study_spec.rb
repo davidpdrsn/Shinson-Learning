@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature "study" do
-  scenario "user creates a new study", js: true do
+  scenario "user creates a new study", focus: true, js: true do
     bob = create :user
     kicks = create :category
     su = create :category

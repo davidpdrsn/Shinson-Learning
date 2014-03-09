@@ -34,9 +34,9 @@ class TechniqueList
     this._removePick $(linkNode)
     if this._picksListEmpty() then this._handlePicksListEmpty()
 
-  _$picks: -> $('.picked-techniques')
+  _$picks: -> $('.new-study__picks')
 
-  _$picksList: -> $('.picked-techniques').find('ul')
+  _$picksList: -> this._$picks().find('ul')
 
   _picksListEmpty: ->
     this._$picksList().find('li').length == 0
@@ -60,28 +60,28 @@ class TechniqueList
     this._$picksList().remove()
     this._$picks().find('p').show()
 
-$(window).on "load page:fetch", ->
-  $(document).on "sayt:fetch:starting", -> domain.injectSpinner()
-  $(document).on "sayt:fetch:complete", -> domain.removeSpinner()
-
+$(window).on "load page:load", ->
   techniqueList = new TechniqueList()
 
-  $("#study-search-query").sayt
+  $(".new-study__query").sayt
     url: "/techniques"
+    keyboard: true
     minLength: 1
-    markup: (techniques) -> techniqueList.markupFor(techniques)
-    enterPressedHandler: techniqueList.pickTechnique
+    markup: (techniques) ->
+      techniqueList.markupFor(techniques)
+    enterPressedHandler: (selection, event) ->
+      techniqueList.pickTechnique selection, event
+    containerClass: 'new-study__results'
 
-  $(document).on 'click', '.ajax-results a', (event) ->
+  $(document).on 'click', '.new-study__results a', (event) ->
     techniqueList.pickTechnique this, event
 
-  $(document).on 'click', '.picked-techniques a', (event) ->
+  $(document).on 'click', '.new-study__picks a', (event) ->
     techniqueList.unpickTechnique this, event
 
-  $(document).on 'submit', "form#new_study", (event) ->
-    techniqueIds = $('.picked-techniques').find('ul li a').toArray().reduce ((acc, li) ->
-      acc.push $(li).data 'id'
-      acc), []
-
-    techniqueIds.forEach (id) =>
-      $(this).append "<input type='hidden' multiple='multiple' name='study[technique_ids][]' value='#{id}'>"
+  $(document).on 'submit', ".new-study form", (event) ->
+    $('.new-study__picks').find('ul li a').toArray().forEach (link) =>
+      $(this).append "<input type='hidden'
+                             multiple='multiple'
+                             name='study[technique_ids][]'
+                             value='#{$(link).data 'id'}'>"
