@@ -14,11 +14,11 @@
 #
 
 require 'grouper'
-require 'grouper_techniques'
-require 'parameterizer'
 require 'technique_extensions'
 
 class Technique < ActiveRecord::Base
+  include Comparable
+
   belongs_to :belt
   belongs_to :category
   belongs_to :user, touch: true
@@ -30,8 +30,30 @@ class Technique < ActiveRecord::Base
   validates :user_id, presence: true
   validates :description, presence: true
 
-  include TechniqueExtensions::Delegators
-  include TechniqueExtensions::Comparisons
-  include Parameterizer
-  extend Grouper::Techniques
+  delegate :name, to: :category, prefix: :category
+  delegate :pretty_print, to: :belt, prefix: :belt
+
+  def self.for_user_grouped_by user, *groupings
+    Grouper.new(user.sorted_techniques).group_by(*groupings)
+  end
+
+  def <=> another
+    name_to_a(self) <=> name_to_a(another)
+  end
+
+  def to_param
+    [id, name.parameterize].join("-")
+  end
+
+  private
+
+  def name_to_a technique
+    match = technique.name.match /(?<string>.*?)(?<digit>\d+)$/
+
+    if match
+      [match[:string], match[:digit].to_i]
+    else
+      [technique.name]
+    end
+  end
 end
