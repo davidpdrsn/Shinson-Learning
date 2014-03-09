@@ -52,31 +52,24 @@ describe StudiesController do
 
   describe "#create" do
     it "creates the study" do
-      Study.any_instance.stub(:valid?) { true }
-
       user = create :user
       sign_in user
-      belt = create :belt
-      category = create :category
+      4.times { create :technique, user: user }
 
-      expect do
-        post :create, study: { category_id: category.id, belt_id: belt.id }
-      end.to change { user.studies.count }.by 1
+      post :create, study: { name: "foo", technique_ids: user.techniques.map(&:id) }
 
+      Study.last.techniques.should =~ user.techniques
+      Study.last.name.should == "foo"
+      expect(user.studies.count).to eq 1
       expect(subject).to redirect_to Study.last
     end
 
     it "doesn't create the study if its invalid" do
       Study.any_instance.stub(:valid?) { false }
-
       user = create :user
       sign_in user
-      belt = create :belt
-      category = create :category
 
-      expect do
-        post :create, study: { category_id: category.id, belt_id: belt.id }
-      end.not_to change { user.studies.count }
+      post :create, study: { name: nil, technique_ids: nil }
 
       expect(subject).to render_template :new
     end

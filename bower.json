@@ -17,6 +17,8 @@
     "fastclick": "~0.6.11",
     "normalize-css": "~3.0.0",
     "morris.js": "~0.4.3",
-    "moment": "~2.5.1"
+    "moment": "~2.5.1",
+    "jquery.sayt": "https://github.com/davidpdrsn/jquery.sayt.git",
+    "jquery-ui": "~1.10.4"
   }
 }

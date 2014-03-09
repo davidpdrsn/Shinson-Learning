@@ -23,6 +23,7 @@ class Technique < ActiveRecord::Base
   belongs_to :category
   belongs_to :user, touch: true
   has_many :notes, dependent: :destroy
+  has_and_belongs_to_many :studies
 
   validates :name, presence: true
   validates :belt_id, presence: true

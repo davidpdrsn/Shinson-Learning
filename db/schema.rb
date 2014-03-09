@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305151642) do
+ActiveRecord::Schema.define(version: 20140307175416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,16 +60,21 @@ ActiveRecord::Schema.define(version: 20140305151642) do
   add_index "scores", ["user_id"], name: "index_scores_on_user_id", using: :btree
 
   create_table "studies", force: true do |t|
-    t.integer  "belt_id"
-    t.integer  "category_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
-  add_index "studies", ["belt_id"], name: "index_studies_on_belt_id", using: :btree
-  add_index "studies", ["category_id"], name: "index_studies_on_category_id", using: :btree
   add_index "studies", ["user_id"], name: "index_studies_on_user_id", using: :btree
+
+  create_table "studies_techniques", id: false, force: true do |t|
+    t.integer "study_id"
+    t.integer "technique_id"
+  end
+
+  add_index "studies_techniques", ["study_id"], name: "index_studies_techniques_on_study_id", using: :btree
+  add_index "studies_techniques", ["technique_id"], name: "index_studies_techniques_on_technique_id", using: :btree
 
   create_table "study_rounds", force: true do |t|
     t.integer  "study_set_id"
