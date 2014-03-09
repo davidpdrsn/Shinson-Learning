@@ -1,15 +1,19 @@
-<%= simple_form_for @study do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :name, label: "Name of study" %>
+<div class="new-study">
+  <%= simple_form_for @study do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :name, label: "Name of study" %>
 
-  <label for="study-search-query">Search query:</label>
-  <input type="text" id="study-search-query">
+    <label for="new-study__query">Search query:</label>
+    <input type="text" class="new-study__query" id="new-study__query">
 
-  <div class="picked-techniques">
-    <h2>Picked technqiues</h2>
-    <p>You have not picked any technqiues yet</p>
-  </div>
+    <div class="new-study__results"></div>
 
-  <%= f.error :base %>
-  <%= f.button :submit %>
-<% end %>
+    <div class="new-study__picks">
+      <h2>Picked technqiues</h2>
+      <p>You have not picked any technqiues yet</p>
+    </div>
+
+    <%= f.error :base %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
