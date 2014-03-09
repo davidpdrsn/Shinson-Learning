@@ -7,8 +7,6 @@
 #  degree :string(255)
 #
 
-require 'belt_extensions'
-
 class Belt < ActiveRecord::Base
   has_many :techniques
 
@@ -16,5 +14,7 @@ class Belt < ActiveRecord::Base
   validates :degree, presence: true,
                      uniqueness: true
 
-  include BeltExtensions::PrettyPrinter
+  def pretty_print
+    "#{color.titleize} (#{degree.downcase})"
+  end
 end
