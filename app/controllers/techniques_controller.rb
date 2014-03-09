@@ -1,4 +1,6 @@
 class TechniquesController < ApplicationController
+  include FindsTechniques
+
   before_action :authenticate_user!, except: [:show]
   before_action :get_technique, only: [:destroy, :update, :edit]
 
