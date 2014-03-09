@@ -15,7 +15,6 @@ gem 'bourbon'
 gem 'neat'
 gem 'smarter_csv'
 gem 'simple_form'
-gem 'pry'
 gem 'autoprefixer-rails'
 gem 'figaro'
 gem 'pg'
@@ -41,4 +40,5 @@ group :test, :development do
   gem 'simplecov'
   gem 'quiet_assets'
   gem 'thin'
+  gem 'pry-rails'
 end
