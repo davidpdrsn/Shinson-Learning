@@ -170,3 +170,36 @@
     }
   }
 }
+
+.new-study {
+  h2 {
+    margin-top: $space !important;
+  }
+}
+
+.new-study__picks,
+.new-study__results {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    background: $light_gray;
+    border-radius: $radius;
+    display: block;
+    margin: .5rem 0;
+    padding: .25rem;
+    transition: .1s;
+  }
+}
+
+.new-study__results a.new-study__picked-link {
+  opacity: .5;
+}
+
+.new-study__selection {
+  box-shadow: $blue 0 0 0 2px;
+}
