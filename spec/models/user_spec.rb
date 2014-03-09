@@ -25,4 +25,23 @@ describe User do
   it { should have_many(:techniques).dependent(:destroy) }
   it { should have_many(:notes).dependent(:destroy) }
   it { should have_many(:studies).dependent(:destroy) }
+
+  describe "#questions" do
+    it "returns the notes that are also questions for the user" do
+      user = create :user
+      question = create :question, user: user
+
+      expect(user.questions).to eq [question]
+    end
+  end
+
+  describe "#sorted_techniques" do
+    it "returns the techqniues for the user, sorted" do
+      user = create :user
+      technique = create :technique, user: user
+      another_technique = create :technique, user: user
+
+      expect(user.sorted_techniques).to eq [technique, another_technique]
+    end
+  end
 end
