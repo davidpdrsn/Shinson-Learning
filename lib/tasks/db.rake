@@ -25,12 +25,5 @@ namespace :db do
     technique = me.techniques.first
     category = technique.category
     belt = technique.belt
-
-    study = me.studies.create! category: category, belt: belt
-
-    100.times do |n|
-      study.scores.create! correct_answers: (1..study.techniques.count).to_a.sample,
-                           created_at: n.days.ago
-    end
   end
 end
