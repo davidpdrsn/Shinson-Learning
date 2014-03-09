@@ -14,7 +14,7 @@
       <ul>
         <% @studies.each do |study| %>
           <li>
-            <%= link_to study.pretty_print, study %>
+            <%= link_to study.name, study %>
 
             <div class="studies__list__meta">
               <% if study.scores.present? %>

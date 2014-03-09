@@ -1,4 +1,6 @@
 class StudiesController < ApplicationController
+  respond_to :html, :json
+
   before_filter :authenticate_user!, only: [:index, :new, :create, :show, :study]
   before_filter :get_study, only: [:show, :study]
 
@@ -16,11 +18,17 @@ class StudiesController < ApplicationController
   def create
     @study = current_user.studies.new study_params
 
+    # TODO: move this into the model
+    techniques = (params[:study][:technique_ids] || []).map(&:to_i).inject([]) do |acc, id|
+      acc << Technique.find(id)
+    end
+
+    @study.techniques = techniques
     if @study.save
       flash.notice = "Study created"
       redirect_to @study
     else
-      render action: :new
+      render :new
     end
   end
 
@@ -40,6 +48,6 @@ class StudiesController < ApplicationController
   end
 
   def study_params
-    params.require(:study).permit :category_id, :belt_id
+    params.require(:study).permit :name
   end
 end

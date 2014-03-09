@@ -2,21 +2,13 @@ require 'math_helper'
 
 class Study < ActiveRecord::Base
   belongs_to :user, touch: true
-  belongs_to :belt
-  belongs_to :category
+  has_and_belongs_to_many :techniques
   has_many :scores, dependent: :destroy
 
+  validates :name, presence: true
   validate :has_techniques
-
-  # TODO: add validation for belt and category id
-
-  def techniques
-    Technique.where user: user, belt: belt, category: category
-  end
-
-  def pretty_print
-    "#{belt.pretty_print} #{category.name}"
-  end
+  validate :techniques_belong_to_user
+  validate :name_not_duplicated
 
   def to_json
     {
@@ -43,9 +35,21 @@ class Study < ActiveRecord::Base
 
   private
 
+  def name_not_duplicated
+    if !user.blank? && user.studies.any? { |study| study.name == self.name }
+      errors[:base] << "You already have a study with that name"
+    end
+  end
+
+  def techniques_belong_to_user
+    unless techniques.all? { |t| t.user == user }
+      errors[:base] << "You can only study your own techniques"
+    end
+  end
+
   def has_techniques
-    unless techniques.present?
-      errors[:base] << "No techniques for #{pretty_print}"
+    if techniques.blank?
+      errors[:base] << "A study most have techniques"
     end
   end
 end
