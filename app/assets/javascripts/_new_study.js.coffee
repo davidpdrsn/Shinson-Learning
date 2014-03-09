@@ -71,7 +71,6 @@ $(window).on "load page:load", ->
   $(".new-study__query").sayt
     url: "/techniques"
     keyboard: true
-    minLength: 1
     selectionClass: 'new-study__selection'
     markup: (techniques) ->
       "<h2>Matching techniques</h2> #{techniqueList.markupFor(techniques)}"
