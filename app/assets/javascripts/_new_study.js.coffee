@@ -69,9 +69,11 @@ $(window).on "load page:load", ->
   techniqueList = new TechniqueList()
 
   $(".new-study__query").sayt
-    url: "/techniques"
+    url: "/searches"
+    requestType: "POST"
     keyboard: true
     selectionClass: 'new-study__selection'
+    contentType: "application/x-www-form-urlencoded; charset=UTF-8"
     markup: (techniques) ->
       "<h2>Matching techniques</h2> #{techniqueList.markupFor(techniques)}"
     enterPressedHandler: (selection, event) ->
