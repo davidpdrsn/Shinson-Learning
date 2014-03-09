@@ -19,8 +19,6 @@
 #  last_name              :string(255)
 #
 
-require 'user_extensions'
-
 class User < ActiveRecord::Base
   has_many :techniques, dependent: :destroy
   has_many :notes, dependent: :destroy
@@ -29,5 +27,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  include UserExtensions::Queries
+  def questions
+    notes.where(question: true).includes(:technique)
+  end
+
+  def sorted_techniques
+    techniques.includes(:category, :belt).sort
+  end
 end
