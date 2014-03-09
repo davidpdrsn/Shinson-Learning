@@ -2,34 +2,29 @@ require 'spec_helper'
 
 describe Study do
   it { should belong_to :user }
-  it { should belong_to :belt }
-  it { should belong_to :category }
+  it { should have_and_belong_to_many :techniques }
   it { should have_many(:scores).dependent(:destroy) }
 
-  it "is not valid if it has not techniques" do
+  it { should validate_presence_of :name }
+
+  it "is invalild without techniques" do
     study = build :study
 
     expect(study).not_to be_valid
   end
 
-  describe "#techniques" do
-    it "returns the number of techniques for the study" do
-      category = create :category
-      belt = create :belt
-      user = create :user
-      4.times { create :technique, belt: belt, category: category, user: user }
-      study = build :study, category: category, belt: belt, user: user
+  it "is invalid unless all techniques are from the same user" do
+    study = build :study
+    study.techniques << create(:technique)
 
-      expect(study.techniques).to have(4).techniques
-    end
+    expect(study).not_to be_valid
   end
 
-  describe "#pretty_print" do
-    it "pretty prints the study" do
-      study = build :study
+  it "isn't valid if the user already has a study with the same name" do
+    study = create :study
+    another_study = build :study, user: study.user, name: study.name
 
-      expect(study.pretty_print).to eq "#{study.belt.pretty_print} #{study.category.name}"
-    end
+    expect(another_study).not_to be_valid
   end
 
   describe "#to_json" do
@@ -53,7 +48,7 @@ describe Study do
   describe "#newest_score" do
     it "finds the newest score" do
       study = build :study
-      create :technique, belt: study.belt, category: study.category, user: study.user
+      study.techniques << create(:technique, user: study.user)
       new_score = create :score, study: study, created_at: 1.day.ago
       old_score = create :score, study: study, created_at: 2.weeks.ago
 

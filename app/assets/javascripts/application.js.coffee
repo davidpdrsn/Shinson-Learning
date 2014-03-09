@@ -5,6 +5,9 @@
 //= require raphael/raphael
 //= require morris.js/morris.js
 //= require moment/moment.js
+//= require jquery-ui/ui/jquery.ui.core
+//= require jquery-ui/ui/jquery.ui.widget
+//= require jquery.sayt/jquery.sayt
 //= require domain
 //= require_tree .
 

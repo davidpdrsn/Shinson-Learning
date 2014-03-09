@@ -11,7 +11,7 @@ describe "studies/index" do
       assign(:studies, [study])
 
       with_rendered_page do |page|
-        expect(page).to have_link study.pretty_print
+        expect(page).to have_link study.name
       end
     end
   end
