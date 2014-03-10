@@ -1,6 +1,8 @@
 namespace :db do
   desc "add test data to database"
   task :add_test_data do
+    system 'bin/rake db:seed'
+
     include FactoryGirl::Syntax::Methods
 
     [User, Technique, Study, Note, Score].map &:destroy_all
