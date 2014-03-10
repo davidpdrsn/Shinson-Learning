@@ -92,8 +92,11 @@ $(window).on "load page:load", ->
       $('.new-study__results').find("[data-id=#{id}]").addClass "new-study__picked-link"
 
   $(document).on 'submit', ".new-study form", (event) ->
-    $('.new-study__picks').find('ul li a').toArray().forEach (link) =>
-      $(this).append "<input type='hidden'
-                             multiple
-                             name='study[technique_ids][]'
-                             value='#{$(link).data 'id'}'>"
+    ids = $('.new-study__picks').find('ul li a').toArray().reduce ((acc, link) ->
+      acc.push $(link).data("id")
+      acc
+    ), []
+
+    $(this).append "<input type='hidden'
+                           name='study[technique_ids]'
+                           value='#{ids}'>"

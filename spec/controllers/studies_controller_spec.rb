@@ -56,10 +56,11 @@ describe StudiesController do
       sign_in user
       4.times { create :technique, user: user }
 
-      post :create, study: { name: "foo", technique_ids: user.techniques.map(&:id) }
+      post :create, study: { name: "foo", technique_ids: user.techniques.map(&:id).join(",") }
 
       Study.last.techniques.should =~ user.techniques
       Study.last.name.should == "foo"
+      Study.last.techniques.count.should eq 4
       expect(user.studies.count).to eq 1
       expect(subject).to redirect_to Study.last
     end

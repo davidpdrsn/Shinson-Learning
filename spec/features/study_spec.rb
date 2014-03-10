@@ -7,24 +7,24 @@ feature "study" do
     su = create :category
     white = create :belt
 
-    create :technique, user: bob, belt: white, category: kicks, name: "ap chagi"
-    create :technique, user: bob, belt: white, category: kicks, name: "dollyo chagi"
-    create :technique, user: bob, belt: white, category: su, name: "gibon sul 1"
+    10.times do |n|
+      create :technique, user: bob, belt: white, category: kicks, name: "technique ##{n}"
+    end
 
     sign_in bob
 
     click_link "Studies"
     click_link "+"
     fill_in "Name of study", with: "Misc study"
-    fill_in "new-study__query", with: "chagi"
-    click_link "ap chagi"
-    click_link "dollyo chagi"
-    fill_in "new-study__query", with: "sul"
-    click_link "gibon sul 1"
+    fill_in "new-study__query", with: "tec"
+    click_link "technique #1"
+    click_link "technique #3"
+    click_link "technique #2"
+    click_link "technique #9"
     click_button "Create Study"
 
     expect(page).to have_content "Misc study"
-    expect(page).to have_content "3 techniques"
+    expect(page).to have_content "4 techniques"
   end
 
   scenario "user views a study" do
