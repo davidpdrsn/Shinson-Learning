@@ -64,10 +64,10 @@ class Study
       domain.log "card flipped"
       this._flip()
     $(document).on 'click', '.study__controls__right', =>
-      domain.log "card wrong"
+      domain.log "card right"
       this._processRight()
     $(document).on 'click', '.study__controls__wrong', =>
-      domain.log "card right"
+      domain.log "card wrong"
       this._processWrong()
 
   _processRight: ->
