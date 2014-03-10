@@ -18,8 +18,7 @@ class StudiesController < ApplicationController
   def create
     @study = current_user.studies.new study_params
 
-    # TODO: move this into the model
-    techniques = (params[:study][:technique_ids] || []).map(&:to_i).inject([]) do |acc, id|
+    techniques = (params[:study][:technique_ids] || "").split(",").map(&:to_i).inject([]) do |acc, id|
       acc << Technique.find(id)
     end
 
