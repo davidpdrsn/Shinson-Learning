@@ -1,6 +1,6 @@
 class LogsController < ApplicationController
   def create
-    logger.debug params[:message]
+    logger.info params[:message]
     render :nothing => true
   end
 end
