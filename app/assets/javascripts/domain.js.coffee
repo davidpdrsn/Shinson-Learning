@@ -47,6 +47,9 @@ domain.removeSpinner = ->
 domain.toggleNav = ($nav) ->
   $nav.slideToggle('fast')
 
+domain.log = (message) ->
+  $.post "/logs", message: "===================\nclient side log: #{message}\n==================="
+
 # private
 
 redirectTo = (url) -> window.location.href = url

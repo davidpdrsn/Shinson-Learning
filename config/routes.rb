@@ -17,5 +17,7 @@ ShinsonLearning::Application.routes.draw do
 
   resources :searches, only: [:create]
 
+  resources :logs, only: [:create]
+
   root to: "home#index"
 end
