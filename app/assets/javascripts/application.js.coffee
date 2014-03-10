@@ -12,7 +12,7 @@
 //= require_tree .
 
 $ ->
-  # FastClick.attach document.body
+  FastClick.attach document.body
 
   $(document).on "change", 'select[name="groupings"]', ->
     domain.setGrouping $(this).val()
