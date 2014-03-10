@@ -75,6 +75,9 @@ class TechniqueList
 $(window).on "load page:load", ->
   techniqueList = new TechniqueList()
 
+  $(document).on "sayt:fetch:starting", -> domain.injectSpinner()
+  $(document).on "sayt:fetch:complete", -> domain.removeSpinner()
+
   $(".new-study__query").sayt
     url: "/searches"
     requestType: "POST"
