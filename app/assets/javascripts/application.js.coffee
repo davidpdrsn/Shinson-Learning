@@ -14,8 +14,6 @@
 $ ->
   FastClick.attach document.body
 
-  domain.log "message"
-
   $(document).on "change", 'select[name="groupings"]', ->
     domain.setGrouping $(this).val()
 
