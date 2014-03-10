@@ -23,8 +23,12 @@ class TechniqueList
 
   markupFor: (techniques) ->
     if techniques.length > 0
-      (techniques.reduce ((acc, technique) ->
-        acc += new Technique(technique.id, technique.name).choiceMarkup()), "<ul>") + "</ul>"
+      "
+      #{
+        (techniques.reduce ((acc, technique) ->
+          acc += new Technique(technique.id, technique.name).choiceMarkup()), "<ul>") + "</ul>"
+      }
+      "
     else
       "<p>No matches were found...</p>"
 
@@ -78,7 +82,18 @@ $(window).on "load page:load", ->
     selectionClass: 'new-study__selection'
     contentType: "application/x-www-form-urlencoded; charset=UTF-8"
     markup: (techniques) ->
-      "<h2>Matching techniques</h2> #{techniqueList.markupFor(techniques)}"
+      "
+      <div class='controls'>
+        <h1 class='controls__heading'>
+          Matching techniques
+        </h1>
+
+        <div class='controls__container'>
+          <button class='new-study__add-all button button--small' type='button'>Add all</button>
+        </div>
+      </div>
+      #{techniqueList.markupFor(techniques)}
+      "
     enterPressedHandler: (selection, event) ->
       techniqueList.pickTechnique selection, event
     containerClass: 'new-study__results'
@@ -89,10 +104,15 @@ $(window).on "load page:load", ->
   $(document).on 'click', '.new-study__picks a', (event) ->
     techniqueList.unpickTechnique this, event
 
+  $(document).delegate '.new-study__add-all', 'click', (event) ->
+    event.preventDefault()
+    $('.new-study__results a[data-id]').each -> $(this).click()
+
   $(document).on 'sayt:results:injected', ->
     $('.new-study__picks a').each ->
       id = $(this).data 'id'
       $('.new-study__results').find("[data-id=#{id}]").addClass "new-study__picked-link"
+
 
   $(document).on 'submit', ".new-study form", (event) ->
     ids = $('.new-study__picks').find('ul li a').toArray().reduce ((acc, link) ->

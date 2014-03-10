@@ -172,8 +172,28 @@
 }
 
 .new-study {
-  h2 {
+  .controls {
     margin-top: $space !important;
+
+    h1 {
+      margin-bottom: $space/2;
+      @include small {
+        margin-bottom: 0;
+      }
+      font-size: 1.5rem;
+    }
+
+    .controls__container {
+      @include small {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .new-study__picks {
+    h2 {
+      margin-top: $space !important;
+    }
   }
 }
 
