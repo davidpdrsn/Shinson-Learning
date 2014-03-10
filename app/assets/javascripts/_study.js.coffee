@@ -60,10 +60,14 @@ class Study
     el.css width: "#{this._progressPercentage()}%"
 
   _bindButtons: ->
-    $(document).on 'click', '.study__controls__flip', => this._flip()
+    $(document).on 'click', '.study__controls__flip', =>
+      domain.log "card flipped"
+      this._flip()
     $(document).on 'click', '.study__controls__right', =>
+      domain.log "card wrong"
       this._processRight()
     $(document).on 'click', '.study__controls__wrong', =>
+      domain.log "card right"
       this._processWrong()
 
   _processRight: ->
