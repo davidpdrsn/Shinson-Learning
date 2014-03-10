@@ -22,8 +22,11 @@ class TechniqueList
     @picks = []
 
   markupFor: (techniques) ->
-    (techniques.reduce ((acc, technique) ->
-      acc += new Technique(technique.id, technique.name).choiceMarkup()), "<ul>") + "</ul>"
+    if techniques.length > 0
+      (techniques.reduce ((acc, technique) ->
+        acc += new Technique(technique.id, technique.name).choiceMarkup()), "<ul>") + "</ul>"
+    else
+      "<p>No matches were found...</p>"
 
   pickTechnique: (linkNode, event) ->
     event.preventDefault()

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 feature "study" do
-  scenario "user creates a new study", js: true do
-    bob = create :user
-    kicks = create :category
-    su = create :category
-    white = create :belt
+  let(:bob) { create :user }
+  let(:kicks) { create :category }
+  let(:su) { create :category }
+  let(:white) { create :belt }
 
+  scenario "user creates a new study", js: true do
     10.times do |n|
       create :technique, user: bob, belt: white, category: kicks, name: "technique ##{n}"
     end
@@ -25,6 +25,17 @@ feature "study" do
 
     expect(page).to have_content "Misc study"
     expect(page).to have_content "4 techniques"
+  end
+
+  scenario "user searches for a technique but doesn't find any matches", js: true do
+    sign_in bob
+
+    click_link "Studies"
+    click_link "+"
+    fill_in "Name of study", with: "Misc study"
+    fill_in "new-study__query", with: "tec"
+
+    expect(page).to have_content "No matches were found"
   end
 
   scenario "user views a study" do
