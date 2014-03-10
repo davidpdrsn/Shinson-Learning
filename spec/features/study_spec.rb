@@ -38,6 +38,23 @@ feature "study" do
     expect(page).to have_content "No matches were found"
   end
 
+  scenario "user searcher for techniques and adds all the matches", js: true do
+    10.times do |n|
+      create :technique, user: bob, belt: white, category: kicks, name: "technique ##{n}"
+    end
+
+    sign_in bob
+
+    click_link "Studies"
+    click_link "+"
+    fill_in "Name of study", with: "Misc study"
+    fill_in "new-study__query", with: "tec"
+    click_button "Add all"
+    click_button "Create Study"
+
+    expect(page).to have_content "10 techniques"
+  end
+
   scenario "user views a study" do
     study = create :study
 
