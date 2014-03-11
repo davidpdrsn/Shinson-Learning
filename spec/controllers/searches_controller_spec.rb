@@ -14,6 +14,14 @@ describe SearchesController do
         expect(json.first.fetch "id").to eq technique.id
       end
 
+      it "does a fuzzy search" do
+        technique = create :technique, user: user, name: "bar"
+        post :create, query: "br", format: :json
+
+        json = JSON.parse response.body
+        expect(json.first.fetch "id").to eq technique.id
+      end
+
       it "doesn't find techniques that belong to other users" do
         technique = create :technique, user: user, name: "foo"
         another_technique = create :technique, name: "foo"
