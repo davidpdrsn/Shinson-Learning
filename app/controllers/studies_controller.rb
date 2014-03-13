@@ -1,8 +1,9 @@
 class StudiesController < ApplicationController
   respond_to :html, :json
 
-  before_filter :authenticate_user!, only: [:index, :new, :create, :show, :study]
-  before_filter :get_study, only: [:show, :study]
+  before_filter :authenticate_user!, only: [:index, :new, :create,
+                                            :show, :study, :destroy]
+  before_filter :get_study, only: [:show, :study, :destroy]
 
   def index
     @studies = current_user.studies
@@ -40,10 +41,18 @@ class StudiesController < ApplicationController
     end
   end
 
+  def destroy
+    @study.destroy
+
+    redirect_to studies_path, notice: "Study deleted"
+  end
+
   private
 
   def get_study
     @study = current_user.studies.find params[:id]
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: "Study not found"
   end
 
   def study_params

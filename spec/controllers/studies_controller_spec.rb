@@ -114,4 +114,39 @@ describe StudiesController do
       expect(subject).to redirect_to new_user_session_path
     end
   end
+
+  describe "#destroy" do
+    context "as a signed in user" do
+      let(:study) { create :study }
+      let(:user) { study.user }
+      before { sign_in user }
+
+      it 'destroys the study' do
+        expect do
+          delete :destroy, id: study.id
+        end.to change { user.studies.count }.by -1
+
+        expect(subject).to redirect_to studies_path
+        expect(subject).to set_the_flash[:notice]
+      end
+
+      it "doesn't let a user destroy another users study" do
+        another_user = create :user
+        sign_in another_user
+
+        expect do
+          delete :destroy, id: study.id
+        end.not_to change { user.studies.count }
+
+        expect(subject).to redirect_to root_path
+        expect(subject).to set_the_flash[:alert]
+      end
+    end
+
+    it "requires authentication" do
+      delete :destroy, id: 1
+
+      expect(subject).to redirect_to new_user_session_path
+    end
+  end
 end

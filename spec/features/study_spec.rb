@@ -84,4 +84,16 @@ feature "study" do
 
     expect(page).to have_content "50.0%"
   end
+
+  scenario 'user destroys a study' do
+    study = create :study, techniques_count: 1
+
+    sign_in study.user
+    click_link "Studies"
+    click_link study.name
+    click_link "Delete"
+
+    expect(page).to have_content "Study deleted"
+    expect(page).not_to have_content study.name
+  end
 end
