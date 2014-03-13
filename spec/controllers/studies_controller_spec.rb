@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe StudiesController do
+  let(:study) { create :study }
+  let(:user) { study.user }
+
   describe "index" do
     it "assigns studies" do
-      study = create :study
-      sign_in study.user
+      sign_in user
       get :index
 
       expect(assigns(:studies)).to eq [study]
@@ -19,8 +21,7 @@ describe StudiesController do
 
   describe "#show" do
     it "assigns @study" do
-      study = create :study
-      sign_in study.user
+      sign_in user
       get :show, id: study.id
 
       expect(assigns(:study)).to eq study
@@ -35,7 +36,6 @@ describe StudiesController do
 
   describe "#new" do
     it "assigns @study" do
-      user = create :user
       sign_in user
       get :new
 
@@ -83,9 +83,6 @@ describe StudiesController do
   end
 
   describe "study" do
-    let(:study) { create :study }
-    let(:user) { study.user }
-
     context "as a signed in user" do
       before { sign_in user }
 
@@ -117,8 +114,6 @@ describe StudiesController do
 
   describe "#destroy" do
     context "as a signed in user" do
-      let(:study) { create :study }
-      let(:user) { study.user }
       before { sign_in user }
 
       it 'destroys the study' do
