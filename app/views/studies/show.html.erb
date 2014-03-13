@@ -3,7 +3,6 @@
 
   <div class="controls__container">
     <%= link_to "Study this", study_study_path(@study), class: "button" %>
-    <%= link_to "Delete", study_path(@study), method: :delete, class: "button", data: { confirm: "Sure?" } %>
   </div>
 </header>
 
@@ -42,4 +41,10 @@
   <% else %>
     <p>You haven't studied this yet.</p>
   <% end %>
+</div>
+
+<div class="controls">
+  <div class="controls__container">
+    <%= link_to "Delete", study_path(@study), method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
+  </div>
 </div>
