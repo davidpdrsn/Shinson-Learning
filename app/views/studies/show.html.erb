@@ -3,6 +3,7 @@
 
   <div class="controls__container">
     <%= link_to "Study this", study_study_path(@study), class: "button" %>
+    <%= link_to "Delete", study_path(@study), method: :delete, class: "button", data: { confirm: "Sure?" } %>
   </div>
 </header>
 
