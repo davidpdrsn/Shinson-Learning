@@ -86,7 +86,7 @@ feature "study" do
   end
 
   scenario 'user destroys a study' do
-    study = create :study, techniques_count: 1
+    study = create :study
 
     sign_in study.user
     click_link "Studies"
