@@ -19,11 +19,7 @@ class StudiesController < ApplicationController
   def create
     @study = current_user.studies.new study_params
 
-    techniques = (params[:study][:technique_ids] || "").split(",").map(&:to_i).inject([]) do |acc, id|
-      acc << Technique.find(id)
-    end
-
-    @study.techniques = techniques
+    @study.techniques = techniques_from_technique_ids
     if @study.save
       flash.notice = "Study created"
       redirect_to @study
@@ -48,6 +44,16 @@ class StudiesController < ApplicationController
   end
 
   private
+
+  def techniques_from_technique_ids
+    technique_ids.inject([]) do |acc, id|
+      acc << Technique.find(id)
+    end
+  end
+
+  def technique_ids
+    (params[:study][:technique_ids] || "").split(",").map(&:to_i)
+  end
 
   def get_study
     @study = current_user.studies.find params[:id]
