@@ -4,8 +4,8 @@ describe "techniques/show" do
   let(:user) { build_stubbed(:user) }
 
   before do
-    controller.stub(:current_user).and_return(user)
-    view.stub(:timestamp)
+    allow(controller).to receive(:current_user).and_return(user)
+    allow(view).to receive(:timestamp)
   end
 
   context "when the user owns the technique" do
@@ -46,7 +46,7 @@ describe "techniques/show" do
 
     it "doesn't show the form for creating a new note" do
       another_user = build_stubbed(:user)
-      controller.stub(:current_user).and_return(another_user)
+      allow(controller).to receive(:current_user).and_return(another_user)
       technique = build_stubbed(:technique, user: user)
       assign(:note, technique.notes.new)
       assign(:technique, technique)

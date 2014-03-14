@@ -66,7 +66,7 @@ describe StudiesController do
     end
 
     it "doesn't create the study if its invalid" do
-      Study.any_instance.stub(:valid?) { false }
+      allow(Study).to receive.stub(:valid?).and_return(false)
       user = create :user
       sign_in user
 

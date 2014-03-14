@@ -28,9 +28,6 @@ describe Technique do
   it { should validate_presence_of :user_id }
   it { should validate_presence_of :description }
 
-  it { should delegate(:name).to(:category).with_prefix }
-  it { should delegate(:pretty_print).to(:belt).with_prefix }
-
   it "compares the names and the numbers in the name" do
     a = build :technique, name: "Gibon sul 2"
     b = build :technique, name: "Gibon sul 10"
@@ -53,7 +50,7 @@ describe Technique do
       techniques = [build(:technique), build(:technique)]
       user = double sorted_techniques: techniques
       fake_grouper = double.as_null_object
-      Grouper.stub(:new) { fake_grouper }
+      allow(Grouper).to receive(:new).and_return(fake_grouper)
       Technique.for_user_grouped_by(user, :one, :two)
 
       expect(Grouper).to have_received(:new).with(techniques)

@@ -6,7 +6,7 @@ describe QuestionsController, "GET #index" do
       user = create(:user)
       sign_in user
       question = create(:question, user: user)
-      user.stub(:questions).and_return([question])
+      allow(user).to receive(:questions).and_return([question])
 
       get :index
 

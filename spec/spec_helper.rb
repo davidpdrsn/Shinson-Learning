@@ -21,44 +21,17 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
-  config.include Devise::TestHelpers, type: :controller
+  config.filter_run :focus
+  config.run_all_when_everything_filtered = true
 
-  config.use_transactional_fixtures = false
+  if config.files_to_run.one?
+    config.full_backtrace = true
+    config.formatter = 'doc' if config.formatters.none?
+  end
 
   config.infer_base_class_for_anonymous_controllers = false
 
-  config.order = "random"
+  config.order = :random
 
-  config.include FactoryGirl::Syntax::Methods
-
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
-  end
-
-  config.before(:each, :js => true) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
-  config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
-
-  config.treat_symbols_as_metadata_keys_with_true_values = true
-
-  config.around(:each, :caching) do |example|
-    caching = ActionController::Base.perform_caching
-    ActionController::Base.perform_caching = example.metadata[:caching]
-    example.run
-    ActionController::Base.perform_caching = caching
-  end
+  config.profile_examples = 10
 end

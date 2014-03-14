@@ -6,7 +6,7 @@ feature "study" do
   let(:su) { create :category }
   let(:white) { create :belt }
 
-  scenario "user creates a new study", js: true do
+  scenario "user creates a new study", :js do
     10.times do |n|
       create :technique, user: bob, belt: white, category: kicks, name: "technique ##{n}"
     end
@@ -27,7 +27,7 @@ feature "study" do
     expect(page).to have_content "4 techniques"
   end
 
-  scenario "user searches for a technique but doesn't find any matches", js: true do
+  scenario "user searches for a technique but doesn't find any matches", :js do
     sign_in bob
 
     click_link "Studies"
@@ -38,7 +38,7 @@ feature "study" do
     expect(page).to have_content "No matches were found"
   end
 
-  scenario "user searcher for techniques and adds all the matches", js: true do
+  scenario "user searcher for techniques and adds all the matches", :js do
     10.times do |n|
       create :technique, user: bob, belt: white, category: kicks, name: "technique ##{n}"
     end
@@ -66,7 +66,7 @@ feature "study" do
     expect(page).to have_content "#{study.techniques.count} technique"
   end
 
-  scenario "user studies a study", js: true do
+  scenario "user studies a study", :js do
     study = create :study, techniques_count: 4
 
     sign_in study.user

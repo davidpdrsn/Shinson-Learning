@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "studies/index" do
   before do
-    controller.stub(:current_user) { build_stubbed :user }
+    allow(controller).to receive(:current_user).and_return(build_stubbed :user)
   end
 
   context "when there are studies" do
