@@ -1,0 +1,7 @@
+<%= simple_form_for @study do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name, label: "Name of study" %>
+
+  <%= f.error :base %>
+  <%= f.button :submit %>
+<% end %>

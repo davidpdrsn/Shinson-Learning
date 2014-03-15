@@ -1,9 +1,9 @@
 class StudiesController < ApplicationController
   respond_to :html, :json
 
-  before_filter :authenticate_user!, only: [:index, :new, :create,
-                                            :show, :study, :destroy]
-  before_filter :get_study, only: [:show, :study, :destroy]
+  before_filter :authenticate_user!, only: [:index, :new, :create, :update,
+                                            :show, :study, :destroy, :edit]
+  before_filter :get_study, only: [:show, :study, :destroy, :edit, :update]
 
   def index
     @studies = current_user.studies
@@ -25,6 +25,17 @@ class StudiesController < ApplicationController
       redirect_to @study
     else
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @study.update_attributes study_params
+      redirect_to @study, notice: "Study updated"
+    else
+      render :edit
     end
   end
 

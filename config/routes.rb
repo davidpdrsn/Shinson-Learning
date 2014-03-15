@@ -7,7 +7,8 @@ ShinsonLearning::Application.routes.draw do
   end
   resources :questions, only: [:index]
 
-  resources :studies, only: [:new, :create, :show, :index, :destroy] do
+  resources :studies, only: [:new, :create, :show,
+                             :index, :destroy, :edit, :update] do
     member do
       get :study
     end
