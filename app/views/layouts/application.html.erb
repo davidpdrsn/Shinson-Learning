@@ -40,7 +40,7 @@
 </header>
 
 <div class="main">
-  <% if notice.present? or alert.present? %>
+  <% if notice.present? || alert.present? %>
     <div class="flash flash--<%= if notice.present? then "notice" else "alert" end %>">
       <%= notice %>
       <%= alert %>
