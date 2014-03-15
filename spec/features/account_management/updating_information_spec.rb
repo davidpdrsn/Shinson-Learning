@@ -1,8 +1,7 @@
 require 'spec_helper'
 
-feature 'user crud' do
+feature 'updating account information' do
   let(:user) { build :user }
-
   before { sign_up user }
 
   scenario 'a user updates his information' do
@@ -14,12 +13,5 @@ feature 'user crud' do
     click_button "Update"
 
     expect(page).to have_content "Foo Pedersen"
-  end
-
-  scenario 'a user deletes his account' do
-    click_link "Profile"
-    click_link "Delete account"
-
-    expect(page).to have_content "Sign in"
   end
 end

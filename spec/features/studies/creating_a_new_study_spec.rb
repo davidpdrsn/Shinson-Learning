@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "study" do
+feature 'a user creates a new study' do
   let(:bob) { create :user }
   let(:kicks) { create :category }
   let(:su) { create :category }
@@ -27,7 +27,7 @@ feature "study" do
     expect(page).to have_content "4 techniques"
   end
 
-  scenario "user searches for a technique but doesn't find any matches", js: true do
+  scenario "user tries to find techniques that don't exist", js: true do
     sign_in bob
 
     click_link "Studies"
@@ -55,45 +55,4 @@ feature "study" do
     expect(page).to have_content "10 techniques"
   end
 
-  scenario "user views a study" do
-    study = create :study
-
-    sign_in study.user
-    click_link "Studies"
-    click_link study.name
-
-    expect(page).to have_content study.name
-    expect(page).to have_content "#{study.techniques.count} technique"
-  end
-
-  scenario "user studies a study", js: true do
-    study = create :study, techniques_count: 4
-
-    sign_in study.user
-    click_link "Studies"
-    click_link study.name
-    click_link "Study this"
-    2.times do
-      click_button "Flip"
-      click_button "Guessed correctly"
-    end
-    2.times do
-      click_button "Flip"
-      click_button "Didn't guess correctly"
-    end
-
-    expect(page).to have_content "50.0%"
-  end
-
-  scenario 'user destroys a study' do
-    study = create :study
-
-    sign_in study.user
-    click_link "Studies"
-    click_link study.name
-    click_link "Delete"
-
-    expect(page).to have_content "Study deleted"
-    expect(page).not_to have_content study.name
-  end
 end
