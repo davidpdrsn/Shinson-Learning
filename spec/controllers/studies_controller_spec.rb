@@ -112,6 +112,50 @@ describe StudiesController do
     end
   end
 
+  describe "#edit" do
+    it "requires authentication" do
+      get :edit, id: 1
+
+      expect(subject).to redirect_to new_user_session_path
+    end
+  end
+
+  describe "#update" do
+    context "as a signed in user" do
+      let(:study) { create :study, name: "name" }
+      before { sign_in study.user }
+
+      it "updates the study" do
+        patch :update, id: study.id, study: { name: "new name" }
+
+        expect(Study.last.name).to eq "new name"
+        expect(subject).to set_the_flash[:notice]
+        expect(subject).to redirect_to Study.last
+      end
+
+      it "doesn't update the study if its invalid" do
+        Study.any_instance.stub(:valid?).and_return(false)
+
+        patch :update, id: study.id, study: { name: "" }
+
+        expect(Study.last.name).to eq "name"
+        expect(subject).to render_template :edit
+      end
+
+      it "doesn't a user update other users studies" do
+        patch :update, id: create(:study).id, study: { name: "new_name" }
+
+        expect(subject).to redirect_to root_path
+      end
+    end
+
+    it "requires authentication" do
+      patch :update, id: 1, study: attributes_for(:study)
+
+      expect(subject).to redirect_to new_user_session_path
+    end
+  end
+
   describe "#destroy" do
     context "as a signed in user" do
       before { sign_in user }
