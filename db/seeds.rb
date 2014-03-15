@@ -20,9 +20,6 @@ def create_belts
 
     Belt.create(color: color, degree: degree)
   end
-
-  puts "There are now #{Belt.count} belts"
-  puts "\n===============\n\n"
 end
 
 def create_categories
@@ -46,9 +43,6 @@ def create_categories
   ].map(&:titleize).each do |name|
     Category.create(name: name)
   end
-
-  puts "There are now #{Category.count} categories"
-  puts "\n===============\n\n"
 end
 
 create_belts
