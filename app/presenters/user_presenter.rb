@@ -11,16 +11,16 @@ class UserPresenter < Presenter
   end
 
   def screen_name
-    return user.email unless user.first_name || user.last_name
+    return user.email unless (user.first_name || user.last_name).present?
 
     [user.first_name, user.last_name].reject(&:blank?).map(&:to_s).map(&:titleize).join(" ")
   end
 
   def name_with_s
-    if name.match /s$/
-      "#{name}'"
+    if screen_name.match /s$/
+      "#{screen_name}'"
     else
-      "#{name}'s"
+      "#{screen_name}'s"
     end
   end
 
