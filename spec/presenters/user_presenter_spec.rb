@@ -18,52 +18,37 @@ describe UserPresenter do
   end
 
   describe "#screen_name" do
-    let(:email) { "bob@example.com" }
-    let(:first_name) { "Bob" }
-    let(:last_name) { "Johnson" }
-
     it "returns email when provided with only email" do
-      user = double :user,
-                    first_name: nil,
-                    last_name: nil,
-                    email: email
+      user = create :user, first_name: "", last_name: ""
       user_presenter = UserPresenter.new user, view
 
-      expect(user_presenter.screen_name).to eq email
+      expect(user_presenter.screen_name).to match /#{user.email}/i
     end
 
     it "returns the first name when provided with first name" do
-      user = double :user,
-                    first_name: first_name,
-                    last_name: nil,
-                    email: nil
+      user = create :user, last_name: ""
       user_presenter = UserPresenter.new user, view
 
-      expect(user_presenter.screen_name).to eq first_name
+      expect(user_presenter.screen_name).to match /#{user.first_name}/i
     end
 
     it "returns the last name when provided with last name" do
-      user = double :user,
-                    first_name: nil,
-                    last_name: last_name,
-                    email: nil
+      user = create :user, first_name: nil
       user_presenter = UserPresenter.new user, view
 
-      expect(user_presenter.screen_name).to eq last_name
+      expect(user_presenter.screen_name).to match /#{user.last_name}/i
     end
 
     it "returns the full when provided with first and last name" do
-      user = double :user,
-                    first_name: first_name,
-                    last_name: last_name,
-                    email: nil
+      user = create :user
       user_presenter = UserPresenter.new user, view
+      name = [user.first_name, user.last_name].join(" ")
 
-      expect(user_presenter.screen_name).to eq [first_name, last_name].join(" ")
+      expect(user_presenter.screen_name).to match /#{name}/i
     end
   end
 
-  describe "#s" do
+  describe "#name_with_s" do
     it "adds 's" do
       user = double :user, first_name: "Bob", last_name: "Johnson"
       user_presenter = UserPresenter.new user, view
