@@ -12,6 +12,8 @@ select[name="groupings"] {
 }
 
 .techniques {
+  @include clearfix;
+
   h1 {
     font-size: 1.5rem;
     clear: both;
