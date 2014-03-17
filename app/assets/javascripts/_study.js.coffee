@@ -137,7 +137,7 @@ $(window).on "load page:load", ->
         ymin: 0
         ymax: json.techniques_count
         dateFormat: (x) -> moment(x).format("MMM Do YYYY")
-        xLabelFormat: (x) -> moment(x).format("DD-MM-YYYY")
+        xLabelFormat: (x) -> moment(x).format("MMM Do")
         yLabelFormat: (y) -> if Math.round(y) == y
                                y
                              else
