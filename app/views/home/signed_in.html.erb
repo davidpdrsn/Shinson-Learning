@@ -1,5 +1,14 @@
 <% present current_user do |user_presenter| %>
   <h1>Welcome back <%= user_presenter.screen_name %></h1>
 
-  <p>Your new hair cut looks cool ;)</p>
+  <p>
+    <%=
+      [
+        "Your new hair cut looks cool!",
+        "Hope you had a nice training yesterday",
+        "Legs store? Go for a walk, that often helps",
+        "Are you coming to the summer camp this year? Its gonna be awesome!",
+      ].sample
+    %>
+  </p>
 <% end %>
