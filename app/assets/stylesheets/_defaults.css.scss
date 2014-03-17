@@ -82,7 +82,7 @@ input[type=submit] {
   margin-left: $space*2;
 
   @include small {
-    margin-top: $space;
+    margin-top: 0;
   }
 }
 
