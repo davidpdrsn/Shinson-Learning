@@ -171,3 +171,7 @@ hr {
 
   background-size: 15px 10px;
 }
+
+small {
+  @include secondary_text;
+}

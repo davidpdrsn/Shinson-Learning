@@ -70,8 +70,15 @@ ul.feature-list {
   }
 }
 
-ul.new-features {
+.new-features {
+  @include border_list($space);
+
+  h1 {
+    margin-top: 0;
+    font-size: 1.25rem;
+  }
+
   li {
-    margin-bottom: $space/2;
+    font-size: .8rem;
   }
 }

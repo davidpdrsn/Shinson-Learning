@@ -13,8 +13,6 @@
           ].sample
         %>
       </p>
-
-      <%= render partial: "shared/new_features" %>
     <% end %>
 
     <% if @neglected_studies.present? %>
@@ -42,4 +40,8 @@
       <h1>You're doing good on your studies!</h1>
     <% end %>
   <% end %>
+
+  <hr>
+
+  <%= render partial: "shared/new_features" %>
 <% end %>
