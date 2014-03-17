@@ -10,6 +10,12 @@ class Study < ActiveRecord::Base
   validate :techniques_belong_to_user
   validate :name_not_duplicated
 
+  def self.neglected_for_user user
+    where(user: user).select do |study|
+      study.scores.count == 0 || study.newest_score.created_at < 2.weeks.ago
+    end
+  end
+
   def to_json
     {
       study: self,
