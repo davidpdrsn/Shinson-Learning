@@ -1,0 +1,14 @@
+<p>Shinson Learning has many useful features and new ones are being added all the time. Here are some of the newest features:</p>
+
+<ul class="new-features">
+  <li>When logged in the front page now shows studies you might have neglected. That would be studies you have never studied, or not studied for two weeks.</li>
+  <li>Many performance optimizations have been made that should make the site feel faster.</li>
+  <li>
+    If you're a developer you can now get to all your techniques as JSON. Other formats will soon also be available.
+
+    <% if user_signed_in? %>
+      Just click <%= link_to "here", techniques_path(format: "json") %>
+    <% end %>
+  </li>
+  <li>Separate sidebar for options. An "options" sidebar as now been added to pages that contain lots of features.</li>
+</ul>
