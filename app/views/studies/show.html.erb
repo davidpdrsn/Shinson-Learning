@@ -5,12 +5,12 @@
 <%= render layout: "shared/more_options/main" do %>
   <%= render layout: "shared/more_options/content" do %>
     <dl>
-      <dt>Number of techniques</dt>
+      <dt>Techniques #</dt>
       <dd>
         <%= pluralize @study.techniques.count, "technique" %>
       </dd>
 
-      <dt>Number of times studies</dt>
+      <dt>Studied</dt>
       <dd>
         <%= pluralize @study.cached_scores_count, "time" %>
       </dd>
