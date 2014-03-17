@@ -1,5 +1,26 @@
-<% present current_user do |user_presenter| %>
-  <h1>Welcome <%= user_presenter.screen_name %></h1>
+<h1 class="welcome-heading">Welcome to Shinson Learning!</h1>
 
-  <p>Some text will appear here at some point...</p>
-<% end %>
+<p class="welcome-text">Here you can:</p>
+
+<ul class="feature-list">
+  <li>Keep track of all your techniques</li>
+  <li>Add notes and questions to each technique</li>
+  <li>Study your techniques and track your progress</li>
+  <li>And more coming all the time!</li>
+</ul>
+
+<hr>
+
+<p class="sign-up-text">So go ahead and <%= link_to "sign up", new_user_registration_path %> right now!</p>
+
+<hr>
+
+<p>Shinson Learning has many useful features and new ones are being added all the time. Here are some of the newest features:</p>
+
+<ul class="new-features">
+  <li>Many performance optimizations have been made that should make the site feel faster.</li>
+  <li>If you're a developer you can now get to all your techniques as JSON. Other formats will soon also be available.</li>
+  <li>Separate sidebar for options. An "options" sidebar as now been added to pages that contain lots of features.</li>
+</ul>
+
+<p>If you have any questions or suggestions feel free to send me an <a href="mailto:david.pdrsn@gail.com">email</a></p>

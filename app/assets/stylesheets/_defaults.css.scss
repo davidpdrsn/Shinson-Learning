@@ -164,3 +164,18 @@ dl {
     }
   }
 }
+
+hr {
+  opacity: .25;
+  border: none;
+  height: 3px;
+  border-radius: 0;
+  margin: $space*2 0;
+  @include linear-gradient(
+    -45deg,
+    darken(white, 5%) 33%, darken($light-gray, 5%) 33%,
+    darken($light-gray, 5%) 66%, darken(white, 5%) 66%
+  );
+
+  background-size: 15px 10px;
+}
