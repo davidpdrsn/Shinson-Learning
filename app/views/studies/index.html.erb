@@ -1,12 +1,6 @@
-<div class="controls">
-  <h1 class="controls__heading">
-    Studies
-  </h1>
-
-  <div class="controls__container">
-    <%= link_to "+", new_study_path, class: "button" %>
-  </div>
-</div>
+<%= render layout: "shared/controls", locals: { heading: "Studies" } do %>
+  <%= link_to "+", new_study_path, class: "button" %>
+<% end %>
 
 <% cache [current_user, @studies] do  %>
   <div class="studies__list">

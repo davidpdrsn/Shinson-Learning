@@ -1,0 +1,9 @@
+<div class="controls">
+  <% if local_assigns[:heading] %>
+    <h1 class="controls__heading"><%= local_assigns[:heading] %></h1>
+  <% end %>
+
+  <div class="controls__container">
+    <%= yield %>
+  </div>
+</div>

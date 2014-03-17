@@ -1,16 +1,10 @@
 <% present @user do |user_presenter| %>
-  <div class="controls">
-    <h1 class="controls__heading">
-      <%= user_presenter.name_with_s %> profile
-    </h1>
-
+  <%= render layout: "shared/controls", locals: { heading: "#{user_presenter.name_with_s} profile" } do %>
     <% if current_user == @user %>
-      <div class="controls__container">
-        <%= user_presenter.edit_link %>
-        <%= user_presenter.destroy_link %>
-      </div>
+      <%= user_presenter.edit_link %>
+      <%= user_presenter.destroy_link %>
     <% end %>
-  </div>
+  <% end %>
 
   <dl>
     <dt>Name</dt>

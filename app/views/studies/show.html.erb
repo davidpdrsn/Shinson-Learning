@@ -1,10 +1,6 @@
-<header class="controls">
-  <h1 class="controls__heading"><%= @study.name %></h1>
-
-  <div class="controls__container">
-    <%= link_to "Study this", study_study_path(@study), class: "button" %>
-  </div>
-</header>
+<%= render layout: "shared/controls", locals: { heading: @study.name } do %>
+  <%= link_to "Study this", study_study_path(@study), class: "button" %>
+<% end %>
 
 <dl>
   <dt>Number of techniques</dt>
@@ -43,10 +39,7 @@
   <% end %>
 </div>
 
-<div class="controls">
-  <div class="controls__container">
-    <%= link_to "Edit", edit_study_path(@study), class: "button button--small" %>
-
-    <%= link_to "Delete", study_path(@study), method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
-  </div>
-</div>
+<%= render layout: "shared/controls" do %>
+  <%= link_to "Edit", edit_study_path(@study), class: "button button--small" %>
+  <%= link_to "Delete", study_path(@study), method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
+<% end %>
