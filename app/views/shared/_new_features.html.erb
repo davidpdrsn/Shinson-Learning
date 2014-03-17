@@ -1,14 +1,32 @@
-<p>Shinson Learning has many useful features and new ones are being added all the time. Here are some of the newest features:</p>
+<div class="new-features">
+  <h1>Newest features:</h1>
 
-<ul class="new-features">
-  <li>When logged in the front page now shows studies you might have neglected. That would be studies you have never studied, or not studied for two weeks.</li>
-  <li>Many performance optimizations have been made that should make the site feel faster.</li>
-  <li>
-    If you're a developer you can now get to all your techniques as JSON. Other formats will soon also be available.
+  <ul>
+    <li>
+      <strong>Neglected studies</strong><br>
+      When logged in the front page now shows studies you might have neglected. That would be studies you have never studied, or not studied for two weeks.
+    </li>
+    <li>
+      <strong>Speed!</strong><br>
+      Many performance optimizations have been made that should make the site feel faster.
+    </li>
+    <li>
+      <strong>Techniques as JSON</strong><br>
+      If you're a developer you can now get to all your techniques as JSON. Other formats will soon also be available.
 
-    <% if user_signed_in? %>
-      Just click <%= link_to "here", techniques_path(format: "json") %>
-    <% end %>
-  </li>
-  <li>Separate sidebar for options. An "options" sidebar as now been added to pages that contain lots of features.</li>
-</ul>
+      <% if user_signed_in? %>
+        Just click <%= link_to "here", techniques_path(format: "json") %>
+      <% end %>
+    </li>
+    <li>
+      <strong>Separate sidebar for options.</strong><br>
+      An "options" sidebar as now been added to pages that contain lots of features.
+    </li>
+  </ul>
+
+  <% unless request.fullpath == "/" %>
+    <p>
+      <small>New features are added all the time so remember to check back soon</small>
+    </p>
+  <% end %>
+</div>
