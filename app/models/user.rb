@@ -34,4 +34,8 @@ class User < ActiveRecord::Base
   def sorted_techniques
     techniques.includes(:category, :belt).sort
   end
+
+  def admin?
+    AdminUser.where(email: email).present?
+  end
 end

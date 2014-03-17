@@ -127,4 +127,23 @@ describe "layouts/application" do
       end
     end
   end
+
+  context "the user is an admin" do
+    let(:user) { create :user }
+    before { create :admin_user, email: user.email }
+
+    it "shows a link to the admin area" do
+      with_rendered_page do |page|
+        expect(page).to have_link "Admin"
+      end
+    end
+  end
+
+  context "the user is not an admin" do
+    it "shows a link to the admin area" do
+      with_rendered_page do |page|
+        expect(page).not_to have_link "Admin"
+      end
+    end
+  end
 end
