@@ -15,8 +15,8 @@
       </p>
     <% end %>
 
-    <% if @neglected_studies.present? %>
-      <%= render layout: "shared/more_options/sidebar" do %>
+    <%= render layout: "shared/more_options/sidebar" do %>
+      <% if @neglected_studies.present? %>
         <h1>You should consider studying:</h1>
 
         <ul>
@@ -35,9 +35,9 @@
             </li>
           <% end %>
         </ul>
+      <% else %>
+        <h1>You're doing good on your studies!</h1>
       <% end %>
-    <% else %>
-      <h1>You're doing good on your studies!</h1>
     <% end %>
   <% end %>
 
