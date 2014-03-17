@@ -44,4 +44,18 @@ describe User do
       expect(user.sorted_techniques).to eq [technique, another_technique]
     end
   end
+
+  describe "#admin" do
+    let(:user) { create :user }
+
+    it "returns true if the user is an admin" do
+      create :admin_user, email: user.email
+
+      expect(user).to be_admin
+    end
+
+    it "return false if the user is not an admin" do
+      expect(user).not_to be_admin
+    end
+  end
 end
