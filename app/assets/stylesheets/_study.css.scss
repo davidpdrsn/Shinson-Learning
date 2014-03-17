@@ -2,6 +2,9 @@
 
 .studies__list {
   @include border_list;
+  @include small {
+    padding-top: $space;
+  }
 
   a {
     color: inherit;
