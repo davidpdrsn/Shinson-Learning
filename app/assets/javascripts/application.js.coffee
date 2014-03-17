@@ -14,6 +14,13 @@
 $ ->
   FastClick.attach document.body
 
+  $(document).on 'click', '.more-options__expand', ->
+    $('.more-options ul').toggle()
+    if $('.more-options ul').is ":visible"
+      $('.more-options__expand').text "-"
+    else
+      $('.more-options__expand').text "+"
+
   $(document).on "change", 'select[name="groupings"]', ->
     domain.setGrouping $(this).val()
 

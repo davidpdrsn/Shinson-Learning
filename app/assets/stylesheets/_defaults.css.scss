@@ -38,6 +38,27 @@ input[type=submit] {
   font-size: .7rem;
   padding: .2rem .33rem;
 }
+.button--red {
+  $color: lighten(red, 5%);
+  @include linear_gradient(lighten($color, 10%), darken($color, 10%));
+  color: white !important;
+  border-color: darken($color, 10%);
+
+  &:active {
+    @include linear_gradient(bottom, lighten($color, 10%), darken($color, 10%));
+  }
+}
+.button--green {
+  margin-right: $space;
+  $color: lighten(green, 5%);
+  @include linear_gradient(lighten($color, 10%), darken($color, 3%));
+  color: white !important;
+  border-color: darken($color, 3%);
+
+  &:active {
+    @include linear_gradient(bottom, lighten($color, 10%), darken($color, 3%));
+  }
+}
 
 .screen-reader-text {
   position: absolute;
@@ -45,8 +66,12 @@ input[type=submit] {
   left: -9999px;
 }
 
-dt:after {
-  content: ":";
+dl {
+  margin-top: 0;
+
+  dt:after {
+    content: ":";
+  }
 }
 
 .controls {
@@ -69,3 +94,73 @@ dt:after {
   }
 }
 
+.row {
+  @include outer_container;
+  $width: 9;
+
+  .main-content {
+    @include span_columns($width);
+
+    p:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .more-options {
+    @include span_columns(12 - $width);
+    background: lighten($light_gray, 5%);
+    padding: $space/2;
+    border-radius: $radius;
+
+    @include small {
+      margin-top: $space;
+    }
+
+    h1 {
+      font-size: .9rem;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .more-options__expand {
+      font-weight: normal;
+      float: right;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      margin-top: $space/3;
+      padding: 0;
+      display: none;
+
+      li {
+        &:not(:last-child) {
+          margin-bottom: $space/2;
+        }
+
+        .button {
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      a {
+        font-size: .8rem;
+
+        &, &:visited {
+          color: $black;
+        }
+      }
+    }
+  }
+
+  @include small {
+    .main-content,
+    .more-options {
+      @include span_columns(12);
+    }
+  }
+}

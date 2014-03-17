@@ -45,6 +45,10 @@ class UserPresenter < Presenter
   end
 
   def destroy_link
-    h.link_to "Delete account", h.registration_path(user), data: { confirm: "Are you sure?" }, method: :delete, class: "button button--small"
+    h.link_to "Delete account",
+              h.registration_path(user),
+              data: { confirm: "Are you sure?" },
+              method: :delete,
+              class: "button button--small button--red"
   end
 end

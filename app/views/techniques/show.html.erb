@@ -1,25 +1,48 @@
 <% cache [current_user, @technique] do %>
   <% present @technique do |technique_presenter| %>
-    <%= render layout: "shared/controls", locals: { heading: technique_presenter.name } do %>
+    <h1><%= technique_presenter.name %></h1>
+
+    <%= render layout: "shared/more_options/main" do %>
+      <%= render layout: "shared/more_options/content" do %>
+        <div class="technique__description">
+          <%= simple_format technique_presenter.description %>
+        </div>
+
+        <dl>
+          <dt>Category</dt>
+          <dd><%= technique_presenter.category_name %></dd>
+
+          <dt>Belt</dt>
+          <dd><%= technique_presenter.belt_pretty_print %></dd>
+
+          <dt>Created</dt>
+          <dd><%= technique_presenter.timestamp %></dd>
+
+          <% present technique_presenter.user do |user_presenter| %>
+            <dt>Added by</dt>
+            <dd><%= user_presenter.link_to_user %></dd>
+          <% end %>
+        </dl>
+      <% end %>
+
       <% if current_user == technique_presenter.user %>
-        <%= link_to "Edit", edit_technique_path(@technique), class: "button button--small" %>
-        <%= link_to "Delete", @technique, method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
+        <%= render layout: "shared/more_options/sidebar" do %>
+          <h1>
+            Options
+            <button class="more-options__expand button--small">+</button>
+          </h1>
+
+          <ul>
+            <li>
+              <%= link_to "Edit", edit_technique_path(@technique), class: "button button--small" %>
+            </li>
+            <li>
+              <%= link_to "Delete", @technique, method: :delete, class: "button button--small button--red", data: { confirm: "Sure?" } %>
+            </li>
+          </ul>
+        <% end %>
       <% end %>
     <% end %>
-
-    <%= simple_format technique_presenter.description %>
-
-    <p>
-      Category: <%= technique_presenter.category_name %><br>
-      Belt: <%= technique_presenter.belt_pretty_print %><br>
-      Created: <%= technique_presenter.timestamp %>
-    </p>
-
-    <p>
-      <% present technique_presenter.user do |user_presenter| %>
-        Added by <%= user_presenter.link_to_user %>
-      <% end %>
-    </p>
 
     <%= render partial: "notes_list", locals: { notes: @notes } %>
   <% end %>
