@@ -202,3 +202,9 @@
 .new-study__selection {
   box-shadow: $blue 0 0 0 2px;
 }
+
+.neglected-study__meta {
+  @include secondary_text;
+  margin-top: 3px;
+  font-size: .7rem;
+}

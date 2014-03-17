@@ -15,7 +15,7 @@ def logout
   click_link "Log out"
 end
 
-def sign_in user = build(:user)
+def sign_in user = create(:user)
   visit root_path
 
   click_link "Sign in"

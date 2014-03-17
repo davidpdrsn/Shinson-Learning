@@ -1,14 +1,43 @@
 <% present current_user do |user_presenter| %>
   <h1>Welcome back <%= user_presenter.screen_name %></h1>
 
-  <p>
-    <%=
-      [
-        "Your new hair cut looks cool!",
-        "Hope you had a nice training yesterday",
-        "Legs store? Go for a walk, that often helps",
-        "Are you coming to the summer camp this year? Its gonna be awesome!",
-      ].sample
-    %>
-  </p>
+  <%= render layout: "shared/more_options/main" do %>
+    <%= render layout: "shared/more_options/content" do %>
+      <p>
+        <%=
+          [
+            "Your new hair cut looks cool!",
+            "Hope you had a nice training yesterday",
+            "Legs store? Go for a walk, that often helps",
+            "Are you coming to the summer camp this year? Its gonna be awesome!",
+          ].sample
+        %>
+      </p>
+    <% end %>
+
+    <% if @neglected_studies.present? %>
+      <%= render layout: "shared/more_options/sidebar" do %>
+        <h1>You should consider studying:</h1>
+
+        <ul>
+          <% @neglected_studies.each do |study| %>
+            <li>
+              <%= link_to study.name, study %><br>
+
+              <div class="neglected-study__meta">
+                Created <%= time_ago_in_words study.created_at %> ago |
+                <% if study.newest_score.present? %>
+                  Last studied <%= time_ago_in_words study.newest_score.created_at %> ago
+                <% else %>
+                  Never studied
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% else %>
+      <h1>You're doing good on your studies!</h1>
+    <% end %>
+  <% end %>
 <% end %>

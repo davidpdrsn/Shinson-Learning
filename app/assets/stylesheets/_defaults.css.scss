@@ -96,7 +96,7 @@ dl {
 
 .row {
   @include outer_container;
-  $width: 9;
+  $width: 8;
 
   .main-content {
     @include span_columns($width);
@@ -108,20 +108,10 @@ dl {
 
   .more-options {
     @include span_columns(12 - $width);
-    background: lighten($light_gray, 5%);
-    padding: $space/2;
-    border-radius: $radius;
+    @include panel;
 
     @include small {
       margin-top: $space;
-    }
-
-    h1 {
-      font-size: .9rem;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
 
     .more-options__expand {
@@ -134,7 +124,9 @@ dl {
       margin: 0;
       margin-top: $space/3;
       padding: 0;
-      display: none;
+      &.toggleable {
+        display: none;
+      }
 
       li {
         &:not(:last-child) {
