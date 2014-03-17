@@ -12,7 +12,7 @@ class Study < ActiveRecord::Base
 
   def self.neglected_for_user user
     where(user: user).select do |study|
-      study.scores.count == 0 || study.newest_score.created_at < 2.weeks.ago
+      never_been_studied(study) || not_studied_recently(study)
     end
   end
 
@@ -40,6 +40,14 @@ class Study < ActiveRecord::Base
   end
 
   private
+
+  def self.not_studied_recently study
+    study.newest_score.created_at < 2.weeks.ago
+  end
+
+  def self.never_been_studied study
+    study.scores.count == 0
+  end
 
   def name_not_duplicated
     if !user.blank? && user.studies.any? { |study| study.name == self.name }
