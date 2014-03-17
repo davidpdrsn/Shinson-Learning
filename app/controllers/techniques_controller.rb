@@ -8,6 +8,13 @@ class TechniquesController < ApplicationController
     @page_title = "Techniques"
     @default_grouping = default_grouping
     @techniques = Technique.for_user_grouped_by(current_user, *groupings[params[:group_by]])
+
+    respond_to do |format|
+      format.html {}
+      format.json do
+        render json: Technique.as_hash_for_user(current_user)
+      end
+    end
   end
 
   def new
