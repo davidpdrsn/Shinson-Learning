@@ -67,7 +67,7 @@ $page_width: 50rem;
   color: $darker_gray;
 }
 
-@mixin border_list {
+@mixin border_list($list_space: $space*1.5) {
   > ul {
     list-style: none;
     padding: 0;
@@ -76,11 +76,11 @@ $page_width: 50rem;
     > li {
       &:not(:last-of-type) {
         border-bottom: 1px solid $light_gray;
-        padding-bottom: $space*1.5;
+        padding-bottom: $list_space;
       }
 
       &:not(:first-of-type) {
-        padding-top: $space*1.5;
+        padding-top: $list_space;
       }
 
       &:last-of-type {
@@ -95,5 +95,20 @@ $page_width: 50rem;
         margin-top: 0;
       }
     }
+  }
+}
+
+@mixin panel {
+  background: lighten($light_gray, 5%);
+  padding: $space/2;
+  border-radius: $radius;
+  font-size: .8rem;
+
+  h1 {
+    font-size: .9rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }
