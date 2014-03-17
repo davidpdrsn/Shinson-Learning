@@ -89,27 +89,6 @@
     flex: 1;
   }
 }
-.study__controls__right {
-  margin-right: $space;
-  $color: lighten(green, 5%);
-  @include linear_gradient(lighten($color, 10%), darken($color, 3%));
-  color: white;
-  border-color: darken($color, 3%);
-
-  &:active {
-    @include linear_gradient(bottom, lighten($color, 10%), darken($color, 3%));
-  }
-}
-.study__controls__wrong {
-  $color: lighten(red, 5%);
-  @include linear_gradient(lighten($color, 10%), darken($color, 10%));
-  color: white;
-  border-color: darken($color, 10%);
-
-  &:active {
-    @include linear_gradient(bottom, lighten($color, 10%), darken($color, 10%));
-  }
-}
 
 .stats-container {
   margin-bottom: $space*4;

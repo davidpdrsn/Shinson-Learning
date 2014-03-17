@@ -24,8 +24,8 @@ class Question
 
     <div class='study__controls'>
       <div class='study__controls__submit'>
-        <button class='study__controls__right' type='button'>Guessed correctly</button>
-        <button class='study__controls__wrong'type='button'>Didn't guess correctly</button>
+        <button class='study__controls__right button--green' type='button'>Guessed correctly</button>
+        <button class='study__controls__wrong button--red'type='button'>Didn't guess correctly</button>
       </div>
 
       <button class='study__controls__flip' type='button'>Flip</button>

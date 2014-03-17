@@ -107,7 +107,12 @@ select[name="groupings"] {
     margin-right: $space/2;
   }
 
-  .technique__description p {
-    margin-bottom: 0;
+  .technique__description {
+    display: none;
+
+    p {
+      margin-bottom: 0;
+    }
   }
 }
+

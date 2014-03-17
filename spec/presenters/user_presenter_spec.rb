@@ -142,7 +142,7 @@ describe UserPresenter do
                                                    {
                                                      data: { confirm: "Are you sure?" },
                                                      method: :delete,
-                                                     class: "button button--small"
+                                                     class: "button button--small button--red"
                                                    }
     end
   end

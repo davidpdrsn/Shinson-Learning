@@ -40,6 +40,12 @@ $page_width: 50rem;
   }
 }
 
+@mixin medium_and_up {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
 @mixin small {
   @media (max-width: 400px) {
     @content;
