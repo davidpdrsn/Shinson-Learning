@@ -1,12 +1,6 @@
-<div class="controls">
-  <h1 class="controls__heading">
-    Techniques
-  </h1>
-
-  <div class="controls__container">
-    <%= link_to "+", new_technique_path, class: "button" %>
-  </div>
-</div>
+<%= render layout: "shared/controls", locals: { heading: "Techniques" } do %>
+  <%= link_to "+", new_technique_path, class: "button" %>
+<% end %>
 
 <%= render "grouping_select" if @techniques.present? %>
 

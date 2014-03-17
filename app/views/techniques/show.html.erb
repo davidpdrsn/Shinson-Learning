@@ -1,10 +1,11 @@
 <% cache [current_user, @technique] do %>
   <% present @technique do |technique_presenter| %>
-    <header class="technique__header controls">
-      <h1 class="technique__heading controls__heading"><%= technique_presenter.name %></h1>
-
-      <%= render partial: 'controls' if technique_presenter.user == current_user %>
-    </header>
+    <%= render layout: "shared/controls", locals: { heading: technique_presenter.name } do %>
+      <% if current_user == technique_presenter.user %>
+        <%= link_to "Edit", edit_technique_path(@technique), class: "button button--small" %>
+        <%= link_to "Delete", @technique, method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
+      <% end %>
+    <% end %>
 
     <%= simple_format technique_presenter.description %>
 
