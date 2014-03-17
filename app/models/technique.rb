@@ -34,6 +34,18 @@ class Technique < ActiveRecord::Base
   delegate :name, to: :category, prefix: :category
   delegate :pretty_print, to: :belt, prefix: :belt
 
+  def self.as_hash_for_user user
+    user.techniques.inject([]) do |acc, technique|
+      attributes = technique.attributes.tap do |attrs|
+        attrs["notes"] = technique.notes
+        attrs["belt"] = technique.belt
+        attrs["category"] = technique.category
+      end
+
+      acc << attributes
+    end
+  end
+
   def self.for_user_grouped_by user, *groupings
     Grouper.new(user.sorted_techniques).group_by(*groupings)
   end
