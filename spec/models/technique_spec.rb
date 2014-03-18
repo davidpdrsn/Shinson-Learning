@@ -73,4 +73,16 @@ describe Technique do
       expect(hash.first["notes"].length).to eq 1
     end
   end
+
+  describe ".unstudied_for_user" do
+    it "returns techniques that have not been studied" do
+      user = create :user
+      technique = create :technique, user: user
+      study = create :study, user: user
+      other_techniques = study.techniques
+
+      expect(Technique.unstudied_for_user(user)).to eq [technique]
+      expect(Technique.unstudied_for_user(user)).not_to include other_techniques
+    end
+  end
 end

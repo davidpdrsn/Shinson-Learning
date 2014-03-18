@@ -33,6 +33,10 @@ class Technique < ActiveRecord::Base
   delegate :name, to: :category, prefix: :category
   delegate :pretty_print, to: :belt, prefix: :belt
 
+  def self.unstudied_for_user user
+    user.techniques.select { |t| t.studies.count == 0 }
+  end
+
   def self.as_hash_for_user user
     user.techniques.inject([]) do |acc, technique|
       attributes = technique.attributes.tap do |attrs|
