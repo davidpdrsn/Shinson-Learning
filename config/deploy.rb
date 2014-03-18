@@ -16,7 +16,7 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup"
-after 'deploy:cold', 'deploy:clear_cache'
+after 'deploy', 'deploy:clear_cache'
 
 after 'deploy:cold', 'deploy:seed'
 
