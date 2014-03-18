@@ -43,10 +43,3 @@ group :test, :development do
   gem 'thin'
   gem 'pry-rails'
 end
-
-# possibly deleted
-gem 'smarter_csv'
-group :production do
-  gem 'rails_12factor'
-end
-gem 'memcachier'
