@@ -1,7 +1,7 @@
 Shinson Learning
 ================
 
-Shinson Learning is a Rails 4 app on Ruby 2.0 and deployed to Heroku.
+Shinson Learning is a Rails 4 app on Ruby 2.
 
 Development
 -----------
