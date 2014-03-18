@@ -14,7 +14,6 @@
 #
 
 require 'grouper'
-require 'technique_extensions'
 
 class Technique < ActiveRecord::Base
   include Comparable
