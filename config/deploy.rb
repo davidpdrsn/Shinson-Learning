@@ -15,7 +15,8 @@ set :branch, "master"
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
-after "deploy", "deploy:cleanup" # keep only the last 5 releases
+after "deploy", "deploy:cleanup"
+after 'deploy:cold', 'deploy:clear_cache'
 
 after 'deploy:cold', 'deploy:seed'
 
@@ -23,6 +24,11 @@ namespace :deploy do
   desc "reload the database with seed data"
   task :seed do
     run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  end
+
+  desc "clear cached"
+  task :clear_cache do
+    run "cd #{current_path}; bundle exec rake tmp:clear RAILS_ENV=#{rails_env}"
   end
 
   %w[start stop restart].each do |command|
