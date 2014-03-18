@@ -3,32 +3,30 @@ source 'https://rubygems.org'
 ruby '2.1.0'
 
 gem 'rails', '4.0.3'
+gem 'pg'
+
+# assets
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 1.2'
-gem 'devise'
-gem 'launchy'
 gem 'bourbon'
 gem 'neat'
-gem 'smarter_csv'
-gem 'simple_form'
 gem 'autoprefixer-rails'
-gem 'figaro'
-gem 'pg'
-gem 'newrelic_rpm'
-gem 'memcachier'
-gem 'dalli'
-gem 'annotate', '>=2.6.0'
+
+gem 'devise'
 gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'annotate', '>=2.6.0'
+gem 'figaro'
+
+gem 'dalli'
 gem 'unicorn'
 gem 'capistrano', '2.15.5'
+gem 'newrelic_rpm'
 
-group :production do
-  gem 'rails_12factor'
-end
+gem 'launchy'
+gem 'simple_form'
 
 group :test, :development do
   gem 'rspec-rails'
@@ -45,3 +43,10 @@ group :test, :development do
   gem 'thin'
   gem 'pry-rails'
 end
+
+# possibly deleted
+gem 'smarter_csv'
+group :production do
+  gem 'rails_12factor'
+end
+gem 'memcachier'
