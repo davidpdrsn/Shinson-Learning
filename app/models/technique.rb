@@ -34,7 +34,7 @@ class Technique < ActiveRecord::Base
   delegate :pretty_print, to: :belt, prefix: :belt
 
   def self.unstudied_for_user user
-    user.techniques.select { |t| t.studies.count == 0 }
+    user.techniques.select { |t| t.studies.blank? }
   end
 
   def self.as_hash_for_user user
