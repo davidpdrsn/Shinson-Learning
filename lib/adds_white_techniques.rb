@@ -58,19 +58,23 @@ class AddsWhiteTechniques
         "Ap cha olligi" => "Fodballespark lige nedefra og op fremad",
       },
     }.each do |category, techniques|
-      techniques.each do |name, description|
-        unless user_has_technique name
-          Technique.create! user: @user,
-                            category: category,
-                            belt: white,
-                            name: name,
-                            description: description
-        end
-      end
+      create_techniques_in_category category, techniques
     end
   end
 
   private
+
+  def create_techniques_in_category category, techniques
+    techniques.each do |name, description|
+      unless user_has_technique name
+        Technique.create! user: @user,
+                          category: category,
+                          belt: white,
+                          name: name,
+                          description: description
+      end
+    end
+  end
 
   def add_su
     {
@@ -99,8 +103,8 @@ class AddsWhiteTechniques
       end
   end
 
-  def user_has_technique full_name
-    Technique.where(user: @user).find_by(name: full_name).present?
+  def user_has_technique name
+    Technique.where(user: @user).find_by(name: name).present?
   end
 
   def theory
