@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: scores
+#
+#  id              :integer          not null, primary key
+#  user_id         :integer
+#  study_id        :integer
+#  correct_answers :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 require 'spec_helper'
 
 describe Score do

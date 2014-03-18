@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: studies
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  name       :string(255)
+#
+
 require 'math_helper'
 
 class Study < ActiveRecord::Base
