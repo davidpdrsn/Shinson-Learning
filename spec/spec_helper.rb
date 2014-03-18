@@ -59,6 +59,7 @@ RSpec.configure do |config|
     caching = ActionController::Base.perform_caching
     ActionController::Base.perform_caching = example.metadata[:caching]
     example.run
+    Rails.cache.clear
     ActionController::Base.perform_caching = caching
   end
 end
