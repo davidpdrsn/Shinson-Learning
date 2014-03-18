@@ -1,0 +1,9 @@
+development:
+  adapter: postgresql
+  database: shinson_learning_development
+  host: localhost
+
+test:
+  adapter: postgresql
+  database: shinson_learning_test
+  host: localhost
