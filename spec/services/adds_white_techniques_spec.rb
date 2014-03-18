@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'adds_white_techniques'
 require_relative '../../db/seeds'
 
 describe AddsWhiteTechniques do

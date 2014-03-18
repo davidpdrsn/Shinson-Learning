@@ -1,5 +1,3 @@
-require 'adds_white_techniques'
-
 class RegistrationsController < Devise::RegistrationsController
   def create
     super do |user|
