@@ -17,7 +17,14 @@ ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
+after 'deploy:cold', 'deploy:seed'
+
 namespace :deploy do
+  desc "reload the database with seed data"
+  task :seed do
+    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  end
+
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
     task command, roles: :app, except: {no_release: true} do
@@ -48,4 +55,14 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
+end
+
+namespace :log do
+  desc "Tail production log"
+  task :tail, :roles => :app do
+    run "tail -f #{current_path}/log/unicorn.log" do |channel, stream, data|
+      puts "#{channel[:host]}: #{data}"
+      break if stream == :err
+    end
+  end
 end
