@@ -22,7 +22,7 @@ Development
 5. Setup your environment
 
     ```
-    $ bin/setup
+    $ scripts/bootstrap
     ```
 
 6. Run the server to check that everything works
