@@ -72,28 +72,4 @@ describe Study do
       expect(study.newest_score).to be_nil
     end
   end
-
-  describe ".neglected_for_user" do
-    let(:user) { create :user }
-
-    it "returns studies that have never been studied" do
-      never_studied = create :study, user: user
-
-      expect(Study.neglected_for_user user).to include never_studied
-    end
-
-    it "returns studies that haven't been studied for a while" do
-      not_studied_for_a_while = create :study, user: user
-      create :score, study: not_studied_for_a_while, user: user, created_at: 2.weeks.ago
-
-      expect(Study.neglected_for_user user).to include not_studied_for_a_while
-    end
-
-    it "doesn't return studies that have been studied recently" do
-      studied = create :study, user: user
-      create :score, study: studied, user: user
-
-      expect(Study.neglected_for_user user).not_to include studied
-    end
-  end
 end

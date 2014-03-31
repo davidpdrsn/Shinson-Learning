@@ -11,16 +11,6 @@ describe HomeController do
 
         expect(controller).to render_template :signed_in
       end
-
-      it "assigns @neglected_studies" do
-        study = double :study
-        Study.stub(:neglected_for_user).with(user).and_return([study])
-
-        get :index
-
-        expect(Study).to have_received(:neglected_for_user).with(user)
-        expect(assigns(:neglected_studies)).to eq [study]
-      end
     end
 
     context "as a guest" do

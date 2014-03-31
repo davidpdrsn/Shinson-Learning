@@ -27,6 +27,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  def neglected_studies
+    studies.select do |study|
+      never_been_studied?(study) || not_studied_recently?(study)
+    end
+  end
+
   def questions
     notes.where(question: true).includes(:technique)
   end
@@ -37,5 +43,15 @@ class User < ActiveRecord::Base
 
   def admin?
     AdminUser.where(email: email).present?
+  end
+
+  private
+
+  def not_studied_recently? study
+    study.newest_score.created_at < 2.weeks.ago
+  end
+
+  def never_been_studied? study
+    study.scores.count == 0
   end
 end
