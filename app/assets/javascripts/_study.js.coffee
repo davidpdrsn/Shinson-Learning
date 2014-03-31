@@ -46,7 +46,6 @@ class Study
     this._bindButtons()
 
   _initProgress: () ->
-    # TODO: rename __tile to __dot
     $(".study-progress").append("<span class='study-progress__tile'></span>")
     @questions.forEach ->
       $(".study-progress").append("<span class='study-progress__dot'></span>")
