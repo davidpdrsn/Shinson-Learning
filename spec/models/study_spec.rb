@@ -26,13 +26,13 @@ describe Study do
 
   it "is invalid unless all techniques are from the same user" do
     study = build :study
-    study.techniques << create(:technique)
+    study.techniques << build_stubbed(:technique)
 
     expect(study).not_to be_valid
   end
 
   it "isn't valid if the user already has a study with the same name" do
-    study = create :study
+    study = build_stubbed :study
     another_study = build :study, user: study.user, name: study.name
 
     expect(another_study).not_to be_valid
@@ -59,7 +59,7 @@ describe Study do
   describe "#newest_score" do
     it "finds the newest score" do
       study = build :study
-      study.techniques << create(:technique, user: study.user)
+      study.techniques << build_stubbed(:technique, user: study.user)
       new_score = create :score, study: study, created_at: 1.day.ago
       old_score = create :score, study: study, created_at: 2.weeks.ago
 
