@@ -72,4 +72,34 @@ describe Study do
       expect(study.newest_score).to be_nil
     end
   end
+
+  describe "#studied_recently?" do
+    let(:study) { build_stubbed :study }
+
+    it "return true if the study has been studied recently" do
+      create :score, study: study, created_at: Time.now
+
+      expect(study.studied_recently?).to be_true
+    end
+
+    it "return false if the study has not been studied recently" do
+      create :score, study: study, created_at: 2.weeks.ago
+
+      expect(study.studied_recently?).to be_false
+    end
+  end
+
+  describe "#ever_studied?" do
+    let(:study) { build_stubbed :study }
+
+    it "returns true if the study has been studied" do
+      create :score, study: study
+
+      expect(study.ever_studied?).to be_true
+    end
+
+    it "returns false if the study has never been studied" do
+      expect(study.ever_studied?).to be_false
+    end
+  end
 end

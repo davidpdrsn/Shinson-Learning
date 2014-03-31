@@ -44,14 +44,4 @@ class User < ActiveRecord::Base
   def admin?
     AdminUser.where(email: email).present?
   end
-
-  private
-
-  def not_studied_recently? study
-    study.newest_score.created_at < 2.weeks.ago
-  end
-
-  def never_been_studied? study
-    study.scores.count == 0
-  end
 end

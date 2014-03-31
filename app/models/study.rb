@@ -44,6 +44,14 @@ class Study < ActiveRecord::Base
     scores.order("created_at").last
   end
 
+  def studied_recently?
+    newest_score.created_at > 2.weeks.ago
+  end
+
+  def ever_studied?
+    scores.count > 0
+  end
+
   private
 
   def name_not_duplicated
