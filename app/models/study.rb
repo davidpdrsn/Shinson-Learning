@@ -21,6 +21,7 @@ class Study < ActiveRecord::Base
   validate :techniques_belong_to_user
   validate :name_not_duplicated
 
+  # TODO: should this method be on the user?
   def self.neglected_for_user user
     where(user: user).select do |study|
       never_been_studied(study) || not_studied_recently(study)
