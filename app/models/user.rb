@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
 
   def neglected_studies
     studies.select do |study|
-      never_been_studied?(study) || not_studied_recently?(study)
+      # TODO: refactor this conditional
+      !study.ever_studied? || !study.studied_recently?
     end
   end
 
