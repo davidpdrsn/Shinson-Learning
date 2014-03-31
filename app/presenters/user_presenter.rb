@@ -11,9 +11,11 @@ class UserPresenter < Presenter
   end
 
   def screen_name
-    return user.email unless (user.first_name || user.last_name).present?
-
-    [user.first_name, user.last_name].reject(&:blank?).map(&:to_s).map(&:titleize).join(" ")
+    if user_has_first_or_last_name
+      users_first_and_or_last_name
+    else
+      user.email
+    end
   end
 
   def name_with_s
@@ -50,5 +52,15 @@ class UserPresenter < Presenter
               data: { confirm: "Are you sure?" },
               method: :delete,
               class: "button button--small button--red"
+  end
+
+  private
+
+  def user_has_first_or_last_name
+    (user.first_name || user.last_name).present?
+  end
+
+  def users_first_and_or_last_name
+    [user.first_name, user.last_name].reject(&:blank?).map(&:titleize).join(" ")
   end
 end
