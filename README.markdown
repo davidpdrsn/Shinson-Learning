@@ -1,6 +1,8 @@
 Shinson Learning
 ================
 
+[![Code Climate](https://codeclimate.com/github/davidpdrsn/Shinson-Learning.png)](https://codeclimate.com/github/davidpdrsn/Shinson-Learning)
+
 Shinson Learning is a Rails 4 app on Ruby 2.
 
 Development
