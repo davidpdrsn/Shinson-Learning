@@ -11,7 +11,7 @@ class UserPresenter < Presenter
   end
 
   def screen_name
-    if user_has_first_or_last_name
+    if users_first_and_or_last_name.present?
       users_first_and_or_last_name
     else
       user.email
@@ -55,10 +55,6 @@ class UserPresenter < Presenter
   end
 
   private
-
-  def user_has_first_or_last_name
-    (user.first_name || user.last_name).present?
-  end
 
   def users_first_and_or_last_name
     [user.first_name, user.last_name].reject(&:blank?).map(&:titleize).join(" ")
