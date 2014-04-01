@@ -9,10 +9,31 @@ ensure_qt_installed() {
       brew update
       brew install qt
     else
-      echo "Install qt (dependency of capybara-webkit)"
+      echo "Install qt (dependency of capybara-webkit) then run this script again"
       echo "Find help here: https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit"
       exit 2
     fi
+  fi
+}
+
+ensure_memcached_installed() {
+  if !(which memcached > /dev/null); then
+    if (which brew > /dev/null); then
+      echo "Installing memcached with Homebrew"
+      brew update
+      brew install memcached
+    else
+      echo "Install memcached (dependency of Dalli) then run this script again"
+      echo "Find help here: https://github.com/mperham/dalli"
+      exit 2
+    fi
+  fi
+}
+
+ensure_postgres_installed() {
+  if !(which psql > /dev/null); then
+    echo "Install PostgreSQL then run this script again"
+    exit 2
   fi
 }
 
@@ -30,5 +51,7 @@ setup_database() {
 }
 
 ensure_qt_installed
+ensure_memcached_installed
+ensure_postgres_installed
 install_dependencies
 setup_database
