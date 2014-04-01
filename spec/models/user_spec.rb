@@ -82,4 +82,16 @@ describe User do
       expect(user.neglected_studies).not_to include studied
     end
   end
+
+  describe "#techniques_grouped_by" do
+    it "delegates to grouper" do
+      user = create :user
+      fake_grouper = double.as_null_object
+      Grouper.stub(:new) { fake_grouper }
+      user.techniques_grouped_by :one, :two
+
+      expect(Grouper).to have_received(:new).with(user.techniques)
+      expect(fake_grouper).to have_received(:group_by).with(:one, :two)
+    end
+  end
 end

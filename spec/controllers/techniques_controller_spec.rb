@@ -10,14 +10,9 @@ describe TechniquesController do
   describe "#index" do
     context "when signed in" do
       before do
-        Technique.stub(:for_user_grouped_by)
         Technique.stub(:as_hash_for_user)
         sign_in user
         get :index
-      end
-
-      it "assigns @techniques" do
-        expect(Technique).to have_received :for_user_grouped_by
       end
 
       it "assigns @page_title" do

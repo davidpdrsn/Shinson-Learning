@@ -7,7 +7,7 @@ class TechniquesController < ApplicationController
   def index
     @page_title = "Techniques"
     @default_grouping = default_grouping
-    @techniques = Technique.for_user_grouped_by(current_user, *groupings[params[:group_by]])
+    @techniques = current_user.techniques_grouped_by *groupings[params[:group_by]]
 
     respond_to do |format|
       format.html {}

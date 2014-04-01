@@ -13,8 +13,6 @@
 #  notes_count :integer          default(0), not null
 #
 
-require 'grouper'
-
 class Technique < ActiveRecord::Base
   include Comparable
 
@@ -44,11 +42,6 @@ class Technique < ActiveRecord::Base
 
       acc << attributes
     end
-  end
-
-  # TODO: should this method be on the user?
-  def self.for_user_grouped_by user, *groupings
-    Grouper.new(user.sorted_techniques).group_by(*groupings)
   end
 
   def <=> another

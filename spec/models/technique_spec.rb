@@ -48,19 +48,6 @@ describe Technique do
     end
   end
 
-  describe "#for_user_grouped_by" do
-    it "delegates to grouper" do
-      techniques = [build(:technique), build(:technique)]
-      user = double sorted_techniques: techniques
-      fake_grouper = double.as_null_object
-      Grouper.stub(:new) { fake_grouper }
-      Technique.for_user_grouped_by(user, :one, :two)
-
-      expect(Grouper).to have_received(:new).with(techniques)
-      expect(fake_grouper).to have_received(:group_by).with(:one, :two)
-    end
-  end
-
   describe ".as_hash_for_user" do
     it "returns the techniques as a hash" do
       user = create :user

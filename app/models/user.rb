@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def techniques_grouped_by *groupings
+    Grouper.new(sorted_techniques).group_by(*groupings)
+  end
+
   def questions
     notes.where(question: true).includes(:technique)
   end
