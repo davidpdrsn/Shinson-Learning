@@ -43,7 +43,9 @@ class UserPresenter < Presenter
   end
 
   def edit_link
-    h.link_to "Edit information", h.edit_user_registration_path, class: "button button--small"
+    h.link_to "Edit information",
+              h.edit_user_registration_path,
+              class: "button button--small"
   end
 
   def destroy_link
@@ -57,6 +59,9 @@ class UserPresenter < Presenter
   private
 
   def users_first_and_or_last_name
-    [user.first_name, user.last_name].reject(&:blank?).map(&:titleize).join(" ")
+    [user.first_name, user.last_name].
+      reject(&:blank?).
+      map(&:titleize).
+      join(" ")
   end
 end
