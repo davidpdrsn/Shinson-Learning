@@ -2,10 +2,18 @@
 
 # Set up Rails app. Run this script immediately after cloning the codebase.
 
-# Set up Ruby dependencies via Bundler
-bundle install
+install_dependencies() {
+  bin/bundle install
+  bower install
+}
 
-# Set up the database
-bundle exec rake db:setup db:migrate db:test:prepare db:seed
-bundle exec rake db:migrate RAILS_ENV=test
-bower install
+setup_database() {
+  bin/rake db:setup
+  bin/rake db:migrate
+  bin/rake db:test:prepare
+  bin/rake db:seed
+  bin/rake db:migrate RAILS_ENV=test
+}
+
+install_dependencies
+setup_database
