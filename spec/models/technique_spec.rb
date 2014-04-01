@@ -47,17 +47,4 @@ describe Technique do
       expect(technique.to_param).to eq "#{technique.id}-gibon-sul-1"
     end
   end
-
-  describe ".as_hash_for_user" do
-    it "returns the techniques as a hash" do
-      user = create :user
-      technique = create :technique, user: user
-      create :note, technique: technique, user: user
-      hash = Technique.as_hash_for_user user
-
-      expect(hash.length).to eq 1
-      expect(hash.first["id"]).to eq technique.id
-      expect(hash.first["notes"].length).to eq 1
-    end
-  end
 end

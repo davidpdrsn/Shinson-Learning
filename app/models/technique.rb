@@ -31,19 +31,6 @@ class Technique < ActiveRecord::Base
   delegate :name, to: :category, prefix: :category
   delegate :pretty_print, to: :belt, prefix: :belt
 
-  # TODO: move this method to User
-  def self.as_hash_for_user user
-    user.techniques.inject([]) do |acc, technique|
-      attributes = technique.attributes.tap do |attrs|
-        attrs["notes"] = technique.notes
-        attrs["belt"] = technique.belt
-        attrs["category"] = technique.category
-      end
-
-      acc << attributes
-    end
-  end
-
   def <=> another
     name_to_a(self) <=> name_to_a(another)
   end

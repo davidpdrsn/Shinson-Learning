@@ -12,7 +12,7 @@ class TechniquesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.json do
-        render json: Technique.as_hash_for_user(current_user)
+        render json: current_user.techniques_as_hash
       end
     end
   end

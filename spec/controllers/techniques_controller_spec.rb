@@ -10,19 +10,20 @@ describe TechniquesController do
   describe "#index" do
     context "when signed in" do
       before do
-        Technique.stub(:as_hash_for_user)
         sign_in user
-        get :index
       end
 
       it "assigns @page_title" do
+        get :index
+
         expect(assigns(:page_title)).to eq "Techniques"
       end
 
       it "renders the json when making a json request" do
+        user.stub(:techniques_as_hash)
         get :index, format: :json
 
-        expect(Technique).to have_received(:as_hash_for_user).with(user)
+        expect(response.status).to eq 200
       end
     end
 
