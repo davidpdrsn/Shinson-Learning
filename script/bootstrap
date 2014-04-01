@@ -2,6 +2,20 @@
 
 # Set up Rails app. Run this script immediately after cloning the codebase.
 
+ensure_qt_installed() {
+  if !(which qmake > /dev/null); then
+    if (which brew > /dev/null); then
+      echo "Installing qt with Homebrew"
+      brew update
+      brew install qt
+    else
+      echo "Install qt (dependency of capybara-webkit)"
+      echo "Find help here: https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit"
+      exit 2
+    fi
+  fi
+}
+
 install_dependencies() {
   bin/bundle install
   bower install
@@ -15,5 +29,6 @@ setup_database() {
   bin/rake db:migrate RAILS_ENV=test
 }
 
+ensure_qt_installed
 install_dependencies
 setup_database
