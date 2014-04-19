@@ -43,6 +43,7 @@ domain.injectSpinner = ->
 
 domain.removeSpinner = ->
   clearTimeout(domain.timer)
+  domain.timer = undefined
   $('.spinner').fadeOut('fast', -> $(@).remove())
 
 domain.toggleNav = ($nav) ->
