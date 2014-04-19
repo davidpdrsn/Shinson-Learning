@@ -53,9 +53,19 @@ domain.log = (message) ->
   $.post "/logs", message: "===================\nclient side log: #{message}\n==================="
 
 domain.newTechniqueFieldset = ($form, $fieldset, lastFieldSet) ->
-  # TODO: copy category and belt from last fieldset
   $clone = $fieldset.clone()
   $clone.find(":input").val("")
+
+  (inheritSelectValues = ->
+    selects =
+      fieldset: $fieldset.find("select")
+      clone: $clone.find("select")
+
+    $clone.find("select").each (index, element) ->
+      valueOfPreviousSelect = selects.fieldset[index].value
+      $(selects.clone[index]).val(valueOfPreviousSelect)
+  )()
+
   lastFieldSet().after $clone
 
 domain.removeFieldset = ($fieldset) -> $fieldset.remove()

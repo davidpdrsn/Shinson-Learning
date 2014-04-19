@@ -56,7 +56,7 @@ $ ->
 
   $(document).on 'click', '.create-multiple__buttons button', ->
     $form = $(this).parents(".create-multiple")
-    $fieldset = $form.find("fieldset").first().clone()
+    $fieldset = $form.find("fieldset").last()
     lastFieldSet = -> $form.find("fieldset").last()
 
     domain.newTechniqueFieldset $form, $fieldset, lastFieldSet
