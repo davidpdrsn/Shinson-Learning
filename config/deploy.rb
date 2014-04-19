@@ -17,6 +17,7 @@ ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup"
 after 'deploy', 'deploy:clear_cache'
+after 'deploy', 'deploy:tag_ref'
 
 after 'deploy:cold', 'deploy:seed'
 
@@ -24,6 +25,13 @@ namespace :deploy do
   desc "reload the database with seed data"
   task :seed do
     run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  end
+
+  desc "tag current revision as production"
+  task :tag_ref do
+    tag_name = "production"
+    system "git tag -d #{tag_name}"
+    system "git tag #{tag_name}"
   end
 
   desc "clear cached"
