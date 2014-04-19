@@ -36,7 +36,7 @@ domain.toggleNewNoteForm = ($button, $form) ->
     $button.text("+")
 
 domain.injectSpinner = ->
-  unless $('.spinner').length > 0
+  unless $('.spinner').length > 0 or domain.timer
     domain.timer = setTimeout(
       (-> $('<div class="spinner"></div>').appendTo('html').hide().fadeIn('fast')),
       100)
