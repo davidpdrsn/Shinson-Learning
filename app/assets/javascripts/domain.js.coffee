@@ -52,6 +52,25 @@ domain.log = (message) ->
   console.log message
   $.post "/logs", message: "===================\nclient side log: #{message}\n==================="
 
+domain.newTechniqueFieldset = ($form, $fieldset, lastFieldSet) ->
+  # TODO: copy category and belt from last fieldset
+  $clone = $fieldset.clone()
+  $clone.find(":input").val("")
+  lastFieldSet().after $clone
+
+domain.removeFieldset = ($fieldset) -> $fieldset.remove()
+
+domain.validateBulkTechniqueForm = (event) ->
+  inputs = $(this)
+    .find("input:not([type='submit']):not([type='hidden']), textarea, select")
+    .toArray()
+
+  for input in inputs
+    if input.value.length == 0
+      alert "You need to fill out all fields"
+      event.preventDefault()
+      break
+
 # private
 
 redirectTo = (url) -> window.location.href = url

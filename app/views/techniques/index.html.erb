@@ -1,5 +1,6 @@
 <%= render layout: "shared/controls", locals: { heading: "Techniques" } do %>
   <%= link_to "+", new_technique_path, class: "button" %>
+  <%= link_to "+++", multiple_new_techniques_path, class: "button" %>
 <% end %>
 
 <%= render "grouping_select" if @techniques.present? %>

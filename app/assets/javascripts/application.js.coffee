@@ -53,3 +53,15 @@ $ ->
 
   $(document).on('page:fetch', domain.injectSpinner)
   $(document).on('page:receive', domain.removeSpinner)
+
+  $(document).on 'click', '.create-multiple__buttons button', ->
+    $form = $(this).parents(".create-multiple")
+    $fieldset = $form.find("fieldset").first().clone()
+    lastFieldSet = -> $form.find("fieldset").last()
+
+    domain.newTechniqueFieldset $form, $fieldset, lastFieldSet
+
+  $(document).on 'click', '.create-multiple__remove-fieldset', ->
+    domain.removeFieldset $(this).parents("fieldset")
+
+  $(document).on 'submit', 'form.create-multiple', domain.validateBulkTechniqueForm
