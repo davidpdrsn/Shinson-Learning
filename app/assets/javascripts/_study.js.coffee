@@ -94,7 +94,7 @@ class Study
               correct_answers: @score
             }
           }
-        }).done => Turbolinks.visit "/studies/#{@id}"
+        }).done => domain.visit "/studies/#{@id}"
 
   _wait: (f) ->
     durationOfProgressAnimation = 500

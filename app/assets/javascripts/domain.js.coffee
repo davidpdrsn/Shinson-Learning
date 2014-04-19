@@ -2,7 +2,7 @@ this.domain = {}
 
 domain.setGrouping = (grouping) ->
   newUrl = "#{window.location.origin}#{window.location.pathname}?group_by=#{grouping}"
-  redirectTo newUrl
+  domain.visit newUrl
 
 domain.toggleTechniques = ($button, $list) ->
   if $button.hasClass("icon-arrow-right-after") ||
@@ -82,6 +82,4 @@ domain.validateBulkTechniqueForm = (event) ->
       event.preventDefault()
       break
 
-# private
-
-redirectTo = (url) -> window.location.href = url
+domain.visit = (url) -> Turbolinks.visit url
