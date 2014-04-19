@@ -6,6 +6,9 @@ ShinsonLearning::Application.routes.draw do
 
   resources :users, only: [:show]
   resources :techniques do
+    get :multiple_new, to: "techniques#new_multiple", on: :collection
+    post :multiple_create, to: "techniques#create_multiple", on: :collection
+
     resources :notes, only: [:create, :edit, :update, :destroy, :index]
   end
   resources :questions, only: [:index]

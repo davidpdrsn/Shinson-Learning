@@ -115,3 +115,80 @@
   }
 }
 
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid $light_gray;
+    margin-bottom: $space*2;
+    padding-bottom: $space*2;
+  }
+
+  &:last-of-type {
+    margin-bottom: $space;
+  }
+}
+
+.create-multiple {
+  #{$all-text-inputs},
+  select,
+  textarea {
+    width: 100%;
+  }
+
+  .create-multiple__row {
+    margin-bottom: $space;
+
+    @include medium {
+      #{$all-text-inputs},
+      select,
+      textarea {
+        margin-bottom: $space;
+      }
+    }
+
+    @include medium_and_up {
+      @include outer-container;
+
+      #{$all-text-inputs},
+      select,
+      textarea {
+        @include span-columns(4);
+      }
+    }
+  }
+
+  .create-multiple__2nd-row {
+    display: flex;
+
+    textarea {
+      margin-right: 0;
+    }
+
+    .create-multiple__remove-fieldset {
+      margin-left: $space;
+    }
+  }
+
+  .create-multiple__buttons {
+    margin-top: $space;
+    float: right;
+
+    input[type="submit"] {
+      float: none;
+      margin-top: 0;
+      margin-left: $space;
+    }
+  }
+
+  fieldset:only-of-type .create-multiple__remove-fieldset {
+    display: none;
+  }
+}
+
+[disabled] {
+  opacity: .5;
+  pointer-events: none;
+}

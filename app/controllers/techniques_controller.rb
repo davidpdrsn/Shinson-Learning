@@ -59,6 +59,24 @@ class TechniquesController < ApplicationController
     redirect_to root_path
   end
 
+  def new_multiple
+    @page_title = "Add multiple techniques"
+  end
+
+  def create_multiple
+    technique_attributes = Zipper.new(params[:techniques]).zip
+
+    invalid_techniques = CreatesTechniquesInBulk.new(technique_attributes).create_for_user current_user
+
+    if invalid_techniques.blank?
+      flash.notice = "Techniques saved"
+      redirect_to techniques_path
+    else
+      flash.alert = "One of the techniques were invalid"
+      redirect_to multiple_new_techniques_path
+    end
+  end
+
   private
 
   def default_grouping
