@@ -37,6 +37,7 @@ class TechniquesController < ApplicationController
     @technique = Technique.find(params[:id])
     @page_title = @technique.name
     @note = @technique.notes.new
+    # TODO: refactor this
     @notes = @technique.notes.reject(&:new_record?)
   end
 
