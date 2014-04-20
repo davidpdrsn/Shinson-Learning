@@ -148,7 +148,7 @@ describe UserPresenter do
   end
 
   describe "#studies_count" do
-    it "returns the number of studies a user has" do
+    it "returns the number of studies a user has", caching: true do
       user = create :user
       user_presenter = UserPresenter.new user, double
 
