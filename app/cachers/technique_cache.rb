@@ -1,9 +1,4 @@
-class TechniqueCache
-  def initialize technique, cache
-    @technique = technique
-    @cache = cache
-  end
-
+class TechniqueCache < Cacher
   def category_name
     @cache.fetch([@technique, @technique.category]) do
       @technique.category.name

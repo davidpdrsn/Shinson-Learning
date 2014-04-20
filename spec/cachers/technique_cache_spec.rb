@@ -5,7 +5,7 @@ describe TechniqueCache do
     it "returns the category name", caching: true do
       kicks = double name: "kicks"
       punches = double name: "punches"
-      technique = double
+      technique = build_stubbed :technique
       technique_cache = TechniqueCache.new technique, Rails.cache
 
       technique.stub category: kicks
@@ -20,7 +20,7 @@ describe TechniqueCache do
     it "returns the pretty print for the belt", caching: true do
       white = double pretty_print: "white"
       yellow = double pretty_print: "yellow"
-      technique = double
+      technique = build_stubbed :technique
       technique_cache = TechniqueCache.new technique, Rails.cache
 
       technique.stub belt: white

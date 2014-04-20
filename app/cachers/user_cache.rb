@@ -1,9 +1,4 @@
-class UserCache
-  def initialize user, cache
-    @user = user
-    @cache = cache
-  end
-
+class UserCache < Cacher
   def studies_count
     @cache.fetch [@user, :studies_count] do
       @user.studies.count
