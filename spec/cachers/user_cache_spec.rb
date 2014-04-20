@@ -5,11 +5,11 @@ describe UserCache do
     it "returns the number of studies a user has", caching: true do
       user, user_cache = user_with_cache
 
-      2.times { create :study, user: user }
-      expect(user_cache.studies_count).to eq 2
-
-      2.times { create :study, user: user }
-      expect(user_cache.studies_count).to eq 4
+      2.times do
+        expect do
+          create :study, user: user
+        end.to change { user_cache.studies_count }.by(1)
+      end
     end
   end
 
@@ -17,11 +17,11 @@ describe UserCache do
     it "returns the number of notes the user has", caching: true do
       user, user_cache = user_with_cache
 
-      2.times { create :note, user: user }
-      expect(user_cache.notes_count).to eq 2
-
-      2.times { create :note, user: user }
-      expect(user_cache.notes_count).to eq 4
+      2.times do
+        expect do
+          create :note, user: user
+        end.to change { user_cache.notes_count }.by(1)
+      end
     end
   end
 
@@ -29,11 +29,11 @@ describe UserCache do
     it "returns the number of techniques the user has", caching: true do
       user, user_cache = user_with_cache
 
-      2.times { create :technique, user: user }
-      expect(user_cache.techniques_count).to eq 2
-
-      2.times { create :technique, user: user }
-      expect(user_cache.techniques_count).to eq 4
+      2.times do
+        expect do
+          create :technique, user: user
+        end.to change { user_cache.techniques_count }.by(1)
+      end
     end
   end
 
