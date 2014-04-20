@@ -88,33 +88,6 @@ describe UserPresenter do
     end
   end
 
-  describe "#techniques_count" do
-    it "returns the number of techniques the user has", caching: true do
-      user = create :user
-      view = double :view
-      user_presenter = UserPresenter.new user, view
-
-      2.times { create :technique, user: user }
-      expect(user_presenter.techniques_count).to eq 2
-
-      2.times { create :technique, user: user }
-      expect(user_presenter.techniques_count).to eq 4
-    end
-  end
-
-  describe "#notes_count" do
-    it "returns the number of notes the user has", caching: true do
-      user = create :user
-      user_presenter = UserPresenter.new user, double
-
-      2.times { create :note, user: user }
-      expect(user_presenter.notes_count).to eq 2
-
-      2.times { create :note, user: user }
-      expect(user_presenter.notes_count).to eq 4
-    end
-  end
-
   describe "#edit link" do
     it "returns a edit link for the user" do
       user = create :user
@@ -144,19 +117,6 @@ describe UserPresenter do
                                                      method: :delete,
                                                      class: "button button--small button--red"
                                                    }
-    end
-  end
-
-  describe "#studies_count" do
-    it "returns the number of studies a user has", caching: true do
-      user = create :user
-      user_presenter = UserPresenter.new user, double
-
-      2.times { create :study, user: user }
-      expect(user_presenter.studies_count).to eq 2
-
-      2.times { create :study, user: user }
-      expect(user_presenter.studies_count).to eq 4
     end
   end
 end

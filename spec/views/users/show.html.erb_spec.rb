@@ -6,6 +6,7 @@ describe "users/show" do
   before do
     view.stub(:timestamp)
     assign(:user, user)
+    assign(:user_cache, double.as_null_object)
   end
 
   context "when viewing your own profile" do
