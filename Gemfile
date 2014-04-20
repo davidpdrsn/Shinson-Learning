@@ -18,6 +18,7 @@ gem 'devise'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'annotate', '>=2.6.0'
 gem 'figaro'
+gem 'timecop'
 
 gem 'dalli'
 gem 'unicorn'
