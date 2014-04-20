@@ -39,6 +39,7 @@ class TechniquesController < ApplicationController
     @note = @technique.notes.new
     # TODO: refactor this
     @notes = @technique.notes.reject(&:new_record?)
+    @technique_cache = TechniqueCache.new @technique, Rails.cache
   end
 
   def edit

@@ -4,6 +4,7 @@ describe "techniques/show" do
   let(:user) { build_stubbed(:user) }
 
   before do
+    assign(:technique_cache, double.as_null_object)
     controller.stub(:current_user).and_return(user)
     view.stub(:timestamp)
   end
