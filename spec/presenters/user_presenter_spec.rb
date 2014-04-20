@@ -146,4 +146,17 @@ describe UserPresenter do
                                                    }
     end
   end
+
+  describe "#studies_count" do
+    it "returns the number of studies a user has" do
+      user = create :user
+      user_presenter = UserPresenter.new user, double
+
+      2.times { create :study, user: user }
+      expect(user_presenter.studies_count).to eq 2
+
+      2.times { create :study, user: user }
+      expect(user_presenter.studies_count).to eq 4
+    end
+  end
 end

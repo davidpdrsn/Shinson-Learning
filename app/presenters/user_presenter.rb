@@ -42,6 +42,10 @@ class UserPresenter < Presenter
     Rails.cache.fetch([user, :notes_count]) { user.notes.count }
   end
 
+  def studies_count
+    Rails.cache.fetch([user, :studies_count]) { user.studies.count }
+  end
+
   def edit_link
     h.link_to "Edit information",
               h.edit_user_registration_path,
