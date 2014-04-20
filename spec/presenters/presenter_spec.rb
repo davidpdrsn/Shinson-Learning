@@ -2,19 +2,21 @@ require 'spec_helper'
 
 describe Presenter do
   describe "#timestamp" do
-    it "returns a human readable time stamp" do
-      user = double(:user).as_null_object
-      view = double(:view).as_null_object
+    it "returns a human readable time stamp", caching: true do
+      user = create :user
       presenter = Presenter.new user, view
-      fake_date = double(:date).as_null_object
 
-      user.stub(:created_at) { fake_date }
+      Timecop.freeze(Date.new 1990, 8, 6) do
+        user.touch
 
-      presenter.timestamp :created_at
+        expect(presenter.timestamp :updated_at).to eq "06 Aug 00:00 (less than a minute ago)"
+      end
 
-      expect(user).to have_received(:created_at)
-      expect(fake_date).to have_received(:to_formatted_s).with(:short)
-      expect(view).to have_received(:time_ago_in_words).with(fake_date)
+      Timecop.freeze(Date.new 2000, 1, 1) do
+        user.touch
+
+        expect(presenter.timestamp :updated_at).to eq "01 Jan 00:00 (less than a minute ago)"
+      end
     end
   end
 end
