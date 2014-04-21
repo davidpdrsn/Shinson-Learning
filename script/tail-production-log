@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+ssh vps tail -f apps/shinson_learning/current/log/production.log
