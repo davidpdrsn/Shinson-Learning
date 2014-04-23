@@ -5,10 +5,8 @@ class Presenter
   end
 
   def timestamp method = :created_at
-    Rails.cache.fetch([@object, :timestamp, method]) do
-      date = @object.send method
-      "#{date.to_formatted_s(:short)} (#{h.time_ago_in_words date} ago)"
-    end
+    date = @object.send method
+    "#{date.to_formatted_s(:short)} (#{h.time_ago_in_words date} ago)"
   end
 
   private
