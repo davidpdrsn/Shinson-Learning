@@ -19,7 +19,7 @@ class UserPresenter < Presenter
   end
 
   def name_with_s
-    if screen_name.match /s$/
+    if ends_in_s(screen_name)
       "#{screen_name}'"
     else
       "#{screen_name}'s"
@@ -49,6 +49,10 @@ class UserPresenter < Presenter
   end
 
   private
+
+  def ends_in_s(screen_name)
+    screen_name.match /s$/
+  end
 
   def has_full_name(user)
     user.first_name && user.last_name
