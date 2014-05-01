@@ -3,7 +3,7 @@ class UserPresenter < Presenter
   delegate :email, to: :user
 
   def name
-    if user.first_name && user.last_name
+    if has_full_name(user)
       "#{user.first_name} #{user.last_name}"
     else
       "None given"
@@ -49,6 +49,10 @@ class UserPresenter < Presenter
   end
 
   private
+
+  def has_full_name(user)
+    user.first_name && user.last_name
+  end
 
   def users_first_and_or_last_name
     [user.first_name, user.last_name].
