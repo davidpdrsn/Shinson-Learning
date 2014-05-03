@@ -55,7 +55,7 @@ class Study < ActiveRecord::Base
   private
 
   def name_not_duplicated
-    if !user.blank? && user.studies.any? { |study| study.name == self.name }
+    if user.present? && user.studies.reject(&:new_record?).any? { |study| study.name == self.name }
       errors[:base] << "You already have a study with that name"
     end
   end
