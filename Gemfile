@@ -34,7 +34,7 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'capybara'
   gem "capybara-webkit"
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', require: false
   gem 'factory_girl_rails'
   gem 'spring-commands-rspec'
   gem 'simplecov'
