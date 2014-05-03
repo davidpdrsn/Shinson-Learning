@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.0'
 
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.0'
 gem 'pg'
 
 gem 'sass-rails', '~> 4.0.0'
@@ -37,7 +37,6 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'spring-commands-rspec'
-  gem 'spring-commands-cucumber'
   gem 'simplecov'
   gem 'quiet_assets'
   gem 'thin'
