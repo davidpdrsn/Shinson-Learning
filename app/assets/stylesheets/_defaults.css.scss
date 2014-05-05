@@ -1,13 +1,29 @@
 @import "bits";
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: "Lato", sans-serif;
 }
 
 .main {
   padding: 1rem;
-  max-width: $page_width;
   margin: 0 auto;
+  width: 75%;
+  float: left;
+
+  @media (min-width: $menu_breakpoint) {
+    width: calc(100% - #{$menu_max_width});
+  }
+
+  @include medium {
+    float: none;
+    width: 100%;
+    height: auto;
+  }
 
   @include all_headings {
     &:first-of-type {

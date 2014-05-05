@@ -23,6 +23,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-arrow-right-after:after {
+  content: "\e603";
+}
+.icon-arrow-down-after:after {
+  content: "\e604";
+}
 .icon-eye:before {
   content: "\e600";
 }
@@ -32,18 +38,18 @@
 .icon-search:before {
   content: "\e602";
 }
-.icon-arrow-right:before {
-  content: "\e603";
+.icon-user:before {
+  content: "\e606";
 }
-.icon-arrow-down:before {
-  content: "\e604";
+.icon-trophy:before {
+  content: "\e607";
 }
-.icon-arrow-right-after:after {
-  content: "\e603";
-}
-.icon-arrow-down-after:after {
-  content: "\e604";
-}
-.icon-close:before {
+.icon-logout:before {
   content: "\e605";
+}
+.icon-question:before {
+  content: "\e608";
+}
+.icon-list:before {
+  content: "\e609";
 }
