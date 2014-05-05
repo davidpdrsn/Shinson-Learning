@@ -36,7 +36,7 @@
       <%= link_to "Profile", current_user, class: "icon-user" %>
       <%= link_to "Log out", destroy_user_session_path, class: "icon-logout", method: :delete %>
       <% if current_user.admin? %>
-        <%= link_to "Admin", admin_root_path %>
+        <%= link_to "Admin", admin_root_path, class: "secondary" %>
       <% end %>
     <% else %>
       <%= link_to "Sign in", new_user_session_path %>

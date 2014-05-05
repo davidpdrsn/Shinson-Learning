@@ -61,6 +61,11 @@
     display: block;
     transition: .1s;
 
+    &.secondary {
+      @include secondary_text;
+      font-style: normal;
+    }
+
     &:hover {
       background: darken($light_gray, 10%);
     }
@@ -87,9 +92,15 @@
       padding: $space 0;
       font-size: 1rem;
       margin: 0 $space/2;
+
+      &.secondary {
+        padding: $space/2 0;
+      }
+
       &:not(:last-child) {
         border-bottom: 1px solid $dark_gray;
       }
+
       text-align: left;
 
       &:hover {
