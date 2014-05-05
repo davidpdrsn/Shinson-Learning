@@ -38,7 +38,6 @@
       <% if current_user.admin? %>
         <%= link_to "Admin", admin_root_path %>
       <% end %>
-      <%# <a class="icon-search" href="#"></a> %>
     <% else %>
       <%= link_to "Sign in", new_user_session_path %>
       <%= link_to "Sign up", new_user_registration_path %>
