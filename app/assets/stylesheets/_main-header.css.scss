@@ -55,6 +55,12 @@
   }
 
   .main-header__logo__text {
+    @include big {
+      br {
+        display: none;
+      }
+    }
+
     @include medium {
       height: 74px;
       width: 50%;
