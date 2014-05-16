@@ -1,10 +1,15 @@
-<%= render layout: "shared/controls", locals: { heading: @study.name } do %>
+<%= render layout: "shared/controls" do %>
   <%= link_to "Study this", study_study_path(@study), class: "button" %>
 <% end %>
 
 <%= render layout: "shared/more_options/main" do %>
   <%= render layout: "shared/more_options/content" do %>
     <dl>
+      <dt>Name</dt>
+      <dd>
+        <%= @study.name %>
+      </dd>
+
       <dt>Techniques #</dt>
       <dd>
         <%= pluralize @study.techniques.count, "technique" %>

@@ -94,8 +94,8 @@ input[type=submit] {
 }
 .controls__container {
   float: right;
-  margin-top: $space/2;
   margin-left: $space*2;
+  margin-bottom: $space;
 
   @include small {
     margin-top: 0;
