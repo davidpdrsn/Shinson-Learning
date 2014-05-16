@@ -27,21 +27,13 @@ set :linked_files, %w{config/database.yml config/application.yml}
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-# after 'deploy', 'deploy:clear_cache'
-# after 'deploy', 'deploy:tag_ref'
-
 namespace :deploy do
-  # desc "tag current revision as production"
-  # task :tag_ref do
-  #   tag_name = "production"
-  #   system "git tag -d #{tag_name}"
-  #   system "git tag #{tag_name}"
-  # end
-
-  # desc "clear cache"
-  # task :clear_cache do
-  #   execute "cd #{current_path}; bundle exec rake tmp:clear RAILS_ENV=#{rails_env}"
-  # end
+  desc "tag current revision as production"
+  task :tag_ref do
+    tag_name = "production"
+    system "git tag -d #{tag_name}"
+    system "git tag #{tag_name}"
+  end
 
   desc "restart unicorn server"
   task :restart do
@@ -53,13 +45,6 @@ namespace :deploy do
 
   after :publishing, :restart
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
+  after :deploy, 'deploy:clear_cache'
+  after :deploy, 'deploy:tag_ref'
 end
