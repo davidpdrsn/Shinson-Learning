@@ -50,7 +50,7 @@ namespace :deploy do
     end
   end
 
-  after :publishing, :restart
+  after :deploy, :restart
 
   # after :deploy, 'deploy:clear_cache'
   after :deploy, 'deploy:tag_ref'
