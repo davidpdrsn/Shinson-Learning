@@ -43,12 +43,11 @@ namespace :deploy do
   #   execute "cd #{current_path}; bundle exec rake tmp:clear RAILS_ENV=#{rails_env}"
   # end
 
-  %w[start stop restart].each do |command|
-    desc "#{command} unicorn server"
-    task command do
-      on roles(:all) do |host|
-        execute "/etc/init.d/unicorn_#{fetch :application} #{command}"
-      end
+  desc "restart unicorn server"
+  task :restart do
+    on roles(:all) do |host|
+      execute "/etc/init.d/unicorn_#{fetch :application} stop"
+      execute "/etc/init.d/unicorn_#{fetch :application} start"
     end
   end
 
