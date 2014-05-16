@@ -41,16 +41,13 @@ namespace :deploy do
       execute "cd /home/deployer/apps/shinson_learning/current; bin/rake cache:clear RAILS_ENV=production"
     end
   end
-
-  desc "restart unicorn server"
-  task :restart do
-    on roles(:all) do
-      execute "/etc/init.d/unicorn_#{fetch :application} restart"
-    end
-  end
-
-  # after :deploy, :restart
-
-  # after :deploy, 'deploy:clear_cache'
-  after :deploy, 'deploy:tag_ref'
 end
+
+namespace :deploy do
+  task :restart do
+    invoke 'unicorn:restart'
+  end
+end
+
+after :deploy, 'deploy:tag_ref'
+after 'deploy:publishing', 'deploy:restart'
