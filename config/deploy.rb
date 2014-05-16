@@ -52,6 +52,6 @@ namespace :deploy do
 
   after :publishing, :restart
 
-  after :deploy, 'deploy:clear_cache'
+  # after :deploy, 'deploy:clear_cache'
   after :deploy, 'deploy:tag_ref'
 end
