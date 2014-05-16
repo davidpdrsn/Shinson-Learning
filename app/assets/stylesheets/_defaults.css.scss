@@ -55,8 +55,8 @@ input[type=submit] {
   padding: .2rem .33rem;
 }
 .button--red {
-  $color: $red;
-  @include linear_gradient(lighten($color, 0%), darken($color, 10%));
+  $color: red;
+  @include linear_gradient(lighten($color, 10%), darken($color, 10%));
   color: white !important;
   border-color: darken($color, 10%);
 

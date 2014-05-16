@@ -12,7 +12,7 @@ $darker_gray: darken($dark_gray, 10%);
 $black: black;
 $white: white;
 $blue: rgb(37, 67, 147);
-$red: lighten(desaturate(red, 20%), 20%);
+$red: darken(red, 10%);
 $yellow: #ffe533;
 
 // Sizes
