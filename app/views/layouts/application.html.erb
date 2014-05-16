@@ -34,17 +34,17 @@
 
   <nav class="main-header__nav">
     <% if user_signed_in? %>
-      <%= link_to "Techniques", techniques_path, class: "icon-list" %>
-      <%= link_to "Studies", studies_path, class: "icon-trophy" %>
-      <%= link_to "Questions", questions_path, class: "icon-question" %>
-      <%= link_to "Profile", current_user, class: "icon-user" %>
-      <%= link_to "Log out", destroy_user_session_path, class: "icon-logout", method: :delete %>
+      <%= nav_link_to "Techniques", techniques_path, class: "icon-list" %>
+      <%= nav_link_to "Studies", studies_path, class: "icon-trophy" %>
+      <%= nav_link_to "Questions", questions_path, class: "icon-question" %>
+      <%= nav_link_to "Profile", current_user, class: "icon-user" %>
+      <%= nav_link_to "Log out", destroy_user_session_path, class: "icon-logout", method: :delete %>
       <% if current_user.admin? %>
-        <%= link_to "Admin", admin_root_path, class: "secondary" %>
+        <%= nav_link_to "Admin", admin_root_path, class: "secondary" %>
       <% end %>
     <% else %>
-      <%= link_to "Log in", new_user_session_path, class: "icon-login" %>
-      <%= link_to "Sign up", new_user_registration_path, class: "icon-signup" %>
+      <%= nav_link_to "Log in", new_user_session_path, class: "icon-login" %>
+      <%= nav_link_to "Sign up", new_user_registration_path, class: "icon-signup" %>
     <% end %>
   </nav>
 </header>
