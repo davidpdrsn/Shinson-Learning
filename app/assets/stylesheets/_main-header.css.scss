@@ -93,11 +93,11 @@
       font-style: normal;
     }
 
-    &:hover {
-      background: darken($light_gray, 5%) !important;
-    }
-
     @include big {
+      &:hover {
+        background: darken($light_gray, 5%) !important;
+      }
+
       &:not(:last-of-type) {
         border-bottom: 1px solid darken($light_gray, 12%);
       }
