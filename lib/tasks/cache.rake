@@ -1,6 +1,6 @@
 namespace :cache do
   desc "Clear cache"
-  task :clear do
+  task :clear => :environment do
     Rails.cache.clear
   end
 end

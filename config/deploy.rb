@@ -37,12 +37,14 @@ namespace :deploy do
 
   desc "Clear cache"
   task :clear_cache do
-    execute "cd /deployer/apps/shinson_learning/current; bin/rake cache:clear RAILS_ENV=production"
+    on roles(:all) do
+      execute "cd /home/deployer/apps/shinson_learning/current; bin/rake cache:clear RAILS_ENV=production"
+    end
   end
 
   desc "restart unicorn server"
   task :restart do
-    on roles(:all) do |host|
+    on roles(:all) do
       execute "/etc/init.d/unicorn_#{fetch :application} stop"
       execute "/etc/init.d/unicorn_#{fetch :application} start"
     end
