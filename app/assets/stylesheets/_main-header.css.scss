@@ -22,11 +22,16 @@
 }
 
 .main-header__logo {
+  @include clearfix;
   font-size: 1.33rem;
-  text-align: center;
   display: block;
   padding: $space 0;
   border-bottom: 1px solid darken($light_gray, 12%);
+  text-align: center;
+
+  @include big {
+    text-align: center;
+  }
 
   @include medium {
     border-bottom: none;
@@ -39,6 +44,28 @@
 
   .main-header__logo__image {
     margin-bottom: $space/3;
+
+    @include medium {
+      float: left;
+      text-align: right;
+      padding-right: $space/2;
+      width: 50%;
+      margin-bottom: 0;
+    }
+  }
+
+  .main-header__logo__text {
+    @include medium {
+      height: 74px;
+      width: 50%;
+      display: flex;
+      align-items: center;
+      padding-left: $space/2;
+    }
+
+    @include small {
+      height: 50px;
+    }
   }
 
   img {
