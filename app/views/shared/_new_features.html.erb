@@ -14,14 +14,6 @@
       <strong>Speed!</strong><br>
       Many performance optimizations have been made that should make the site feel faster.
     </li>
-    <li>
-      <strong>Techniques as JSON</strong><br>
-      If you're a developer you can now get to all your techniques as JSON. Other formats will soon also be available.
-
-      <% if user_signed_in? %>
-        Just click <%= link_to "here", techniques_path(format: "json") %>
-      <% end %>
-    </li>
   </ul>
 
   <% unless request.fullpath == "/" %>
