@@ -35,6 +35,11 @@ namespace :deploy do
     system "git tag #{tag_name}"
   end
 
+  desc "Clear cache"
+  task :clear_cache do
+    execute "cd /deployer/apps/shinson_learning/current; bin/rake cache:clear RAILS_ENV=production"
+  end
+
   desc "restart unicorn server"
   task :restart do
     on roles(:all) do |host|
