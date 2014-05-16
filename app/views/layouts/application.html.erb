@@ -37,7 +37,7 @@
       <%= nav_link_to "Techniques", techniques_path, class: "icon-list" %>
       <%= nav_link_to "Studies", studies_path, class: "icon-trophy" %>
       <%= nav_link_to "Questions", questions_path, class: "icon-question" %>
-      <%= nav_link_to "Profile", current_user, class: "icon-user" %>
+      <%= nav_link_to "Profile", user_path(current_user), class: "icon-user" %>
       <%= nav_link_to "Log out", destroy_user_session_path, class: "icon-logout", method: :delete %>
       <% if current_user.admin? %>
         <%= nav_link_to "Admin", admin_root_path, class: "secondary" %>
