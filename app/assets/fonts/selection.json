@@ -145,8 +145,8 @@
 				"name": "trophy",
 				"ligatures": ""
 			},
-			"setIdx": 5,
-			"iconIdx": 44
+			"setIdx": 0,
+			"iconIdx": 5
 		},
 		{
 			"icon": {
@@ -169,35 +169,8 @@
 				"name": "list",
 				"ligatures": ""
 			},
-			"setIdx": 5,
-			"iconIdx": 147
-		},
-		{
-			"icon": {
-				"paths": [
-					"M564.275 870.4h-411.699v-716.8h411.648v153.6h101.376v-153.6c0-56.32-46.029-102.4-102.4-102.4h-409.6c-56.32 0-102.4 46.080-102.4 102.4v716.8c0 56.32 46.080 102.4 102.4 102.4h409.6c56.371 0 102.4-46.080 102.4-102.4v-102.4h-101.325v102.4zM972.8 537.6l-203.725-199.68v122.88h-460.8v153.6h460.8v122.88l203.725-199.68z"
-				],
-				"tags": [
-					"logout",
-					"log out",
-					"sign out",
-					"exit",
-					"log off",
-					"quit",
-					"leave"
-				],
-				"grid": 20
-			},
-			"properties": {
-				"id": 117,
-				"order": 8,
-				"prevSize": 20,
-				"code": 58885,
-				"name": "logout",
-				"ligatures": ""
-			},
-			"setIdx": 5,
-			"iconIdx": 117
+			"setIdx": 0,
+			"iconIdx": 6
 		},
 		{
 			"icon": {
@@ -218,8 +191,8 @@
 				"name": "question",
 				"ligatures": ""
 			},
-			"setIdx": 5,
-			"iconIdx": 133
+			"setIdx": 0,
+			"iconIdx": 8
 		},
 		{
 			"icon": {
@@ -243,8 +216,83 @@
 				"name": "user",
 				"ligatures": ""
 			},
-			"setIdx": 5,
-			"iconIdx": 13
+			"setIdx": 0,
+			"iconIdx": 9
+		},
+		{
+			"icon": {
+				"paths": [
+					"M864 0c88.364 0 160 71.634 160 160 0 36.020-11.91 69.258-32 96l-64 64-224-224 64-64c26.742-20.090 59.978-32 96-32zM64 736l-64 288 288-64 592-592-224-224-592 592zM715.578 363.578l-448 448-55.156-55.156 448-448 55.156 55.156z"
+				],
+				"tags": [
+					"pencil",
+					"write",
+					"edit",
+					"blog",
+					"note"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"id": 5,
+				"order": 3,
+				"prevSize": 32,
+				"code": 58891,
+				"name": "signup",
+				"ligatures": ""
+			},
+			"setIdx": 1,
+			"iconIdx": 5
+		},
+		{
+			"icon": {
+				"paths": [
+					"M384 512h-320v-128h320v-128l192 192-192 192zM1024 0v832l-384 192v-192h-384v-256h64v192h320v-576l256-128h-576v256h-64v-320z"
+				],
+				"tags": [
+					"enter",
+					"sign in",
+					"log in",
+					"login"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"id": 259,
+				"order": 1,
+				"prevSize": 32,
+				"code": 58885,
+				"name": "login",
+				"ligatures": ""
+			},
+			"setIdx": 1,
+			"iconIdx": 259
+		},
+		{
+			"icon": {
+				"paths": [
+					"M768 640v-128h-320v-128h320v-128l192 192zM704 576v256h-320v192l-384-192v-832h704v320h-64v-256h-512l256 128v576h256v-192z"
+				],
+				"tags": [
+					"exit",
+					"sign out",
+					"log out",
+					"quit",
+					"close",
+					"logout"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"id": 260,
+				"order": 2,
+				"prevSize": 32,
+				"code": 58890,
+				"name": "logout",
+				"ligatures": ""
+			},
+			"setIdx": 1,
+			"iconIdx": 260
 		}
 	],
 	"height": 1024,
@@ -252,38 +300,22 @@
 		"name": "icomoon"
 	},
 	"preferences": {
+		"showGlyphs": true,
+		"showQuickUse": true,
 		"fontPref": {
 			"prefix": "icon-",
 			"metadata": {
 				"fontFamily": "icomoon"
 			},
-			"showGlyphs": true,
 			"metrics": {
 				"emSize": 512,
 				"baseline": 6.25,
 				"whitespace": 50
-			},
-			"resetPoint": 58880,
-			"showQuickUse": true,
-			"quickUsageToken": false,
-			"showMetrics": true,
-			"showMetadata": false
+			}
 		},
-		"imagePref": {
-			"color": 0,
-			"height": 32,
-			"columns": 16,
-			"margin": 16,
-			"png": false,
-			"sprites": true
-		},
+		"imagePref": {},
 		"historySize": 100,
 		"showCodes": true,
-		"gridSize": 16,
-		"showLiga": false,
-		"showGrid": true,
-		"showGlyphs": true,
-		"showQuickUse": true,
 		"search": ""
 	}
 }

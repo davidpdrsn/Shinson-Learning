@@ -39,8 +39,8 @@
         <%= link_to "Admin", admin_root_path, class: "secondary" %>
       <% end %>
     <% else %>
-      <%= link_to "Log in", new_user_session_path %>
-      <%= link_to "Sign up", new_user_registration_path %>
+      <%= link_to "Log in", new_user_session_path, class: "icon-login" %>
+      <%= link_to "Sign up", new_user_registration_path, class: "icon-signup" %>
     <% end %>
   </nav>
 </header>
