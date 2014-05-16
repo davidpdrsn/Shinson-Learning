@@ -31,9 +31,9 @@ domain.toggleNewNoteForm = ($button, $form) ->
   $form.toggle()
   if $form.is(":visible")
     $form.find("textarea").first().focus()
-    $button.text("-")
+    $button.text("Don't add note")
   else
-    $button.text("+")
+    $button.text("Add note")
 
 domain.injectSpinner = ->
   unless $('.spinner').length > 0 or domain.timer

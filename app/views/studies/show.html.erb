@@ -1,59 +1,45 @@
 <%= render layout: "shared/controls" do %>
-  <%= link_to "Study this", study_study_path(@study), class: "button" %>
+  <div class="controls__primary">
+    <%= link_to "Study this", study_study_path(@study), class: "button" %>
+  </div>
+
+  <%= link_to "Edit", edit_study_path(@study), class: "button" %>
+
+  <%= link_to "Delete", study_path(@study), class: "button button--red", method: :delete, data: { confirm: "Sure?" } %>
 <% end %>
 
-<%= render layout: "shared/more_options/main" do %>
-  <%= render layout: "shared/more_options/content" do %>
-    <dl>
-      <dt>Name</dt>
-      <dd>
-        <%= @study.name %>
-      </dd>
+<dl>
+  <dt>Name</dt>
+  <dd>
+    <%= @study.name %>
+  </dd>
 
-      <dt>Techniques #</dt>
-      <dd>
-        <%= pluralize @study.techniques.count, "technique" %>
-      </dd>
+  <dt>Techniques #</dt>
+  <dd>
+    <%= pluralize @study.techniques.count, "technique" %>
+  </dd>
 
-      <dt>Studied</dt>
-      <dd>
-        <%= pluralize @study.cached_scores_count, "time" %>
-      </dd>
+  <dt>Studied</dt>
+  <dd>
+    <%= pluralize @study.cached_scores_count, "time" %>
+  </dd>
 
-      <dt>Average score</dt>
-      <dd>
-        <%= @study.cached_average_score %>%
-      </dd>
+  <dt>Average score</dt>
+  <dd>
+    <%= @study.cached_average_score %>%
+  </dd>
 
-      <dt>Last study</dt>
-      <dd>
-        <% if @study.scores.present? %>
-          <% present @study.newest_score do |score_presenter| %>
-            <%= score_presenter.timestamp %>
-          <% end %>
-        <% else %>
-          Never studied this
-        <% end %>
-      </dd>
-    </dl>
-  <% end %>
-
-  <%= render layout: "shared/more_options/sidebar" do %>
-    <h1>
-      Options
-      <button class="more-options__expand button--small">+</button>
-    </h1>
-
-    <ul class="toggleable">
-      <li>
-        <%= link_to "Edit", edit_study_path(@study), class: "button button--small" %>
-      </li>
-      <li>
-        <%= link_to "Delete", study_path(@study), class: "button button--small button--red", method: :delete, data: { confirm: "Sure?" } %>
-      </li>
-    </ul>
-  <% end %>
-<% end %>
+  <dt>Last study</dt>
+  <dd>
+    <% if @study.scores.present? %>
+      <% present @study.newest_score do |score_presenter| %>
+        <%= score_presenter.timestamp %>
+      <% end %>
+    <% else %>
+      Never studied this
+    <% end %>
+  </dd>
+</dl>
 
 <div class="stats-container">
   <h2>Statistics</h2>

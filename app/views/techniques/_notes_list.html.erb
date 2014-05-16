@@ -2,7 +2,7 @@
   <h2>Notes</h2>
 
   <% if @technique.user == current_user %>
-    <button class="notes__new-button">+</button>
+    <button class="notes__new-button">Add note</button>
     <%= render partial: "shared/notes_form" %>
   <% end %>
 

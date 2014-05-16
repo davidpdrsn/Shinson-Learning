@@ -1,9 +1,11 @@
 <%= render layout: "shared/controls" do %>
-  <%= link_to "+", new_technique_path, class: "button" %>
-  <%= link_to "+++", multiple_new_techniques_path, class: "button" %>
-<% end %>
+  <div class="controls__primary">
+    <%= link_to "Add new", new_technique_path, class: "button" %>
+  </div>
 
-<%= render "grouping_select" if @techniques.present? %>
+  <%= link_to "Add multiple", multiple_new_techniques_path, class: "button" %>
+  <%= render "grouping_select" if @techniques.present? %>
+<% end %>
 
 <% cache [current_user, (params[:group_by] || @default_grouping), "techniques"] do %>
   <div class="techniques">

@@ -98,7 +98,7 @@ describe UserPresenter do
 
       expect(view).to have_received(:link_to).with "Edit information",
                                                    edit_user_registration_path,
-                                                   { class: "button button--small" }
+                                                   { class: "button" }
     end
   end
 
@@ -115,7 +115,7 @@ describe UserPresenter do
                                                    {
                                                      data: { confirm: "Are you sure?" },
                                                      method: :delete,
-                                                     class: "button button--small button--red"
+                                                     class: "button button--red"
                                                    }
     end
   end

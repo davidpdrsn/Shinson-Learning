@@ -14,7 +14,7 @@ feature 'a user creates a new study' do
     sign_in bob
 
     click_link "Studies"
-    click_link "+"
+    click_link "Add new"
     fill_in "Name of study", with: "Misc study"
     fill_in "new-study__query", with: "tec"
     click_link "technique #1"
@@ -31,7 +31,7 @@ feature 'a user creates a new study' do
     sign_in bob
 
     click_link "Studies"
-    click_link "+"
+    click_link "Add new"
     fill_in "Name of study", with: "Misc study"
     fill_in "new-study__query", with: "tec"
 
@@ -46,7 +46,7 @@ feature 'a user creates a new study' do
     sign_in bob
 
     click_link "Studies"
-    click_link "+"
+    click_link "Add new"
     fill_in "Name of study", with: "Misc study"
     fill_in "new-study__query", with: "tec"
     click_button "Add all"

@@ -37,7 +37,7 @@ class UserPresenter < Presenter
   def edit_link
     h.link_to "Edit information",
               h.edit_user_registration_path,
-              class: "button button--small"
+              class: "button"
   end
 
   def destroy_link
@@ -45,7 +45,7 @@ class UserPresenter < Presenter
               h.registration_path(user),
               data: { confirm: "Are you sure?" },
               method: :delete,
-              class: "button button--small button--red"
+              class: "button button--red"
   end
 
   private

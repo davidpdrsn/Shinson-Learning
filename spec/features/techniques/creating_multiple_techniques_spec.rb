@@ -7,7 +7,7 @@ feature 'creating multiple techniques' do
 
     sign_up
     click_link "Techniques"
-    click_link "+++"
+    click_link "Add multiple"
 
     within "fieldset:first-of-type" do
       fill_in "techniques[name][]", with: "one"

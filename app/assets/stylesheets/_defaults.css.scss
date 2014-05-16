@@ -36,14 +36,14 @@ body {
 button,
 input[type=submit] {
   @include linear-gradient(lighten($light_gray, 5%), lighten($dark_gray, 5%));
-  font-size: 1rem;
-  padding: .5rem .75rem;
   border: 1px solid $dark_gray;
   border-radius: $radius;
   color: inherit;
   text-decoration: none;
   display: inline-block;
   outline: none;
+  font-size: .9rem;
+  padding: .33rem .5rem;
 
   &:active {
     @include linear-gradient(to top, lighten($light_gray, 5%), lighten($dark_gray, 5%));
@@ -83,22 +83,76 @@ input[type=submit] {
 }
 
 .controls {
-  @include clearfix;
-}
-.controls__heading {
-  float: left;
+  margin-bottom: $space*2;
+  display: flex;
+  align-items: stretch;
+  position: relative;
 
-  @include small {
-    margin-bottom: 0;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -$space;
+    bottom: -$space;
+    left: -$space;
+    right: -$space;
+    background: rgba($light_gray, .25);
+    border-bottom: 1px solid $light_gray;
+    z-index: -1;
   }
-}
-.controls__container {
-  float: right;
-  margin-left: $space*2;
-  margin-bottom: $space;
 
-  @include small {
-    margin-top: 0;
+  select {
+    margin: 0 !important;
+  }
+
+  @include medium {
+    * {
+      flex: 1;
+    }
+
+    > :only-child {
+      flex: 0 1 auto;
+      width: 33.3%;
+      margin: 0 auto;
+    }
+
+    select {
+      flex: 2;
+    }
+
+    > *:not(:last-child) {
+      margin-right: $space;
+    }
+
+    .controls__primary {
+      display: flex;
+    }
+
+    .button {
+      font-size: .7rem;
+      padding: .2rem .33rem;
+    }
+  }
+
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include big {
+    justify-content: flex-end;
+
+    > *:not(:last-child) {
+      margin-right: $space;
+    }
+  }
+
+  @include big {
+    .controls__primary {
+      border-right: 1px solid $dark_gray;
+      padding-right: $space;
+      margin-right: $space;
+    }
   }
 }
 

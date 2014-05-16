@@ -1,5 +1,5 @@
 <%= render layout: "shared/controls" do %>
-  <%= link_to "+", new_study_path, class: "button" %>
+  <%= link_to "Add new", new_study_path, class: "button" %>
 <% end %>
 
 <% cache [current_user, @studies] do  %>
