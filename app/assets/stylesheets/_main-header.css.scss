@@ -123,6 +123,7 @@
       padding: $space 0;
       font-size: 1rem;
       margin: 0 $space/2;
+      text-align: left;
 
       &.secondary {
         padding: $space/2 0;
@@ -131,8 +132,6 @@
       &:not(:last-child) {
         border-bottom: 1px solid $dark_gray;
       }
-
-      text-align: left;
 
       &:hover {
         background: inherit;
