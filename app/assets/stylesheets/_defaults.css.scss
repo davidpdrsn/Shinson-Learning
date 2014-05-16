@@ -111,6 +111,7 @@ input[type=submit] {
 
   @include medium {
     position: fixed;
+    z-index: 9999;
     bottom: -$space;
     left: $space;
     right: $space;
