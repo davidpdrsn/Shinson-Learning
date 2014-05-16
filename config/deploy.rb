@@ -45,12 +45,11 @@ namespace :deploy do
   desc "restart unicorn server"
   task :restart do
     on roles(:all) do
-      execute "/etc/init.d/unicorn_#{fetch :application} stop"
-      execute "/etc/init.d/unicorn_#{fetch :application} start"
+      execute "/etc/init.d/unicorn_#{fetch :application} restart"
     end
   end
 
-  after :deploy, :restart
+  # after :deploy, :restart
 
   # after :deploy, 'deploy:clear_cache'
   after :deploy, 'deploy:tag_ref'
