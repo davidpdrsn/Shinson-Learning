@@ -95,9 +95,14 @@ input[type=submit] {
     bottom: -$space;
     left: -$space;
     right: -$space;
-    background: rgba($light_gray, .25);
+    background: lighten($light_gray, 8%);
     border-bottom: 1px solid $light_gray;
     z-index: -1;
+
+    @include medium {
+      border-bottom: none;
+      border-top: 1px solid $light_gray;
+    }
   }
 
   select {
@@ -105,6 +110,11 @@ input[type=submit] {
   }
 
   @include medium {
+    position: fixed;
+    bottom: -$space;
+    left: $space;
+    right: $space;
+
     * {
       flex: 1;
     }
@@ -242,10 +252,6 @@ dl {
   @include clearfix;
   margin-bottom: 20px;
   margin-top: 0;
-
-  @include small {
-    margin-top: $space;
-  }
 
   dt,
   dd {
