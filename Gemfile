@@ -22,8 +22,11 @@ gem 'timecop'
 
 gem 'dalli'
 gem 'unicorn'
-gem 'capistrano', '2.15.5'
 gem 'newrelic_rpm'
+
+gem 'capistrano', '~> 3.2.0'
+gem 'capistrano-rails', '~> 1.1'
+gem 'capistrano-bundler', '~> 1.1.2'
 
 gem 'launchy'
 gem 'simple_form'

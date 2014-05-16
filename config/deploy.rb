@@ -1,82 +1,66 @@
-require "bundler/capistrano"
+# config valid only for Capistrano 3.1
+lock '3.2.1'
 
-server "151.236.221.178", :web, :app, :db, primary: true
-
-set :application, "shinson_learning"
+set :application, 'shinson_learning'
+set :repo_url, 'https://github.com/davidpdrsn/Shinson-Learning.git'
 set :user, "deployer"
-set :deploy_to, "/home/#{user}/apps/#{application}"
-set :deploy_via, :remote_cache
-set :use_sudo, false
 
-set :scm, "git"
-set :repository, "https://github.com/davidpdrsn/Shinson-Learning.git"
-set :branch, "master"
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
+# Default deploy_to directory is /var/www/my_app
+set :deploy_to, "/home/#{fetch :user}/apps/#{fetch :application}"
 
-after "deploy", "deploy:cleanup"
-after 'deploy', 'deploy:clear_cache'
-after 'deploy', 'deploy:tag_ref'
+# Default value for :pty is false
+# set :pty, true
 
-after 'deploy:cold', 'deploy:seed'
+# Default value for :linked_files is []
+# set :linked_files, %w{config/database.yml}
+
+# Default value for linked_dirs is []
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{config/database.yml config/application.yml}
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+# after 'deploy', 'deploy:clear_cache'
+# after 'deploy', 'deploy:tag_ref'
 
 namespace :deploy do
-  desc "reload the database with seed data"
-  task :seed do
-    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
-  end
+  # desc "tag current revision as production"
+  # task :tag_ref do
+  #   tag_name = "production"
+  #   system "git tag -d #{tag_name}"
+  #   system "git tag #{tag_name}"
+  # end
 
-  desc "tag current revision as production"
-  task :tag_ref do
-    tag_name = "production"
-    system "git tag -d #{tag_name}"
-    system "git tag #{tag_name}"
-  end
-
-  desc "clear cached"
-  task :clear_cache do
-    run "cd #{current_path}; bundle exec rake tmp:clear RAILS_ENV=#{rails_env}"
-  end
+  # desc "clear cache"
+  # task :clear_cache do
+  #   execute "cd #{current_path}; bundle exec rake tmp:clear RAILS_ENV=#{rails_env}"
+  # end
 
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
-    task command, roles: :app, except: {no_release: true} do
-      run "/etc/init.d/unicorn_#{application} #{command}"
+    task command do
+      on roles(:all) do |host|
+        execute "/etc/init.d/unicorn_#{fetch :application} #{command}"
+      end
     end
   end
 
-  task :setup_config, roles: :app do
-    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-    sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
-    run "mkdir -p #{shared_path}/config"
-    put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
-    puts "Now edit the config files in #{shared_path}."
-  end
-  after "deploy:setup", "deploy:setup_config"
+  after :publishing, :restart
 
-  task :symlink_config, roles: :app do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-  end
-  after "deploy:finalize_update", "deploy:symlink_config"
-
-  desc "Make sure local git is in sync with remote."
-  task :check_revision, roles: :web do
-    unless `git rev-parse HEAD` == `git rev-parse origin/master`
-      puts "WARNING: HEAD is not the same as origin/master"
-      puts "Run `git push` to sync changes."
-      exit
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
     end
   end
-  before "deploy", "deploy:check_revision"
-end
 
-namespace :log do
-  desc "Tail production log"
-  task :tail, :roles => :app do
-    run "tail -f #{current_path}/log/unicorn.log" do |channel, stream, data|
-      puts "#{channel[:host]}: #{data}"
-      break if stream == :err
-    end
-  end
 end
