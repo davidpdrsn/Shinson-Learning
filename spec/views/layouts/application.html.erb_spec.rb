@@ -25,7 +25,7 @@ describe "layouts/application" do
 
     it "doesn't show the sign in link" do
       with_rendered_page do |page|
-        expect(page).not_to have_content "Sign in"
+        expect(page).not_to have_content "Log in"
       end
     end
 
@@ -55,7 +55,7 @@ describe "layouts/application" do
 
     it "shows the link to sign in" do
       with_rendered_page do |page|
-        expect(page).to have_content "Sign in"
+        expect(page).to have_content "Log in"
       end
     end
 

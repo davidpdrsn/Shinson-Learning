@@ -8,6 +8,6 @@ feature 'deleting account' do
     click_link "Profile"
     click_link "Delete account"
 
-    expect(page).to have_content "Sign in"
+    expect(page).to have_content "Log in"
   end
 end
