@@ -2,6 +2,22 @@ class UserPresenter < Presenter
   presents :user
   delegate :email, to: :user
 
+  def first_name
+    if user.first_name.present?
+      user.first_name
+    else
+      'n\a'
+    end
+  end
+
+  def last_name
+    if user.last_name.present?
+      user.last_name
+    else
+      'n\a'
+    end
+  end
+
   def name
     if has_full_name(user)
       "#{user.first_name} #{user.last_name}"
