@@ -8,12 +8,11 @@
   <%= link_to "Delete", study_path(@study), class: "button button--red", method: :delete, data: { confirm: "Sure?" } %>
 <% end %>
 
-<dl>
-  <dt>Name</dt>
-  <dd>
-    <%= @study.name %>
-  </dd>
+<h1>
+  <%= @study.name %>
+</h1>
 
+<dl>
   <dt>Techniques #</dt>
   <dd>
     <%= pluralize @study.techniques.count, "technique" %>
