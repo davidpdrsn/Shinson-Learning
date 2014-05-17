@@ -5,9 +5,11 @@
       <%= user_presenter.destroy_link %>
     <% end %>
 
+    <h1>
+      <%= user_presenter.name_with_s %> profile
+    </h1>
+
     <dl>
-      <dt>Name</dt>
-      <dd><%= user_presenter.name %></dd>
 
       <dt>Email</dt>
       <dd><%= user_presenter.mailto_link %></dd>
