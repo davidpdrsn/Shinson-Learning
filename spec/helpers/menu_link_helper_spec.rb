@@ -12,6 +12,12 @@ describe MenuLinkHelper do
       expect(nav_link_to "Home", "/").to eq '<a class=" current" href="/">Home</a>'
     end
 
+    it "doesn't care about query params" do
+      request.stub(:fullpath).and_return("/?foo=bar")
+
+      expect(nav_link_to "Home", "/").to eq '<a class=" current" href="/">Home</a>'
+    end
+
     it "appends the class if the link already has one" do
       request.stub(:fullpath).and_return("/")
 
