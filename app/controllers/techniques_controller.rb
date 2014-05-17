@@ -1,8 +1,8 @@
 class TechniquesController < ApplicationController
   include FindsTechniques
 
-  before_action :authenticate_user!, except: [:show]
-  before_action :get_technique, only: [:destroy, :update, :edit]
+  before_action :authenticate_user!
+  before_action :get_technique, only: [:destroy, :update, :edit, :show]
 
   def index
     @page_title = "Techniques"
@@ -34,7 +34,6 @@ class TechniquesController < ApplicationController
   end
 
   def show
-    @technique = Technique.find(params[:id])
     @page_title = @technique.name
     @note = @technique.notes.new
     @notes = @technique.notes - [@note]

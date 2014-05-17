@@ -36,27 +36,44 @@ describe TechniquesController do
   end
 
   describe "#show" do
-    before { get :show, id: technique.id }
+    context "when signed in" do
+      before do
+        sign_in technique.user
+        get :show, id: technique.id
+      end
 
-    it "assigns @technique" do
-      expect(assigns(:technique)).to eq technique
+      it "assigns @technique" do
+        expect(assigns(:technique)).to eq technique
+      end
+
+      it "assigns @note" do
+        expect(assigns(:note)).to be_new_record
+        expect(assigns(:note).technique).to eq technique
+      end
+
+      it "assigns @notes" do
+        note = create :note, technique: technique
+        another_note = create :note
+
+        get :show, id: technique.id
+
+        expect(assigns(:notes)).to eq [note]
+      end
     end
 
-    it "assigns @note" do
-      expect(assigns(:note)).to be_new_record
-      expect(assigns(:note).technique).to eq technique
-    end
-
-    it "assigns @notes" do
-      note = create :note, technique: technique
-      another_note = create :note
-
+    it "doesn't let you view other users techniques" do
+      sign_in another_technique.user
       get :show, id: technique.id
 
-      expect(assigns(:notes)).to eq [note]
+      expect(subject).to redirect_to root_path
+      expect(subject).to set_the_flash[:alert]
     end
 
-    it { should render_template :show }
+    it "requires authentication" do
+      get :show, id: technique.id
+
+      expect(subject).to redirect_to new_user_session_path
+    end
   end
 
   describe "#new" do
