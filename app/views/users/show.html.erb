@@ -4,35 +4,35 @@
       <%= user_presenter.edit_link %>
       <%= user_presenter.destroy_link %>
     <% end %>
-
-    <h1>
-      <%= user_presenter.name_with_s %> profile
-    </h1>
-
-    <dl>
-      <dt>First name</dt>
-      <dd><%= user_presenter.first_name %></dd>
-
-      <dt>Last name</dt>
-      <dd><%= user_presenter.last_name %></dd>
-
-      <dt>Email</dt>
-      <dd><%= user_presenter.mailto_link %></dd>
-    </dl>
-
-    <h2>Quick stats</h2>
-    <dl>
-      <dt>Techniques</dt>
-      <dd><%= @user_cache.techniques_count %></dd>
-
-      <dt>Notes</dt>
-      <dd><%= @user_cache.notes_count %></dd>
-
-      <dt>Studies</dt>
-      <dd><%= @user_cache.studies_count %></dd>
-
-      <dt>Joined</dt>
-      <dd><%= user_presenter.timestamp %></dd>
-    </dl>
   <% end %>
+
+  <h1>
+    <%= user_presenter.name_with_s %> profile
+  </h1>
+
+  <dl>
+    <dt>First name</dt>
+    <dd><%= user_presenter.first_name %></dd>
+
+    <dt>Last name</dt>
+    <dd><%= user_presenter.last_name %></dd>
+
+    <dt>Email</dt>
+    <dd><%= user_presenter.mailto_link %></dd>
+  </dl>
+
+  <h2>Quick stats</h2>
+  <dl>
+    <dt>Techniques</dt>
+    <dd><%= @user_cache.techniques_count %></dd>
+
+    <dt>Notes</dt>
+    <dd><%= @user_cache.notes_count %></dd>
+
+    <dt>Studies</dt>
+    <dd><%= @user_cache.studies_count %></dd>
+
+    <dt>Joined</dt>
+    <dd><%= user_presenter.timestamp %></dd>
+  </dl>
 <% end %>

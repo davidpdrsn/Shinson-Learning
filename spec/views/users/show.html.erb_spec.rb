@@ -34,6 +34,12 @@ describe "users/show" do
       controller.stub(:current_user).and_return(another_user)
     end
 
+    it "shows their name" do
+      with_rendered_page do |page|
+        expect(page).to have_content another_user.first_name
+      end
+    end
+
     it "doesn't show edit link" do
       with_rendered_page do |page|
         expect(page).not_to have_content "Edit information"
