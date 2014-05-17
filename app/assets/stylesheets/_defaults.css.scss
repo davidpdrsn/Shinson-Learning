@@ -54,7 +54,7 @@ body {
 .button,
 button,
 input[type=submit] {
-  @include linear-gradient(lighten($light_gray, 5%), lighten($dark_gray, 5%));
+  background: $light_gray;
   border: 1px solid $dark_gray;
   border-radius: $radius;
   color: inherit;
@@ -65,33 +65,33 @@ input[type=submit] {
   padding: .33rem .5rem;
 
   &:active {
-    @include linear-gradient(to top, lighten($light_gray, 5%), lighten($dark_gray, 5%));
+    background: lighten($dark_gray, 10%);
   }
-
 }
 .button--small {
   font-size: .7rem;
   padding: .2rem .33rem;
 }
 .button--red {
-  $color: red;
-  @include linear_gradient(lighten($color, 10%), darken($color, 10%));
+  $color: darken(red, 1.5%);
+  background: $color;
   color: white !important;
-  border-color: darken($color, 10%);
+  border-color: darken($color, 12%);
 
   &:active {
-    @include linear_gradient(bottom, lighten($color, 10%), darken($color, 10%));
+    background: darken($color, 5%);
   }
 }
 .button--green {
+  $color: lighten(green, 10%);
+  background: $color;
   margin-right: $space;
-  $color: lighten(green, 5%);
-  @include linear_gradient(lighten($color, 10%), darken($color, 3%));
   color: white !important;
-  border-color: darken($color, 3%);
+  border-color: darken($color, 5%);
 
   &:active {
     @include linear_gradient(bottom, lighten($color, 10%), darken($color, 3%));
+    background: darken($color, 3%);
   }
 }
 

@@ -147,8 +147,14 @@
 }
 
 .main-header__toggle-nav {
-  width: 3rem;
   margin: 0 auto $space;
+  background: darken($light_gray, 5);
+  font-size: .8rem;
+  padding: .3rem .5rem;
+
+  &:active {
+    background: lighten($dark_gray, 5%);
+  }
 
   @include big {
     display: none;
