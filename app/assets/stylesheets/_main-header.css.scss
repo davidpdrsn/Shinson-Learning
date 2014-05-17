@@ -1,5 +1,4 @@
 .main-header {
-  background: $light_gray;
   width: 25%;
   float: left;
   height: 100%;
@@ -9,6 +8,7 @@
   }
 
   @include medium {
+    background: $light_gray;
     float: none;
     width: 100%;
     height: auto;

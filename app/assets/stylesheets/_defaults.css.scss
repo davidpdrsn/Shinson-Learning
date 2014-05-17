@@ -7,6 +7,25 @@ body {
 
 body {
   font-family: "Lato", sans-serif;
+
+  @include big {
+    // the gray thing that looks like the background of the menu
+    &:after {
+      content: '';
+      z-index: -1;
+      position: fixed;
+      display: block;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background: $light_gray;
+      width: 25%;
+
+      @media (min-width: $menu_breakpoint) {
+        width: 250px;
+      }
+    }
+  }
 }
 
 .main {
