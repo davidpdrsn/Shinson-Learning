@@ -3,13 +3,30 @@
 $flash_padding: .75rem;
 
 .flash {
-  font-size: .8rem;
-  padding: $flash_padding;
+  animation: move_out .5s 2s cubic-bezier(.34,-0.6,.6,.47) forwards;
   border-radius: $radius;
+  font-size: .8rem;
+  left: $space;
   margin-bottom: $space;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
+  padding: $flash_padding;
+  position: fixed;
+  right: $space;
+  top: $space;
+  text-align: center;
+
+  @include big {
+    $max_width: 600px;
+    left: 50%;
+    margin-left: -$max_width/2;
+    max-width: $max_width;
+    width: 100%;
+  }
+}
+
+@keyframes move_out {
+  to {
+    transform: translateY(-100px);
+  }
 }
 
 .flash--notice {
@@ -22,20 +39,4 @@ $flash_padding: .75rem;
   background: #e54d42;
   border: 1px solid darken(#e54d42, 15%);
   color: white;
-}
-
-.flash__close {
-  -webkit-appearance: none;
-  font-size: .8rem;
-  padding: 0;
-  background: none;
-  margin: 0;
-  border: none;
-  position: relative;
-  top: 1px;
-
-  &:active,
-  &:focus {
-    background: none !important;
-  }
 }

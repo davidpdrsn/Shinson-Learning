@@ -24,9 +24,6 @@ domain.peekAtTechnique = ($link, $description) ->
   $description.toggle()
   $link.toggleClass("peek__link--peeking").toggleClass("icon-eye-blocked")
 
-domain.closeFlash = ($flash) ->
-  $flash.remove()
-
 domain.injectSpinner = ->
   unless $('.spinner').length > 0 or domain.timer
     domain.timer = setTimeout(

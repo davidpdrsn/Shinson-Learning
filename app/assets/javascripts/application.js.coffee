@@ -32,10 +32,6 @@ $ ->
     event.preventDefault()
     domain.peekAtTechnique $(this), $(this).parents('li').find('.technique__description')
 
-  $(document).on 'click', '.flash__close', (event) ->
-    event.preventDefault()
-    domain.closeFlash $(this).parents('.flash')
-
   $(document).on 'click', '.main-header__toggle-nav', (event) ->
     event.preventDefault()
     domain.toggleNav $('.main-header__nav')
