@@ -27,14 +27,6 @@ domain.peekAtTechnique = ($link, $description) ->
 domain.closeFlash = ($flash) ->
   $flash.remove()
 
-domain.toggleNewNoteForm = ($button, $form) ->
-  $form.toggle()
-  if $form.is(":visible")
-    $form.find("textarea").first().focus()
-    $button.text("Don't add note")
-  else
-    $button.text("Add note")
-
 domain.injectSpinner = ->
   unless $('.spinner').length > 0 or domain.timer
     domain.timer = setTimeout(

@@ -1,5 +1,9 @@
 <% if @technique.user == current_user %>
   <%= render layout: "shared/controls" do %>
+    <div class="controls__primary">
+      <%= link_to "Add note", new_technique_note_path(@technique), class: "button" %>
+    </div>
+
     <%= link_to "Edit", edit_technique_path(@technique), class: "button" %>
 
     <%= link_to "Delete", @technique, method: :delete, class: "button button--red", data: { confirm: "Sure?" } %>

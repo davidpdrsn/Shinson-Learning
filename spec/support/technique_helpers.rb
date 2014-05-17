@@ -7,4 +7,6 @@ def create_technique technique = build(:technique)
   select technique.belt.pretty_print, from: "Belt"
   select technique.category.name, from: "Category"
   click_button "Create Technique"
+
+  Technique.last
 end

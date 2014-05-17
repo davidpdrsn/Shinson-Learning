@@ -1,12 +1,17 @@
 class NotesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy, :edit, :update, :index]
-  before_action :get_technique, only: [:create, :destroy, :edit, :update, :index]
+  before_action :authenticate_user!, only: [:create, :destroy, :edit, :update, :index, :new]
+  before_action :get_technique, only: [:new, :create, :destroy, :edit, :update, :index]
   before_action :get_note, only: [:edit, :update, :destroy]
 
   include FindsTechniques
 
   def index
     redirect_to @technique
+  end
+
+  def new
+    @note = current_user.notes.new
+    @note.technique = @technique
   end
 
   def create

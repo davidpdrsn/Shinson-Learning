@@ -27,7 +27,7 @@ describe "techniques/show" do
 
     it "shows the form for creating a note" do
       with_rendered_page do |page|
-        expect(page).to have_button "Create Note"
+        expect(page).to have_link "Add note"
       end
     end
   end
@@ -53,7 +53,7 @@ describe "techniques/show" do
       assign(:technique, technique)
 
       with_rendered_page do |page|
-        expect(page).not_to have_button "Create Note"
+        expect(page).not_to have_link "Add note"
       end
     end
   end

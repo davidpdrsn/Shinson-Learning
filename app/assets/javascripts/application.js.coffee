@@ -40,10 +40,6 @@ $ ->
     event.preventDefault()
     domain.toggleNav $('.main-header__nav')
 
-  $(document).on 'click', '.notes__new-button', (event) ->
-    event.preventDefault()
-    domain.toggleNewNoteForm $('.notes__new-button'), $('.new_note')
-
   $(document).on('page:fetch', domain.injectSpinner)
   $(document).on('page:receive', domain.removeSpinner)
 

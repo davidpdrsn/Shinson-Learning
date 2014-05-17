@@ -24,6 +24,32 @@ describe NotesController do
     end
   end
 
+  describe "#new" do
+    context "when signed in" do
+      before { sign_in user }
+
+      it "assingns @note" do
+        get :new, technique_id: technique.id
+
+        expect(assigns[:note]).to be_new_record
+        expect(assigns[:note].user).to eq user
+        expect(assigns[:note].technique).to eq technique
+      end
+
+      it "assingns @technique" do
+        get :new, technique_id: technique.id
+
+        expect(assigns[:technique]).to eq technique
+      end
+    end
+
+    it "requires authentication" do
+      get :new, technique_id: technique.id
+
+      expect(subject).to redirect_to new_user_session_path
+    end
+  end
+
   describe "#create" do
     context "when signed in" do
       before { sign_in user }
