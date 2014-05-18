@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html manifest="<%= export_appcache_path %>?url=<%= CGI.escape request.fullpath %>">
+<%# <html manifest="<%= export_appcache_path %1>?url=<%= CGI.escape request.fullpath %1>"> %>
+<html>
 <head>
   <meta charset="utf-8">
   <title>Export | Shinson Learning</title>
@@ -31,6 +32,15 @@
       margin-bottom: 0;
       text-align: center;
       color: #aaa;
+    }
+
+    table.table {
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    ul {
+      padding-left: 2rem;
     }
   </style>
 </head>
