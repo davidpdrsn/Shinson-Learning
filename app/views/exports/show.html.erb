@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="<%= export_appcache_path %>?url=<%= CGI.escape request.fullpath %>">
 <head>
   <meta charset="utf-8">
   <title>Export | Shinson Learning</title>
@@ -22,6 +22,16 @@
       margin-top: 5rem;
       margin-bottom: 5rem;
     }
+
+    hr:last-of-type {
+      display: none;
+    }
+
+    p {
+      margin-bottom: 0;
+      text-align: center;
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
@@ -29,6 +39,17 @@
   <div class="row">
     <div class="col-md-12">
       <h1>Export of techniques on <%= Date.today %></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <p>
+        <small>This page gets cached so you can view it <em>offline</em>. Just bookmark it and come back to it again later.</small>
+      </p>
+      <p>
+        <small>And if it looks like something isn't quite up to date, just refresh a couple of times.</small>
+      </p>
     </div>
   </div>
 

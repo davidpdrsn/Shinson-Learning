@@ -28,6 +28,7 @@ ShinsonLearning::Application.routes.draw do
 
   get '/exports/new', to: "exports#new", as: 'new_export'
   get '/exports/show', to: "exports#show", as: 'export'
+  get '/export.appcache', to: "exports#appcache", as: 'export_appcache'
 
   root to: "home#index"
 end
