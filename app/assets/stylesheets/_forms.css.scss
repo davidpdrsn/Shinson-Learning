@@ -96,6 +96,26 @@
     opacity: .5;
     clear: both;
   }
+
+  .check_boxes {
+    label.checkbox {
+      width: auto;
+      margin-right: 0;
+      margin-bottom: $space/4;
+      clear: both;
+      float: right;
+    }
+
+    label.check_boxes + label {
+      clear: none;
+    }
+
+    input[type="checkbox"] {
+      float: right;
+      margin-right: 0;
+      margin-left: $space/2;
+    }
+  }
 }
 
 .devise-shared-links {

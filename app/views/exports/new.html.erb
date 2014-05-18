@@ -1,0 +1,9 @@
+<%= form_tag export_path, method: "get", class: "simple_form" do |f| %>
+  <%= simple_fields_for :export do |f| %>
+    <%= f.input :belts, collection: Belt.all, as: :check_boxes, label_method: :pretty_print %>
+
+    <%= f.input :categories, collection: Category.all, as: :check_boxes, label: "Only these categories" %>
+
+    <%= f.submit "Export" %>
+  <% end %>
+<% end %>

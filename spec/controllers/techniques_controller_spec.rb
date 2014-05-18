@@ -18,13 +18,6 @@ describe TechniquesController do
 
         expect(assigns(:page_title)).to eq "Techniques"
       end
-
-      it "renders the json when making a json request" do
-        user.stub(:techniques_as_hash)
-        get :index, format: :json
-
-        expect(response.status).to eq 200
-      end
     end
 
     it "requires authentication" do

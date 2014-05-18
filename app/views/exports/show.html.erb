@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Export | Shinson Learning</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+  <style>
+    body {
+      width: 700px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      margin-top: 2.5rem;
+    }
+
+    hr {
+      border-top-width: 10px;
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Export of techniques on <%= Date.today %></h1>
+    </div>
+  </div>
+
+  <% if @export.techniques.present? %>
+    <% @export.techniques.each do |belt, categories| %>
+      <h2><%= belt %></h2>
+
+      <% categories.each do |category, techniques| %>
+        <h3><%= category %></h3>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% techniques.each do |technique| %>
+              <tr>
+                <td>
+                  <%= technique.name %>
+                </td>
+
+                <td>
+                  <%= technique.description %>
+                </td>
+
+                <% if technique.notes_count > 0 %>
+                  <td>
+                    <ul>
+                      <% technique.notes.each do |note| %>
+                        <li>
+                          <%= note.text %>
+
+                          <% if note.question? %>
+                            (question)
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </td>
+                <% else %>
+                  <td>
+                    n/a
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+
+      <hr>
+    <% end %>
+  <% else %>
+    No techniques matched.
+  <% end %>
+
+</body>
+</html>
+

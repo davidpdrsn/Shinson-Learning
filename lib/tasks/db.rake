@@ -1,6 +1,6 @@
 namespace :db do
   desc "add test data to database"
-  task :add_test_data do
+  task :add_test_data => :environment do
     system 'bin/rake db:seed'
 
     include FactoryGirl::Syntax::Methods
