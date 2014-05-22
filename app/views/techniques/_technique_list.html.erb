@@ -6,13 +6,13 @@
 
         <%= render partial: "peek_link", locals: { technique: technique } %>
 
+        <%= technique_presenter.human_note_count if technique.notes_count > 0 %>
+
         <a class="inline-edit icon-edit" href="#">
           <span class="screen-reader-text">
             Edit
           </span>
         </a>
-
-        <%= technique_presenter.human_note_count if technique.notes_count > 0 %>
 
         <div class="technique__description">
           <%= simple_format technique.description %>
