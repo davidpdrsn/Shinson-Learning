@@ -61,6 +61,7 @@ select[name="groupings"] {
     text-decoration: none;
   }
 
+  .inline-edit,
   .peek__link--all,
   .peek__link {
     float: right;
@@ -107,12 +108,42 @@ select[name="groupings"] {
     margin-right: $space/2;
   }
 
+  .technique__description,
+  .rest-in-place {
+    margin-top: $space;
+  }
+
   .technique__description {
     display: none;
 
     p {
       margin-bottom: 0;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .inline-edit {
+    font-size: 13px;
+    display: none;
+    clear: both;
+    margin-right: 2px
+  }
+
+  .rest-in-place {
+    display: none;
+
+    textarea {
+      -webkit-appearance: none;
+      display: block;
+      width: 100%;
+      outline: none;
+      background: rgba(white, .5);
+      border: 1px dashed $black;
+      padding: $space/4;
+      border-radius: $radius;
     }
   }
 }
-

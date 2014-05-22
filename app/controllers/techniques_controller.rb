@@ -31,6 +31,11 @@ class TechniquesController < ApplicationController
     @note = @technique.notes.new
     @notes = @technique.notes - [@note]
     @technique_cache = TechniqueCache.new @technique, Rails.cache
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @technique }
+    end
   end
 
   def edit
@@ -38,11 +43,18 @@ class TechniquesController < ApplicationController
   end
 
   def update
-    if @technique.update_attributes(techinque_params)
-      flash.notice = "Technique updated"
-      redirect_to @technique
-    else
-      render :edit
+    respond_to do |format|
+      if @technique.update_attributes(techinque_params)
+        format.html do
+          flash.notice = "Technique updated"
+          redirect_to @technique
+        end
+
+        format.json { render json: @technique }
+      else
+        format.html { render action: :edit }
+        format.json { render nothing: true }
+      end
     end
   end
 

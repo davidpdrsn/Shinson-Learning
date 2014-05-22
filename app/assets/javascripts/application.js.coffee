@@ -8,6 +8,7 @@
 //= require jquery-ui/ui/jquery.ui.core
 //= require jquery-ui/ui/jquery.ui.widget
 //= require jquery.sayt/jquery.sayt
+//= require rest_in_place
 //= require domain
 //= require_tree .
 
@@ -50,3 +51,19 @@ $ ->
     domain.removeFieldset $(this).parents("fieldset")
 
   $(document).on 'submit', 'form.create-multiple', domain.validateBulkTechniqueForm
+
+  $(document).on 'click', '.techniques .inline-edit', (e) ->
+    e.preventDefault()
+    domain.toggleInlineEdit $(@), $(@).parents("li")
+
+  $(document).on 'success.rest-in-place', (e, data) ->
+    `
+    function p(t){
+          t = t.trim();
+        return (t.length>0?'<p>'+t.replace(/[\r\n]/g,'</p><p>')+'</p>':null);
+    }
+    `
+
+    $technique = $(e.target).parents("li")
+    domain.stopInlineEdit $technique.find(".inline-edit"), $technique
+    $technique.find(".technique__description").html(p(data.description))

@@ -21,8 +21,10 @@ domain.peekAtAllTechniques = ($list, $toggleLink, $peekLinks) ->
     $(this).click() unless !allOpen and $(this).hasClass("peek__link--peeking")
 
 domain.peekAtTechnique = ($link, $description) ->
-  $description.toggle()
-  $link.toggleClass("peek__link--peeking").toggleClass("icon-eye-blocked")
+  unless domain.inlineEditing
+    $description.toggle()
+    $link.toggleClass("peek__link--peeking").toggleClass("icon-eye-blocked")
+    $link.parents("li").find(".inline-edit").toggle()
 
 domain.injectSpinner = ->
   unless $('.spinner').length > 0 or domain.timer
@@ -72,3 +74,29 @@ domain.validateBulkTechniqueForm = (event) ->
       break
 
 domain.visit = (url) -> Turbolinks.visit url
+
+domain.inlineEditing = false
+
+domain.toggleInlineEdit = ($button, $technique) ->
+  if domain.inlineEditing
+    domain.stopInlineEdit.apply this, arguments
+  else
+    domain.startInlineEdit.apply this, arguments
+
+domain.startInlineEdit = ($button, $technique) ->
+  domain.inlineEditing = true
+
+  $technique.find(".rest-in-place")
+    .show()
+    .data("restInPlaceEditor")
+    .activate()
+  $technique.find(".technique__description").hide()
+  $technique.find(".rest-in-place-description").attr("id", "rest-in-place-description")
+  $technique.find(".peek__link").attr("disabled", "disabled")
+
+domain.stopInlineEdit = ($button, $technique) ->
+  domain.inlineEditing = false
+
+  $technique.find(".peek__link").removeAttr("disabled")
+  $technique.find(".rest-in-place").hide()
+  $technique.find(".technique__description").show()

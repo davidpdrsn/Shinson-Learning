@@ -13,6 +13,7 @@ gem 'turbolinks'
 gem 'bourbon'
 gem 'neat'
 gem 'autoprefixer-rails'
+gem 'rest_in_place'
 
 gem 'devise'
 gem 'activeadmin', github: 'gregbell/active_admin'
