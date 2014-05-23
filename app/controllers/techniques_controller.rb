@@ -30,7 +30,7 @@ class TechniquesController < ApplicationController
     @page_title = @technique.name
     @note = @technique.notes.new
     @notes = @technique.notes - [@note]
-    @technique_cache = TechniqueCache.new @technique, Rails.cache
+    @technique_cache = TechniqueCache.new @technique
 
     respond_to do |format|
       format.html

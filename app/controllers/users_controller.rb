@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :get_user, only: [:show]
 
   def show
-    @user_cache = UserCache.new @user, Rails.cache
+    @user_cache = UserCache.new @user
   end
 
   private
