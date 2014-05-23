@@ -48,6 +48,11 @@ setup_database() {
   bin/rake db:test:prepare
   bin/rake db:seed
   bin/rake db:migrate RAILS_ENV=test
+
+  if [[ ! -f config/database.yml ]]; then
+    cp config/database.example.yml config/database.yml
+    echo "\n\nUpdate config/database.yml with the right database settings"
+  fi
 }
 
 ensure_qt_installed
