@@ -3,14 +3,7 @@ class Technique
     @id = id
     @name = name
 
-  choiceMarkup: ->
-    "
-    <li>
-      <a href='#' data-id='#{@id}' data-name='#{@name}'>#{@name}</a>
-    </li>
-    "
-
-  pickMarkup: ->
+  markup: ->
     "
     <li>
       <a href='#' data-id='#{@id}' data-name='#{@name}'>#{@name}</a>
@@ -26,7 +19,7 @@ class TechniqueList
       "
       #{
         (techniques.reduce ((acc, technique) ->
-          acc += new Technique(technique.id, technique.name).choiceMarkup()), "<ul>") + "</ul>"
+          acc += new Technique(technique.id, technique.name).markup()), "<ul>") + "</ul>"
       }
       "
     else
@@ -63,7 +56,7 @@ class TechniqueList
 
     unless this._picksListContains $linkNode
       this._$picksList()
-        .append new Technique($linkNode.data('id'), $linkNode.data('name')).pickMarkup()
+        .append new Technique($linkNode.data('id'), $linkNode.data('name')).markup()
 
   _picksListContains: ($linkNode) ->
     this._$picksList().find("[data-id=#{$linkNode.data('id')}]").length > 0
