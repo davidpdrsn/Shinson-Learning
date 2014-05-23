@@ -210,26 +210,19 @@
 }
 
 .new-study__controls {
-  @include clearfix;
   margin: $space 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include medium {
+    margin-bottom: $space/2;
+  }
 
   h1 {
     margin: 0;
-
-    @include big {
-      float: left;
-    }
-
-    @include medium {
-      margin-bottom: $space/2;
-    }
   }
 
   button {
-    float: right;
-
-    @include big {
-      margin-top: 13px;
-    }
   }
 }
