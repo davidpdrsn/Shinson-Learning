@@ -9,6 +9,6 @@ feature 'viewing a study' do
     click_link study.name
 
     expect(page).to have_content study.name
-    expect(page).to have_content "#{study.techniques.count} technique"
+    expect(page).to have_content "#{study.techniques.count}"
   end
 end

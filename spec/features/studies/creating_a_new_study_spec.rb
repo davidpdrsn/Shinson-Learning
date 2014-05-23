@@ -24,7 +24,7 @@ feature 'a user creates a new study' do
     click_button "Create Study"
 
     expect(page).to have_content "Misc study"
-    expect(page).to have_content "4 techniques"
+    expect(page).to have_content "4"
   end
 
   scenario "user tries to find techniques that don't exist", js: true do
@@ -52,7 +52,7 @@ feature 'a user creates a new study' do
     click_button "Add all"
     click_button "Create Study"
 
-    expect(page).to have_content "10 techniques"
+    expect(page).to have_content "10"
   end
 
 end
