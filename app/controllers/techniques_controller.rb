@@ -1,4 +1,7 @@
 class TechniquesController < ApplicationController
+  DEFAULT_GROUPING = [:category_name, :belt_pretty_print]
+  TECHNIQUE_PARAM_KEY = :id
+
   include FindsTechniques
 
   before_action :authenticate_user!
@@ -6,7 +9,7 @@ class TechniquesController < ApplicationController
 
   def index
     @page_title = "Techniques"
-    @default_grouping = default_grouping
+    @default_grouping = DEFAULT_GROUPING
     @techniques = current_user.techniques_grouped_by *groupings[params[:group_by]]
   end
 
@@ -84,19 +87,11 @@ class TechniquesController < ApplicationController
 
   private
 
-  def default_grouping
-    [:category_name, :belt_pretty_print]
-  end
-
   def groupings
-    Hash.new(default_grouping).tap do |hash|
+    Hash.new(DEFAULT_GROUPING).tap do |hash|
       hash['category-belt'] = [:category_name, :belt_pretty_print]
       hash['belt-category'] = [:belt_pretty_print, :category_name]
     end
-  end
-
-  def technique_param_key
-    :id
   end
 
   def techinque_params

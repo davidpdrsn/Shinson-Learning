@@ -1,4 +1,6 @@
 class NotesController < ApplicationController
+  TECHNIQUE_PARAM_KEY = :technique_id
+
   before_action :authenticate_user!, only: [:create, :destroy, :edit, :update, :index, :new]
   before_action :get_technique, only: [:new, :create, :destroy, :edit, :update, :index]
   before_action :get_note, only: [:edit, :update, :destroy]
@@ -48,10 +50,6 @@ class NotesController < ApplicationController
 
   def get_note
     @note = @technique.notes.find(params[:id])
-  end
-
-  def technique_param_key
-    :technique_id
   end
 
   def note_params
