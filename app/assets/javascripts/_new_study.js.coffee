@@ -79,14 +79,12 @@ $(window).on "load page:load", ->
     contentType: "application/x-www-form-urlencoded; charset=UTF-8"
     markup: (techniques) ->
       "
-      <div class='controls'>
-        <h1 class='controls__heading'>
+      <div class='new-study__controls'>
+        <h1>
           Matching techniques
         </h1>
 
-        <div class='controls__container'>
-          <button class='new-study__add-all button button--small' type='button'>Add all</button>
-        </div>
+        <button class='new-study__add-all button button--small' type='button'>Add all</button>
       </div>
       #{techniqueList.markupFor(techniques)}
       "
