@@ -73,36 +73,6 @@ describe Study do
     end
   end
 
-  describe "#studied_recently?" do
-    let(:study) { build_stubbed :study }
-
-    it "return true if the study has been studied recently" do
-      create :score, study: study, created_at: Time.now
-
-      expect(study.studied_recently?).to be_true
-    end
-
-    it "return false if the study has not been studied recently" do
-      create :score, study: study, created_at: 2.weeks.ago
-
-      expect(study.studied_recently?).to be_false
-    end
-  end
-
-  describe "#ever_studied?" do
-    let(:study) { build_stubbed :study }
-
-    it "returns true if the study has been studied" do
-      create :score, study: study
-
-      expect(study.ever_studied?).to be_true
-    end
-
-    it "returns false if the study has never been studied" do
-      expect(study.ever_studied?).to be_false
-    end
-  end
-
   describe ".sorted_by_name" do
     it "sorts the collection by the name of each study" do
       create :study, name: 'a'
@@ -110,6 +80,28 @@ describe Study do
       create :study, name: 'b'
 
       expect(Study.sorted_by_name.map &:name).to eq ['a', 'b', 'c']
+    end
+  end
+
+  describe ".neglected" do
+    it "returns studies that have never been studied" do
+      never_studied = create :study
+
+      expect(Study.neglected).to include never_studied
+    end
+
+    it "returns studies that haven't been studied for a while" do
+      not_studied_for_a_while = create :study
+      create :score, study: not_studied_for_a_while, created_at: 2.weeks.ago
+
+      expect(Study.neglected).to include not_studied_for_a_while
+    end
+
+    it "doesn't return studies that have been studied recently" do
+      studied = create :study
+      create :score, study: studied
+
+      expect(Study.neglected).not_to include studied
     end
   end
 end

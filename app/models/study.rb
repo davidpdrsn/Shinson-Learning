@@ -25,6 +25,10 @@ class Study < ActiveRecord::Base
     order 'name'
   end
 
+  def self.neglected
+    select &:neglected?
+  end
+
   def to_json
     {
       study: self,
@@ -48,15 +52,19 @@ class Study < ActiveRecord::Base
     scores.order("created_at").last
   end
 
+  def neglected?
+    never_studied? || !studied_recently?
+  end
+
+  private
+
   def studied_recently?
     newest_score.created_at > 2.weeks.ago
   end
 
-  def ever_studied?
-    scores.count > 0
+  def never_studied?
+    scores.count == 0
   end
-
-  private
 
   def name_not_duplicated
     if user.present? && user.studies.reject(&:new_record?).any? { |study| study.name == self.name }

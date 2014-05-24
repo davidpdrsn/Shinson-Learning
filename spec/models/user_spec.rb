@@ -64,26 +64,12 @@ describe User do
   end
 
   describe "#neglected_studies" do
-    let(:user) { create :user }
+    it "delegates to Study" do
+      user = create :user
+      Study.stub(:neglected)
+      user.neglected_studies
 
-    it "returns studies that have never been studied" do
-      never_studied = create :study, user_id: user.id
-
-      expect(user.neglected_studies).to include never_studied
-    end
-
-    it "returns studies that haven't been studied for a while" do
-      not_studied_for_a_while = create :study, user_id: user.id
-      create :score, study: not_studied_for_a_while, user: user, created_at: 2.weeks.ago
-
-      expect(user.neglected_studies).to include not_studied_for_a_while
-    end
-
-    it "doesn't return studies that have been studied recently" do
-      studied = create :study, user_id: user.id
-      create :score, study: studied, user: user
-
-      expect(user.neglected_studies).not_to include studied
+      expect(Study).to have_received :neglected
     end
   end
 

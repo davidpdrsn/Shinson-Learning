@@ -28,9 +28,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def neglected_studies
-    studies.select do |study|
-      !study.ever_studied? || !study.studied_recently?
-    end
+    studies.neglected
   end
 
   def techniques_grouped_by *groupings
