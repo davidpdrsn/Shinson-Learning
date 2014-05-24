@@ -39,15 +39,19 @@
       <%= nav_link_to "Questions", questions_path, class: "icon-question" %>
       <%= nav_link_to "Profile", user_path(current_user), class: "icon-user" %>
       <%= nav_link_to "Export techniques", new_export_path, class: "secondary" %>
-      <%= nav_link_to "Contact", page_path('contact'), class: "secondary" %>
-      <%= nav_link_to "Log out", destroy_user_session_path, class: "secondary", method: :delete %>
-
-      <% if current_user.admin? %>
-        <%= nav_link_to "Admin", admin_root_path, class: "secondary" %>
-      <% end %>
     <% else %>
       <%= nav_link_to "Log in", new_user_session_path, class: "icon-login" %>
       <%= nav_link_to "Sign up", new_user_registration_path, class: "icon-signup" %>
+    <% end %>
+
+    <%= nav_link_to "Contact", page_path('contact'), class: "secondary" %>
+
+    <% if user_signed_in? %>
+      <%= nav_link_to "Log out", destroy_user_session_path, class: "secondary", method: :delete %>
+    <% end %>
+
+    <% if user_signed_in? && current_user.admin? %>
+      <%= nav_link_to "Admin", admin_root_path, class: "secondary" %>
     <% end %>
   </nav>
 </header>
