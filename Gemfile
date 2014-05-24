@@ -14,6 +14,7 @@ gem 'bourbon'
 gem 'neat'
 gem 'autoprefixer-rails'
 gem 'rest_in_place'
+gem 'high_voltage', '~> 2.1.0'
 
 gem 'devise'
 gem 'activeadmin', github: 'gregbell/active_admin'

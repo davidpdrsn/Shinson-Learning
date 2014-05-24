@@ -114,6 +114,7 @@ GEM
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    high_voltage (2.1.0)
     hike (1.2.3)
     i18n (0.6.9)
     inherited_resources (1.4.1)
@@ -286,6 +287,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   figaro
+  high_voltage (~> 2.1.0)
   jquery-rails
   launchy
   neat

@@ -40,6 +40,7 @@
       <%= nav_link_to "Profile", user_path(current_user), class: "icon-user" %>
       <%= nav_link_to "Log out", destroy_user_session_path, class: "icon-logout", method: :delete %>
       <%= nav_link_to "Export techniques", new_export_path, class: "secondary" %>
+      <%= nav_link_to "Contact", page_path('contact'), class: "secondary" %>
 
       <% if current_user.admin? %>
         <%= nav_link_to "Admin", admin_root_path, class: "secondary" %>
