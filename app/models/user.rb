@@ -60,4 +60,8 @@ class User < ActiveRecord::Base
       acc << attributes
     end
   end
+
+  def sorted_studies
+    studies.sorted_by_name
+  end
 end

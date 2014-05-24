@@ -6,7 +6,7 @@ class StudiesController < ApplicationController
   before_filter :get_study, only: [:show, :study, :destroy, :edit, :update]
 
   def index
-    @studies = current_user.studies
+    @studies = current_user.sorted_studies
   end
 
   def show

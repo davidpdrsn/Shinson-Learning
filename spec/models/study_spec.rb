@@ -102,4 +102,14 @@ describe Study do
       expect(study.ever_studied?).to be_false
     end
   end
+
+  describe ".sorted_by_name" do
+    it "sorts the collection by the name of each study" do
+      create :study, name: 'a'
+      create :study, name: 'c'
+      create :study, name: 'b'
+
+      expect(Study.sorted_by_name.map &:name).to eq ['a', 'b', 'c']
+    end
+  end
 end

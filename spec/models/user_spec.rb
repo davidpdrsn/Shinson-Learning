@@ -107,4 +107,14 @@ describe User do
       expect(hash.first["notes"].length).to eq 1
     end
   end
+
+  describe "#sorted_studies" do
+    it "delegates to Study" do
+      user = create :user
+      Study.stub(:sorted_by_name)
+      user.sorted_studies
+
+      expect(Study).to have_received :sorted_by_name
+    end
+  end
 end

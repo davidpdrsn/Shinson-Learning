@@ -21,6 +21,10 @@ class Study < ActiveRecord::Base
   validate :techniques_belong_to_user
   validate :name_not_duplicated
 
+  def self.sorted_by_name
+    order 'name'
+  end
+
   def to_json
     {
       study: self,
