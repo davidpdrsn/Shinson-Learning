@@ -47,18 +47,6 @@ class User < ActiveRecord::Base
     AdminUser.where(email: email).present?
   end
 
-  def techniques_as_hash
-    techniques.inject([]) do |acc, technique|
-      attributes = technique.attributes.tap do |attrs|
-        attrs["notes"] = technique.notes
-        attrs["belt"] = technique.belt
-        attrs["category"] = technique.category
-      end
-
-      acc << attributes
-    end
-  end
-
   def sorted_studies
     studies.sorted_by_name
   end

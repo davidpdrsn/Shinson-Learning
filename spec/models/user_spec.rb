@@ -85,19 +85,6 @@ describe User do
     end
   end
 
-  describe "#techniques_as_hash" do
-    it "returns the techniques as a hash" do
-      user = create :user
-      technique = create :technique, user: user
-      create :note, technique: technique, user: user
-      hash = user.techniques_as_hash
-
-      expect(hash.length).to eq 1
-      expect(hash.first["id"]).to eq technique.id
-      expect(hash.first["notes"].length).to eq 1
-    end
-  end
-
   describe "#sorted_studies" do
     it "delegates to Study" do
       user = create :user
