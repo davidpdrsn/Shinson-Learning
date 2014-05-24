@@ -38,7 +38,7 @@ feature 'a user creates a new study' do
     expect(page).to have_content "No matches were found"
   end
 
-  scenario "user searcher for techniques and adds all the matches", js: true do
+  scenario "user searches for techniques and adds all the matches", js: true do
     10.times do |n|
       create :technique, user: bob, belt: white, category: kicks, name: "technique ##{n}"
     end
