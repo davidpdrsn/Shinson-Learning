@@ -31,6 +31,12 @@ $max-width: auto;
   height: $x;
 }
 
+@mixin really_big {
+  @media (min-width: 940px) {
+    @content;
+  }
+}
+
 @mixin big {
   @media (min-width: 600px) {
     @content;

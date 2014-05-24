@@ -1,22 +1,73 @@
 <h1 class="welcome-heading">Welcome to Shinson Learning!</h1>
 
-<p class="welcome-text">Here you can:</p>
+<p class="welcome-text">Shinson Learning is web site that helps you study <a href="http://shinsonhapkido.org">Shinson Hapkido</a></p>
 
-<ul class="feature-list">
-  <li>Keep track of all your techniques</li>
-  <li>Add notes and questions to each technique</li>
-  <li>Study your techniques and track your progress</li>
-  <li>And more coming all the time!</li>
-</ul>
+<hr>
+
+<section class="features">
+  <h2 class="features__headline">Here are some of the most awesome features:</h2>
+
+  <div class="feature">
+    <div class="feature__image">
+      <img src="<%= image_path "features/techniques.png" %>" alt="Techniques">
+    </div>
+
+    <div class="feature__text">
+      <h2 class="feature__text__heading">Track your techniques</h2>
+
+      <p class="feature__text__description">
+        Shinson Learning lets you keep <strong>track of all your techniques</strong>. It groups them nicely into belts and categories so its super easy to get an overview of everything you need to learn. Its also <strong>super quick</strong> to look up a technique when you need to
+      </p>
+    </div>
+  </div> <%# .feature %>
+
+  <div class="feature">
+    <div class="feature__text">
+      <h2 class="feature__text__heading">Take notes</h2>
+
+      <p class="feature__text__description">
+        Whenever you learn an important detail about a technique you should write it down or you might forget. Shinson Learning lets you <strong>attach notes to your techniques</strong> so that never happens.
+        <br>
+        Notes can also be <strong>questions</strong>. So when you're in doubt something, write it down so you can easier remember to ask your teacher.
+      </p>
+    </div>
+
+    <div class="feature__image">
+      <img src="<%= image_path "features/notes.png" %>" alt="Notes">
+    </div>
+  </div> <%# .feature %>
+
+  <div class="feature">
+    <div class="feature__image">
+      <img src="<%= image_path "features/study.png" %>" alt="Study">
+    </div>
+
+    <div class="feature__text">
+      <h2 class="feature__text__heading">Study your techniques</h2>
+
+      <p class="feature__text__description">
+      You can <strong>study your technqiues</strong> using intuitive flash card style. This is works really well for learning a new su group or memorizing pressure points.
+      </p>
+    </div>
+  </div> <%# .feature %>
+
+  <div class="feature">
+    <div class="feature__text">
+      <h2 class="feature__text__heading">Track your progress</h2>
+
+      <p class="feature__text__description">
+        Track your progress over time to see your <strong>improvement</strong>.
+      </p>
+    </div>
+
+    <div class="feature__image">
+      <img src="<%= image_path "features/progress.png" %>" alt="Progress">
+    </div>
+  </div> <%# .feature %>
+
+  <h2 class="features__headline">...and <%= link_to "new features", page_path("new_features") %> are being added all the time</h2>
+</section> <%# .features %>
 
 <hr>
 
 <p class="sign-up-text">So go ahead and <%= link_to "sign up", new_user_registration_path %> right now!</p>
-
-<hr>
-
-<%= render partial: "shared/new_features" %>
-
-<hr>
-
-<p>If you have any questions or suggestions feel free to send me an <a href="mailto:david.pdrsn@gail.com">email</a></p>
