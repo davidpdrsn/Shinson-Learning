@@ -27,11 +27,15 @@ describe User do
   it { should have_many(:studies).dependent(:destroy) }
 
   describe "#questions" do
-    it "returns the notes that are also questions for the user" do
+    it "delegates to Note and includes techniques" do
       user = create :user
-      question = create :question, user: user
+      question_list = double('question_list')
+      question_list.stub(:includes).with(:technique)
+      Note.stub(:questions).and_return(question_list)
+      user.questions
 
-      expect(user.questions).to eq [question]
+      expect(Note).to have_received :questions
+      expect(question_list).to have_received(:includes).with(:technique)
     end
   end
 

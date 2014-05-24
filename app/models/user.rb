@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def questions
-    notes.where(question: true).includes(:technique)
+    notes.questions.includes(:technique)
   end
 
   def sorted_techniques
