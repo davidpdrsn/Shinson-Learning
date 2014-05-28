@@ -42,7 +42,7 @@ class TechniquesController < ApplicationController
   end
 
   def edit
-    @page_title = "Edit #{@technique.name}"
+    @page_title = "Edit \"#{@technique.name}\""
   end
 
   def update

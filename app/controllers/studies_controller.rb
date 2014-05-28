@@ -6,13 +6,16 @@ class StudiesController < ApplicationController
   before_filter :get_study, only: [:show, :study, :destroy, :edit, :update]
 
   def index
+    @page_title = "Studies"
     @studies = current_user.sorted_studies
   end
 
   def show
+    @page_title = @study.name
   end
 
   def new
+    @page_title = "New study"
     @study = current_user.studies.new
   end
 
@@ -29,6 +32,7 @@ class StudiesController < ApplicationController
   end
 
   def edit
+    @page_title = "Edit \"#{@study.name}\""
   end
 
   def update
