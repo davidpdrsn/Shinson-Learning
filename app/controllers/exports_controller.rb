@@ -18,16 +18,4 @@ class ExportsController < ApplicationController
 
     render :show, layout: false
   end
-
-  def appcache
-    appcache = <<-appcache
-CACHE MANIFEST
-# #{current_user.id} #{Time.now.strftime("%T")}
-
-#{params[:url]}
-//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css
-    appcache
-
-    render text: appcache, content_type: "text/cache-manifest"
-  end
 end

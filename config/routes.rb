@@ -27,8 +27,7 @@ ShinsonLearning::Application.routes.draw do
   resources :logs, only: [:create]
 
   get '/exports/new', to: "exports#new", as: 'new_export'
-  get '/exports/show', to: "exports#show", as: 'export'
-  get '/export.appcache', to: "exports#appcache", as: 'export_appcache'
+  post '/exports/show', to: "exports#show", as: 'export'
 
   root to: "home#index"
 end
