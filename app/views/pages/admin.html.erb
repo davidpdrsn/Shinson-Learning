@@ -1,0 +1,20 @@
+<h1>Admin</h1>
+
+<dl>
+  <dt>Number of users</dt>
+  <dd><%= User.all.count %></dd>
+
+  <dt>All users</dt>
+  <dd>
+    <ul>
+      <% User.all.each do |user| %>
+        <li>
+          <%= link_to UserPresenter.new(user).screen_name, user %><br>
+          <%= UserCache.new(user).techniques_count %> techniques<br>
+          <%= UserCache.new(user).notes_count %> notes<br>
+          <%= UserCache.new(user).studies_count %> studies<br>
+        </li>
+      <% end %>
+    </ul>
+  </dd>
+</dl>
