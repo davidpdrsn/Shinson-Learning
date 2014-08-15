@@ -1,5 +1,7 @@
 lock '3.2.1'
 
+set :rbenv_ruby, '2.1.2'
+
 set :application, 'shinson_learning'
 set :repo_url, 'https://github.com/davidpdrsn/Shinson-Learning.git'
 set :user, "deployer"
