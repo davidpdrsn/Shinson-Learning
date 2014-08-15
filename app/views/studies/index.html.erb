@@ -12,7 +12,7 @@
 
             <div class="studies__list__meta">
               <% if study.scores.present? %>
-                Average score <%= study.cached_average_score %>%<br>
+                Average score <%= @study_cache.average_score %>%<br>
                 <%# TODO: fix law of demeter violation %>
                 Studied <%= time_ago_in_words study.newest_score.created_at %> ago
               <% else %>

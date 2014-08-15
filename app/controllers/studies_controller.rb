@@ -72,6 +72,7 @@ class StudiesController < ApplicationController
 
   def get_study
     @study = current_user.studies.find params[:id]
+    @study_cache = StudyCache.new(@study)
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path, alert: "Study not found"
   end
