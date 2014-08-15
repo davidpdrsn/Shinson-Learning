@@ -4,4 +4,10 @@ class StudyCache < Cacher
       @study.average_score
     end
   end
+
+  def scores_count
+    @cache.fetch([@study, :scores_count]) do
+      @study.scores.count
+    end
+  end
 end
