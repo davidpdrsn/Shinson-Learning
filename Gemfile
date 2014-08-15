@@ -17,7 +17,6 @@ gem 'rest_in_place'
 gem 'high_voltage', '~> 2.1.0'
 
 gem 'devise'
-gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'annotate', '>=2.6.0'
 gem 'figaro'
 gem 'timecop'

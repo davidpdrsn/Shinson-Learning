@@ -43,10 +43,6 @@ class User < ActiveRecord::Base
     techniques.includes(:category, :belt).sort
   end
 
-  def admin?
-    AdminUser.where(email: email).present?
-  end
-
   def sorted_studies
     studies.sorted_by_name
   end

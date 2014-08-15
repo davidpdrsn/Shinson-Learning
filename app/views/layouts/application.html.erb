@@ -49,10 +49,6 @@
     <% if user_signed_in? %>
       <%= nav_link_to "Log out", destroy_user_session_path, class: "secondary", method: :delete %>
     <% end %>
-
-    <% if user_signed_in? && current_user.admin? %>
-      <%= nav_link_to "Admin", admin_root_path, class: "secondary" %>
-    <% end %>
   </nav>
 </header>
 

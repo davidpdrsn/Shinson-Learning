@@ -49,20 +49,6 @@ describe User do
     end
   end
 
-  describe "#admin" do
-    let(:user) { create :user }
-
-    it "returns true if the user is an admin" do
-      create :admin_user, email: user.email
-
-      expect(user).to be_admin
-    end
-
-    it "return false if the user is not an admin" do
-      expect(user).not_to be_admin
-    end
-  end
-
   describe "#neglected_studies" do
     it "delegates to Study" do
       user = create :user
