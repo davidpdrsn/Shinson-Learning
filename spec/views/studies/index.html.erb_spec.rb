@@ -14,6 +14,16 @@ describe "studies/index" do
         expect(page).to have_link study.name
       end
     end
+
+    it "shows the average score for a study" do
+      study = create :study, techniques_count: 2
+      score = create :score, correct_answers: 1, study: study
+      assign(:studies, [study])
+
+      with_rendered_page do |page|
+        expect(page).to have_content "50.0%"
+      end
+    end
   end
 
   context "when there are no studies" do
