@@ -1,3 +1,6 @@
+# Given an array of techniques this class things the ones
+# that belong any of the given categories and belts
+
 class TechniquesFilter
   def initialize(techniques_to_filter, categories, belts)
     @techniques_to_filter = techniques_to_filter
