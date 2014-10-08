@@ -22,7 +22,7 @@ class StudiesController < ApplicationController
   def create
     @study = current_user.studies.new study_params
 
-    @study.techniques = techniques_from_technique_ids
+    @study.techniques = Technique.where(id: technique_ids)
     if @study.save
       flash.notice = "Study created"
       redirect_to @study
@@ -59,12 +59,6 @@ class StudiesController < ApplicationController
   end
 
   private
-
-  def techniques_from_technique_ids
-    technique_ids.inject([]) do |acc, id|
-      acc << Technique.find(id)
-    end
-  end
 
   def technique_ids
     (params[:study][:technique_ids] || "").split(",").map(&:to_i)
