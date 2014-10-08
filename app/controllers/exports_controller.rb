@@ -6,13 +6,13 @@ class ExportsController < ApplicationController
   end
 
   def show
-    export = Export.new(
+    filtere = TechniquesFilter.new(
       current_user.sorted_techniques,
       params[:export][:categories],
       params[:export][:belts]
     )
 
-    @techniques = export.techniques
+    @techniques = filtere.techniques
     render :show, layout: false
   end
 end

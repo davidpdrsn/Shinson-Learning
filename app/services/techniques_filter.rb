@@ -1,4 +1,4 @@
-class Export
+class TechniquesFilter
   def initialize(techniques_to_filter, categories, belts)
     @techniques_to_filter = techniques_to_filter
     @categories = categories
