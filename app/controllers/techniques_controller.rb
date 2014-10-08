@@ -8,6 +8,7 @@ class TechniquesController < ApplicationController
   before_action :get_technique, only: [:destroy, :update, :edit, :show]
 
   def index
+    # TODO: extract some kind of facade object so I don't have to set 3 ivars, but only 2
     @page_title = "Techniques"
     @default_grouping = DEFAULT_GROUPING
     @techniques = current_user.techniques_grouped_by *groupings[params[:group_by]]
@@ -30,6 +31,7 @@ class TechniquesController < ApplicationController
   end
 
   def show
+    # TODO: set no more than 2 ivars
     @page_title = @technique.name
     @note = @technique.notes.new
     @notes = @technique.notes - [@note]
@@ -72,8 +74,8 @@ class TechniquesController < ApplicationController
   end
 
   def create_multiple
+    # TODO: extract two lines into one method call
     technique_attributes = Zipper.new(params[:techniques]).zip
-
     invalid_techniques = CreatesTechniquesInBulk.new(technique_attributes).create_for_user current_user
 
     if invalid_techniques.blank?
@@ -88,6 +90,7 @@ class TechniquesController < ApplicationController
   private
 
   def groupings
+    # TODO: don't use tap
     Hash.new(DEFAULT_GROUPING).tap do |hash|
       hash['category-belt'] = [:category_name, :belt_pretty_print]
       hash['belt-category'] = [:belt_pretty_print, :category_name]
