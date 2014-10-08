@@ -6,10 +6,13 @@ class ExportsController < ApplicationController
   end
 
   def show
+    categories = Category.where(id: params[:export][:categories])
+    belts = Belt.where(id: params[:export][:belts])
+
     filtere = TechniquesFilter.new(
       current_user.sorted_techniques,
-      params[:export][:categories],
-      params[:export][:belts]
+      categories,
+      belts
     )
 
     @techniques = filtere.techniques

@@ -27,7 +27,7 @@ class TechniquesFilter
   end
 
   def technique_should_be_exported(technique)
-    categories.include?(technique.category_id.to_s) &&
-      belts.include?(technique.belt_id.to_s)
+    categories.include?(technique.category) &&
+      belts.include?(technique.belt)
   end
 end
