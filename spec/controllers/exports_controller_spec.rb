@@ -4,15 +4,6 @@ describe ExportsController do
   let(:user) { create :user }
 
   describe "#new" do
-    context "when signed in" do
-      it "assigns @export" do
-        sign_in user
-        get :new
-
-        expect(assigns[:export]).to_not be_nil
-      end
-    end
-
     it "requies authentication" do
       get :new
 
@@ -33,7 +24,7 @@ describe ExportsController do
 
         get :show, export: { belts: [belt.id], categories: [category.id] }
 
-        assigned_techniques = techniques_in_grouped_hash assigns[:export].techniques
+        assigned_techniques = techniques_in_grouped_hash assigns[:techniques]
         expect(assigned_techniques).to eq [technique]
       end
 

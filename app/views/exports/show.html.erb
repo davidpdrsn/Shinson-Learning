@@ -51,8 +51,8 @@
     </div>
   </div>
 
-  <% if @export.techniques.present? %>
-    <% @export.techniques.each do |belt, categories| %>
+  <% if @techniques.present? %>
+    <% @techniques.each do |belt, categories| %>
       <h2><%= belt %></h2>
 
       <% categories.each do |category, techniques| %>
