@@ -28,10 +28,10 @@ class TechniquesController < ApplicationController
 
   def show
     @technique = current_user.techniques.find(params[:id])
-    @page_title = @technique.name
-
-    @notes = @technique.notes - [@note]
+    @notes = @technique.notes
     @technique_cache = TechniqueCache.new @technique
+
+    @page_title = @technique.name
 
     respond_to do |format|
       format.html
