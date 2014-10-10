@@ -4,13 +4,13 @@
   </div>
 
   <%= link_to "Add multiple", multiple_new_techniques_path, class: "button" %>
-  <%= render "grouping_select" if @techniques.present? %>
+  <%= render "grouping_select" if @page.has_techniques? %>
 <% end %>
 
 <% cache [current_user, (params[:group_by] || @default_grouping), "techniques"] do %>
   <div class="techniques">
-    <% if @techniques.present? %>
-      <% @techniques.each do |first_group_name, second_group| %>
+    <% if @page.has_techniques? %>
+      <% @page.techniques.each do |first_group_name, second_group| %>
         <div>
           <h1><%= first_group_name %></h1>
 

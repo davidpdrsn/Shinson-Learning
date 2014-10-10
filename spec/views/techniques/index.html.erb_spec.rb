@@ -10,7 +10,10 @@ describe "techniques/index" do
     let(:techniques) do
       { "Jokgi Sul" => { "White (mu kup)" => [technique] } }
     end
-    before { assign(:techniques, techniques) }
+    before do
+      page = TechniquesIndexPage.new(techniques: techniques, default_grouping: nil)
+      assign(:page, page)
+    end
 
     it "shows a list of the techniques" do
       render
@@ -35,7 +38,7 @@ describe "techniques/index" do
   end
 
   context "when there are no techniques" do
-    before { assign(:techniques, []) }
+    before { assign(:page, TechniquesIndexPage.new(techniques: [], default_grouping: nil)) }
 
     it "shows when there are no techniques" do
       with_rendered_page do |page|

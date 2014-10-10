@@ -8,10 +8,9 @@ class TechniquesController < ApplicationController
   before_action :get_technique, only: [:destroy, :update, :edit, :show]
 
   def index
-    # TODO: extract some kind of facade object so I don't have to set 3 ivars, but only 2
+    techniques = current_user.techniques_grouped_by *groupings[params[:group_by]]
+    @page = TechniquesIndexPage.new(techniques: techniques, default_grouping: DEFAULT_GROUPING)
     @page_title = "Techniques"
-    @default_grouping = DEFAULT_GROUPING
-    @techniques = current_user.techniques_grouped_by *groupings[params[:group_by]]
   end
 
   def new
