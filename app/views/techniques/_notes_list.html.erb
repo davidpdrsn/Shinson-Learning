@@ -14,10 +14,10 @@
               <%= content_tag :p, "This note is a question" if note.question? %>
             </div>
 
-            <% if @technique.user == current_user %>
+            <% if technique.user == current_user %>
               <div class="notes__list__controls">
-                <%= link_to "Edit note", edit_technique_note_path(@technique, note), class: "button button--small" %>
-                <%= link_to "Delete note", technique_note_path(@technique, note), method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
+                <%= link_to "Edit note", edit_technique_note_path(technique, note), class: "button button--small" %>
+                <%= link_to "Delete note", technique_note_path(technique, note), method: :delete, class: "button button--small", data: { confirm: "Sure?" } %>
               </div>
             <% end %>
           </li>
