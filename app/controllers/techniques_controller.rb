@@ -2,10 +2,7 @@ class TechniquesController < ApplicationController
   DEFAULT_GROUPING = [:category_name, :belt_pretty_print]
   TECHNIQUE_PARAM_KEY = :id
 
-  include FindsTechniques
-
   before_action :authenticate_user!
-  before_action :ensure_user_owns_technique!, only: [:destroy, :update, :edit, :show]
 
   def index
     techniques = current_user.techniques_grouped_by *groupings[params[:group_by]]
@@ -30,7 +27,7 @@ class TechniquesController < ApplicationController
   end
 
   def show
-    @technique = Technique.find(params[:id])
+    @technique = current_user.techniques.find(params[:id])
     @page_title = @technique.name
 
     @notes = @technique.notes - [@note]
@@ -43,12 +40,12 @@ class TechniquesController < ApplicationController
   end
 
   def edit
-    @technique = Technique.find(params[:id])
+    @technique = current_user.techniques.find(params[:id])
     @page_title = "Edit \"#{@technique.name}\""
   end
 
   def update
-    @technique = Technique.find(params[:id])
+    @technique = current_user.techniques.find(params[:id])
 
     respond_to do |format|
       if @technique.update_attributes(techinque_params)
@@ -66,7 +63,7 @@ class TechniquesController < ApplicationController
   end
 
   def destroy
-    @technique = Technique.find(params[:id])
+    @technique = current_user.techniques.find(params[:id])
 
     @technique.destroy
     flash.notice = "Technique deleted"

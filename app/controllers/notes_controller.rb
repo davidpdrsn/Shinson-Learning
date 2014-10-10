@@ -2,22 +2,19 @@ class NotesController < ApplicationController
   TECHNIQUE_PARAM_KEY = :technique_id
 
   before_action :authenticate_user!, only: [:create, :destroy, :edit, :update, :index, :new]
-  before_action :ensure_user_owns_technique!, only: [:new, :create, :destroy, :edit, :update, :index]
-
-  include FindsTechniques
 
   def index
-    redirect_to Technique.find(params[:technique_id])
+    redirect_to current_user.techniques.find(params[:technique_id])
   end
 
   def new
-    @technique = Technique.find(params[:technique_id])
+    @technique = current_user.techniques.find(params[:technique_id])
     @note = current_user.notes.new
     @note.technique = @technique
   end
 
   def create
-    @technique = Technique.find(params[:technique_id])
+    @technique = current_user.techniques.find(params[:technique_id])
     @note = @technique.notes.new(note_params)
     @note.user = current_user
 
@@ -30,13 +27,13 @@ class NotesController < ApplicationController
   end
 
   def edit
-    @technique = Technique.find(params[:technique_id])
+    @technique = current_user.techniques.find(params[:technique_id])
     @note = @technique.notes.find(params[:id])
     @page_title = "Edit note for #{@technique.name}"
   end
 
   def update
-    @technique = Technique.find(params[:technique_id])
+    @technique = current_user.techniques.find(params[:technique_id])
     @note = @technique.notes.find(params[:id])
 
     if @note.update_attributes(note_params)
@@ -47,7 +44,7 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    @technique = Technique.find(params[:technique_id])
+    @technique = current_user.techniques.find(params[:technique_id])
     @note = @technique.notes.find(params[:id])
 
     @note.destroy
