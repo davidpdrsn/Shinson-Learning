@@ -39,11 +39,6 @@ describe TechniquesController do
         expect(assigns(:technique)).to eq technique
       end
 
-      it "assigns @note" do
-        expect(assigns(:note)).to be_new_record
-        expect(assigns(:note).technique).to eq technique
-      end
-
       it "assigns @notes" do
         note = create :note, technique: technique
         another_note = create :note

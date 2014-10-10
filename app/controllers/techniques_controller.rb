@@ -30,9 +30,8 @@ class TechniquesController < ApplicationController
   end
 
   def show
-    # TODO: set no more than 2 ivars
     @page_title = @technique.name
-    @note = @technique.notes.new
+
     @notes = @technique.notes - [@note]
     @technique_cache = TechniqueCache.new @technique
 
