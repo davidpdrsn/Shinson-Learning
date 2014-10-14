@@ -27,11 +27,6 @@
 
       <dt>Created</dt>
       <dd><%= technique_presenter.timestamp %></dd>
-
-      <% present technique_presenter.user do |user_presenter| %>
-        <dt>Added by</dt>
-        <dd><%= user_presenter.link_to_user %></dd>
-      <% end %>
     </dl>
 
     <%= render partial: "notes_list", locals: { notes: @notes, technique: @technique } %>
