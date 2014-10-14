@@ -1,11 +1,11 @@
 {
   "name": "jquery.sayt",
   "homepage": "https://github.com/davidpdrsn/jquery.sayt",
-  "_release": "8932eb9718",
+  "_release": "ffb6a47ffc",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "8932eb9718af178b928edfe12e73f60a5c6b5866"
+    "commit": "ffb6a47ffc1a381887a2d761e5f4c98b40461d62"
   },
   "_source": "https://github.com/davidpdrsn/jquery.sayt.git",
   "_target": "*",

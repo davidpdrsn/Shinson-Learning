@@ -55,4 +55,20 @@ feature 'a user creates a new study' do
     expect(page).to have_content "10"
   end
 
+  scenario 'user searches for nothing and sees all techniques', js: true do
+    10.times do |n|
+      create :technique, user: bob, belt: white, category: kicks, name: "technique ##{n}"
+    end
+
+    sign_in bob
+
+    click_link "Studies"
+    click_link "Add new"
+    fill_in "Name of study", with: "Misc study"
+    page.evaluate_script("$('#new-study__query').trigger('focus')")
+    click_button "Add all"
+    click_button "Create Study"
+
+    expect(page).to have_content "10"
+  end
 end

@@ -75,6 +75,8 @@ $(window).on "load page:load", ->
     url: "/searches"
     requestType: "POST"
     keyboard: true
+    minLength: 0
+    searchOnFocus: true
     selectionClass: 'new-study__selection'
     contentType: "application/x-www-form-urlencoded; charset=UTF-8"
     markup: (techniques) ->
