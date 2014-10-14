@@ -15,7 +15,7 @@
     <h1><%= technique_presenter.name %></h1>
 
     <div class="technique__description">
-      <%= simple_format technique_presenter.description %>
+      <%= markdown(technique_presenter.description) %>
     </div>
 
     <dl>

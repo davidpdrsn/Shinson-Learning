@@ -1,5 +1,28 @@
 @import "bits";
 
+.technique__description {
+  margin-bottom: $space*2;
+
+  @include all_headings {
+    font-size: 15px;
+    margin-top: $space !important;
+  }
+
+  h1 {
+    font-size: 17px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: $space/2 0;
+  }
+}
+
 .notes {
   margin-top: $space*2;
 

@@ -5,4 +5,8 @@ module ApplicationHelper
     yield presenter if block_given?
     presenter
   end
+
+  def markdown(markdown)
+    MarkdownParser.new.parse(markdown).html_safe
+  end
 end

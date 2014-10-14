@@ -35,6 +35,8 @@ gem 'capistrano-rbenv', '~> 2.0'
 gem 'launchy'
 gem 'simple_form'
 
+gem 'redcarpet'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'spring'

@@ -10,7 +10,13 @@ describe "techniques/show" do
   end
 
   context "when the user owns the technique" do
-    let(:technique) { build_stubbed(:technique, user: user) }
+    let(:technique) {
+      build_stubbed(
+        :technique,
+        description: "**kick**",
+        user: user
+      )
+    }
 
     before do
       assign(:note, technique.notes.new)
@@ -29,6 +35,11 @@ describe "techniques/show" do
       with_rendered_page do |page|
         expect(page).to have_link "Add note"
       end
+    end
+
+    it 'renders the description as markdown' do
+      render
+      expect(rendered).to match("<strong>kick</strong>")
     end
   end
 
