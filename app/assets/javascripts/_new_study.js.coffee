@@ -16,12 +16,10 @@ class TechniqueList
 
   markupFor: (techniques) ->
     if techniques.length > 0
-      "
-      #{
+      "<ul>" +
         (techniques.reduce ((acc, technique) ->
-          acc += new Technique(technique.id, technique.name).markup()), "<ul>") + "</ul>"
-      }
-      "
+          acc += new Technique(technique.id, technique.name).markup()), "") +
+      "</ul>"
     else
       "<p>No matches were found...</p>"
 
@@ -80,19 +78,10 @@ $(window).on "load page:load", ->
     selectionClass: 'new-study__selection'
     contentType: "application/x-www-form-urlencoded; charset=UTF-8"
     markup: (techniques) ->
-      "
-      <div class='new-study__controls'>
-        <h1>
-          Matching techniques
-        </h1>
-
-        <button class='new-study__add-all button button--small' type='button'>Add all</button>
-      </div>
-      #{techniqueList.markupFor(techniques)}
-      "
+      techniqueList.markupFor(techniques)
     enterPressedHandler: (selection, event) ->
       techniqueList.pickTechnique selection, event
-    containerClass: 'new-study__results'
+    containerClass: 'new-study__results__content'
 
   $(document).on 'click', '.new-study__results a', (event) ->
     techniqueList.pickTechnique this, event

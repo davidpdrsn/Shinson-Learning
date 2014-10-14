@@ -55,6 +55,12 @@ $max-width: auto;
   }
 }
 
+@mixin small_up {
+  @media (min-width: 400px) {
+    @content;
+  }
+}
+
 @mixin small {
   @media (max-width: 400px) {
     @content;

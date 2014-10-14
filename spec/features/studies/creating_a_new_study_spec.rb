@@ -49,6 +49,7 @@ feature 'a user creates a new study' do
     click_link "Add new"
     fill_in "Name of study", with: "Misc study"
     fill_in "new-study__query", with: "tec"
+    expect(page).to have_content "technique #1"
     click_button "Add all"
     click_button "Create Study"
 
@@ -66,6 +67,7 @@ feature 'a user creates a new study' do
     click_link "Add new"
     fill_in "Name of study", with: "Misc study"
     page.evaluate_script("$('#new-study__query').trigger('focus')")
+    expect(page).to have_content "technique #1"
     click_button "Add all"
     click_button "Create Study"
 

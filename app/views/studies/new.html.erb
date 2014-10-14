@@ -3,14 +3,30 @@
     <%= f.error_notification %>
     <%= f.input :name, label: "Name of study" %>
 
-    <label for="new-study__query">Search for techniques</label>
-    <input type="text" class="new-study__query" id="new-study__query">
+    <div class="new-study__fields">
+      <label for="new-study__query">Search for techniques</label>
+      <input type="text" class="new-study__query" id="new-study__query">
+    </div>
 
-    <div class="new-study__results"></div>
+    <div class="new-study__results-picks-container">
+      <div class="new-study__results">
+        <div class='new-study__controls'>
+          <h2>Matching techniques</h2>
 
-    <div class="new-study__picks">
-      <h2>Picked technqiues</h2>
-      <p>You have not picked any technqiues yet</p>
+          <button class='new-study__add-all button button--small' type='button'>Add all</button>
+        </div>
+
+        <div class="new-study__results__content">
+          <p>
+            Search for techniques and pick the ones you wanna add to the study
+          </p>
+        </div>
+      </div>
+
+      <div class="new-study__picks">
+        <h2>Picked technqiues</h2>
+        <p>You have not picked any technqiues yet</p>
+      </div>
     </div>
 
     <%= f.error :base %>
