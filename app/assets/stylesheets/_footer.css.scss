@@ -16,4 +16,10 @@ footer.main-footer {
   &, a {
     color: $footer_color;
   }
+
+  &:before {
+    content: "";
+    display: block;
+    clear: both;
+  }
 }
