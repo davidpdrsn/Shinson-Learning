@@ -1,8 +1,13 @@
 class MarkdownParser
   def initialize
-    @parser = Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(:hard_wrap => true)
-    )
+    options = {
+      hard_wrap: true,
+      autolink: true,
+      filter_html: true,
+    }
+
+    renderer = Redcarpet::Render::HTML.new(options)
+    @parser = Redcarpet::Markdown.new(renderer)
   end
 
   def parse(markdown)
