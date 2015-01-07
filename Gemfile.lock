@@ -39,6 +39,19 @@ GEM
       sass (~> 3.2)
       thor
     builder (3.2.2)
+    capistrano (3.2.1)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (~> 1.3)
+    capistrano-bundler (1.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+    capistrano-rails (1.1.1)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rbenv (2.0.2)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
     capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -98,6 +111,9 @@ GEM
     neat (1.5.1)
       bourbon (>= 3.1)
       sass (~> 3.2.19)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.1)
     newrelic_rpm (3.8.0.218)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
@@ -175,6 +191,12 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    sshkit (1.4.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
+      term-ansicolor
+    term-ansicolor (1.3.0)
+      tins (~> 1.0)
     thin (1.6.2)
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
@@ -183,6 +205,7 @@ GEM
     thread_safe (0.3.3)
     tilt (1.4.1)
     timecop (0.7.1)
+    tins (1.3.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -205,6 +228,10 @@ DEPENDENCIES
   annotate (>= 2.6.0)
   autoprefixer-rails
   bourbon
+  capistrano
+  capistrano-bundler
+  capistrano-rails
+  capistrano-rbenv
   capybara
   capybara-webkit
   coffee-rails (~> 4.0.0)

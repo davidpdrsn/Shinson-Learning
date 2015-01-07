@@ -24,10 +24,10 @@ gem 'timecop'
 gem 'dalli'
 gem 'newrelic_rpm'
 
-# gem "capistrano"
-# gem "capistrano-bundler"
-# gem "capistrano-rails"
-# gem "capistrano-rbenv"
+gem 'capistrano'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
+gem 'capistrano-rbenv'
 
 gem 'launchy'
 gem 'simple_form'
