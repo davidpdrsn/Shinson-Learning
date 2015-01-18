@@ -6,7 +6,7 @@ describe "techniques/index" do
   end
 
   context "when there are techniques" do
-    let(:technique) { build_stubbed(:technique) }
+    let(:technique) { build_stubbed(:technique, description: "**hi** there") }
     let(:techniques) do
       { "Jokgi Sul" => { "White (mu kup)" => [technique] } }
     end
@@ -23,6 +23,12 @@ describe "techniques/index" do
     it "shows groupings select" do
       with_rendered_page do |page|
         expect(page).to have_css "select"
+      end
+    end
+
+    it "compiles the markdown description" do
+      with_rendered_page do |page|
+        expect(page).to have_css "strong", text: "hi"
       end
     end
 
