@@ -66,11 +66,11 @@ select[name="groupings"] {
   .peek__link {
     float: right;
     padding: 4px;
-    color: $darker_gray;
+    color: $darker_gray !important;
     text-decoration: none;
 
     &:hover {
-      color: black;
+      color: black !important;
     }
   }
 
@@ -125,7 +125,7 @@ select[name="groupings"] {
     }
 
     ul {
-      padding-top: $space/2;
+      padding-top: 0;
       padding-left: $space*2;
 
       li {
