@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-ssh linode tail -f apps/shinson_learning/current/log/production.log
+ssh digitalocean tail -f apps/shinson_learning/current/log/production.log
