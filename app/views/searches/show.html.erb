@@ -1,0 +1,15 @@
+<div class="search__heading">
+  <h1>
+    Results for "<%= @results.query %>"
+  </h1>
+
+  <p>
+    <small>
+      <%= pluralize @results.count, "result" %>
+    </small>
+  </p>
+</div>
+
+<div class="techniques techniques--search">
+  <%= render partial: "techniques/technique_list", locals: { techniques: @results.techniques } %>
+</div>

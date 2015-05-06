@@ -4,7 +4,7 @@
       <li>
         <%= technique_presenter.link %>
 
-        <%= render partial: "peek_link", locals: { technique: technique } %>
+        <%= render partial: "techniques/peek_link", locals: { technique: technique } %>
 
         <%= technique_presenter.human_note_count if technique.notes_count > 0 %>
 

@@ -127,4 +127,25 @@ describe "layouts/application" do
       end
     end
   end
+
+  describe "showing the search form" do
+
+    context "signed in" do
+      it "shows the form" do
+        with_rendered_page do |page|
+          expect(page).to have_css("form.search-form")
+        end
+      end
+    end
+
+    context "not signed in" do
+      it "doesn't shows the form" do
+        controller.stub(:user_signed_in?).and_return(false)
+
+        with_rendered_page do |page|
+          expect(page).not_to have_css("form.search-form")
+        end
+      end
+    end
+  end
 end

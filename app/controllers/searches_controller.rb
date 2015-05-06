@@ -4,8 +4,14 @@ class SearchesController < ApplicationController
   # TODO: extract some kind of searcher class that does the SQL stuff
   def create
     sql_query = params[:query].split("").join("%")
-    result = current_user.techniques.where 'name ILIKE ?', "%#{sql_query}%"
+    results = current_user.techniques.where 'name ILIKE ?', "%#{sql_query}%"
 
-    render json: result
+    respond_to do |format|
+      format.json { render json: results }
+      format.html {
+        @results = SearchResult.new(params[:query], results)
+        render :show
+      }
+    end
   end
 end
