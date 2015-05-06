@@ -71,7 +71,7 @@ $(window).on "load page:load", ->
 
   $(".new-study__query").sayt
     url: "/searches"
-    requestType: "POST"
+    requestType: "GET"
     keyboard: true
     minLength: 0
     searchOnFocus: true

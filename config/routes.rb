@@ -19,7 +19,7 @@ ShinsonLearning::Application.routes.draw do
     resources :scores, only: [:create, :index]
   end
 
-  resources :searches, only: [:create]
+  resources :searches, only: [:index]
 
   resources :logs, only: [:create]
 

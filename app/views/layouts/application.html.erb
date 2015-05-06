@@ -33,7 +33,7 @@
   <button class="main-header__toggle-nav button--small">Menu</button>
 
   <% if user_signed_in? %>
-    <%= form_tag searches_path, method: :post, class: "search-form" do %>
+    <%= form_tag searches_path, method: :get, class: "search-form" do %>
       <%= search_field_tag :search, nil, name: "query" %>
       <%= submit_tag "Search" %>
     <% end %>
